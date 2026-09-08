@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME on Pons | $PRIME x $AMZN Vault</title>
+    <title>PRIME on Pons | The Onchain $AMZN Community</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-dark: #05070C;
-            --card-bg: rgba(12, 17, 29, 0.85);
-            --card-hover: rgba(18, 26, 44, 0.95);
+            --bg-dark: #07090E;
+            --card-bg: rgba(13, 18, 28, 0.85);
+            --card-hover: rgba(20, 28, 45, 0.95);
             --border-color: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(0, 162, 255, 0.5);
+            --border-glow: rgba(0, 162, 255, 0.4);
             --accent-blue: #00A2FF;
             --accent-orange: #FF8A00;
             --accent-orange-glow: rgba(255, 138, 0, 0.4);
@@ -35,8 +35,8 @@
             color: var(--text-main);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 162, 255, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 85% 70%, rgba(255, 138, 0, 0.1) 0%, transparent 45%);
+                radial-gradient(circle at 50% 0%, rgba(0, 162, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 60%, rgba(255, 138, 0, 0.08) 0%, transparent 45%);
         }
 
         h1, h2, h3, .brand-font {
@@ -45,6 +45,7 @@
             letter-spacing: -0.02em;
         }
 
+        /* Toast Popup */
         #toast {
             visibility: hidden;
             min-width: 250px;
@@ -68,7 +69,39 @@
             bottom: 40px;
         }
 
-        /* Nav Header */
+        /* Top Live Ticker Tape Bar */
+        .ticker-wrap {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 8px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .ticker {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-weight: 600;
+        }
+
+        .ticker-item span { color: var(--accent-blue); }
+        .ticker-item .green { color: #00FF87; }
+        .ticker-item .orange { color: var(--accent-orange); }
+
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        /* Navigation */
         nav {
             display: flex;
             justify-content: space-between;
@@ -79,7 +112,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(5, 7, 12, 0.85);
+            background: rgba(7, 9, 14, 0.85);
         }
 
         .logo {
@@ -122,7 +155,7 @@
             box-shadow: 0 0 30px rgba(255, 138, 0, 0.8);
         }
 
-        /* Hero */
+        /* Hero Section (Artificial Inu Inspired) */
         .hero {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -132,8 +165,10 @@
             gap: 4rem;
         }
 
-        .hero-tag {
-            display: inline-block;
+        .stock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 6px 16px;
             background: rgba(0, 162, 255, 0.12);
             border: 1px solid var(--accent-blue);
@@ -142,6 +177,14 @@
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
+        }
+
+        .stock-badge .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #00FF87;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00FF87;
         }
 
         .hero h1 {
@@ -195,7 +238,48 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Stats */
+        /* How It Works Section (Artificial Inu Mechanics) */
+        .mechanics-section { padding: 5rem 8%; }
+        .mechanics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mech-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .mech-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+            background: var(--card-hover);
+        }
+
+        .mech-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+        }
+
+        .mech-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mech-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Stats Bar */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -225,29 +309,6 @@
             margin-bottom: 0.5rem;
         }
         .stat-label { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* How To Buy Section */
-        .buy-section { padding: 4rem 8%; }
-        .buy-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .buy-step {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 20px;
-            position: relative;
-        }
-        .buy-step-num {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-orange);
-            margin-bottom: 1rem;
-        }
 
         /* Calculator Section */
         .calc-section {
@@ -307,7 +368,7 @@
             margin-bottom: 3rem;
         }
 
-        /* Gallery Grid */
+        /* Gallery Matrix */
         .gallery { padding: 5rem 8%; }
         .gallery-grid {
             display: grid;
@@ -352,7 +413,7 @@
             .hero { grid-template-columns: 1fr; text-align: center; }
             .hero p { margin: 0 auto 2rem auto; }
             .hero-actions { justify-content: center; }
-            .stats-grid, .buy-grid, .calc-container-grid { grid-template-columns: 1fr; }
+            .stats-grid, .mechanics-grid, .calc-container-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
             .calc-input { width: 100%; }
         }
@@ -362,12 +423,29 @@
 
     <div id="toast">Contract Address Copied!</div>
 
+    <!-- Top Live Ticker Tape -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">$PRIME ON PONS: <span>ONLINE</span></div>
+            <div class="ticker-item">PAIRED ASSET: <span>$AMZN (NASDAQ)</span></div>
+            <div class="ticker-item">24H VAULT GROWTH: <span class="green">+18.4%</span></div>
+            <div class="ticker-item">TAX: <span class="orange">0% / 0%</span></div>
+            <div class="ticker-item">LIQUIDITY: <span class="green">100% LOCKED</span></div>
+            <!-- Duplicated for seamless loop -->
+            <div class="ticker-item">$PRIME ON PONS: <span>ONLINE</span></div>
+            <div class="ticker-item">PAIRED ASSET: <span>$AMZN (NASDAQ)</span></div>
+            <div class="ticker-item">24H VAULT GROWTH: <span class="green">+18.4%</span></div>
+            <div class="ticker-item">TAX: <span class="orange">0% / 0%</span></div>
+            <div class="ticker-item">LIQUIDITY: <span class="green">100% LOCKED</span></div>
+        </div>
+    </div>
+
     <nav>
         <div class="logo">PRIME <span>ON PONS</span></div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
-            <li><a href="#calculator">Calculator</a></li>
-            <li><a href="#howtobuy">How to Buy</a></li>
+            <li><a href="#howitworks">How It Works</a></li>
+            <li><a href="#calculator">Vault Calc</a></li>
             <li><a href="#chart">Chart</a></li>
             <li><a href="#gallery">Gallery</a></li>
         </ul>
@@ -376,9 +454,12 @@
 
     <section class="hero" id="about">
         <div class="hero-content">
-            <div class="hero-tag">TOKENIZED $AMZN STOCK PAIRING</div>
-            <h1>SPECIAL DELIVERY HAS ARRIVED.</h1>
-            <p>High-priority liquidity paired with tokenized $AMZN stock metrics on the Pons blockchain ecosystem.</p>
+            <div class="stock-badge">
+                <div class="live-dot"></div>
+                PAIRED WITH TOKENIZED $AMZN
+            </div>
+            <h1>THE ONCHAIN $AMZN COMMUNITY</h1>
+            <p>$PRIME is paired with tokenized $AMZN. Every trade feeds the Vault, and liquidity is locked permanently on the Pons blockchain.</p>
             <div class="hero-actions">
                 <button class="btn-buy" onclick="copyCA()">Buy $PRIME</button>
                 <a href="#chart" class="btn-secondary">View Chart</a>
@@ -388,7 +469,29 @@
             <div class="glass-card">
                 <img src="hero-vault.jpg" alt="PRIME Package Vault">
                 <h3>$PRIME / $AMZN / PONS</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Handle With Memes</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Special Delivery Vault</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section (Artificial Inu Mechanics) -->
+    <section class="mechanics-section" id="howitworks">
+        <h2 class="section-title">HOW IT WORKS</h2>
+        <div class="mechanics-grid">
+            <div class="mech-card">
+                <div class="mech-num">01.</div>
+                <h3>$AMZN Tokenized Pair</h3>
+                <p>$PRIME trades directly against tokenized $AMZN equity rather than standard USD pairs, syncing token liquidity directly with ecommerce volume.</p>
+            </div>
+            <div class="mech-card">
+                <div class="mech-num">02.</div>
+                <h3>Trading Activity Compounds</h3>
+                <p>Every buy and sell routes a fee allocation directly into the Vault. As volume scales, the underlying liquidity backing compounds automatically.</p>
+            </div>
+            <div class="mech-card">
+                <div class="mech-num">03.</div>
+                <h3>Deflationary Lock & Burn</h3>
+                <p>Vault acquisitions in $PRIME are permanently locked or burned from circulating supply, tightening token float while vault reserves rise.</p>
             </div>
         </div>
     </section>
@@ -400,7 +503,7 @@
         </div>
         <div class="stat-box">
             <div class="stat-value">$AMZN</div>
-            <div class="stat-label">Paired Equity</div>
+            <div class="stat-label">Paired Asset</div>
         </div>
         <div class="stat-box">
             <div class="stat-value">PONS</div>
@@ -426,29 +529,8 @@
         </div>
     </section>
 
-    <section class="buy-section" id="howtobuy">
-        <h2 class="section-title">HOW TO BUY $PRIME</h2>
-        <div class="buy-grid">
-            <div class="buy-step">
-                <div class="buy-step-num">01</div>
-                <h3>Connect Wallet</h3>
-                <p style="color: var(--text-muted); margin-top: 10px;">Set up a Pons-compatible web3 wallet and fund it with native chain assets.</p>
-            </div>
-            <div class="buy-step">
-                <div class="buy-step-num">02</div>
-                <h3>Swap for $PRIME</h3>
-                <p style="color: var(--text-muted); margin-top: 10px;">Navigate to the decentralized exchange on Pons and enter the $PRIME contract address.</p>
-            </div>
-            <div class="buy-step">
-                <div class="buy-step-num">03</div>
-                <h3>Track $AMZN Sync</h3>
-                <p style="color: var(--text-muted); margin-top: 10px;">Hold $PRIME in your vault and track liquidity metrics against $AMZN stock performance.</p>
-            </div>
-        </div>
-    </section>
-
     <section class="chart-section" id="chart">
-        <h2 class="section-title">$PRIME / $AMZN PERFORMANCE</h2>
+        <h2 class="section-title">$PRIME / $AMZN PERFORMANCE CHART</h2>
         <div class="chart-container">
             <canvas id="primeChart"></canvas>
         </div>
