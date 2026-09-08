@@ -10,8 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-dark: #07090E;
-            --card-bg: rgba(13, 18, 28, 0.85);
+            --bg-dark: #05070C;
+            --card-bg: rgba(12, 17, 29, 0.85);
             --card-hover: rgba(20, 28, 45, 0.95);
             --border-color: rgba(255, 255, 255, 0.08);
             --border-glow: rgba(0, 162, 255, 0.4);
@@ -35,7 +35,7 @@
             color: var(--text-main);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 162, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(0, 162, 255, 0.18) 0%, transparent 50%),
                 radial-gradient(circle at 85% 60%, rgba(255, 138, 0, 0.08) 0%, transparent 45%);
         }
 
@@ -45,6 +45,7 @@
             letter-spacing: -0.02em;
         }
 
+        /* Toast Popup */
         #toast {
             visibility: hidden;
             min-width: 250px;
@@ -68,6 +69,7 @@
             bottom: 40px;
         }
 
+        /* Ticker Bar */
         .ticker-wrap {
             width: 100%;
             background: rgba(0, 0, 0, 0.9);
@@ -99,6 +101,7 @@
             100% { transform: translate3d(-50%, 0, 0); }
         }
 
+        /* Nav Header */
         nav {
             display: flex;
             justify-content: space-between;
@@ -109,7 +112,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(7, 9, 14, 0.85);
+            background: rgba(5, 7, 12, 0.85);
         }
 
         .logo {
@@ -152,6 +155,7 @@
             box-shadow: 0 0 30px rgba(255, 138, 0, 0.8);
         }
 
+        /* Hero Layout */
         .hero {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -225,6 +229,11 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             text-align: center;
             transition: border-color 0.3s ease;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         .glass-card:hover { border-color: var(--accent-orange); }
 
@@ -232,8 +241,11 @@
             width: 100%;
             border-radius: 16px;
             margin-bottom: 1.5rem;
+            max-height: 280px;
+            object-fit: cover;
         }
 
+        /* Mechanics */
         .mechanics-section { padding: 5rem 8%; }
         .mechanics-grid {
             display: grid;
@@ -274,6 +286,7 @@
             line-height: 1.6;
         }
 
+        /* Stats Bar */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -304,6 +317,7 @@
         }
         .stat-label { color: var(--text-muted); font-size: 0.85rem; }
 
+        /* Calculator Section */
         .calc-section {
             padding: 3rem 8%;
             max-width: 1100px;
@@ -344,6 +358,7 @@
         }
         .calc-input:focus { border-color: var(--accent-blue); }
 
+        /* Chart Section */
         .chart-section { padding: 4rem 8%; }
         .chart-container {
             background: var(--card-bg);
@@ -360,6 +375,7 @@
             margin-bottom: 3rem;
         }
 
+        /* Gallery Matrix */
         .gallery { padding: 5rem 8%; }
         .gallery-grid {
             display: grid;
@@ -373,6 +389,7 @@
             border-radius: 16px;
             overflow: hidden;
             transition: all 0.3s ease;
+            min-height: 300px;
         }
         .gallery-item:hover {
             transform: translateY(-5px);
@@ -381,8 +398,9 @@
 
         .gallery-item img {
             width: 100%;
-            height: 260px;
+            height: 240px;
             object-fit: cover;
+            display: block;
         }
 
         .gallery-item .caption {
@@ -456,7 +474,7 @@
         </div>
         <div class="hero-visual">
             <div class="glass-card">
-                <img src="hero-vault.jpg" alt="PRIME Package Vault">
+                <img src="./hero-vault.jpg" alt="PRIME Package Vault" onerror="this.onerror=null; this.src='hero-vault.jpg';">
                 <h3>$PRIME / $AMZN / PONS</h3>
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Special Delivery Vault</p>
             </div>
@@ -505,7 +523,7 @@
 
     <section class="calc-section" id="calculator">
         <div class="calc-container-grid">
-            <img src="glass-pod.jpg" alt="Glass Pod Shield" style="width: 100%; border-radius: 24px; border: 1px solid var(--border-color);">
+            <img src="./glass-pod.jpg" alt="Glass Pod Shield" style="width: 100%; border-radius: 24px; border: 1px solid var(--border-color);" onerror="this.onerror=null; this.src='glass-pod.jpg';">
             <div class="calc-card">
                 <h2>$AMZN EQUIVALENCY CALCULATOR</h2>
                 <p style="color: var(--text-muted); margin-top: 5px;">Estimate your tokenized stock value exposure</p>
@@ -528,27 +546,27 @@
         <h2 class="section-title">MARKETING SUITE</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="hero-vault.jpg" alt="AMZN Vault Sync">
+                <img src="./hero-vault.jpg" alt="AMZN Vault Sync" onerror="this.onerror=null; this.src='hero-vault.jpg';">
                 <div class="caption">AMZN Vault Sync</div>
             </div>
             <div class="gallery-item">
-                <img src="delivery-van.jpg" alt="High Speed Express">
+                <img src="./delivery-van.jpg" alt="High Speed Express" onerror="this.onerror=null; this.src='delivery-van.jpg';">
                 <div class="caption">High Speed Express Delivery</div>
             </div>
             <div class="gallery-item">
-                <img src="glass-pod.jpg" alt="Glass Pod Shield">
+                <img src="./glass-pod.jpg" alt="Glass Pod Shield" onerror="this.onerror=null; this.src='glass-pod.jpg';">
                 <div class="caption">Glass Pod Shield</div>
             </div>
             <div class="gallery-item">
-                <img src="special-delivery.jpg" alt="Rainy Porch Delivery">
+                <img src="./special-delivery.jpg" alt="Rainy Porch Delivery" onerror="this.onerror=null; this.src='special-delivery.jpg';">
                 <div class="caption">Special Delivery Rain Night</div>
             </div>
             <div class="gallery-item">
-                <img src="token-badge.jpg" alt="Token Badge Icon">
+                <img src="./token-badge.jpg" alt="Token Badge Icon" onerror="this.onerror=null; this.src='token-badge.jpg';">
                 <div class="caption">Official Token Badge</div>
             </div>
             <div class="gallery-item">
-                <img src="amzn-banner.jpg" alt="Paired with AMZN Banner">
+                <img src="./amzn-banner.jpg" alt="Paired with AMZN Banner" onerror="this.onerror=null; this.src='amzn-banner.jpg';">
                 <div class="caption">Paired with $AMZN Banner</div>
             </div>
         </div>
