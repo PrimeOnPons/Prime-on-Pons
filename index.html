@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME on Pons | $PRIME</title>
+    <title>PRIME on Pons | $PRIME x $AMZN Vault</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-dark: #05070B;
-            --card-bg: rgba(13, 18, 28, 0.7);
+            --bg-dark: #05070C;
+            --card-bg: rgba(12, 17, 29, 0.85);
+            --card-hover: rgba(18, 26, 44, 0.95);
             --border-color: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(0, 162, 255, 0.3);
+            --border-glow: rgba(0, 162, 255, 0.5);
             --accent-blue: #00A2FF;
             --accent-orange: #FF8A00;
+            --accent-orange-glow: rgba(255, 138, 0, 0.4);
             --text-main: #FFFFFF;
             --text-muted: #8E9BAE;
         }
@@ -24,6 +27,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -31,8 +35,8 @@
             color: var(--text-main);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 162, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 60%, rgba(255, 138, 0, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(0, 162, 255, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 85% 70%, rgba(255, 138, 0, 0.1) 0%, transparent 45%);
         }
 
         h1, h2, h3, .brand-font {
@@ -41,18 +45,41 @@
             letter-spacing: -0.02em;
         }
 
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--accent-orange);
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 14px 24px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            right: 30px;
+            font-weight: 600;
+            box-shadow: 0 0 20px var(--accent-orange-glow);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 40px;
+        }
+
         /* Nav Header */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 8%;
+            padding: 1.2rem 8%;
             border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(5, 7, 11, 0.8);
+            background: rgba(5, 7, 12, 0.85);
         }
 
         .logo {
@@ -62,10 +89,21 @@
             align-items: center;
             gap: 10px;
         }
+        .logo span { color: var(--accent-orange); }
 
-        .logo span {
-            color: var(--accent-orange);
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--text-main); }
 
         .btn-buy {
             background: linear-gradient(135deg, var(--accent-orange), #FF5500);
@@ -74,19 +112,20 @@
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 0 20px rgba(255, 138, 0, 0.4);
+            box-shadow: 0 0 20px var(--accent-orange-glow);
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
         }
-
         .btn-buy:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(255, 138, 0, 0.7);
+            box-shadow: 0 0 30px rgba(255, 138, 0, 0.8);
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
             padding: 5rem 8%;
             min-height: 85vh;
             align-items: center;
@@ -96,7 +135,7 @@
         .hero-tag {
             display: inline-block;
             padding: 6px 16px;
-            background: rgba(0, 162, 255, 0.1);
+            background: rgba(0, 162, 255, 0.12);
             border: 1px solid var(--accent-blue);
             border-radius: 20px;
             color: var(--accent-blue);
@@ -106,23 +145,20 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.8rem;
             line-height: 1.05;
             margin-bottom: 1.5rem;
         }
 
         .hero p {
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             line-height: 1.6;
             margin-bottom: 2rem;
-            max-width: 500px;
+            max-width: 520px;
         }
 
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-        }
+        .hero-actions { display: flex; gap: 1rem; }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.05);
@@ -134,17 +170,11 @@
             text-decoration: none;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
-
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .glass-card {
@@ -153,12 +183,11 @@
             border-radius: 24px;
             padding: 2rem;
             backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            position: relative;
-            width: 100%;
-            max-width: 450px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             text-align: center;
+            transition: border-color 0.3s ease;
         }
+        .glass-card:hover { border-color: var(--accent-orange); }
 
         .glass-card img {
             width: 100%;
@@ -166,90 +195,120 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Stats Bar */
+        /* Stats */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
             padding: 2rem 8%;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
         }
 
         .stat-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 2rem;
+            padding: 1.8rem;
             border-radius: 16px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+        .stat-box:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+            background: var(--card-hover);
         }
 
         .stat-value {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: #fff;
             margin-bottom: 0.5rem;
         }
+        .stat-label { color: var(--text-muted); font-size: 0.85rem; }
 
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        /* How To Buy Section */
+        .buy-section { padding: 4rem 8%; }
+        .buy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .buy-step {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 20px;
+            position: relative;
+        }
+        .buy-step-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
         }
 
-        /* Delivery Roadmap Section */
+        /* Calculator Section */
+        .calc-section {
+            padding: 3rem 8%;
+            max-width: 1100px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .calc-container-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .calc-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .calc-input-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .calc-input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            width: 80%;
+            outline: none;
+        }
+        .calc-input:focus { border-color: var(--accent-blue); }
+
+        /* Chart Section */
+        .chart-section { padding: 4rem 8%; }
+        .chart-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
         }
 
-        .roadmap {
-            padding: 4rem 8%;
-        }
-
-        .tracker-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .tracker-step {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .tracker-step:last-child {
-            margin-bottom: 0;
-        }
-
-        .status-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--accent-orange);
-            box-shadow: 0 0 10px var(--accent-orange);
-            margin-top: 5px;
-        }
-
-        .step-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .step-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
         /* Gallery Grid */
-        .gallery {
-            padding: 5rem 8%;
-        }
-
+        .gallery { padding: 5rem 8%; }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -263,7 +322,6 @@
             overflow: hidden;
             transition: all 0.3s ease;
         }
-
         .gallery-item:hover {
             transform: translateY(-5px);
             border-color: var(--accent-blue);
@@ -271,7 +329,7 @@
 
         .gallery-item img {
             width: 100%;
-            height: 250px;
+            height: 260px;
             object-fit: cover;
         }
 
@@ -282,7 +340,6 @@
             color: var(--text-muted);
         }
 
-        /* Footer */
         footer {
             padding: 3rem 8%;
             text-align: center;
@@ -292,43 +349,45 @@
         }
 
         @media (max-width: 900px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero p {
-                margin: 0 auto 2rem auto;
-            }
-            .hero-actions {
-                justify-content: center;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin: 0 auto 2rem auto; }
+            .hero-actions { justify-content: center; }
+            .stats-grid, .buy-grid, .calc-container-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .calc-input { width: 100%; }
         }
     </style>
 </head>
 <body>
 
+    <div id="toast">Contract Address Copied!</div>
+
     <nav>
         <div class="logo">PRIME <span>ON PONS</span></div>
-        <a href="#" class="btn-buy">GET $PRIME</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#calculator">Calculator</a></li>
+            <li><a href="#howtobuy">How to Buy</a></li>
+            <li><a href="#chart">Chart</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+        </ul>
+        <button class="btn-buy" onclick="copyCA()">GET $PRIME</button>
     </nav>
 
-    <section class="hero">
+    <section class="hero" id="about">
         <div class="hero-content">
-            <div class="hero-tag">INDEPENDENT MEME TOKEN</div>
+            <div class="hero-tag">TOKENIZED $AMZN STOCK PAIRING</div>
             <h1>SPECIAL DELIVERY HAS ARRIVED.</h1>
-            <p>Inspired by Amazon shopping culture. High priority meme liquidity delivered straight to the Pons blockchain ecosystem.</p>
+            <p>High-priority liquidity paired with tokenized $AMZN stock metrics on the Pons blockchain ecosystem.</p>
             <div class="hero-actions">
-                <a href="#" class="btn-buy">Buy $PRIME</a>
-                <a href="#" class="btn-secondary">View Chart</a>
+                <button class="btn-buy" onclick="copyCA()">Buy $PRIME</button>
+                <a href="#chart" class="btn-secondary">View Chart</a>
             </div>
         </div>
         <div class="hero-visual">
             <div class="glass-card">
-                <img src="prime-avatar.png" alt="PRIME Package">
-                <h3>$PRIME / PONS</h3>
+                <img src="hero-vault.jpg" alt="PRIME Package Vault">
+                <h3>$PRIME / $AMZN / PONS</h3>
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Handle With Memes</p>
             </div>
         </div>
@@ -340,12 +399,12 @@
             <div class="stat-label">Ticker Symbol</div>
         </div>
         <div class="stat-box">
-            <div class="stat-value">PONS</div>
-            <div class="stat-label">Network</div>
+            <div class="stat-value">$AMZN</div>
+            <div class="stat-label">Paired Equity</div>
         </div>
         <div class="stat-box">
-            <div class="stat-value">0%</div>
-            <div class="stat-label">Buy / Sell Tax</div>
+            <div class="stat-value">PONS</div>
+            <div class="stat-label">Blockchain</div>
         </div>
         <div class="stat-box">
             <div class="stat-value">100%</div>
@@ -353,58 +412,119 @@
         </div>
     </section>
 
-    <section class="roadmap">
-        <h2 class="section-title">PACKAGE TRACKING STATUS</h2>
-        <div class="tracker-container">
-            <div class="tracker-step">
-                <div class="status-dot"></div>
-                <div class="step-info">
-                    <h4>01. ORDER PLACED — TOKEN LAUNCH</h4>
-                    <p>Contract deployed on Pons. Liquidity pool seeded and permanently locked in the vault.</p>
+    <section class="calc-section" id="calculator">
+        <div class="calc-container-grid">
+            <img src="glass-pod.jpg" alt="Glass Pod Shield" style="width: 100%; border-radius: 24px; border: 1px solid var(--border-color);">
+            <div class="calc-card">
+                <h2>$AMZN EQUIVALENCY CALCULATOR</h2>
+                <p style="color: var(--text-muted); margin-top: 5px;">Estimate your tokenized stock value exposure</p>
+                <div class="calc-input-group">
+                    <input type="number" id="primeAmount" class="calc-input" placeholder="Enter $PRIME amount..." oninput="calculateValue()">
                 </div>
-            </div>
-            <div class="tracker-step">
-                <div class="status-dot"></div>
-                <div class="step-info">
-                    <h4>02. IN TRANSIT — COMMUNITY MARKETING</h4>
-                    <p>Suite of high-definition graphics deployed across social networks. High frequency meme blitz.</p>
-                </div>
-            </div>
-            <div class="tracker-step">
-                <div class="status-dot"></div>
-                <div class="step-info">
-                    <h4>03. OUT FOR DELIVERY — ECOSYSTEM INTEGRATION</h4>
-                    <p>DexScreener, CoinGecko, and CoinMarketCap listings prioritized with prime tracking updates.</p>
-                </div>
+                <h3 id="calcResult" style="color: var(--accent-orange);">0.00 $AMZN Shares Equivalent</h3>
             </div>
         </div>
     </section>
 
-    <section class="gallery">
+    <section class="buy-section" id="howtobuy">
+        <h2 class="section-title">HOW TO BUY $PRIME</h2>
+        <div class="buy-grid">
+            <div class="buy-step">
+                <div class="buy-step-num">01</div>
+                <h3>Connect Wallet</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">Set up a Pons-compatible web3 wallet and fund it with native chain assets.</p>
+            </div>
+            <div class="buy-step">
+                <div class="buy-step-num">02</div>
+                <h3>Swap for $PRIME</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">Navigate to the decentralized exchange on Pons and enter the $PRIME contract address.</p>
+            </div>
+            <div class="buy-step">
+                <div class="buy-step-num">03</div>
+                <h3>Track $AMZN Sync</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">Hold $PRIME in your vault and track liquidity metrics against $AMZN stock performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="chart-section" id="chart">
+        <h2 class="section-title">$PRIME / $AMZN PERFORMANCE</h2>
+        <div class="chart-container">
+            <canvas id="primeChart"></canvas>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
         <h2 class="section-title">MARKETING SUITE</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="download.png" alt="Special Delivery">
-                <div class="caption">Special Delivery</div>
+                <img src="hero-vault.jpg" alt="AMZN Vault Sync">
+                <div class="caption">AMZN Vault Sync</div>
             </div>
             <div class="gallery-item">
-                <img src="Codex Image Sep 8, 2026, 04_44_38 PM.png" alt="Big Package Bigger Energy">
-                <div class="caption">Big Package. Bigger Energy.</div>
+                <img src="express-delivery.jpg" alt="High Speed Express">
+                <div class="caption">High Speed Express Delivery</div>
             </div>
             <div class="gallery-item">
-                <img src="Codex Image Sep 8, 2026, 05_08_02 PM.png" alt="Handle With Memes">
-                <div class="caption">Handle With Memes</div>
+                <img src="glass-pod.jpg" alt="Glass Pod Shield">
+                <div class="caption">Glass Pod Shield</div>
             </div>
             <div class="gallery-item">
-                <img src="prime-launch.png" alt="Prime on Pons Launch">
-                <div class="caption">Prime on Pons Official Badge</div>
+                <img src="special-delivery.jpg" alt="Rainy Porch Delivery">
+                <div class="caption">Special Delivery Rain Night</div>
+            </div>
+            <div class="gallery-item">
+                <img src="token-badge.jpg" alt="Token Badge Icon">
+                <div class="caption">Official Token Badge</div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 PRIME ON PONS ($PRIME). Independent meme token. Inspired by Amazon shopping culture. Not affiliated with Amazon Inc.</p>
+        <p>&copy; 2026 PRIME ON PONS ($PRIME). Independent meme token paired with $AMZN stock metrics. Inspired by Amazon shopping culture. Not affiliated with Amazon Inc.</p>
     </footer>
+
+    <script>
+        function copyCA() {
+            var toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function calculateValue() {
+            let amount = document.getElementById('primeAmount').value;
+            let ratio = 0.00045;
+            let result = (amount * ratio).toFixed(4);
+            document.getElementById('calcResult').innerText = result + " $AMZN Shares Equivalent";
+        }
+
+        const ctx = document.getElementById('primeChart').getContext('2d');
+        const primeChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
+                datasets: [{
+                    label: '$PRIME / $AMZN Stock Ratio',
+                    data: [1.2, 1.45, 1.38, 1.75, 2.10, 2.35, 2.80],
+                    borderColor: '#00A2FF',
+                    backgroundColor: 'rgba(0, 162, 255, 0.15)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: '#FFFFFF' } }
+                },
+                scales: {
+                    x: { ticks: { color: '#8E9BAE' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                    y: { ticks: { color: '#8E9BAE' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
