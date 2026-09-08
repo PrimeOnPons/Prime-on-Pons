@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME on Pons | The Onchain $AMZN Community</title>
+    <title>PRIME | Onchain $AMZN Community</title>
     <link rel="icon" type="image/jpeg" href="token-badge.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #030508;
-            --glass-bg: rgba(10, 15, 26, 0.65);
-            --glass-card: rgba(16, 24, 40, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --glass-hover: rgba(255, 255, 255, 0.18);
-            --accent-blue: #00A2FF;
-            --accent-blue-glow: rgba(0, 162, 255, 0.35);
+            --bg-dark: #07090E;
+            --card-bg: rgba(14, 18, 27, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
             --accent-orange: #FF8A00;
-            --accent-orange-glow: rgba(255, 138, 0, 0.4);
+            --accent-orange-glow: rgba(255, 138, 0, 0.35);
+            --accent-blue: #00A2FF;
             --text-main: #FFFFFF;
-            --text-muted: #94A3B8;
+            --text-muted: #8E9BAE;
         }
 
         * {
@@ -36,26 +32,30 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 0%, rgba(0, 162, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 50%, rgba(255, 138, 0, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 50% 100%, rgba(0, 162, 255, 0.08) 0%, transparent 50%);
-            background-attachment: fixed;
+            position: relative;
         }
 
-        h1, h2, h3, .brand-font {
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
+        /* Starry Space Particle Background Canvas */
+        #space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 50% 10%, rgba(255, 138, 0, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 80% 60%, rgba(0, 162, 255, 0.08) 0%, transparent 45%),
+                #07090E;
         }
 
         /* Toast Popup */
         #toast {
             visibility: hidden;
             min-width: 280px;
-            background: rgba(255, 138, 0, 0.95);
-            backdrop-filter: blur(12px);
-            color: #fff;
+            background: var(--accent-orange);
+            color: #000;
             text-align: center;
             border-radius: 50px;
             padding: 14px 28px;
@@ -63,578 +63,529 @@
             z-index: 1000;
             bottom: 30px;
             right: 30px;
-            font-weight: 600;
+            font-weight: 700;
             box-shadow: 0 0 30px var(--accent-orange-glow);
             opacity: 0;
             transition: opacity 0.3s, bottom 0.3s;
         }
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 40px;
+        #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
+
+        /* Top Nav Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 6%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--card-border);
         }
 
-        /* Ambient Glass Container Effect */
-        .glass-panel {
-            background: var(--glass-card);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .glass-panel:hover {
-            border-color: var(--glass-hover);
-            box-shadow: 0 30px 70px rgba(0, 162, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
         }
 
-        /* Marquee Ticker */
-        .ticker-wrap {
+        .brand-logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid var(--accent-orange);
+        }
+
+        .stock-pill-btn {
+            background: rgba(255, 138, 0, 0.12);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .nav-center-menu {
+            display: flex;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px;
+            border-radius: 30px;
+            border: 1px solid var(--card-border);
+        }
+
+        .nav-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .nav-tab-btn.active, .nav-tab-btn:hover {
+            background: var(--accent-orange);
+            color: #000;
+        }
+
+        .btn-trade-main {
+            background: var(--accent-orange);
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            box-shadow: 0 0 20px var(--accent-orange-glow);
+            transition: transform 0.2s ease;
+        }
+        .btn-trade-main:hover { transform: scale(1.03); }
+
+        /* Marquee Strip */
+        .marquee-wrap {
             width: 100%;
-            background: rgba(3, 5, 8, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
+            background: var(--accent-orange);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            padding: 8px 0;
             overflow: hidden;
             white-space: nowrap;
-            padding: 10px 0;
-            font-size: 0.85rem;
-            color: var(--text-muted);
             position: relative;
             z-index: 10;
         }
-
-        .ticker {
+        .marquee-content {
             display: inline-block;
-            animation: marquee 35s linear infinite;
+            animation: marquee 25s linear infinite;
         }
-
-        .ticker-item {
-            display: inline-block;
-            padding: 0 2rem;
-            font-weight: 600;
-        }
-
-        .ticker-item span { color: var(--accent-blue); }
-        .ticker-item .green { color: #00FF87; }
-        .ticker-item .orange { color: var(--accent-orange); }
-
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
         }
 
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 8%;
-            border-bottom: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(3, 5, 8, 0.75);
+        /* Viewport Container */
+        .view-section {
+            display: none;
+            position: relative;
+            z-index: 2;
+            min-height: 80vh;
         }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1.5px solid var(--accent-orange);
-            object-fit: cover;
-            box-shadow: 0 0 15px var(--accent-orange-glow);
-        }
-
-        .logo span { color: var(--accent-orange); }
-
-        .nav-links {
-            display: flex;
-            gap: 2.2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--text-main); }
-
-        .btn-buy {
-            background: linear-gradient(135deg, var(--accent-orange), #FF5500);
-            color: #fff;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 0 25px var(--accent-orange-glow);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            border: none;
-        }
-        .btn-buy:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 0 35px rgba(255, 138, 0, 0.7);
-        }
+        .view-section.active { display: block; }
 
         /* Hero Layout */
-        .hero {
+        .hero-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            padding: 6rem 8%;
-            min-height: 85vh;
+            padding: 5rem 8%;
             align-items: center;
-            gap: 4rem;
-            position: relative;
+            gap: 3rem;
         }
 
-        .stock-badge {
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.8rem;
+            line-height: 1.05;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-sub {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .btn-pill-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-pill:hover { background: rgba(255, 255, 255, 0.12); }
+        .btn-pill.primary { background: var(--accent-orange); color: #000; font-weight: 700; }
+
+        .ca-box-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--card-border);
+            padding: 8px 16px;
+            border-radius: 12px;
+            width: fit-content;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Big Holdings Display Counter */
+        .holdings-banner {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .holdings-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 18px;
-            background: rgba(0, 162, 255, 0.1);
-            border: 1px solid rgba(0, 162, 255, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            color: var(--accent-blue);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .stock-badge .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #00FF87;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00FF87;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            line-height: 1.05;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(180deg, #FFFFFF 0%, #94A3B8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            line-height: 1.6;
-            margin-bottom: 2.2rem;
-            max-width: 520px;
-        }
-
-        .hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--glass-border);
-            color: #fff;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .hero-card {
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .hero-card img {
-            width: 100%;
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-            max-height: 340px;
-            object-fit: cover;
-            border: 1px solid var(--glass-border);
-        }
-
-        /* Interactive Tab Container */
-        .tab-section {
-            padding: 3rem 8%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .tab-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            padding: 0.8rem 1.8rem;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background: rgba(0, 162, 255, 0.15);
-            border-color: var(--accent-blue);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(0, 162, 255, 0.2);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-        .tab-content.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Grid Layouts */
-        .mechanics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .mech-card {
-            padding: 2.5rem 2rem;
-        }
-
-        .mech-num {
-            font-size: 2.5rem;
-            font-weight: 700;
             color: var(--accent-orange);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
             margin-bottom: 1rem;
         }
 
-        /* Calculator Tool Box */
-        .calc-tool-box {
-            padding: 3rem;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+        .big-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.8rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            line-height: 1;
+            margin-bottom: 0.5rem;
         }
 
-        .slider-group { margin: 2rem 0; text-align: left; }
-        .slider-group label { display: block; margin-bottom: 0.8rem; color: var(--text-muted); }
-        .slider-input {
-            width: 100%;
-            accent-color: var(--accent-orange);
-            height: 8px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            outline: none;
-            cursor: pointer;
+        .sub-number {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 2rem;
         }
 
-        .calc-grid {
+        .breakdown-row {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .breakdown-item { text-align: center; }
+        .breakdown-item .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+        .breakdown-item .val { font-size: 1.1rem; font-weight: 700; color: #fff; }
+
+        /* How It Works Flowchart Diagram */
+        .diagram-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .flow-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .flow-header {
+            color: var(--accent-orange);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .flow-split-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
-            margin-top: 2rem;
         }
 
-        .calc-val-box {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1.8rem;
-            border-radius: 16px;
-            border: 1px solid var(--glass-border);
+        .split-card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--accent-orange);
+            padding: 1.5rem;
+            border-radius: 12px;
         }
+        .split-card.secondary { border-color: var(--card-border); }
 
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            padding: 4rem 8%;
-        }
-
-        .stat-box {
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2rem;
+        .split-percent {
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.5rem;
+            color: var(--accent-orange);
+            margin-bottom: 0.3rem;
         }
-        .stat-label { color: var(--text-muted); font-size: 0.85rem; }
 
-        /* Marketing Gallery Grid */
-        .gallery { padding: 5rem 8%; }
-        .gallery-grid {
+        /* Meme Grid */
+        .meme-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            padding: 3rem 8%;
         }
 
-        .gallery-item {
+        .meme-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
             overflow: hidden;
         }
 
-        .gallery-item img {
+        .meme-card img {
             width: 100%;
-            height: 250px;
+            height: 240px;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.05);
         }
 
-        .gallery-item .caption {
-            padding: 1.2rem;
+        .meme-card .cap {
+            padding: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            font-size: 0.9rem;
             color: var(--text-muted);
-            background: rgba(10, 15, 26, 0.8);
-            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Panoramic Footer Banner */
+        .pano-footer {
+            width: 100%;
+            border-top: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .pano-footer img {
+            width: 100%;
+            height: auto;
+            max-height: 420px;
+            object-fit: cover;
+            opacity: 0.7;
+            display: block;
+        }
+
+        .pano-overlay {
+            position: absolute;
+            bottom: 20%;
+            right: 8%;
+            text-align: right;
+        }
+
+        .pano-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
         }
 
         footer {
-            padding: 3.5rem 8%;
+            padding: 2rem 8%;
             text-align: center;
-            border-top: 1px solid var(--glass-border);
             color: var(--text-muted);
-            font-size: 0.85rem;
-            background: rgba(3, 5, 8, 0.9);
-        }
-
-        /* Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            font-size: 0.8rem;
+            background: rgba(0,0,0,0.9);
+            border-top: 1px solid var(--card-border);
         }
 
         @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero p { margin: 0 auto 2rem auto; }
-            .hero-actions { justify-content: center; }
-            .mechanics-grid, .calc-grid, .stats-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-sub { margin: 0 auto 2rem auto; }
+            .btn-pill-group { justify-content: center; }
+            .ca-box-row { margin: 0 auto; }
+            .flow-split-grid { grid-template-columns: 1fr; }
+            .nav-center-menu { display: none; }
+            .big-number { font-size: 3.2rem; }
         }
     </style>
 </head>
 <body>
 
+    <canvas id="space-bg"></canvas>
     <div id="toast">Contract Address Copied!</div>
 
-    <!-- Ticker Bar -->
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <div class="ticker-item">$PRIME ON PONS: <span>LIVE ON PONSFAMILY.COM</span></div>
-            <div class="ticker-item">PAIRED ASSET: <span>$AMZN (NASDAQ)</span></div>
-            <div class="ticker-item">24H VAULT GROWTH: <span class="green">+18.4%</span></div>
-            <div class="ticker-item">TAX: <span class="orange">0% / 0%</span></div>
-            <div class="ticker-item">LIQUIDITY: <span class="green">100% LOCKED</span></div>
-            <div class="ticker-item">$PRIME ON PONS: <span>LIVE ON PONSFAMILY.COM</span></div>
-            <div class="ticker-item">PAIRED ASSET: <span>$AMZN (NASDAQ)</span></div>
-            <div class="ticker-item">24H VAULT GROWTH: <span class="green">+18.4%</span></div>
-            <div class="ticker-item">TAX: <span class="orange">0% / 0%</span></div>
-            <div class="ticker-item">LIQUIDITY: <span class="green">100% LOCKED</span></div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
+    <!-- Top Navigation -->
     <nav>
-        <div class="logo">
-            <img src="token-badge.jpg" alt="PRIME Logo" class="logo-img">
-            PRIME <span>ON PONS</span>
+        <a href="#" class="brand-logo" onclick="showTab('home')">
+            <img src="token-badge.jpg" alt="PRIME Logo">
+            PRIME <span class="stock-pill-btn">$AMZN $176.45</span>
+        </a>
+
+        <div class="nav-center-menu">
+            <button class="nav-tab-btn active" onclick="showTab('home', event)">Home</button>
+            <button class="nav-tab-btn" onclick="showTab('vault', event)">Vault</button>
+            <button class="nav-tab-btn" onclick="showTab('mechanics', event)">How It Works</button>
+            <button class="nav-tab-btn" onclick="showTab('memes', event)">Memes</button>
         </div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#terminal">Vault Terminal</a></li>
-            <li><a href="#gallery">Marketing Suite</a></li>
-        </ul>
-        <button class="btn-buy" onclick="copyCA()">GET $PRIME</button>
+
+        <a href="https://ponsfamily.com" target="_blank" class="btn-trade-main">Trade $PRIME ↗</a>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="hero-content reveal">
-            <div class="stock-badge">
-                <div class="live-dot"></div>
-                PAIRED WITH TOKENIZED $AMZN
-            </div>
-            <h1>THE ONCHAIN $AMZN COMMUNITY</h1>
-            <p>$PRIME is paired with tokenized $AMZN stock metrics on Ponsfamily.com. Every transaction fuels the Vault with backed liquidity.</p>
-            <div class="hero-actions">
-                <button class="btn-buy" onclick="copyCA()">Copy Contract Address</button>
-                <a href="https://ponsfamily.com" target="_blank" class="btn-secondary">Trade on Ponsfamily</a>
-            </div>
-        </div>
-        <div class="hero-visual reveal">
-            <div class="glass-panel hero-card">
-                <img src="hero-vault.jpg" alt="PRIME Vault">
-                <h3>$PRIME / $AMZN / PONS</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Official Tokenized Vault</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Showcase Banner -->
-    <div style="padding: 0 8%; margin-bottom: 4rem;" class="reveal">
-        <div class="glass-panel" style="overflow: hidden; border-radius: 24px;">
-            <img src="amzn-banner.jpg" alt="AMZN Banner" style="width: 100%; display: block;">
+    <!-- Marquee Banner -->
+    <div class="marquee-wrap">
+        <div class="marquee-content">
+            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • FEES BURNED OR LOCKED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
+            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • FEES BURNED OR LOCKED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
         </div>
     </div>
 
-    <!-- Interactive Terminal & Calculator Tabs -->
-    <section class="tab-section" id="terminal">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;" class="reveal">ONCHAIN VAULT TERMINAL</h2>
-        
-        <div class="tab-buttons reveal">
-            <button class="tab-btn active" onclick="switchTab(event, 'tab-calc')">Yield Estimator</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-mech')">Core Mechanics</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-chart')">Performance Chart</button>
-        </div>
-
-        <!-- Tab 1: Yield Estimator -->
-        <div id="tab-calc" class="tab-content active">
-            <div class="glass-panel calc-tool-box">
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">$AMZN VAULT ESTIMATOR</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Slide volume to project daily stock share accumulation</p>
-                <div class="slider-group">
-                    <label>Estimated 24H DEX Volume: <b id="volumeLabel" style="color:#fff;">$100,000 USD</b></label>
-                    <input type="range" id="volumeSlider" class="slider-input" min="10000" max="5000000" step="10000" value="100000" oninput="updateDistCalc()">
+    <!-- VIEWPORT 1: HOME -->
+    <div id="view-home" class="view-section active">
+        <section class="hero-grid">
+            <div class="hero-left">
+                <h1 class="hero-title">The onchain<br><span style="color: var(--accent-orange);">$AMZN</span> community.</h1>
+                <p class="hero-sub">$PRIME is paired with tokenized $AMZN on Ponsfamily.com. Every trade feeds the Vault, and every fee is burned or locked forever.</p>
+                
+                <div class="btn-pill-group">
+                    <a href="https://ponsfamily.com" target="_blank" class="btn-pill primary">Trade $PRIME ↗</a>
+                    <button class="btn-pill" onclick="showTab('mechanics')">How It Works</button>
+                    <button class="btn-pill" onclick="showTab('memes')">Memes</button>
                 </div>
-                <div class="calc-grid">
-                    <div class="calc-val-box">
-                        <div style="color: var(--text-muted); font-size: 0.85rem;">DAILY $AMZN SHARES ADDED</div>
-                        <div id="estShares" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-orange); margin-top: 5px;">2.83 Shares</div>
+
+                <div class="ca-box-row">
+                    <span>CA:</span>
+                    <span id="ca-text">YOUR_PONS_CONTRACT_ADDRESS_HERE</span>
+                    <button style="background:none; border:none; color:var(--accent-orange); cursor:pointer; font-weight:700;" onclick="copyCA()">COPY</button>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 1.5rem; text-align: center;">
+                    <img src="hero-vault.jpg" alt="PRIME Vault" style="width: 100%; border-radius: 16px; display: block; margin-bottom: 1rem;">
+                    <h3 style="font-family: 'Space Grotesk'; color: #fff;">$AMZN VAULT ENGAGED</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Holdings Hero Section -->
+        <section class="holdings-banner">
+            <div class="holdings-pill">● LIVE • $AMZN HOLDINGS</div>
+            <div class="big-number" id="holdings-usd">$2,665,443</div>
+            <div class="sub-number"><span id="holdings-shares">15,105.37</span> $AMZN SHARES</div>
+
+            <div class="breakdown-row">
+                <div class="breakdown-item">
+                    <div class="label">● Community Vault</div>
+                    <div class="val">1,264.28 NVDA ($223,157)</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">● Liquidity Pools</div>
+                    <div class="val">13,841.09 NVDA ($2,442,286)</div>
+                </div>
+            </div>
+        </section>
+
+        <div style="padding: 4rem 8%;">
+            <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden;">
+                <img src="amzn-banner.jpg" alt="AMZN Banner" style="width: 100%; display: block;">
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEWPORT 2: VAULT -->
+    <div id="view-vault" class="view-section">
+        <div style="padding: 4rem 8%; text-align: center;">
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem; margin-bottom: 0.5rem;">$AMZN Community Vault</h1>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">Every trade routes fees here, completely onchain.</p>
+
+            <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 3rem; max-width: 900px; margin: 0 auto;">
+                <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 1rem;">● COMMUNITY NODE • ACTIVE</div>
+                <div style="font-size: 3.5rem; font-weight: 700; color: #fff; font-family: 'Space Grotesk';">$298,706</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Total Accumulated Vault Reserve</p>
+                
+                <div style="margin-top: 3rem; border-top: 1px solid var(--card-border); padding-top: 2rem;">
+                    <img src="glass-pod.jpg" alt="Glass Pod" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 16px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEWPORT 3: MECHANICS / HOW IT WORKS -->
+    <div id="view-mechanics" class="view-section">
+        <div class="diagram-container">
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem; margin-bottom: 0.5rem;">How it works</h1>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">$PRIME trades against tokenized $AMZN on Ponsfamily. Every transaction routes fees into backing and burns.</p>
+
+            <div class="flow-box">
+                <div class="flow-header">— ON BUYS • FEES PAID IN $AMZN</div>
+                <div class="flow-split-grid">
+                    <div class="split-card">
+                        <div class="split-percent">80%</div>
+                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Vault Accumulation</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Tokenized stock tokens acquired and held forever.</div>
                     </div>
-                    <div class="calc-val-box">
-                        <div style="color: var(--text-muted); font-size: 0.85rem;">MONTHLY VAULT GROWTH</div>
-                        <div id="estVaultGrowth" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-blue); margin-top: 5px;">+$15,000 USD</div>
+                    <div class="split-card secondary">
+                        <div class="split-percent" style="color: var(--text-muted);">20%</div>
+                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Protocol Routing</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Liquidity depth balancing on DEX engine.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-box">
+                <div class="flow-header">— ON SELLS • FEES PAID IN $PRIME</div>
+                <div class="flow-split-grid">
+                    <div class="split-card">
+                        <div class="split-percent">50%</div>
+                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Burned Forever</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Tokens destroyed permanently from circulating float.</div>
+                    </div>
+                    <div class="split-card">
+                        <div class="split-percent">50%</div>
+                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Locked in Vault</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Supply locked away permanently.</div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Tab 2: Core Mechanics -->
-        <div id="tab-mech" class="tab-content">
-            <div class="mechanics-grid">
-                <div class="glass-panel mech-card">
-                    <div class="mech-num">01.</div>
-                    <h3>$AMZN Tokenized Pair</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem;">$PRIME trades directly against tokenized $AMZN equity metrics, syncing token liquidity directly with stock performance.</p>
-                </div>
-                <div class="glass-panel mech-card">
-                    <div class="mech-num">02.</div>
-                    <h3>Trading Activity Compounds</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem;">Every transaction routes a fee allocation directly into the Vault, compounding the underlying asset floor.</p>
-                </div>
-                <div class="glass-panel mech-card">
-                    <div class="mech-num">03.</div>
-                    <h3>Deflationary Lock & Burn</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem;">Vault acquisitions in $PRIME are permanently locked or burned from circulating supply to tighten float.</p>
-                </div>
-            </div>
+    <!-- VIEWPORT 4: MEMES GALLERY -->
+    <div id="view-memes" class="view-section">
+        <div style="padding: 4rem 8% 1rem 8%; text-align: center;">
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem;">Marketing Suite & Memes</h1>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Download assets directly for social media pushes.</p>
         </div>
 
-        <!-- Tab 3: Performance Chart -->
-        <div id="tab-chart" class="tab-content">
-            <div class="glass-panel" style="padding: 2.5rem; max-width: 1000px; margin: 0 auto;">
-                <canvas id="primeChart"></canvas>
-            </div>
+        <div class="meme-grid">
+            <div class="meme-card"><img src="token-badge.jpg" alt="Badge"><div class="cap">Official Token Badge</div></div>
+            <div class="meme-card"><img src="hero-vault.jpg" alt="Vault"><div class="cap">$AMZN Vault Graphic</div></div>
+            <div class="meme-card"><img src="glass-pod.jpg" alt="Pod"><div class="cap">Glass Pod Container</div></div>
+            <div class="meme-card"><img src="special-delivery.jpg" alt="Delivery"><div class="cap">Rainy Special Delivery</div></div>
+            <div class="meme-card"><img src="delivery-van.jpg" alt="Van"><div class="cap">High Speed Delivery Van</div></div>
+            <div class="meme-card"><img src="express-delivery.jpg" alt="Express"><div class="cap">Express Hub Terminal</div></div>
+            <div class="meme-card"><img src="vault-square.jpg" alt="Square"><div class="cap">Vault Terminal Square</div></div>
+            <div class="meme-card"><img src="amzn-banner.jpg" alt="Banner"><div class="cap">Paired $AMZN Banner</div></div>
         </div>
-    </section>
+    </div>
 
-    <!-- Stats Grid -->
-    <section class="stats-grid">
-        <div class="glass-panel stat-box reveal">
-            <div class="stat-value">$PRIME</div>
-            <div class="stat-label">Ticker Symbol</div>
+    <!-- Panoramic Footer Banner -->
+    <div class="pano-footer">
+        <img src="express-delivery.jpg" alt="Express Footer Banner">
+        <div class="pano-overlay">
+            <div class="pano-title">Special delivery.<br>Ride with $PRIME.</div>
+            <a href="https://ponsfamily.com" target="_blank" class="btn-trade-main" style="padding: 12px 28px; font-size: 1rem;">Trade on DEX ↗</a>
         </div>
-        <div class="glass-panel stat-box reveal">
-            <div class="stat-value">$AMZN</div>
-            <div class="stat-label">Paired Asset</div>
-        </div>
-        <div class="glass-panel stat-box reveal">
-            <div class="stat-value">PONS</div>
-            <div class="stat-label">Blockchain Ecosystem</div>
-        </div>
-        <div class="glass-panel stat-box reveal">
-            <div class="stat-value">100%</div>
-            <div class="stat-label">Liquidity Locked</div>
-        </div>
-    </section>
-
-    <!-- Marketing Gallery -->
-    <section class="gallery" id="gallery">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2.5rem;" class="reveal">MARKETING SUITE</h2>
-        <div class="gallery-grid">
-            <div class="glass-panel gallery-item reveal">
-                <img src="token-badge.jpg" alt="Token Badge">
-                <div class="caption">Official Token Badge</div>
-            </div>
-            <div class="glass-panel gallery-item reveal">
-                <img src="hero-vault.jpg" alt="Hero Vault">
-                <div class="caption">AMZN Vault Sync</div>
-            </div>
-            <div class="glass-panel gallery-item reveal">
-                <img src="glass-pod.jpg" alt="Glass Pod">
-                <div class="caption">Glass Pod Shield</div>
-            </div>
-            <div class="glass-panel gallery-item reveal">
-                <img src="special-delivery.jpg" alt="Special Delivery">
-                <div class="caption">Special Delivery Rain Night</div>
-            </div>
-            <div class="glass-panel gallery-item reveal">
-                <img src="delivery-van.jpg" alt="Delivery Van">
-                <div class="caption">High Speed Delivery Van</div>
-            </div>
-            <div class="glass-panel gallery-item reveal">
-                <img src="express-delivery.jpg" alt="Express Delivery">
-                <div class="caption">Express Delivery Hub</div>
-            </div>
-            <div class="glass-panel gallery-item reveal">
-                <img src="vault-square.jpg" alt="Vault Square">
-                <div class="caption">Vault Square Terminal</div>
-            </div>
-            <div class="glass-panel gallery-item reveal">
-                <img src="download.png" alt="Doorstep Delivery">
-                <div class="caption">Prime Package Delivery</div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <footer>
         <p>&copy; 2026 PRIME ON PONS ($PRIME). Launched on Ponsfamily.com. Independent token paired with $AMZN stock metrics. Not affiliated with Amazon Inc.</p>
@@ -643,6 +594,17 @@
     <script>
         const CONTRACT_ADDRESS = "YOUR_PONS_CONTRACT_ADDRESS_HERE";
         const PONS_LAUNCHER_URL = "https://ponsfamily.com";
+
+        function showTab(tabName, event) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById('view-' + tabName).classList.add('active');
+            if (event) {
+                event.target.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function copyCA() {
             if (CONTRACT_ADDRESS === "YOUR_PONS_CONTRACT_ADDRESS_HERE") {
@@ -662,59 +624,41 @@
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
-        function switchTab(evt, tabId) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            evt.currentTarget.classList.add('active');
+        // Animated Starry Background Engine
+        const canvas = document.getElementById('space-bg');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        function updateDistCalc() {
-            let volume = document.getElementById('volumeSlider').value;
-            document.getElementById('volumeLabel').innerText = "$" + Number(volume).toLocaleString() + " USD";
-            let dailyVaultFee = volume * 0.005;
-            let dailyShares = (dailyVaultFee / 176.45).toFixed(2);
-            let monthlyVaultUSD = (dailyVaultFee * 30).toLocaleString();
-            document.getElementById('estShares').innerText = dailyShares + " Shares / Day";
-            document.getElementById('estVaultGrowth').innerText = "+$" + monthlyVaultUSD + " USD / Mo";
-        }
-
-        // Chart.js Init
-        const ctx = document.getElementById('primeChart').getContext('2d');
-        const primeChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
-                datasets: [{
-                    label: '$PRIME / $AMZN Stock Ratio',
-                    data: [1.20, 1.45, 1.38, 1.75, 2.10, 2.35, 2.80],
-                    borderColor: '#00A2FF',
-                    backgroundColor: 'rgba(0, 162, 255, 0.12)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { labels: { color: '#FFFFFF' } } },
-                scales: {
-                    x: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                    y: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
-                }
-            }
-        });
-
-        // Intersection Observer for Reveal Effects
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+        for (let i = 0; i < 120; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1.5,
+                alpha: Math.random(),
+                speed: Math.random() * 0.005 + 0.002
             });
-        }, { threshold: 0.1 });
+        }
 
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
     </script>
 </body>
 </html>
