@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRIME on Pons | $PRIME x $AMZN Vault</title>
-    <link rel="icon" type="image/jpeg" href="token-badge.jpg">
+    <link rel="icon" type="image/jpeg" href="official-badge.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,6 @@
             --card-bg: rgba(12, 17, 29, 0.85);
             --card-hover: rgba(20, 28, 45, 0.95);
             --border-color: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(0, 162, 255, 0.4);
             --accent-blue: #00A2FF;
             --accent-orange: #FF8A00;
             --accent-orange-glow: rgba(255, 138, 0, 0.4);
@@ -35,17 +34,51 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 162, 255, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 85% 60%, rgba(255, 138, 0, 0.08) 0%, transparent 45%);
+            position: relative;
         }
 
-        h1, h2, h3, .brand-font {
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
+        /* Floating Animated Background Packages */
+        .bg-floating-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
+        .floating-pkg {
+            position: absolute;
+            width: 70px;
+            opacity: 0.15;
+            filter: blur(1px);
+            animation: floatUpDown 8s ease-in-out infinite alternate;
+        }
+
+        .floating-pkg:nth-child(1) { top: 15%; left: 5%; animation-duration: 7s; }
+        .floating-pkg:nth-child(2) { top: 60%; left: 88%; animation-duration: 9s; width: 90px; }
+        .floating-pkg:nth-child(3) { top: 80%; left: 10%; animation-duration: 11s; width: 60px; }
+
+        @keyframes floatUpDown {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-35px) rotate(8deg); }
+        }
+
+        /* Scroll Pop-Up Animation Engine */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.96);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Toast Popup */
         #toast {
             visibility: hidden;
             min-width: 280px;
@@ -69,7 +102,6 @@
             bottom: 40px;
         }
 
-        /* Marquee Ticker */
         .ticker-wrap {
             width: 100%;
             background: rgba(0, 0, 0, 0.9);
@@ -79,6 +111,8 @@
             padding: 10px 0;
             font-size: 0.85rem;
             color: var(--text-muted);
+            position: relative;
+            z-index: 10;
         }
 
         .ticker {
@@ -101,7 +135,6 @@
             100% { transform: translate3d(-50%, 0, 0); }
         }
 
-        /* Navigation */
         nav {
             display: flex;
             justify-content: space-between;
@@ -165,7 +198,6 @@
             box-shadow: 0 0 30px rgba(255, 138, 0, 0.8);
         }
 
-        /* Hero Layout */
         .hero {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -173,6 +205,8 @@
             min-height: 85vh;
             align-items: center;
             gap: 4rem;
+            position: relative;
+            z-index: 2;
         }
 
         .stock-badge {
@@ -201,6 +235,7 @@
             font-size: 3.8rem;
             line-height: 1.05;
             margin-bottom: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .hero p {
@@ -225,10 +260,6 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
 
         .glass-card {
             background: var(--card-bg);
@@ -250,28 +281,7 @@
             object-fit: cover;
         }
 
-        /* Showcase Strip */
-        .showcase-banner-section {
-            padding: 0 8%;
-            margin-bottom: 4rem;
-        }
-
-        .showcase-banner {
-            width: 100%;
-            border-radius: 24px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .showcase-banner img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Mechanics */
-        .mechanics-section { padding: 4rem 8%; }
+        .mechanics-section { padding: 4rem 8%; position: relative; z-index: 2; }
         .mechanics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -290,7 +300,6 @@
         .mech-card:hover {
             border-color: var(--accent-blue);
             transform: translateY(-5px);
-            background: var(--card-hover);
         }
 
         .mech-num {
@@ -300,12 +309,13 @@
             margin-bottom: 1rem;
         }
 
-        /* Estimator Tool Box */
         .estimator-section {
             padding: 4rem 8%;
             background: rgba(0, 0, 0, 0.4);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 2;
         }
 
         .calc-tool-box {
@@ -318,16 +328,8 @@
             text-align: center;
         }
 
-        .slider-group {
-            margin: 2rem 0;
-            text-align: left;
-        }
-        .slider-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
+        .slider-group { margin: 2rem 0; text-align: left; }
+        .slider-group label { display: block; margin-bottom: 0.8rem; color: var(--text-muted); }
         .slider-input {
             width: 100%;
             accent-color: var(--accent-orange);
@@ -338,63 +340,7 @@
             cursor: pointer;
         }
 
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            padding: 4rem 8%;
-        }
-
-        .stat-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 1.8rem;
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .stat-box:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-3px);
-            background: var(--card-hover);
-        }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-        .stat-label { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* Chart Section */
-        .chart-section { padding: 4rem 8%; }
-        .chart-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 2.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 3rem auto;
-            font-size: 1rem;
-        }
-
-        /* Marketing Suite Grid */
-        .gallery { padding: 5rem 8%; }
+        .gallery { padding: 5rem 8%; position: relative; z-index: 2; }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -420,12 +366,7 @@
             display: block;
         }
 
-        .gallery-item .caption {
-            padding: 1rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
+        .gallery-item .caption { padding: 1rem; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
 
         footer {
             padding: 3rem 8%;
@@ -433,18 +374,26 @@
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.85rem;
+            position: relative;
+            z-index: 2;
         }
 
         @media (max-width: 900px) {
             .hero { grid-template-columns: 1fr; text-align: center; }
             .hero p { margin: 0 auto 2rem auto; }
             .hero-actions { justify-content: center; }
-            .stats-grid, .mechanics-grid { grid-template-columns: 1fr; }
+            .mechanics-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
+
+    <div class="bg-floating-container">
+        <img src="official-badge.jpg" class="floating-pkg" alt="Floating Badge">
+        <img src="stock-sphere.jpg" class="floating-pkg" alt="Floating Sphere">
+        <img src="official-badge.jpg" class="floating-pkg" alt="Floating Badge">
+    </div>
 
     <div id="toast">Contract Address Copied!</div>
 
@@ -460,21 +409,20 @@
 
     <nav>
         <div class="logo">
-            <img src="token-badge.jpg" alt="PRIME Logo" class="logo-img" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/token-badge.jpg';">
+            <img src="official-badge.jpg" alt="PRIME Logo" class="logo-img">
             PRIME <span>ON PONS</span>
         </div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#howitworks">Mechanics</a></li>
             <li><a href="#estimator">Yield Calculator</a></li>
-            <li><a href="#chart">Chart</a></li>
             <li><a href="#gallery">Marketing Suite</a></li>
         </ul>
         <button class="btn-buy" onclick="copyCA()">GET $PRIME</button>
     </nav>
 
     <section class="hero" id="about">
-        <div class="hero-content">
+        <div class="hero-content reveal">
             <div class="stock-badge">
                 <div class="live-dot"></div>
                 PAIRED WITH TOKENIZED $AMZN
@@ -486,53 +434,43 @@
                 <a href="https://ponsfamily.com" target="_blank" class="btn-secondary">Trade on Ponsfamily</a>
             </div>
         </div>
-        <div class="hero-visual">
+        <div class="hero-visual reveal">
             <div class="glass-card">
-                <img src="hero-vault.jpg" alt="PRIME Package Vault" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/hero-vault.jpg';">
+                <img src="vault-podium.jpg" alt="PRIME Vault Podium">
                 <h3>$PRIME / $AMZN / PONS</h3>
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">Official Tokenized Vault</p>
             </div>
         </div>
     </section>
 
-    <section class="showcase-banner-section">
-        <div class="showcase-banner">
-            <img src="amzn-banner.jpg" alt="Paired with $AMZN Banner" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/amzn-banner.jpg';">
-        </div>
-    </section>
-
     <section class="mechanics-section" id="howitworks">
-        <h2 class="section-title">HOW IT WORKS</h2>
-        <p class="section-subtitle">Triple-engine tokenomics backing $PRIME directly with $AMZN metric growth.</p>
+        <h2 style="text-align:center; font-size: 2.5rem; margin-bottom: 1rem;" class="reveal">HOW IT WORKS</h2>
         <div class="mechanics-grid">
-            <div class="mech-card">
+            <div class="mech-card reveal">
                 <div class="mech-num">01.</div>
                 <h3>$AMZN Tokenized Pair</h3>
-                <p>$PRIME trades directly against tokenized $AMZN equity rather than standard USD pairs, syncing token liquidity directly with ecommerce volume.</p>
+                <p style="color: var(--text-muted); line-height:1.6;">$PRIME trades directly against tokenized $AMZN equity rather than standard USD pairs, syncing liquidity directly with stock performance.</p>
             </div>
-            <div class="mech-card">
+            <div class="mech-card reveal">
                 <div class="mech-num">02.</div>
                 <h3>Trading Activity Compounds</h3>
-                <p>Every buy and sell routes a fee allocation directly into the Vault. As volume scales, the underlying liquidity backing compounds automatically.</p>
+                <p style="color: var(--text-muted); line-height:1.6;">Every transaction routes a fee allocation directly into the Vault, compounding the underlying asset floor.</p>
             </div>
-            <div class="mech-card">
+            <div class="mech-card reveal">
                 <div class="mech-num">03.</div>
                 <h3>Deflationary Lock & Burn</h3>
-                <p>Vault acquisitions in $PRIME are permanently locked or burned from circulating supply, tightening token float while vault reserves rise.</p>
+                <p style="color: var(--text-muted); line-height:1.6;">Vault acquisitions in $PRIME are permanently locked or burned from circulating supply to tighten float.</p>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Yield Estimator -->
     <section class="estimator-section" id="estimator">
-        <h2 class="section-title">INTERACTIVE $AMZN YIELD ESTIMATOR</h2>
-        <p class="section-subtitle">Slide trading volume to estimate daily tokenized $AMZN share accumulation.</p>
-        <div class="calc-tool-box">
+        <h2 style="text-align:center; font-size: 2.5rem;" class="reveal">INTERACTIVE $AMZN YIELD ESTIMATOR</h2>
+        <div class="calc-tool-box reveal">
             <div class="slider-group">
                 <label>Estimated 24H DEX Volume: <b id="volumeLabel" style="color:#fff;">$100,000 USD</b></label>
                 <input type="range" id="volumeSlider" class="slider-input" min="10000" max="5000000" step="10000" value="100000" oninput="updateDistCalc()">
             </div>
-
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;">
                 <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color);">
                     <div style="color: var(--text-muted); font-size: 0.85rem;">DAILY $AMZN SHARES ADDED</div>
@@ -546,59 +484,19 @@
         </div>
     </section>
 
-    <section class="stats-grid">
-        <div class="stat-box">
-            <div class="stat-value">$PRIME</div>
-            <div class="stat-label">Ticker Symbol</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value">$AMZN</div>
-            <div class="stat-label">Paired Asset</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value">PONS</div>
-            <div class="stat-label">Blockchain Ecosystem</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value">100%</div>
-            <div class="stat-label">Liquidity Locked</div>
-        </div>
-    </section>
-
-    <section class="chart-section" id="chart">
-        <h2 class="section-title">$PRIME / $AMZN PERFORMANCE CHART</h2>
-        <div class="chart-container">
-            <canvas id="primeChart"></canvas>
-        </div>
-    </section>
-
     <section class="gallery" id="gallery">
-        <h2 class="section-title">MARKETING SUITE</h2>
+        <h2 style="text-align:center; font-size: 2.5rem; margin-bottom: 2rem;" class="reveal">MARKETING SUITE</h2>
         <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="token-badge.jpg" alt="Official Token Badge" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/token-badge.jpg';">
-                <div class="caption">Official Circular Token Logo</div>
-            </div>
-            <div class="gallery-item">
-                <img src="hero-vault.jpg" alt="AMZN Vault Sync" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/hero-vault.jpg';">
-                <div class="caption">AMZN Vault Sync</div>
-            </div>
-            <div class="gallery-item">
-                <img src="delivery-van.jpg" alt="High Speed Express" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/delivery-van.jpg';">
-                <div class="caption">High Speed Express Delivery</div>
-            </div>
-            <div class="gallery-item">
-                <img src="glass-pod.jpg" alt="Glass Pod Shield" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/glass-pod.jpg';">
-                <div class="caption">Glass Pod Shield</div>
-            </div>
-            <div class="gallery-item">
-                <img src="special-delivery.jpg" alt="Rainy Porch Delivery" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/special-delivery.jpg';">
-                <div class="caption">Special Delivery Rain Night</div>
-            </div>
-            <div class="gallery-item">
-                <img src="amzn-banner.jpg" alt="Paired with AMZN Banner" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PrimeOnPons/Prime-on-Pons/main/amzn-banner.jpg';">
-                <div class="caption">Paired with $AMZN Banner</div>
-            </div>
+            <div class="gallery-item reveal"><img src="official-badge.jpg" alt="Official Badge"><div class="caption">Official Badge Avatar</div></div>
+            <div class="gallery-item reveal"><img src="stock-sphere.jpg" alt="Stock Sphere"><div class="caption">Holographic Stock Sphere</div></div>
+            <div class="gallery-item reveal"><img src="delivery-drone.jpg" alt="Delivery Drone"><div class="caption">Autonomous Delivery Drone</div></div>
+            <div class="gallery-item reveal"><img src="vault-podium.jpg" alt="Vault Podium"><div class="caption">$AMZN Vault Podium</div></div>
+            <div class="gallery-item reveal"><img src="rainy-porch.jpg" alt="Rainy Porch"><div class="caption">Special Delivery Rain Night</div></div>
+            <div class="gallery-item reveal"><img src="x-launch-banner.jpg" alt="X Banner"><div class="caption">Official Launch Banner</div></div>
+            <div class="gallery-item reveal"><img src="liquidity-locked.jpg" alt="Liquidity Locked"><div class="caption">100% Liquidity Locked</div></div>
+            <div class="gallery-item reveal"><img src="glass-pod-display.jpg" alt="Glass Pod"><div class="caption">Glass Pod Display</div></div>
+            <div class="gallery-item reveal"><img src="assembly-hub.jpg" alt="Assembly Hub"><div class="caption">Package Assembly Hub</div></div>
+            <div class="gallery-item reveal"><img src="express-van-wide.jpg" alt="Express Van"><div class="caption">Express Delivery Van</div></div>
         </div>
     </section>
 
@@ -610,13 +508,6 @@
         const CONTRACT_ADDRESS = "YOUR_PONS_CONTRACT_ADDRESS_HERE";
         const PONS_LAUNCHER_URL = "https://ponsfamily.com";
 
-        function showToast(msg) {
-            var toast = document.getElementById("toast");
-            toast.innerText = msg;
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-
         function copyCA() {
             if (CONTRACT_ADDRESS === "YOUR_PONS_CONTRACT_ADDRESS_HERE") {
                 navigator.clipboard.writeText(PONS_LAUNCHER_URL);
@@ -625,48 +516,36 @@
                 return;
             }
             navigator.clipboard.writeText(CONTRACT_ADDRESS);
-            showToast("Contract Address Copied to Clipboard!");
+            showToast("Contract Address Copied!");
         }
 
-        let amznPrice = 176.45;
+        function showToast(msg) {
+            var toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
         function updateDistCalc() {
             let volume = document.getElementById('volumeSlider').value;
             document.getElementById('volumeLabel').innerText = "$" + Number(volume).toLocaleString() + " USD";
-            
             let dailyVaultFee = volume * 0.005;
-            let dailyShares = (dailyVaultFee / amznPrice).toFixed(2);
+            let dailyShares = (dailyVaultFee / 176.45).toFixed(2);
             let monthlyVaultUSD = (dailyVaultFee * 30).toLocaleString();
-
             document.getElementById('estShares').innerText = dailyShares + " Shares / Day";
             document.getElementById('estVaultGrowth').innerText = "+$" + monthlyVaultUSD + " USD / Mo";
         }
 
-        const ctx = document.getElementById('primeChart').getContext('2d');
-        const primeChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
-                datasets: [{
-                    label: '$PRIME / $AMZN Stock Ratio',
-                    data: [1.20, 1.45, 1.38, 1.75, 2.10, 2.35, 2.80],
-                    borderColor: '#00A2FF',
-                    backgroundColor: 'rgba(0, 162, 255, 0.15)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { labels: { color: '#FFFFFF' } }
-                },
-                scales: {
-                    x: { ticks: { color: '#8E9BAE' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                    y: { ticks: { color: '#8E9BAE' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+        // Intersection Observer Scroll Pop-Up Engine
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
-            }
-        });
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
 </body>
 </html>
