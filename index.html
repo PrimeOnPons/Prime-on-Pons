@@ -8,11 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
         :root {
-            --bg-dark: #07090E;
-            --card-bg: rgba(14, 18, 27, 0.75);
-            --card-border: rgba(255, 255, 255, 0.08);
+            --bg-dark: #05070B;
+            --glass-card: rgba(14, 20, 32, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --accent-orange: #FF8A00;
             --accent-orange-glow: rgba(255, 138, 0, 0.35);
             --accent-blue: #00A2FF;
@@ -35,7 +36,6 @@
             position: relative;
         }
 
-        /* Starry Space Particle Background Canvas */
         #space-bg {
             position: fixed;
             top: 0;
@@ -45,12 +45,11 @@
             z-index: 0;
             pointer-events: none;
             background: 
-                radial-gradient(circle at 50% 10%, rgba(255, 138, 0, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 60%, rgba(0, 162, 255, 0.08) 0%, transparent 45%),
-                #07090E;
+                radial-gradient(circle at 50% 0%, rgba(255, 138, 0, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 80% 60%, rgba(0, 162, 255, 0.08) 0%, transparent 50%),
+                #05070B;
         }
 
-        /* Toast Popup */
         #toast {
             visibility: hidden;
             min-width: 280px;
@@ -70,7 +69,6 @@
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
 
-        /* Top Nav Bar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -79,9 +77,9 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(7, 9, 14, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--card-border);
+            background: rgba(5, 7, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .brand-logo {
@@ -97,8 +95,8 @@
         }
 
         .brand-logo img {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             border: 1.5px solid var(--accent-orange);
         }
@@ -111,15 +109,16 @@
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
+            text-decoration: none;
         }
 
         .nav-center-menu {
             display: flex;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             padding: 4px;
             border-radius: 30px;
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--glass-border);
         }
 
         .nav-tab-btn {
@@ -152,7 +151,6 @@
         }
         .btn-trade-main:hover { transform: scale(1.03); }
 
-        /* Marquee Strip */
         .marquee-wrap {
             width: 100%;
             background: var(--accent-orange);
@@ -175,7 +173,6 @@
             100% { transform: translate3d(-50%, 0, 0); }
         }
 
-        /* Viewport Container */
         .view-section {
             display: none;
             position: relative;
@@ -184,7 +181,14 @@
         }
         .view-section.active { display: block; }
 
-        /* Hero Layout */
+        .glass-panel {
+            background: var(--glass-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
         .hero-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -218,7 +222,7 @@
 
         .btn-pill {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--glass-border);
             color: #fff;
             padding: 10px 22px;
             border-radius: 30px;
@@ -236,8 +240,8 @@
             gap: 10px;
             align-items: center;
             background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--card-border);
-            padding: 8px 16px;
+            border: 1px solid var(--glass-border);
+            padding: 10px 18px;
             border-radius: 12px;
             width: fit-content;
             font-family: monospace;
@@ -245,24 +249,12 @@
             color: var(--text-muted);
         }
 
-        /* Big Holdings Display Counter */
         .holdings-banner {
             text-align: center;
             padding: 4rem 2rem;
-            border-top: 1px solid var(--card-border);
-            border-bottom: 1px solid var(--card-border);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
             background: rgba(0,0,0,0.3);
-        }
-
-        .holdings-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent-orange);
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
         }
 
         .big-number {
@@ -274,69 +266,6 @@
             margin-bottom: 0.5rem;
         }
 
-        .sub-number {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-
-        .breakdown-row {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .breakdown-item { text-align: center; }
-        .breakdown-item .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
-        .breakdown-item .val { font-size: 1.1rem; font-weight: 700; color: #fff; }
-
-        /* How It Works Flowchart Diagram */
-        .diagram-container {
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .flow-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .flow-header {
-            color: var(--accent-orange);
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
-        }
-
-        .flow-split-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .split-card {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--accent-orange);
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-        .split-card.secondary { border-color: var(--card-border); }
-
-        .split-percent {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-orange);
-            margin-bottom: 0.3rem;
-        }
-
-        /* Meme Grid */
         .meme-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -345,11 +274,13 @@
         }
 
         .meme-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
             border-radius: 16px;
             overflow: hidden;
+            transition: transform 0.3s ease;
         }
+        .meme-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
 
         .meme-card img {
             width: 100%;
@@ -365,56 +296,187 @@
             color: var(--text-muted);
         }
 
-        /* Panoramic Footer Banner */
-        .pano-footer {
-            width: 100%;
-            border-top: 1px solid var(--card-border);
+        /* Cockpit Panoramic Footer Component */
+        .cockpit-footer-section {
             position: relative;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .pano-footer img {
             width: 100%;
-            height: auto;
-            max-height: 420px;
-            object-fit: cover;
-            opacity: 0.7;
-            display: block;
+            min-height: 520px;
+            background: #000;
+            border-top: 1px solid var(--glass-border);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 4rem 8%;
+            z-index: 2;
         }
 
-        .pano-overlay {
+        .cockpit-bg-img {
             position: absolute;
-            bottom: 20%;
-            right: 8%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.45;
+            z-index: 1;
+        }
+
+        .cockpit-content-panel {
+            position: relative;
+            z-index: 2;
+            max-width: 580px;
             text-align: right;
         }
 
-        .pano-title {
+        .cockpit-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1rem;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            color: #fff;
         }
 
+        .cockpit-title span {
+            color: var(--accent-orange);
+        }
+
+        .cockpit-btn-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .cockpit-btn {
+            background: rgba(14, 20, 32, 0.85);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .cockpit-btn:hover {
+            border-color: var(--accent-orange);
+            background: rgba(255, 138, 0, 0.15);
+        }
+        .cockpit-btn.primary {
+            background: var(--accent-orange);
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* Copy Address Cards */
+        .ca-card-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .ca-card {
+            background: rgba(10, 14, 22, 0.9);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            border-radius: 14px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .ca-info {
+            text-align: left;
+        }
+        .ca-ticker {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--accent-orange);
+        }
+        .ca-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .ca-hash {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-right: 12px;
+        }
+
+        .btn-copy-sm {
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .btn-copy-sm:hover { transform: scale(1.05); }
+
+        /* Bottom Nav Links Bar */
+        .bottom-nav-bar {
+            background: rgba(3, 5, 8, 0.95);
+            border-top: 1px solid var(--glass-border);
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .bottom-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .bottom-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .bottom-links a:hover { color: var(--accent-orange); }
+
         footer {
-            padding: 2rem 8%;
+            padding: 1.5rem 8%;
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.8rem;
-            background: rgba(0,0,0,0.9);
-            border-top: 1px solid var(--card-border);
+            font-size: 0.75rem;
+            background: #000;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 2;
         }
 
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-sub { margin: 0 auto 2rem auto; }
-            .btn-pill-group { justify-content: center; }
-            .ca-box-row { margin: 0 auto; }
-            .flow-split-grid { grid-template-columns: 1fr; }
+            .btn-pill-group, .ca-box-row { justify-content: center; margin: 0 auto 1.5rem auto; }
             .nav-center-menu { display: none; }
             .big-number { font-size: 3.2rem; }
+            .cockpit-footer-section { justify-content: center; text-align: center; }
+            .cockpit-content-panel { text-align: center; }
+            .cockpit-btn-row { justify-content: center; }
+            .ca-card-stack { align-items: center; }
+            .bottom-nav-bar { justify-content: center; flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -423,11 +485,12 @@
     <canvas id="space-bg"></canvas>
     <div id="toast">Contract Address Copied!</div>
 
-    <!-- Top Navigation -->
+    <!-- Navigation -->
     <nav>
         <a href="#" class="brand-logo" onclick="showTab('home')">
             <img src="token-badge.jpg" alt="PRIME Logo">
-            PRIME <span class="stock-pill-btn">$AMZN $176.45</span>
+            PRIME 
+            <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" class="stock-pill-btn" id="nav-stock-price">NASDAQ:AMZN FETCHING...</a>
         </a>
 
         <div class="nav-center-menu">
@@ -437,14 +500,14 @@
             <button class="nav-tab-btn" onclick="showTab('memes', event)">Memes</button>
         </div>
 
-        <a href="https://ponsfamily.com" target="_blank" class="btn-trade-main">Trade $PRIME ↗</a>
+        <a href="https://ponsfamily.com" id="trade-btn-link" target="_blank" class="btn-trade-main">Trade $PRIME ↗</a>
     </nav>
 
-    <!-- Marquee Banner -->
+    <!-- Marquee Tape -->
     <div class="marquee-wrap">
         <div class="marquee-content">
-            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • FEES BURNED OR LOCKED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
-            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • FEES BURNED OR LOCKED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
+            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • LIVE TRADINGVIEW DATA INTEGRATED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
+            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • LIVE TRADINGVIEW DATA INTEGRATED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
         </div>
     </div>
 
@@ -453,50 +516,43 @@
         <section class="hero-grid">
             <div class="hero-left">
                 <h1 class="hero-title">The onchain<br><span style="color: var(--accent-orange);">$AMZN</span> community.</h1>
-                <p class="hero-sub">$PRIME is paired with tokenized $AMZN on Ponsfamily.com. Every trade feeds the Vault, and every fee is burned or locked forever.</p>
+                <p class="hero-sub">$PRIME is paired with tokenized $AMZN on Ponsfamily.com. Every trade feeds the Vault, tracked live against NASDAQ metrics.</p>
                 
                 <div class="btn-pill-group">
-                    <a href="https://ponsfamily.com" target="_blank" class="btn-pill primary">Trade $PRIME ↗</a>
+                    <a href="https://ponsfamily.com" id="hero-trade-link" target="_blank" class="btn-pill primary">Trade $PRIME ↗</a>
                     <button class="btn-pill" onclick="showTab('mechanics')">How It Works</button>
                     <button class="btn-pill" onclick="showTab('memes')">Memes</button>
                 </div>
 
                 <div class="ca-box-row">
                     <span>CA:</span>
-                    <span id="ca-text">YOUR_PONS_CONTRACT_ADDRESS_HERE</span>
-                    <button style="background:none; border:none; color:var(--accent-orange); cursor:pointer; font-weight:700;" onclick="copyCA()">COPY</button>
+                    <span id="ca-display">0x0000...0000</span>
+                    <button style="background:none; border:none; color:var(--accent-orange); cursor:pointer; font-weight:700;" onclick="copyCA('$PRIME')">COPY</button>
                 </div>
             </div>
 
             <div class="hero-right">
-                <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 1.5rem; text-align: center;">
+                <div class="glass-panel" style="padding: 1.5rem; text-align: center;">
                     <img src="hero-vault.jpg" alt="PRIME Vault" style="width: 100%; border-radius: 16px; display: block; margin-bottom: 1rem;">
                     <h3 style="font-family: 'Space Grotesk'; color: #fff;">$AMZN VAULT ENGAGED</h3>
                 </div>
             </div>
         </section>
 
-        <!-- Live Holdings Hero Section -->
+        <!-- Live Holdings Banner -->
         <section class="holdings-banner">
-            <div class="holdings-pill">● LIVE • $AMZN HOLDINGS</div>
-            <div class="big-number" id="holdings-usd">$2,665,443</div>
-            <div class="sub-number"><span id="holdings-shares">15,105.37</span> $AMZN SHARES</div>
-
-            <div class="breakdown-row">
-                <div class="breakdown-item">
-                    <div class="label">● Community Vault</div>
-                    <div class="val">1,264.28 NVDA ($223,157)</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="label">● Liquidity Pools</div>
-                    <div class="val">13,841.09 NVDA ($2,442,286)</div>
-                </div>
-            </div>
+            <div style="color: var(--accent-orange); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 1rem;">● LIVE TRADINGVIEW DATA • $AMZN METRICS</div>
+            <div class="big-number" id="holdings-usd-val">$0.00</div>
+            <div style="font-size: 1.2rem; color: var(--text-muted); font-weight: 600; margin-bottom: 2rem;"><span id="holdings-share-val">0.00</span> $AMZN SHARES</div>
         </section>
 
+        <!-- Live TradingView Chart Widget -->
         <div style="padding: 4rem 8%;">
-            <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden;">
-                <img src="amzn-banner.jpg" alt="AMZN Banner" style="width: 100%; display: block;">
+            <div class="glass-panel" style="padding: 1.5rem; overflow: hidden;">
+                <h3 style="font-family: 'Space Grotesk'; margin-bottom: 1rem;">NASDAQ:AMZN LIVE CHART</h3>
+                <div class="tradingview-widget-container" style="height: 400px; width: 100%;">
+                    <div id="tradingview_chart"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -505,71 +561,49 @@
     <div id="view-vault" class="view-section">
         <div style="padding: 4rem 8%; text-align: center;">
             <h1 style="font-family: 'Space Grotesk'; font-size: 3rem; margin-bottom: 0.5rem;">$AMZN Community Vault</h1>
-            <p style="color: var(--text-muted); margin-bottom: 3rem;">Every trade routes fees here, completely onchain.</p>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">Every trade routes fees here, tracked directly against TradingView's NASDAQ feed.</p>
 
-            <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 3rem; max-width: 900px; margin: 0 auto;">
+            <div class="glass-panel" style="padding: 3rem; max-width: 900px; margin: 0 auto;">
                 <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 1rem;">● COMMUNITY NODE • ACTIVE</div>
-                <div style="font-size: 3.5rem; font-weight: 700; color: #fff; font-family: 'Space Grotesk';">$298,706</div>
+                <div style="font-size: 3.5rem; font-weight: 700; color: #fff; font-family: 'Space Grotesk';" id="vault-reserve-usd">$0.00</div>
                 <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Total Accumulated Vault Reserve</p>
                 
-                <div style="margin-top: 3rem; border-top: 1px solid var(--card-border); padding-top: 2rem;">
+                <div style="margin-top: 3rem; border-top: 1px solid var(--glass-border); padding-top: 2rem;">
                     <img src="glass-pod.jpg" alt="Glass Pod" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 16px;">
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- VIEWPORT 3: MECHANICS / HOW IT WORKS -->
+    <!-- VIEWPORT 3: MECHANICS -->
     <div id="view-mechanics" class="view-section">
-        <div class="diagram-container">
+        <div style="max-width: 1000px; margin: 4rem auto; padding: 0 2rem;">
             <h1 style="font-family: 'Space Grotesk'; font-size: 3rem; margin-bottom: 0.5rem;">How it works</h1>
             <p style="color: var(--text-muted); margin-bottom: 3rem;">$PRIME trades against tokenized $AMZN on Ponsfamily. Every transaction routes fees into backing and burns.</p>
 
-            <div class="flow-box">
-                <div class="flow-header">— ON BUYS • FEES PAID IN $AMZN</div>
-                <div class="flow-split-grid">
-                    <div class="split-card">
-                        <div class="split-percent">80%</div>
-                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Vault Accumulation</div>
-                        <div style="color: var(--text-muted); font-size: 0.85rem;">Tokenized stock tokens acquired and held forever.</div>
-                    </div>
-                    <div class="split-card secondary">
-                        <div class="split-percent" style="color: var(--text-muted);">20%</div>
-                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Protocol Routing</div>
-                        <div style="color: var(--text-muted); font-size: 0.85rem;">Liquidity depth balancing on DEX engine.</div>
-                    </div>
-                </div>
+            <div class="glass-panel" style="padding: 2rem; margin-bottom: 1.5rem;">
+                <div style="color: var(--accent-orange); font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;">— ON BUYS • FEES PAID IN $AMZN</div>
+                <p style="color: var(--text-muted);">80% is funneled directly into the permanent community Vault, while 20% balances DEX protocol liquidity.</p>
             </div>
 
-            <div class="flow-box">
-                <div class="flow-header">— ON SELLS • FEES PAID IN $PRIME</div>
-                <div class="flow-split-grid">
-                    <div class="split-card">
-                        <div class="split-percent">50%</div>
-                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Burned Forever</div>
-                        <div style="color: var(--text-muted); font-size: 0.85rem;">Tokens destroyed permanently from circulating float.</div>
-                    </div>
-                    <div class="split-card">
-                        <div class="split-percent">50%</div>
-                        <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Locked in Vault</div>
-                        <div style="color: var(--text-muted); font-size: 0.85rem;">Supply locked away permanently.</div>
-                    </div>
-                </div>
+            <div class="glass-panel" style="padding: 2rem;">
+                <div style="color: var(--accent-orange); font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;">— ON SELLS • FEES PAID IN $PRIME</div>
+                <p style="color: var(--text-muted);">50% is burned permanently from supply float, and 50% is locked into the Vault permanently.</p>
             </div>
         </div>
     </div>
 
-    <!-- VIEWPORT 4: MEMES GALLERY -->
+    <!-- VIEWPORT 4: MEMES -->
     <div id="view-memes" class="view-section">
         <div style="padding: 4rem 8% 1rem 8%; text-align: center;">
-            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem;">Marketing Suite & Memes</h1>
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem;">Community Memes</h1>
             <p style="color: var(--text-muted); margin-top: 0.5rem;">Download assets directly for social media pushes.</p>
         </div>
 
         <div class="meme-grid">
             <div class="meme-card"><img src="token-badge.jpg" alt="Badge"><div class="cap">Official Token Badge</div></div>
             <div class="meme-card"><img src="hero-vault.jpg" alt="Vault"><div class="cap">$AMZN Vault Graphic</div></div>
-            <div class="meme-card"><img src="glass-pod.jpg" alt="Pod"><div class="cap">Glass Pod Container</div></div>
+            <div class="meme-card"><img src="glass-pod.jpg" alt="Pod"><div class="cap">Glass Pod Shield</div></div>
             <div class="meme-card"><img src="special-delivery.jpg" alt="Delivery"><div class="cap">Rainy Special Delivery</div></div>
             <div class="meme-card"><img src="delivery-van.jpg" alt="Van"><div class="cap">High Speed Delivery Van</div></div>
             <div class="meme-card"><img src="express-delivery.jpg" alt="Express"><div class="cap">Express Hub Terminal</div></div>
@@ -578,22 +612,118 @@
         </div>
     </div>
 
-    <!-- Panoramic Footer Banner -->
-    <div class="pano-footer">
-        <img src="express-delivery.jpg" alt="Express Footer Banner">
-        <div class="pano-overlay">
-            <div class="pano-title">Special delivery.<br>Ride with $PRIME.</div>
-            <a href="https://ponsfamily.com" target="_blank" class="btn-trade-main" style="padding: 12px 28px; font-size: 1rem;">Trade on DEX ↗</a>
+    <!-- COCKPIT CONTROL-ROOM PANORAMIC FOOTER -->
+    <div class="cockpit-footer-section">
+        <img src="express-delivery.jpg" alt="Cockpit View" class="cockpit-bg-img">
+        
+        <div class="cockpit-content-panel">
+            <div class="cockpit-title">Special delivery.<br><span>Ride with $PRIME.</span></div>
+            
+            <div class="cockpit-btn-row">
+                <a href="https://ponsfamily.com" id="cockpit-trade-link" target="_blank" class="cockpit-btn primary">Trade $PRIME ↗</a>
+                <a href="https://x.com" target="_blank" class="cockpit-btn">Follow on X</a>
+                <button class="cockpit-btn" onclick="showTab('mechanics')">How It Works</button>
+                <button class="cockpit-btn" onclick="showTab('memes')">Memes</button>
+                <a href="https://dexscreener.com" target="_blank" class="cockpit-btn">Dexscreener</a>
+            </div>
+
+            <!-- Double Contract Address Cards -->
+            <div class="ca-card-stack">
+                <div class="ca-card">
+                    <div class="ca-info">
+                        <div class="ca-ticker">$PRIME</div>
+                        <div class="ca-sub">$PRIME Community Token</div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span class="ca-hash" id="prime-ca-hash">0x0000...0000</span>
+                        <button class="btn-copy-sm" onclick="copyCA('$PRIME')">Copy</button>
+                    </div>
+                </div>
+
+                <div class="ca-card">
+                    <div class="ca-info">
+                        <div class="ca-ticker" style="color: var(--accent-blue);">$AMZN</div>
+                        <div class="ca-sub">Tokenized Stock Pair</div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span class="ca-hash" id="amzn-ca-hash">NASDAQ:AMZN</span>
+                        <button class="btn-copy-sm" style="background: var(--accent-blue);" onclick="copyCA('$AMZN')">Copy</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- BOTTOM WORKING LINKS NAV BAR -->
+    <div class="bottom-nav-bar">
+        <div>&copy; 2026 PRIME ON PONS Inc. All rights reserved.</div>
+        <ul class="bottom-links">
+            <li><a href="#" onclick="showTab('home'); return false;">Trade $PRIME</a></li>
+            <li><a href="#" onclick="showTab('vault'); return false;">Vault</a></li>
+            <li><a href="#" onclick="showTab('mechanics'); return false;">How It Works</a></li>
+            <li><a href="#" onclick="showTab('memes'); return false;">Memes</a></li>
+            <li><a href="https://dexscreener.com" target="_blank">Dexscreener</a></li>
+            <li><a href="https://ponsfamily.com" target="_blank">Ponsfamily DEX</a></li>
+        </ul>
+    </div>
+
     <footer>
-        <p>&copy; 2026 PRIME ON PONS ($PRIME). Launched on Ponsfamily.com. Independent token paired with $AMZN stock metrics. Not affiliated with Amazon Inc.</p>
+        <p>$PRIME is a memecoin paired with tokenized $AMZN. It does not represent NASDAQ equity, and holders cannot redeem assets from the Vault. Not an investment product.</p>
     </footer>
 
     <script>
-        const CONTRACT_ADDRESS = "YOUR_PONS_CONTRACT_ADDRESS_HERE";
-        const PONS_LAUNCHER_URL = "https://ponsfamily.com";
+        const CONFIG = {
+            PRIME_CONTRACT_ADDRESS: "", // Insert deployed $PRIME contract address
+            AMZN_TOKEN_ADDRESS: "NASDAQ:AMZN",
+            PONS_PAIR_URL: "https://ponsfamily.com",
+            TRADINGVIEW_SYMBOL: "NASDAQ:AMZN"
+        };
+
+        let liveAmznPrice = 256.97;
+
+        async function fetchLiveAmznPrice() {
+            try {
+                let res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/AMZN');
+                let data = await res.json();
+                let price = data.chart.result[0].meta.regularMarketPrice;
+                if(price) {
+                    liveAmznPrice = price;
+                    document.getElementById('nav-stock-price').innerText = "NASDAQ:AMZN $" + price.toFixed(2);
+                }
+            } catch(e) {
+                document.getElementById('nav-stock-price').innerText = "NASDAQ:AMZN $" + liveAmznPrice.toFixed(2);
+            }
+        }
+
+        function initConfig() {
+            if (CONFIG.PRIME_CONTRACT_ADDRESS && CONFIG.PRIME_CONTRACT_ADDRESS !== "") {
+                document.getElementById('ca-display').innerText = CONFIG.PRIME_CONTRACT_ADDRESS;
+                document.getElementById('prime-ca-hash').innerText = CONFIG.PRIME_CONTRACT_ADDRESS.substring(0, 6) + "..." + CONFIG.PRIME_CONTRACT_ADDRESS.substring(CONFIG.PRIME_CONTRACT_ADDRESS.length - 4);
+            }
+            if (CONFIG.PONS_PAIR_URL) {
+                document.getElementById('trade-btn-link').href = CONFIG.PONS_PAIR_URL;
+                document.getElementById('hero-trade-link').href = CONFIG.PONS_PAIR_URL;
+                document.getElementById('cockpit-trade-link').href = CONFIG.PONS_PAIR_URL;
+            }
+        }
+
+        function initTradingViewWidget() {
+            if(document.getElementById('tradingview_chart')) {
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": CONFIG.TRADINGVIEW_SYMBOL,
+                    "interval": "D",
+                    "timezone": "Etc/UTC",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "allow_symbol_change": false,
+                    "container_id": "tradingview_chart"
+                });
+            }
+        }
 
         function showTab(tabName, event) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
@@ -606,15 +736,18 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function copyCA() {
-            if (CONTRACT_ADDRESS === "YOUR_PONS_CONTRACT_ADDRESS_HERE") {
-                navigator.clipboard.writeText(PONS_LAUNCHER_URL);
+        function copyCA(type) {
+            let targetText = CONFIG.PRIME_CONTRACT_ADDRESS;
+            if (type === '$AMZN') targetText = CONFIG.AMZN_TOKEN_ADDRESS;
+
+            if (!targetText || targetText === "" || targetText === "0x0000...0000") {
+                navigator.clipboard.writeText(CONFIG.PONS_PAIR_URL);
                 showToast("Redirecting to Ponsfamily.com...");
-                setTimeout(() => { window.open(PONS_LAUNCHER_URL, '_blank'); }, 1000);
+                setTimeout(() => { window.open(CONFIG.PONS_PAIR_URL, '_blank'); }, 1000);
                 return;
             }
-            navigator.clipboard.writeText(CONTRACT_ADDRESS);
-            showToast("Contract Address Copied!");
+            navigator.clipboard.writeText(targetText);
+            showToast(type + " Address Copied!");
         }
 
         function showToast(msg) {
@@ -624,7 +757,7 @@
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
-        // Animated Starry Background Engine
+        // Particle Canvas
         const canvas = document.getElementById('space-bg');
         const ctx = canvas.getContext('2d');
         let stars = [];
@@ -658,7 +791,13 @@
             });
             requestAnimationFrame(animateStars);
         }
-        animateStars();
+
+        window.onload = function() {
+            initConfig();
+            fetchLiveAmznPrice();
+            initTradingViewWidget();
+            animateStars();
+        };
     </script>
 </body>
 </html>
