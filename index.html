@@ -51,7 +51,7 @@
       }
     }
 
-    /* Comic Package Cursor Canvas */
+    /* Soft Amazon Smile Cursor Trail Canvas */
     #cursorCanvas {
       position: fixed;
       top: 0;
@@ -279,7 +279,7 @@
       margin-bottom: 10px;
     }
 
-    /* New TradingView Chart Card Container */
+    /* TradingView Chart Container */
     .tv-chart-box {
       max-width: 1200px;
       margin: 40px auto;
@@ -316,7 +316,7 @@
       word-break: break-all;
     }
 
-    /* Meme Generator Studio Layout */
+    /* Meme Studio Layout */
     .meme-studio-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -347,14 +347,6 @@
       font-family: 'Outfit', sans-serif;
       font-weight: bold;
       background: #fff;
-    }
-
-    .generation-status {
-      font-family: 'Outfit', sans-serif;
-      font-weight: bold;
-      color: var(--primary-blue);
-      text-align: center;
-      margin-top: 10px;
     }
 
     /* 100% FULL-BLEED SCREEN SPANNING FOOTER */
@@ -429,7 +421,7 @@
 </head>
 <body>
 
-  <!-- Comic Package Cursor Trail Canvas -->
+  <!-- Soft Amazon Smile Cursor Trail Canvas -->
   <canvas id="cursorCanvas"></canvas>
 
   <!-- Header Navigation -->
@@ -463,10 +455,10 @@
     </div>
   </header>
 
-  <!-- Navigation Tabs (Multiple Page System) -->
+  <!-- Navigation Tabs -->
   <nav class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('home', event)">🏠 Home Hub</button>
-    <button class="tab-btn" onclick="switchTab('memegen', event)">🤖 AI Meme Creator</button>
+    <button class="tab-btn" onclick="switchTab('memegen', event)">🎨 Meme Studio</button>
     <button class="tab-btn" onclick="switchTab('about', event)">📦 About $PRIME</button>
     <button class="tab-btn" onclick="switchTab('tokenomics', event)">📊 Tokenomics</button>
     <button class="tab-btn" onclick="switchTab('roadmap', event)">🗺️ Logistics Roadmap</button>
@@ -505,13 +497,12 @@
       </div>
     </div>
 
-    <!-- NEW TRADINGVIEW OVERVIEW CHART -->
+    <!-- TRADINGVIEW OVERVIEW CHART -->
     <div class="tv-chart-box">
       <h3 style="font-family: 'Outfit'; color: #fff; margin-bottom: 12px; font-size: 1.4rem; display: flex; align-items: center; gap: 8px;">
         📈 Live $AMZN Stock Chart Pairing
       </h3>
       <div class="tv-chart-wrapper">
-        <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container" style="height:100%;width:100%;">
           <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
           <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" rel="noopener nofollow" target="_blank"><span class="blue-text">AMZN stock price</span></a><span class="trademark">&nbsp;by TradingView</span></div>
@@ -563,7 +554,6 @@
           }
           </script>
         </div>
-        <!-- TradingView Widget END -->
       </div>
     </div>
 
@@ -612,52 +602,35 @@
     </section>
   </div>
 
-  <!-- PAGE 2: AI & COMPOSITOR MEME STUDIO -->
+  <!-- PAGE 2: GRAPHIC MEME STUDIO -->
   <div id="memegen" class="page-section">
     <div class="card bold-box" style="padding: 30px;">
-      <h2 style="font-family: 'Outfit'; font-size: 2.5rem; margin-bottom: 8px; color: var(--amazon-orange); text-align: center;">$PRIME AI & Graphic Meme Studio 🎨</h2>
-      <p style="text-align: center; color: #475569; font-weight: bold; margin-bottom: 25px;">Generate unique artwork incorporating $PRIME, PEPE, DOGE, SHIB, WIF, BONK & $AMZN!</p>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem; margin-bottom: 8px; color: var(--amazon-orange); text-align: center;">$PRIME Meme Studio 🎨</h2>
+      <p style="text-align: center; color: #475569; font-weight: bold; margin-bottom: 25px;">Create custom memes incorporating $PRIME, PEPE, DOGE, SHIB, WIF, BONK & $AMZN!</p>
 
       <div class="meme-studio-container">
         <div>
           <canvas id="memeCanvas" width="600" height="400"></canvas>
-          <div id="genStatus" class="generation-status">Ready to generate. Click buttons below!</div>
         </div>
 
         <div class="meme-controls">
-          <label style="font-weight: bold;">Rendering Engine Mode:</label>
-          <select id="renderModeSelect" onchange="toggleRenderMode()">
-            <option value="composite">Vector Compositor Studio (Instant)</option>
-            <option value="ai">AI Image Diffusion Generator (Live AI)</option>
+          <label style="font-weight: bold;">Warehouse Scene Backdrop:</label>
+          <select id="memeBgSelect" onchange="drawMeme()">
+            <option value="warehouse-footer.jpg">Prime Fulfillment Facility</option>
+            <option value="Intro-image-future.jpg">Express Delivery Vehicle</option>
+            <option value="Warehouse-robots.jpg">Robotic Sorting Arm</option>
+            <option value="Prime-porch.jpg">Porch Package Drop</option>
           </select>
 
-          <!-- AI Prompt Inputs -->
-          <div id="aiPromptBox" style="display: none; flex-direction: column; gap: 10px;">
-            <label style="font-weight: bold;">Custom AI Image Prompt:</label>
-            <input type="text" id="aiPromptInput" value="Pepe frog and Dogecoin working in an Amazon Prime warehouse holding $PRIME boxes with robotic arms">
-            <button class="btn btn-orange" onclick="generateAIMeme()">✨ Generate Unique AI Image</button>
-          </div>
-
-          <!-- Composite Controls -->
-          <div id="compositeBox" style="display: flex; flex-direction: column; gap: 10px;">
-            <label style="font-weight: bold;">Warehouse Scene Backdrop:</label>
-            <select id="memeBgSelect" onchange="drawMeme()">
-              <option value="warehouse-footer.jpg">Prime Fulfillment Facility</option>
-              <option value="Intro-image-future.jpg">Express Delivery Vehicle</option>
-              <option value="Warehouse-robots.jpg">Robotic Sorting Arm</option>
-              <option value="Prime-porch.jpg">Porch Package Drop</option>
-            </select>
-
-            <label style="font-weight: bold;">Co-Star Memecoin Guest:</label>
-            <select id="memeCoinSelect" onchange="drawMeme()">
-              <option value="PEPE">Pepe the Frog 🐸</option>
-              <option value="DOGE">Dogecoin (DOGE) 🐕</option>
-              <option value="SHIB">Shiba Inu (SHIB) 🐕‍🦺</option>
-              <option value="BONK">Bonk (BONK) 🔨</option>
-              <option value="WIF">Dogwifhat (WIF) 🎩</option>
-              <option value="POPCAT">Popcat 🐱</option>
-            </select>
-          </div>
+          <label style="font-weight: bold;">Co-Star Memecoin Guest:</label>
+          <select id="memeCoinSelect" onchange="drawMeme()">
+            <option value="PEPE">Pepe the Frog 🐸</option>
+            <option value="DOGE">Dogecoin (DOGE) 🐕</option>
+            <option value="SHIB">Shiba Inu (SHIB) 🐕‍🦺</option>
+            <option value="BONK">Bonk (BONK) 🔨</option>
+            <option value="WIF">Dogwifhat (WIF) 🎩</option>
+            <option value="POPCAT">Popcat 🐱</option>
+          </select>
 
           <label style="font-weight: bold;">Header Banner Text:</label>
           <input type="text" id="memeTopText" value="$PRIME EXPRESS MEME DELIVERY" oninput="drawMeme()">
@@ -803,10 +776,10 @@
       }
     }
 
-    // 2. WAREHOUSE COMIC PACKAGE CURSOR ENGINE
+    // 2. SOFT AMAZON SMILE LINE CURSOR TRAIL ENGINE
     const cCanvas = document.getElementById('cursorCanvas');
     const cCtx = cCanvas.getContext('2d');
-    let particles = [];
+    let points = [];
 
     function resizeCCanvas() {
       cCanvas.width = window.innerWidth;
@@ -816,60 +789,62 @@
     window.addEventListener('resize', resizeCCanvas);
 
     window.addEventListener('mousemove', (e) => {
-      particles.push(new ComicPackageParticle(e.clientX, e.clientY));
+      points.push({
+        x: e.clientX,
+        y: e.clientY,
+        time: Date.now()
+      });
     });
 
-    class ComicPackageParticle {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.size = Math.random() * 12 + 10;
-        this.speedX = (Math.random() - 0.5) * 2;
-        this.speedY = -Math.random() * 2 - 1;
-        this.rotation = Math.random() * 0.4 - 0.2;
-        this.alpha = 1;
-        this.color = Math.random() > 0.5 ? '#ff9900' : '#00f2fe';
-        this.symbol = Math.random() > 0.5 ? '📦' : '⚡';
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.alpha -= 0.025;
-      }
-      draw() {
-        cCtx.save();
-        cCtx.globalAlpha = this.alpha;
-        cCtx.translate(this.x, this.y);
-        cCtx.rotate(this.rotation);
-        
-        cCtx.fillStyle = this.color;
-        cCtx.lineWidth = 2;
-        cCtx.strokeStyle = '#0f172a';
-        cCtx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
-        cCtx.strokeRect(-this.size/2, -this.size/2, this.size, this.size);
-
-        cCtx.font = `${Math.floor(this.size * 0.7)}px sans-serif`;
-        cCtx.textAlign = 'center';
-        cCtx.textBaseline = 'middle';
-        cCtx.fillText(this.symbol, 0, 0);
-
-        cCtx.restore();
-      }
-    }
-
-    function renderParticles() {
+    function renderCursorTrail() {
       cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-        if (particles[i].alpha <= 0) {
-          particles.splice(i, 1);
-          i--;
+      const now = Date.now();
+      
+      // Filter active points within 400ms lifespan
+      points = points.filter(p => now - p.time < 400);
+
+      if (points.length > 1) {
+        cCtx.beginPath();
+        cCtx.moveTo(points[0].x, points[0].y);
+
+        for (let i = 1; i < points.length - 1; i++) {
+          const xc = (points[i].x + points[i + 1].x) / 2;
+          const yc = (points[i].y + points[i + 1].y) / 2 + 1.5; // Slight downward curve resembling Amazon smile
+          cCtx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
         }
+
+        // Soft Glowing Amazon Smile Gradient Line
+        const gradient = cCtx.createLinearGradient(
+          points[0].x, points[0].y, 
+          points[points.length - 1].x, points[points.length - 1].y
+        );
+        gradient.addColorStop(0, 'rgba(255, 153, 0, 0)');
+        gradient.addColorStop(0.5, 'rgba(255, 153, 0, 0.6)');
+        gradient.addColorStop(1, 'rgba(0, 242, 254, 0.9)');
+
+        cCtx.strokeStyle = gradient;
+        cCtx.lineWidth = 4;
+        cCtx.lineCap = 'round';
+        cCtx.lineJoin = 'round';
+        cCtx.shadowColor = '#ff9900';
+        cCtx.shadowBlur = 8;
+        cCtx.stroke();
       }
-      requestAnimationFrame(renderParticles);
+
+      // Draw delicate lead arrow accent
+      if (points.length > 0) {
+        const last = points[points.length - 1];
+        cCtx.beginPath();
+        cCtx.arc(last.x, last.y, 3, 0, Math.PI * 2);
+        cCtx.fillStyle = '#ff9900';
+        cCtx.shadowBlur = 10;
+        cCtx.shadowColor = '#ff9900';
+        cCtx.fill();
+      }
+
+      requestAnimationFrame(renderCursorTrail);
     }
-    renderParticles();
+    renderCursorTrail();
 
     function copyCA() {
       navigator.clipboard.writeText("$PRIME / Tokenized $AMZN Stock - Launching on https://ponsfamily.com");
@@ -889,34 +864,19 @@
       setTimeout(() => { box.remove(); }, 2500);
     }
 
-    // 4. MEME GENERATOR ENGINE
+    // 4. MEME STUDIO GRAPHIC ENGINE
     const mCanvas = document.getElementById('memeCanvas');
     const mCtx = mCanvas.getContext('2d');
 
     const randomMemesData = [
-      { top: "WHEN $PRIME DELIVERS", bottom: "PEPE & DOGE TO THE MOON 🚀", coin: "PEPE", prompt: "Pepe frog in Amazon Prime delivery uniform holding a glowing $PRIME package" },
-      { top: "EXPRESS MEME DELIVERY", bottom: "$PRIME x TOKENIZED $AMZN STOCK 📈", coin: "DOGE", prompt: "Dogecoin dog driving a futuristic Amazon Prime delivery truck with $AMZN stock chart" },
-      { top: "SHIB ORDERED $PRIME", bottom: "MEME DELIVERED IN 1 BLOCK 📦", coin: "SHIB", prompt: "Shiba Inu dog receiving a PRIME package on front porch with robot delivery drone" },
-      { top: "BONK SAYS:", bottom: "ALWAYS USE $PRIME FOR FAST MEMES 🔥", coin: "BONK", prompt: "Bonk dog with hammer in automated warehouse sorting PRIME meme boxes" },
-      { top: "DOGWIFHAT IS WEARING PRIME", bottom: "FULFILLMENT HUB FULLY AUTOMATED 🤖", coin: "WIF", prompt: "Dogwifhat wearing pink beanie inspecting PRIME token packages on conveyor belt" }
+      { top: "WHEN $PRIME DELIVERS", bottom: "PEPE & DOGE TO THE MOON 🚀", coin: "PEPE" },
+      { top: "EXPRESS MEME DELIVERY", bottom: "$PRIME x TOKENIZED $AMZN STOCK 📈", coin: "DOGE" },
+      { top: "SHIB ORDERED $PRIME", bottom: "MEME DELIVERED IN 1 BLOCK 📦", coin: "SHIB" },
+      { top: "BONK SAYS:", bottom: "ALWAYS USE $PRIME FOR FAST MEMES 🔥", coin: "BONK" },
+      { top: "DOGWIFHAT IS WEARING PRIME", bottom: "FULFILLMENT HUB FULLY AUTOMATED 🤖", coin: "WIF" }
     ];
 
-    function toggleRenderMode() {
-      const mode = document.getElementById('renderModeSelect').value;
-      if (mode === 'ai') {
-        document.getElementById('aiPromptBox').style.display = 'flex';
-        document.getElementById('compositeBox').style.display = 'none';
-      } else {
-        document.getElementById('aiPromptBox').style.display = 'none';
-        document.getElementById('compositeBox').style.display = 'flex';
-        drawMeme();
-      }
-    }
-
     function drawMeme() {
-      const mode = document.getElementById('renderModeSelect').value;
-      if (mode === 'ai') return;
-
       const bgSrc = document.getElementById('memeBgSelect').value;
       const coin = document.getElementById('memeCoinSelect').value;
       const topText = document.getElementById('memeTopText').value;
@@ -945,7 +905,6 @@
         mCtx.fillText(`$PRIME x ${coin}`, 110, 47);
 
         renderMemeText(topText, bottomText);
-        document.getElementById('genStatus').innerText = "Composite Meme Rendered!";
       };
     }
 
@@ -985,61 +944,21 @@
       }
     }
 
-    async function generateAIMeme() {
-      const prompt = document.getElementById('aiPromptInput').value;
-      const status = document.getElementById('genStatus');
-      status.innerText = "🤖 Generating unique AI Meme image... Please wait...";
-
-      try {
-        const encodedPrompt = encodeURIComponent(prompt + ", digital art style, high detail, vibrant colors");
-        const seed = Math.floor(Math.random() * 99999);
-        const aiUrl = `https://pollinations.ai/p/${encodedPrompt}?width=600&height=400&seed=${seed}&nologo=true`;
-
-        const aiImg = new Image();
-        aiImg.crossOrigin = "anonymous";
-        aiImg.src = aiUrl;
-
-        aiImg.onload = () => {
-          mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
-          mCtx.drawImage(aiImg, 0, 0, mCanvas.width, mCanvas.height);
-
-          const topText = document.getElementById('memeTopText').value;
-          const bottomText = document.getElementById('memeBottomText').value;
-          renderMemeText(topText, bottomText);
-
-          status.innerText = "✨ AI Image Generated Successfully!";
-        };
-        aiImg.onerror = () => {
-          status.innerText = "Fallback to composite generator...";
-          drawMeme();
-        };
-      } catch (err) {
-        status.innerText = "AI Generation error. Rendered vector composite instead.";
-        drawMeme();
-      }
-    }
-
     function generateRandomMeme() {
       const randomItem = randomMemesData[Math.floor(Math.random() * randomMemesData.length)];
       document.getElementById('memeTopText').value = randomItem.top;
       document.getElementById('memeBottomText').value = randomItem.bottom;
       document.getElementById('memeCoinSelect').value = randomItem.coin;
-      document.getElementById('aiPromptInput').value = randomItem.prompt;
       
       const bgOptions = ["warehouse-footer.jpg", "Intro-image-future.jpg", "Warehouse-robots.jpg", "Prime-porch.jpg"];
       document.getElementById('memeBgSelect').value = bgOptions[Math.floor(Math.random() * bgOptions.length)];
 
-      const mode = document.getElementById('renderModeSelect').value;
-      if (mode === 'ai') {
-        generateAIMeme();
-      } else {
-        drawMeme();
-      }
+      drawMeme();
     }
 
     function downloadMeme() {
       const link = document.createElement('a');
-      link.download = 'Prime-AI-Meme.png';
+      link.download = 'Prime-Meme.png';
       link.href = mCanvas.toDataURL('image/png');
       link.click();
     }
