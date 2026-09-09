@@ -554,28 +554,28 @@
       </div>
     </section>
 
-    <!-- DYNAMIC DEXSCREENER & LOGISTICS STATS BAR -->
+    <!-- DYNAMIC DEXSCREENER & LOGISTICS STATS BAR (DEFAULTS TO "- -") -->
     <div class="live-stats-bar">
       <a id="dexMarketCapLink" href="https://dexscreener.com" target="_blank" class="stat-card-link">
         <div class="stat-card">
-          <div class="stat-value" id="countMarketCap">$125,000</div>
+          <div class="stat-value" id="countMarketCap">- -</div>
           <div class="stat-label">Market Cap</div>
-          <span class="stat-tag" id="tagMarketCap">DexScreener Live</span>
+          <span class="stat-tag" id="tagMarketCap">DexScreener</span>
         </div>
       </a>
 
       <a id="dexHoldersLink" href="https://dexscreener.com" target="_blank" class="stat-card-link">
         <div class="stat-card">
-          <div class="stat-value" id="countHolders">3,820+</div>
-          <div class="stat-label">Prime Holders</div>
-          <span class="stat-tag" id="tagHolders">DexScreener Live</span>
+          <div class="stat-value" id="countHolders">- -</div>
+          <div class="stat-label">Holders / Price</div>
+          <span class="stat-tag" id="tagHolders">DexScreener</span>
         </div>
       </a>
 
       <a id="dexLiquidityLink" href="https://dexscreener.com" target="_blank" class="stat-card-link">
         <div class="stat-card">
-          <div class="stat-value" id="countLiquidity">100% Locked</div>
-          <div class="stat-label">Vault Security</div>
+          <div class="stat-value" id="countLiquidity">- -</div>
+          <div class="stat-label">Vault Liquidity</div>
           <span class="stat-tag">Pons Vault</span>
         </div>
       </a>
@@ -919,52 +919,55 @@
     }
 
     // 4. DEXSCREENER LIVE DYNAMIC STATS CONFIGURATION ENGINE
+    // When you launch, set isLaunched to true and paste your DexScreener URL below!
     const DEXSCREENER_CONFIG = {
-      isLaunched: false, // Change to true when token goes live!
-      chainId: "ethereum", // Chain ID e.g. "ethereum", "solana", "bsc", "polygon"
-      pairAddress: "YOUR_PAIR_ADDRESS_HERE" // Replace with DexScreener Pair or Token Address
+      isLaunched: false, 
+      dexScreenerUrl: "https://dexscreener.com/ethereum/YOUR_PAIR_ADDRESS" 
     };
 
     async function fetchDexScreenerData() {
-      if (!DEXSCREENER_CONFIG.isLaunched || DEXSCREENER_CONFIG.pairAddress === "YOUR_PAIR_ADDRESS_HERE") {
-        return; // Retain placeholder pre-launch formatting
+      if (!DEXSCREENER_CONFIG.isLaunched || !DEXSCREENER_CONFIG.dexScreenerUrl || DEXSCREENER_CONFIG.dexScreenerUrl.includes("YOUR_PAIR_ADDRESS")) {
+        return; // Retain "- -" until you provide your active DexScreener URL
       }
 
-      const dexUrl = `https://dexscreener.com/${DEXSCREENER_CONFIG.chainId}/${DEXSCREENER_CONFIG.pairAddress}`;
-      document.getElementById('dexMarketCapLink').href = dexUrl;
-      document.getElementById('dexHoldersLink').href = dexUrl;
-      document.getElementById('dexLiquidityLink').href = dexUrl;
+      document.getElementById('dexMarketCapLink').href = DEXSCREENER_CONFIG.dexScreenerUrl;
+      document.getElementById('dexHoldersLink').href = DEXSCREENER_CONFIG.dexScreenerUrl;
+      document.getElementById('dexLiquidityLink').href = DEXSCREENER_CONFIG.dexScreenerUrl;
 
       try {
-        const response = await fetch(`https://api.dexscreener.com/latest/dex/pairs/${DEXSCREENER_CONFIG.chainId}/${DEXSCREENER_CONFIG.pairAddress}`);
+        // Parse chainId and pairAddress from the URL
+        const parts = DEXSCREENER_CONFIG.dexScreenerUrl.trim().split('/');
+        const pairAddress = parts.pop() || parts.pop();
+        const chainId = parts.pop();
+
+        const response = await fetch(`https://api.dexscreener.com/latest/dex/pairs/${chainId}/${pairAddress}`);
         const data = await response.json();
 
         if (data && data.pair) {
           const pair = data.pair;
           
-          // Format Market Cap
-          if (pair.fdv || pair.marketCap) {
+          // Market Cap
+          if (pair.marketCap || pair.fdv) {
             const mcap = pair.marketCap || pair.fdv;
             document.getElementById('countMarketCap').innerText = '$' + Number(mcap).toLocaleString();
           }
 
-          // Format Liquidity
+          // Liquidity
           if (pair.liquidity && pair.liquidity.usd) {
             document.getElementById('countLiquidity').innerText = '$' + Number(pair.liquidity.usd).toLocaleString();
           }
 
-          // Format Price / Holders indicator
+          // Price / Holder display
           if (pair.priceUsd) {
             document.getElementById('countHolders').innerText = '$' + parseFloat(pair.priceUsd).toFixed(6);
             document.getElementById('tagHolders').innerText = "Live Token Price";
           }
         }
       } catch (err) {
-        console.log("DexScreener API offline or loading...");
+        console.log("DexScreener API initializing...");
       }
     }
 
-    // Initial check and auto-refresh every 15 seconds
     fetchDexScreenerData();
     setInterval(fetchDexScreenerData, 15000);
   </script>
