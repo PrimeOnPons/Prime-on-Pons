@@ -3,359 +3,833 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$AMZN - Premium Decentralized Asset</title>
+    <title>PRIME | Onchain $AMZN Community</title>
+    <link rel="icon" type="image/jpeg" href="glass-pod.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: #07090e; color: #f0f6fc; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-
-        /* Glassmorphic Dark Navigation */
-        .nav-top { 
-            background: rgba(11, 15, 23, 0.85); 
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 153, 0, 0.15); 
-            padding: 12px 16px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-        }
-        .logo { font-size: 20px; font-weight: 800; color: #ff9900; letter-spacing: -0.5px; }
-        .logo span { color: #ffffff; font-weight: 300; }
-        
-        .ca-pill { 
-            display: flex; 
-            align-items: center; 
-            background: rgba(255, 255, 255, 0.04); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 20px; 
-            padding: 4px 6px 4px 12px; 
-            max-width: 200px;
-        }
-        .ca-pill input { 
-            width: 100%; 
-            background: transparent; 
-            border: none; 
-            color: #8b949e; 
-            font-family: monospace; 
-            font-size: 11px; 
-            outline: none; 
-            text-overflow: ellipsis;
-        }
-        .ca-pill button { 
-            background: #ff9900; 
-            border: none; 
-            padding: 6px 12px; 
-            color: #07090e; 
-            font-weight: 700; 
-            font-size: 11px;
-            border-radius: 14px; 
-            cursor: pointer; 
-            transition: opacity 0.2s;
-            flex-shrink: 0;
+        :root {
+            --bg-dark: #05070B;
+            --glass-card: rgba(14, 20, 32, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --accent-orange: #FF8A00;
+            --accent-orange-glow: rgba(255, 138, 0, 0.45);
+            --accent-blue: #00A2FF;
+            --accent-blue-glow: rgba(0, 162, 255, 0.35);
+            --text-main: #FFFFFF;
+            --text-muted: #8E9BAE;
         }
 
-        /* Hero Banner */
-        .hero {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(255, 138, 0, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 80% 60%, rgba(0, 162, 255, 0.08) 0%, transparent 50%),
+                #05070B;
+        }
+
+        #toast {
+            visibility: hidden;
+            min-width: 280px;
+            background: var(--accent-orange);
+            color: #000;
             text-align: center;
-            padding: 32px 20px 10px;
-            background: radial-gradient(circle at top, rgba(255, 153, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50px;
+            padding: 14px 28px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            right: 30px;
+            font-weight: 700;
+            box-shadow: 0 0 30px var(--accent-orange-glow);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
         }
-        .hero h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(180deg, #fff 0%, #a3b3c2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: #ff9900; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+        #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
 
-        /* Main Container */
-        .container { 
-            max-width: 1100px; 
-            margin: 10px auto 30px; 
-            padding: 0 16px; 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 16px; 
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 6%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 7, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        /* 3D Glass Sphere Bubble Badge */
+        .bubble-token-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.8) 0%, rgba(0, 162, 255, 0.3) 40%, rgba(10, 15, 26, 0.9) 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 18px var(--accent-blue-glow), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bubble-token-avatar img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
-        /* Premium Glass Card */
-        .glass-card { 
-            background: rgba(18, 24, 36, 0.5); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.07); 
-            border-radius: 20px; 
-            padding: 20px; 
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
+        .stock-pill-btn {
+            background: rgba(255, 138, 0, 0.12);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
         }
-        
-        .glass-card h2 { 
-            font-size: 16px; 
-            font-weight: 700; 
-            color: #ffffff; 
-            margin-bottom: 14px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-        }
-        .glass-card h2 span { color: #ff9900; font-size: 10px; border: 1px solid rgba(255, 153, 0, 0.4); padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
 
-        /* Interactive Canvas Stage */
-        .canvas-box { 
-            background: radial-gradient(circle, rgba(255, 153, 0, 0.03) 0%, rgba(0,0,0,0.3) 100%); 
-            border: 1px dashed rgba(255, 255, 255, 0.1); 
-            border-radius: 14px; 
-            padding: 12px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            margin-bottom: 14px; 
-            touch-action: manipulation;
+        .nav-center-menu {
+            display: flex;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
         }
-        canvas { max-width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
 
-        /* Mobile-Optimized Inputs & Controls */
-        .control-group { margin-bottom: 10px; }
-        .control-group label { display: block; font-size: 11px; color: #8b949e; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .control-group input[type="text"] { 
-            width: 100%; 
-            padding: 10px 12px; 
-            background: rgba(0, 0, 0, 0.4); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 8px; 
-            color: #fff; 
-            font-size: 14px;
-            outline: none; 
-        }
-        
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-        .btn-option { 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            color: #8b949e; 
-            padding: 10px; 
-            border-radius: 8px; 
-            font-size: 12px; 
+        .nav-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 600;
-            cursor: pointer; 
-            transition: 0.2s; 
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
-        .btn-option.active { background: rgba(255, 153, 0, 0.15); border-color: #ff9900; color: #ff9900; }
 
-        .btn-action { 
-            background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%); 
-            color: #07090e; 
-            border: none; 
-            padding: 14px; 
-            border-radius: 10px; 
-            font-size: 14px;
-            font-weight: 700; 
-            cursor: pointer; 
-            text-align: center; 
-            text-decoration: none; 
-            box-shadow: 0 4px 16px rgba(255, 153, 0, 0.2); 
-            display: block;
+        .nav-tab-btn.active, .nav-tab-btn:hover {
+            background: var(--accent-orange);
+            color: #000;
+        }
+
+        .btn-trade-main {
+            background: var(--accent-orange);
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            box-shadow: 0 0 20px var(--accent-orange-glow);
+            transition: transform 0.2s ease;
+        }
+        .btn-trade-main:hover { transform: scale(1.03); }
+
+        .marquee-wrap {
             width: 100%;
-            transition: transform 0.1s ease;
+            background: var(--accent-orange);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 10;
         }
-        .btn-action:active { transform: scale(0.98); }
-
-        /* Spec Table */
-        .spec-list { list-style: none; font-size: 13px; }
-        .spec-list li { 
-            padding: 12px 0; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04); 
-            display: flex; 
-            justify-content: space-between; 
-            color: #8b949e; 
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
         }
-        .spec-list li strong { color: #f0f6fc; font-weight: 600; }
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
 
-        footer { text-align: center; padding: 20px; color: #484f58; font-size: 11px; border-top: 1px solid rgba(255, 255, 255, 0.04); }
+        .view-section {
+            display: none;
+            position: relative;
+            z-index: 2;
+            min-height: 80vh;
+        }
+        .view-section.active { display: block; }
 
-        /* Desktop Polish */
-        @media (min-width: 768px) {
-            .hero { padding: 48px 20px 20px; }
-            .hero h1 { font-size: 36px; }
-            .ca-pill { max-width: 260px; }
-            .container { gap: 24px; margin: 20px auto 50px; }
+        .glass-panel {
+            background: var(--glass-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            padding: 5rem 8%;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.8rem;
+            line-height: 1.05;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-sub {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .btn-pill-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-pill:hover { background: rgba(255, 255, 255, 0.12); }
+        .btn-pill.primary { background: var(--accent-orange); color: #000; font-weight: 700; }
+
+        .ca-box-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            padding: 10px 18px;
+            border-radius: 12px;
+            width: fit-content;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .holdings-banner {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .big-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.8rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            padding: 3rem 8%;
+        }
+
+        .meme-card {
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .meme-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
+
+        .meme-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .meme-card .cap {
+            padding: 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Hero Glass Pod Hero Banner */
+        .glass-hero-bubble-card {
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(0, 162, 255, 0.25) 0%, rgba(14, 20, 32, 0.85) 80%);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(24px);
+        }
+
+        .glass-hero-bubble-card img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 1.2rem;
+            box-shadow: 0 0 30px rgba(0, 162, 255, 0.3);
+        }
+
+        /* Cockpit Panoramic Footer */
+        .cockpit-footer-section {
+            position: relative;
+            width: 100%;
+            min-height: 520px;
+            background: #000;
+            border-top: 1px solid var(--glass-border);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 4rem 8%;
+            z-index: 2;
+        }
+
+        .cockpit-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.45;
+            z-index: 1;
+        }
+
+        .cockpit-content-panel {
+            position: relative;
+            z-index: 2;
+            max-width: 580px;
+            text-align: right;
+        }
+
+        .cockpit-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .cockpit-title span { color: var(--accent-orange); }
+
+        .cockpit-btn-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .cockpit-btn {
+            background: rgba(14, 20, 32, 0.85);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .cockpit-btn:hover {
+            border-color: var(--accent-orange);
+            background: rgba(255, 138, 0, 0.15);
+        }
+        .cockpit-btn.primary {
+            background: var(--accent-orange);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .ca-card-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .ca-card {
+            background: rgba(10, 14, 22, 0.9);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            border-radius: 14px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .ca-info { text-align: left; }
+        .ca-ticker {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--accent-orange);
+        }
+        .ca-sub { font-size: 0.75rem; color: var(--text-muted); }
+        .ca-hash {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-right: 12px;
+        }
+
+        .btn-copy-sm {
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .btn-copy-sm:hover { transform: scale(1.05); }
+
+        .bottom-nav-bar {
+            background: rgba(3, 5, 8, 0.95);
+            border-top: 1px solid var(--glass-border);
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .bottom-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .bottom-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .bottom-links a:hover { color: var(--accent-orange); }
+
+        footer {
+            padding: 1.5rem 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            background: #000;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-sub { margin: 0 auto 2rem auto; }
+            .btn-pill-group, .ca-box-row { justify-content: center; margin: 0 auto 1.5rem auto; }
+            .nav-center-menu { display: none; }
+            .big-number { font-size: 3.2rem; }
+            .cockpit-footer-section { justify-content: center; text-align: center; }
+            .cockpit-content-panel { text-align: center; }
+            .cockpit-btn-row { justify-content: center; }
+            .ca-card-stack { align-items: center; }
+            .bottom-nav-bar { justify-content: center; flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="nav-top">
-        <div class="logo">$AMZN<span>.Pons</span></div>
-        <div class="ca-pill">
-            <input type="text" value="0xAMZN...PonsChainContract" id="caInput" readonly>
-            <button onclick="copyCA()">Copy</button>
+    <canvas id="space-bg"></canvas>
+    <div id="toast">Contract Address Copied!</div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#" class="brand-logo" onclick="showTab('home')">
+            <div class="bubble-token-avatar">
+                <img src="glass-pod.jpg" alt="PRIME Glass Sphere Token" onerror="this.src='token-badge.jpg'">
+            </div>
+            PRIME 
+            <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" class="stock-pill-btn" id="nav-stock-price">NASDAQ:AMZN FETCHING...</a>
+        </a>
+
+        <div class="nav-center-menu">
+            <button class="nav-tab-btn active" onclick="showTab('home', event)">Home</button>
+            <button class="nav-tab-btn" onclick="showTab('vault', event)">Vault</button>
+            <button class="nav-tab-btn" onclick="showTab('mechanics', event)">How It Works</button>
+            <button class="nav-tab-btn" onclick="showTab('memes', event)">Memes</button>
+        </div>
+
+        <a href="https://ponsfamily.com" id="trade-btn-link" target="_blank" class="btn-trade-main">Trade $PRIME ↗</a>
+    </nav>
+
+    <!-- Marquee Ticker Tape -->
+    <div class="marquee-wrap">
+        <div class="marquee-content">
+            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • LIVE TRADINGVIEW DATA INTEGRATED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
+            $PRIME x $AMZN VAULT GROWS ON EVERY TRADE • LIVE TRADINGVIEW DATA INTEGRATED • PONS BLOCKCHAIN EXCLUSIVE • 100% LIQUIDITY LOCKED • 
         </div>
     </div>
 
-    <div class="hero">
-        <h1>Prime Liquidity Protocol</h1>
-        <p>1-CLICK DECENTRALIZED SETTLEMENT</p>
-    </div>
+    <!-- VIEWPORT 1: HOME -->
+    <div id="view-home" class="view-section active">
+        <section class="hero-grid">
+            <div class="hero-left">
+                <h1 class="hero-title">The onchain<br><span style="color: var(--accent-orange);">$AMZN</span> community.</h1>
+                <p class="hero-sub">$PRIME is paired with tokenized $AMZN on Ponsfamily.com. Every trade feeds the Vault, tracked live against NASDAQ metrics.</p>
+                
+                <div class="btn-pill-group">
+                    <a href="https://ponsfamily.com" id="hero-trade-link" target="_blank" class="btn-pill primary">Trade $PRIME ↗</a>
+                    <button class="btn-pill" onclick="showTab('mechanics')">How It Works</button>
+                    <button class="btn-pill" onclick="showTab('memes')">Memes</button>
+                </div>
 
-    <div class="container">
-        
-        <!-- Interactive Studio -->
-        <div class="glass-card">
-            <h2>Asset Engine <span>Interactive</span></h2>
-            <div class="canvas-box">
-                <canvas id="assetCanvas" width="260" height="260"></canvas>
-            </div>
-            
-            <div class="control-group">
-                <label>Custom Overlay</label>
-                <input type="text" id="canvasText" value="$AMZN" oninput="updateRender()">
-            </div>
-
-            <div class="control-group">
-                <label>Preset Style</label>
-                <div class="btn-grid">
-                    <button class="btn-option active" id="btnOrb" onclick="setStyle('orb')">Glass Orb</button>
-                    <button class="btn-option" id="btnPackage" onclick="setStyle('package')">Prime Parcel</button>
+                <div class="ca-box-row">
+                    <span>CA:</span>
+                    <span id="ca-display">0x0000...0000</span>
+                    <button style="background:none; border:none; color:var(--accent-orange); cursor:pointer; font-weight:700;" onclick="copyCA('$PRIME')">COPY</button>
                 </div>
             </div>
 
-            <button class="btn-action" onclick="downloadAsset()">Export Asset (.PNG)</button>
+            <div class="hero-right">
+                <div class="glass-hero-bubble-card">
+                    <img src="glass-pod.jpg" alt="Glass Pod Sphere" onerror="this.src='hero-vault.jpg'">
+                    <h3 style="font-family: 'Space Grotesk'; color: #fff;">$PRIME GLASS VAULT SPHERE</h3>
+                    <p style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 600; margin-top: 4px;">Handle With Memes • Paired with $AMZN</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Holdings Banner -->
+        <section class="holdings-banner">
+            <div style="color: var(--accent-orange); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 1rem;">● LIVE TRADINGVIEW DATA • $AMZN METRICS</div>
+            <div class="big-number" id="holdings-usd-val">$0.00</div>
+            <div style="font-size: 1.2rem; color: var(--text-muted); font-weight: 600; margin-bottom: 2rem;"><span id="holdings-share-val">0.00</span> $AMZN SHARES</div>
+        </section>
+
+        <!-- Live TradingView Chart Widget -->
+        <div style="padding: 4rem 8%;">
+            <div class="glass-panel" style="padding: 1.5rem; overflow: hidden;">
+                <h3 style="font-family: 'Space Grotesk'; margin-bottom: 1rem;">NASDAQ:AMZN LIVE CHART</h3>
+                <div class="tradingview-widget-container" style="height: 400px; width: 100%;">
+                    <div id="tradingview_chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEWPORT 2: VAULT -->
+    <div id="view-vault" class="view-section">
+        <div style="padding: 4rem 8%; text-align: center;">
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem; margin-bottom: 0.5rem;">$AMZN Community Vault</h1>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">Every trade routes fees here, tracked directly against TradingView's NASDAQ feed.</p>
+
+            <div class="glass-panel" style="padding: 3rem; max-width: 900px; margin: 0 auto;">
+                <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 1rem;">● COMMUNITY NODE • ACTIVE</div>
+                <div style="font-size: 3.5rem; font-weight: 700; color: #fff; font-family: 'Space Grotesk';" id="vault-reserve-usd">$0.00</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Total Accumulated Vault Reserve</p>
+                
+                <div style="margin-top: 3rem; border-top: 1px solid var(--glass-border); padding-top: 2rem;">
+                    <img src="glass-pod.jpg" alt="Glass Pod" style="width: 100%; max-height: 380px; object-fit: cover; border-radius: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEWPORT 3: MECHANICS -->
+    <div id="view-mechanics" class="view-section">
+        <div style="max-width: 1000px; margin: 4rem auto; padding: 0 2rem;">
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem; margin-bottom: 0.5rem;">How it works</h1>
+            <p style="color: var(--text-muted); margin-bottom: 3rem;">$PRIME trades against tokenized $AMZN on Ponsfamily. Every transaction routes fees into backing and burns.</p>
+
+            <div class="glass-panel" style="padding: 2rem; margin-bottom: 1.5rem;">
+                <div style="color: var(--accent-orange); font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;">— ON BUYS • FEES PAID IN $AMZN</div>
+                <p style="color: var(--text-muted);">80% is funneled directly into the permanent community Vault, while 20% balances DEX protocol liquidity.</p>
+            </div>
+
+            <div class="glass-panel" style="padding: 2rem;">
+                <div style="color: var(--accent-orange); font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;">— ON SELLS • FEES PAID IN $PRIME</div>
+                <p style="color: var(--text-muted);">50% is burned permanently from supply float, and 50% is locked into the Vault permanently.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEWPORT 4: MEMES -->
+    <div id="view-memes" class="view-section">
+        <div style="padding: 4rem 8% 1rem 8%; text-align: center;">
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem;">Community Memes</h1>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Download assets directly for social media pushes.</p>
         </div>
 
-        <!-- Spec Sheet -->
-        <div class="glass-card">
-            <h2>Specifications <span>Verified</span></h2>
-            <ul class="spec-list">
-                <li><span>Ticker</span> <strong>$AMZN</strong></li>
-                <li><span>Network</span> <strong>Pons Blockchain</strong></li>
-                <li><span>Settlement</span> <strong>Instant Prime</strong></li>
-                <li><span>Vault Reserve</span> <strong>Glassmorphic</strong></li>
-                <li><span>Tax / Slippage</span> <strong>0%</strong></li>
-            </ul>
-            <a href="https://t.me" target="_blank" class="btn-action" style="margin-top: 16px; background: rgba(255, 255, 255, 0.05); color: #ff9900; border: 1px solid rgba(255, 153, 0, 0.3);">Join Telegram Channel</a>
+        <div class="meme-grid">
+            <div class="meme-card"><img src="glass-pod.jpg" alt="Glass Bubble Pod"><div class="cap">Glass Pod Sphere Badge</div></div>
+            <div class="meme-card"><img src="hero-vault.jpg" alt="Vault"><div class="cap">$AMZN Vault Graphic</div></div>
+            <div class="meme-card"><img src="token-badge.jpg" alt="Badge"><div class="cap">Official Token Badge</div></div>
+            <div class="meme-card"><img src="special-delivery.jpg" alt="Delivery"><div class="cap">Rainy Special Delivery</div></div>
+            <div class="meme-card"><img src="delivery-van.jpg" alt="Van"><div class="cap">High Speed Delivery Van</div></div>
+            <div class="meme-card"><img src="express-delivery.jpg" alt="Express"><div class="cap">Express Hub Terminal</div></div>
+            <div class="meme-card"><img src="vault-square.jpg" alt="Square"><div class="cap">Vault Terminal Square</div></div>
+            <div class="meme-card"><img src="amzn-banner.jpg" alt="Banner"><div class="cap">Paired $AMZN Banner</div></div>
         </div>
+    </div>
 
+    <!-- COCKPIT CONTROL-ROOM PANORAMIC FOOTER -->
+    <div class="cockpit-footer-section">
+        <img src="express-delivery.jpg" alt="Cockpit View" class="cockpit-bg-img">
+        
+        <div class="cockpit-content-panel">
+            <div class="cockpit-title">Special delivery.<br><span>Ride with $PRIME.</span></div>
+            
+            <div class="cockpit-btn-row">
+                <a href="https://ponsfamily.com" id="cockpit-trade-link" target="_blank" class="cockpit-btn primary">Trade $PRIME ↗</a>
+                <a href="https://x.com" target="_blank" class="cockpit-btn">Follow on X</a>
+                <button class="cockpit-btn" onclick="showTab('mechanics')">How It Works</button>
+                <button class="cockpit-btn" onclick="showTab('memes')">Memes</button>
+                <a href="https://dexscreener.com" target="_blank" class="cockpit-btn">Dexscreener</a>
+            </div>
+
+            <!-- Double Contract Address Cards -->
+            <div class="ca-card-stack">
+                <div class="ca-card">
+                    <div class="ca-info">
+                        <div class="ca-ticker">$PRIME</div>
+                        <div class="ca-sub">$PRIME Community Token</div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span class="ca-hash" id="prime-ca-hash">0x0000...0000</span>
+                        <button class="btn-copy-sm" onclick="copyCA('$PRIME')">Copy</button>
+                    </div>
+                </div>
+
+                <div class="ca-card">
+                    <div class="ca-info">
+                        <div class="ca-ticker" style="color: var(--accent-blue);">$AMZN</div>
+                        <div class="ca-sub">Tokenized Stock Pair</div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span class="ca-hash" id="amzn-ca-hash">NASDAQ:AMZN</span>
+                        <button class="btn-copy-sm" style="background: var(--accent-blue);" onclick="copyCA('$AMZN')">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM WORKING LINKS NAV BAR -->
+    <div class="bottom-nav-bar">
+        <div>&copy; 2026 PRIME ON PONS Inc. All rights reserved.</div>
+        <ul class="bottom-links">
+            <li><a href="#" onclick="showTab('home'); return false;">Trade $PRIME</a></li>
+            <li><a href="#" onclick="showTab('vault'); return false;">Vault</a></li>
+            <li><a href="#" onclick="showTab('mechanics'); return false;">How It Works</a></li>
+            <li><a href="#" onclick="showTab('memes'); return false;">Memes</a></li>
+            <li><a href="https://dexscreener.com" target="_blank">Dexscreener</a></li>
+            <li><a href="https://ponsfamily.com" target="_blank">Ponsfamily DEX</a></li>
+        </ul>
     </div>
 
     <footer>
-        &copy; 2026 $AMZN Protocol. Built on Pons Network.
+        <p>$PRIME is a memecoin paired with tokenized $AMZN. It does not represent NASDAQ equity, and holders cannot redeem assets from the Vault. Not an investment product.</p>
     </footer>
 
     <script>
-        let currentStyle = 'orb';
+        const CONFIG = {
+            PRIME_CONTRACT_ADDRESS: "", 
+            AMZN_TOKEN_ADDRESS: "NASDAQ:AMZN",
+            PONS_PAIR_URL: "https://ponsfamily.com",
+            TRADINGVIEW_SYMBOL: "NASDAQ:AMZN"
+        };
 
-        function setStyle(style) {
-            currentStyle = style;
-            document.getElementById('btnOrb').classList.toggle('active', style === 'orb');
-            document.getElementById('btnPackage').classList.toggle('active', style === 'package');
-            updateRender();
-        }
+        let liveAmznPrice = 256.97;
 
-        function updateRender() {
-            const canvas = document.getElementById('assetCanvas');
-            const ctx = canvas.getContext('2d');
-            const userText = document.getElementById('canvasText').value || '$AMZN';
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            if (currentStyle === 'orb') {
-                // Outer Ambient Glow
-                let outerGlow = ctx.createRadialGradient(130, 130, 40, 130, 130, 120);
-                outerGlow.addColorStop(0, 'rgba(255, 153, 0, 0.15)');
-                outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-                ctx.fillStyle = outerGlow;
-                ctx.fillRect(0, 0, 260, 260);
-
-                // Premium Blue-Chip Glass Sphere
-                let glassGrad = ctx.createRadialGradient(90, 80, 5, 130, 130, 95);
-                glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.6)');
-                glassGrad.addColorStop(0.25, 'rgba(255, 153, 0, 0.25)');
-                glassGrad.addColorStop(0.7, 'rgba(18, 24, 36, 0.85)');
-                glassGrad.addColorStop(1, 'rgba(7, 9, 14, 0.98)');
-
-                ctx.beginPath();
-                ctx.arc(130, 130, 88, 0, Math.PI * 2);
-                ctx.fillStyle = glassGrad;
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-                ctx.lineWidth = 1.5;
-                ctx.fill();
-                ctx.stroke();
-
-                // Inner Glass Highlight Reflection
-                ctx.beginPath();
-                ctx.arc(130, 130, 80, 1.25 * Math.PI, 1.75 * Math.PI);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-                ctx.lineWidth = 2.5;
-                ctx.stroke();
-
-                // Subtle Amazon-inspired Smile Curve
-                ctx.beginPath();
-                ctx.arc(130, 125, 48, 0.28 * Math.PI, 0.72 * Math.PI, false);
-                ctx.strokeStyle = '#ff9900';
-                ctx.lineWidth = 4;
-                ctx.lineCap = 'round';
-                ctx.stroke();
-
-                // Arrowhead
-                ctx.beginPath();
-                ctx.fillStyle = '#ff9900';
-                ctx.moveTo(163, 154);
-                ctx.lineTo(172, 150);
-                ctx.lineTo(168, 161);
-                ctx.fill();
-
-                // Text Overlay
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '700 21px -apple-system, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(userText, 130, 116);
-
-            } else if (currentStyle === 'package') {
-                // Glass Box Studio Glow
-                ctx.fillStyle = 'rgba(255, 153, 0, 0.03)';
-                ctx.fillRect(0, 0, 260, 260);
-
-                // Prime Parcel Frame
-                ctx.fillStyle = '#121824';
-                ctx.strokeStyle = '#ff9900';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.roundRect(45, 55, 170, 150, 14);
-                ctx.fill();
-                ctx.stroke();
-
-                // Ribbon Tape Detail
-                ctx.fillStyle = 'rgba(255, 153, 0, 0.15)';
-                ctx.fillRect(115, 55, 30, 150);
-
-                // Text Overlay
-                ctx.fillStyle = '#ff9900';
-                ctx.font = '700 22px -apple-system, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText(userText, 130, 125);
-
-                ctx.fillStyle = '#8b949e';
-                ctx.font = '600 11px -apple-system, sans-serif';
-                ctx.fillText('PRIORITY VAULT', 130, 148);
+        async function fetchLiveAmznPrice() {
+            try {
+                let res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/AMZN');
+                let data = await res.json();
+                let price = data.chart.result[0].meta.regularMarketPrice;
+                if(price) {
+                    liveAmznPrice = price;
+                    document.getElementById('nav-stock-price').innerText = "NASDAQ:AMZN $" + price.toFixed(2);
+                }
+            } catch(e) {
+                document.getElementById('nav-stock-price').innerText = "NASDAQ:AMZN $" + liveAmznPrice.toFixed(2);
             }
         }
 
-        function copyCA() {
-            navigator.clipboard.writeText('0xAMZN...PonsChainContract');
-            alert('Contract address copied!');
+        function initConfig() {
+            if (CONFIG.PRIME_CONTRACT_ADDRESS && CONFIG.PRIME_CONTRACT_ADDRESS !== "") {
+                document.getElementById('ca-display').innerText = CONFIG.PRIME_CONTRACT_ADDRESS;
+                document.getElementById('prime-ca-hash').innerText = CONFIG.PRIME_CONTRACT_ADDRESS.substring(0, 6) + "..." + CONFIG.PRIME_CONTRACT_ADDRESS.substring(CONFIG.PRIME_CONTRACT_ADDRESS.length - 4);
+            }
+            if (CONFIG.PONS_PAIR_URL) {
+                document.getElementById('trade-btn-link').href = CONFIG.PONS_PAIR_URL;
+                document.getElementById('hero-trade-link').href = CONFIG.PONS_PAIR_URL;
+                document.getElementById('cockpit-trade-link').href = CONFIG.PONS_PAIR_URL;
+            }
         }
 
-        function downloadAsset() {
-            const canvas = document.getElementById('assetCanvas');
-            const link = document.createElement('a');
-            link.download = `AMZN_${currentStyle}_asset.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
+        function initTradingViewWidget() {
+            if(document.getElementById('tradingview_chart')) {
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": CONFIG.TRADINGVIEW_SYMBOL,
+                    "interval": "D",
+                    "timezone": "Etc/UTC",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "allow_symbol_change": false,
+                    "container_id": "tradingview_chart"
+                });
+            }
         }
 
-        window.onload = updateRender;
+        function showTab(tabName, event) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById('view-' + tabName).classList.add('active');
+            if (event) {
+                event.target.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function copyCA(type) {
+            let targetText = CONFIG.PRIME_CONTRACT_ADDRESS;
+            if (type === '$AMZN') targetText = CONFIG.AMZN_TOKEN_ADDRESS;
+
+            if (!targetText || targetText === "" || targetText === "0x0000...0000") {
+                navigator.clipboard.writeText(CONFIG.PONS_PAIR_URL);
+                showToast("Redirecting to Ponsfamily.com...");
+                setTimeout(() => { window.open(CONFIG.PONS_PAIR_URL, '_blank'); }, 1000);
+                return;
+            }
+            navigator.clipboard.writeText(targetText);
+            showToast(type + " Address Copied!");
+        }
+
+        function showToast(msg) {
+            var toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // Animated Particle Canvas Engine
+        const canvas = document.getElementById('space-bg');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 120; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1.5,
+                alpha: Math.random(),
+                speed: Math.random() * 0.005 + 0.002
+            });
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        window.onload = function() {
+            initConfig();
+            fetchLiveAmznPrice();
+            initTradingViewWidget();
+            animateStars();
+        };
     </script>
 </body>
 </html>
