@@ -297,7 +297,39 @@
       word-break: break-all;
     }
 
-    /* 100% FULL-BLEED SCREEN SPANNING FOOTER (Artificial Inu Style) */
+    /* Meme Generator Canvas & Controls */
+    .meme-studio-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    canvas#memeCanvas {
+      width: 100%;
+      height: auto;
+      border: 3px solid var(--border-dark);
+      border-radius: 12px;
+      box-shadow: 4px 4px 0px var(--border-dark);
+      background: #fff;
+    }
+
+    .meme-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .meme-controls input, .meme-controls select {
+      padding: 12px;
+      border: 2px solid var(--border-dark);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: bold;
+    }
+
+    /* FULL-BLEED SCREEN SPANNING FOOTER */
     .warehouse-footer-fullbleed {
       width: 100vw;
       position: relative;
@@ -360,7 +392,7 @@
 
     @media (max-width: 768px) {
       header { justify-content: center; flex-direction: column; text-align: center; }
-      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero, .meme-studio-container { grid-template-columns: 1fr; text-align: center; }
       .hero-text h1 { font-size: 2.5rem; }
       .contract-bar { flex-direction: column; gap: 15px; text-align: center; }
     }
@@ -402,13 +434,14 @@
     </div>
   </header>
 
-  <!-- Navigation Tabs (Multiple Page System) -->
+  <!-- Navigation Tabs -->
   <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('home')">🏠 Home Hub</button>
-    <button class="tab-btn" onclick="switchTab('about')">📦 About $PRIME</button>
-    <button class="tab-btn" onclick="switchTab('tokenomics')">📊 Tokenomics</button>
-    <button class="tab-btn" onclick="switchTab('roadmap')">🗺️ Logistics Roadmap</button>
-    <button class="tab-btn" onclick="switchTab('howtobuy')">🛒 How To Buy</button>
+    <button class="tab-btn active" onclick="switchTab('home', event)">🏠 Home Hub</button>
+    <button class="tab-btn" onclick="switchTab('memegen', event)">🎨 Meme Studio</button>
+    <button class="tab-btn" onclick="switchTab('about', event)">📦 About $PRIME</button>
+    <button class="tab-btn" onclick="switchTab('tokenomics', event)">📊 Tokenomics</button>
+    <button class="tab-btn" onclick="switchTab('roadmap', event)">🗺️ Logistics Roadmap</button>
+    <button class="tab-btn" onclick="switchTab('howtobuy', event)">🛒 How To Buy</button>
   </nav>
 
   <!-- PAGE 1: HOME HUB -->
@@ -488,7 +521,52 @@
     </section>
   </div>
 
-  <!-- PAGE 2: ABOUT $PRIME -->
+  <!-- PAGE 2: MEME GENERATOR STUDIO -->
+  <div id="memegen" class="page-section">
+    <div class="card bold-box" style="padding: 30px;">
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem; margin-bottom: 10px; color: var(--amazon-orange); text-align: center;">$PRIME Meme Generator Studio 🎨</h2>
+      <p style="text-align: center; color: #475569; font-weight: bold; margin-bottom: 25px;">Combine $PRIME with PEPE, DOGE, SHIB, BONK & WIF! Create & Download Your Meme!</p>
+
+      <div class="meme-studio-container">
+        <div>
+          <canvas id="memeCanvas" width="600" height="400"></canvas>
+        </div>
+
+        <div class="meme-controls">
+          <label style="font-weight: bold;">Select Warehouse Background:</label>
+          <select id="memeBgSelect" onchange="drawMeme()">
+            <option value="warehouse-footer.jpg">Prime Warehouse Hub</option>
+            <option value="Intro-image-future.jpg">Express Delivery Vehicle</option>
+            <option value="Warehouse-robots.jpg">Automated Sorting Robots</option>
+            <option value="Prime-porch.jpg">Porch Package Drop-off</option>
+          </select>
+
+          <label style="font-weight: bold;">Partner Memecoin Co-Star:</label>
+          <select id="memeCoinSelect" onchange="drawMeme()">
+            <option value="PEPE">Pepe the Frog 🐸</option>
+            <option value="DOGE">Dogecoin (DOGE) 🐕</option>
+            <option value="SHIB">Shiba Inu (SHIB) 🐕‍🦺</option>
+            <option value="BONK">Bonk (BONK) 🔨</option>
+            <option value="WIF">Dogwifhat (WIF) 🎩</option>
+            <option value="POPCAT">Popcat 🐱</option>
+          </select>
+
+          <label style="font-weight: bold;">Top Text Header:</label>
+          <input type="text" id="memeTopText" value="$PRIME EXPRESS DELIVERY" oninput="drawMeme()">
+
+          <label style="font-weight: bold;">Bottom Text Subtitle:</label>
+          <input type="text" id="memeBottomText" value="DELIVERING MEMES DIRECTLY TO PORTFOLIOS" oninput="drawMeme()">
+
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <button class="btn btn-orange" style="flex: 1;" onclick="generateRandomMeme()">🎲 Generate Random Meme</button>
+            <button class="btn btn-blue" style="flex: 1;" onclick="downloadMeme()">📥 Download Meme</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: ABOUT $PRIME -->
   <div id="about" class="page-section">
     <div class="card bold-box" style="padding: 40px;">
       <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--primary-blue);">About Prime ($PRIME)</h2>
@@ -508,7 +586,7 @@
     </div>
   </div>
 
-  <!-- PAGE 3: TOKENOMICS -->
+  <!-- PAGE 4: TOKENOMICS -->
   <div id="tokenomics" class="page-section">
     <div class="card bold-box" style="padding: 40px;">
       <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--amazon-orange);">Tokenomics & Pairing Mechanics</h2>
@@ -532,7 +610,7 @@
     </div>
   </div>
 
-  <!-- PAGE 4: LOGISTICS ROADMAP -->
+  <!-- PAGE 5: LOGISTICS ROADMAP -->
   <div id="roadmap" class="page-section">
     <div class="card bold-box" style="padding: 40px;">
       <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--primary-blue);">Logistics Roadmap</h2>
@@ -553,7 +631,7 @@
     </div>
   </div>
 
-  <!-- PAGE 5: HOW TO BUY -->
+  <!-- PAGE 6: HOW TO BUY -->
   <div id="howtobuy" class="page-section">
     <div class="card bold-box" style="padding: 40px;">
       <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--amazon-orange);">How To Buy $PRIME</h2>
@@ -596,13 +674,17 @@
   <!-- Scripts Engine -->
   <script>
     // 1. Navigation Tab Switcher
-    function switchTab(tabId) {
+    function switchTab(tabId, evt) {
       document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       
       document.getElementById(tabId).classList.add('active');
-      event.currentTarget.classList.add('active');
+      if (evt) evt.currentTarget.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if(tabId === 'memegen') {
+        setTimeout(drawMeme, 100);
+      }
     }
 
     // 2. Cursor Trail Engine
@@ -670,7 +752,7 @@
       setTimeout(() => { btn.innerText = "Copy Pair Details"; }, 2000);
     }
 
-    // 3. Meme Express Delivery Animation
+    // 3. Meme Floating Delivery Animation
     const memeList = ["📦 Meme Delivered!", "🚀 $PRIME To The Moon!", "📈 $AMZN Stock Boosted!", "🔥 Prime Next Day Delivery!", "💎 Liquidity Locked!"];
     function triggerMemeDelivery() {
       const box = document.createElement('div');
@@ -680,6 +762,88 @@
       document.body.appendChild(box);
       setTimeout(() => { box.remove(); }, 2500);
     }
+
+    // 4. MEME GENERATOR STUDIO ENGINE
+    const mCanvas = document.getElementById('memeCanvas');
+    const mCtx = mCanvas.getContext('2d');
+
+    const randomMemesData = [
+      { top: "WHEN $PRIME DELIVERS", bottom: "PEPE & DOGE TO THE MOON 🚀", coin: "PEPE" },
+      { top: "SAME DAY EXPRESS DELIVERY", bottom: "$PRIME x $AMZN STOCK POWER 📈", coin: "DOGE" },
+      { top: "SHIB ORDERED EXPRESS $PRIME", bottom: "MEME DELIVERED IN 1 BLOCK 📦", coin: "SHIB" },
+      { top: "BONK SAYS:", bottom: "ALWAYS USE $PRIME FOR NEXT DAY MEMES 🔥", coin: "BONK" },
+      { top: "DOGWIFHAT IS WEARING $PRIME", bottom: "FULFILLMENT HUB FULLY AUTOMATED 🤖", coin: "WIF" }
+    ];
+
+    function drawMeme() {
+      const bgSrc = document.getElementById('memeBgSelect').value;
+      const coin = document.getElementById('memeCoinSelect').value;
+      const topText = document.getElementById('memeTopText').value;
+      const bottomText = document.getElementById('memeBottomText').value;
+
+      const img = new Image();
+      img.src = bgSrc;
+      img.onload = () => {
+        mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+        mCtx.drawImage(img, 0, 0, mCanvas.width, mCanvas.height);
+
+        // Dark Overlay for readability
+        mCtx.fillStyle = "rgba(0,0,0,0.25)";
+        mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+
+        // Draw Meme Coin Badge
+        mCtx.fillStyle = "#ff9900";
+        mCtx.fillRect(20, 20, 150, 40);
+        mCtx.strokeStyle = "#000";
+        mCtx.lineWidth = 3;
+        mCtx.strokeRect(20, 20, 150, 40);
+
+        mCtx.fillStyle = "#fff";
+        mCtx.font = "bold 18px Outfit";
+        mCtx.textAlign = "center";
+        mCtx.fillText(`$PRIME x ${coin}`, 95, 46);
+
+        // Meme Impact Font Text
+        mCtx.font = "900 32px Impact, sans-serif";
+        mCtx.fillStyle = "#FFF";
+        mCtx.strokeStyle = "#000";
+        mCtx.lineWidth = 5;
+
+        // Top Text
+        if (topText) {
+          mCtx.strokeText(topText.toUpperCase(), mCanvas.width / 2, 90);
+          mCtx.fillText(topText.toUpperCase(), mCanvas.width / 2, 90);
+        }
+
+        // Bottom Text
+        if (bottomText) {
+          mCtx.strokeText(bottomText.toUpperCase(), mCanvas.width / 2, mCanvas.height - 40);
+          mCtx.fillText(bottomText.toUpperCase(), mCanvas.width / 2, mCanvas.height - 40);
+        }
+      };
+    }
+
+    function generateRandomMeme() {
+      const randomItem = randomMemesData[Math.floor(Math.random() * randomMemesData.length)];
+      document.getElementById('memeTopText').value = randomItem.top;
+      document.getElementById('memeBottomText').value = randomItem.bottom;
+      document.getElementById('memeCoinSelect').value = randomItem.coin;
+      
+      const bgOptions = ["warehouse-footer.jpg", "Intro-image-future.jpg", "Warehouse-robots.jpg", "Prime-porch.jpg"];
+      document.getElementById('memeBgSelect').value = bgOptions[Math.floor(Math.random() * bgOptions.length)];
+
+      drawMeme();
+    }
+
+    function downloadMeme() {
+      const link = document.createElement('a');
+      link.download = 'Prime-Meme.png';
+      link.href = mCanvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // Initialize initial canvas draw
+    window.addEventListener('load', () => { drawMeme(); });
   </script>
 </body>
 </html>
