@@ -51,7 +51,7 @@
       }
     }
 
-    /* Interactive Cursor Canvas */
+    /* Comic Package Cursor Canvas */
     #cursorCanvas {
       position: fixed;
       top: 0;
@@ -409,7 +409,7 @@
 </head>
 <body>
 
-  <!-- Interactive Cursor Trail Canvas -->
+  <!-- Comic Package Cursor Trail Canvas -->
   <canvas id="cursorCanvas"></canvas>
 
   <!-- Header Navigation -->
@@ -612,7 +612,7 @@
     </div>
   </div>
 
-  <!-- PAGE 4: TOKENOMICS -->
+  <!-- PAGE 4: TOKENOMICS (UPDATED TAX & BUYBACK) -->
   <div id="tokenomics" class="page-section">
     <div class="card bold-box" style="padding: 40px;">
       <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--amazon-orange);">Tokenomics & Pairing Mechanics</h2>
@@ -622,13 +622,21 @@
           <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">1,000,000,000</p>
           <p style="margin-top: 10px;">Fixed cap supply. No mint functions, no extra tokens ever created.</p>
         </div>
+
         <div class="card bold-box">
           <h3 style="color: var(--amazon-orange);">Trading Tax</h3>
-          <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">0% / 0%</p>
-          <p style="margin-top: 10px;">Zero buy tax, zero sell tax. Pure uninhibited trading speed.</p>
+          <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">2% / 2%</p>
+          <p style="margin-top: 10px;">2% buy tax and 2% sell tax allocated directly toward automated $PRIME buybacks.</p>
         </div>
+
         <div class="card bold-box">
-          <h3 style="color: #10b981;">Liquidity Lock</h3>
+          <h3 style="color: #10b981;">Automated Buybacks</h3>
+          <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">2% Buyback Pool</p>
+          <p style="margin-top: 10px;">Every trade feeds the 2% buyback mechanism, constantly repurchasing $PRIME from the market to raise price floors.</p>
+        </div>
+
+        <div class="card bold-box">
+          <h3 style="color: var(--primary-blue);">Liquidity Lock</h3>
           <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">100% Locked</p>
           <p style="margin-top: 10px;">All initial liquidity locked securely in the vault at launch on PonsFamily.com.</p>
         </div>
@@ -713,7 +721,7 @@
       }
     }
 
-    // 2. Cursor Trail Engine
+    // 2. WAREHOUSE COMIC PACKAGE CURSOR ENGINE (Matching Site Style)
     const cCanvas = document.getElementById('cursorCanvas');
     const cCtx = cCanvas.getContext('2d');
     let particles = [];
@@ -726,20 +734,20 @@
     window.addEventListener('resize', resizeCCanvas);
 
     window.addEventListener('mousemove', (e) => {
-      for (let i = 0; i < 2; i++) {
-        particles.push(new CursorParticle(e.clientX, e.clientY));
-      }
+      particles.push(new ComicPackageParticle(e.clientX, e.clientY));
     });
 
-    class CursorParticle {
+    class ComicPackageParticle {
       constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 4 + 2;
-        this.speedX = Math.random() * 2 - 1;
-        this.speedY = Math.random() * 2 - 1;
-        this.color = '#00f2fe';
+        this.size = Math.random() * 12 + 10;
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = -Math.random() * 2 - 1; // Float upwards like express package
+        this.rotation = Math.random() * 0.4 - 0.2;
         this.alpha = 1;
+        this.color = Math.random() > 0.5 ? '#ff9900' : '#00f2fe';
+        this.symbol = Math.random() > 0.5 ? '📦' : '⚡';
       }
       update() {
         this.x += this.speedX;
@@ -749,10 +757,22 @@
       draw() {
         cCtx.save();
         cCtx.globalAlpha = this.alpha;
+        cCtx.translate(this.x, this.y);
+        cCtx.rotate(this.rotation);
+        
+        // Draw Comic Box Backdrop
         cCtx.fillStyle = this.color;
-        cCtx.beginPath();
-        cCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        cCtx.fill();
+        cCtx.lineWidth = 2;
+        cCtx.strokeStyle = '#0f172a';
+        cCtx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+        cCtx.strokeRect(-this.size/2, -this.size/2, this.size, this.size);
+
+        // Icon inside box
+        cCtx.font = `${Math.floor(this.size * 0.7)}px sans-serif`;
+        cCtx.textAlign = 'center';
+        cCtx.textBaseline = 'middle';
+        cCtx.fillText(this.symbol, 0, 0);
+
         cCtx.restore();
       }
     }
@@ -779,7 +799,7 @@
     }
 
     // 3. Meme Floating Delivery Animation
-    const memeList = ["📦 Meme Delivered!", "🚀 $PRIME To The Moon!", "📈 $AMZN Stock Boosted!", "🔥 Prime Next Day Delivery!", "💎 Liquidity Locked!"];
+    const memeList = ["📦 Meme Delivered!", "🚀 $PRIME To The Moon!", "📈 $AMZN Stock Boosted!", "🔥 Prime Next Day Delivery!", "💎 Liquidity Locked!", "⚡ 2% Buyback Triggered!"];
     function triggerMemeDelivery() {
       const box = document.createElement('div');
       box.className = 'floating-box';
@@ -815,7 +835,7 @@
 
     function drawMeme() {
       const mode = document.getElementById('renderModeSelect').value;
-      if (mode === 'ai') return; // Handled by generateAIMeme
+      if (mode === 'ai') return;
 
       const bgSrc = document.getElementById('memeBgSelect').value;
       const coin = document.getElementById('memeCoinSelect').value;
@@ -832,10 +852,10 @@
         mCtx.fillStyle = "rgba(15, 23, 42, 0.35)";
         mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
 
-        // Vector Prime Package Avatar Stamp
+        // Vector Prime Package Stamp
         drawPrimeBoxAvatar(mCtx, 420, 240, 140, 110);
 
-        // Draw Memecoin Guest Badge
+        // Draw Memecoin Badge
         mCtx.fillStyle = "#ff9900";
         mCtx.fillRect(20, 20, 180, 42);
         mCtx.strokeStyle = "#0f172a";
