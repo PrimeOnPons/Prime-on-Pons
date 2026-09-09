@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prime | $PRIME - Delivering All Memes</title>
+  <title>Prime | $PRIME - Delivering All Memes on Robinhood Chain</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="token-logo.jpg">
@@ -15,460 +15,265 @@
 
   <style>
     :root {
-      --bg-color: #e3f2fd;
-      --card-bg: rgba(255, 255, 255, 0.95);
+      /* Muted industrial warehouse palette inspired by your new images */
+      --bg-light-gray: #f1f5f9;
+      --card-bg: rgba(255, 255, 255, 0.98);
       --primary-blue: #0088cc;
       --text-dark: #0f172a;
       --amazon-orange: #ff9900;
       --amazon-orange-hover: #e68a00;
-      --border-dark: #0f172a;
-      --accent-cyan: #00f2fe;
+      --border-dark: #1e293b;
+      --rh-green: #00c805;
+      --cool-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      background-image: url('website-background.jpg');
+      background-color: var(--bg-light-gray);
+      background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%), url('image_19.png');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      background-repeat: no-repeat;
       color: var(--text-dark);
       overflow-x: hidden;
       min-height: 100vh;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        background-image: url('website-background-mobile.jpg');
-        background-attachment: scroll;
-      }
+      line-height: 1.6;
     }
 
     /* Soft Amazon Smile Cursor Trail Canvas */
     #cursorCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 99999;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 99999;
     }
 
+    /* Helper Classes for Professional Polish */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    
     .bold-box {
       border: 3px solid var(--border-dark);
-      border-radius: 16px;
+      border-radius: 20px;
       box-shadow: 6px 6px 0px var(--border-dark);
       background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      transition: all 0.2s ease;
+      backdrop-filter: blur(12px);
+      transition: all 0.2s ease-out;
     }
 
-    /* Header & Navigation */
+    .section-title {
+      font-family: 'Outfit', sans-serif; font-size: 2.8rem; font-weight: 900;
+      text-align: center; margin-bottom: 20px; color: var(--text-dark);
+    }
+    
+    .floating-box-anim { animation: floatCard3D 6s ease-in-out infinite; }
+
+    @keyframes floatCard3D {
+      0%, 100% { transform: translateY(0px) rotateX(0deg); }
+      50% { transform: translateY(-10px) rotateX(1.5deg); }
+    }
+
+    /* Images */
+    .logistics-graphic {
+      max-width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--border-dark);
+    }
+
+    /* --- Header --- */
     header {
-      max-width: 1200px;
-      margin: 20px auto 10px auto;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
+      max-width: 1200px; margin: 20px auto 10px auto; padding: 15px 30px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 15px;
     }
 
     .logo {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 900;
-      font-size: 2.5rem;
-      color: var(--text-dark);
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 2.5rem;
+      color: var(--text-dark); display: flex; align-items: center; gap: 14px;
       text-decoration: none;
     }
 
     .logo-img {
-      width: 55px;
-      height: 55px;
-      border-radius: 14px;
-      object-fit: cover;
+      width: 55px; height: 55px; border-radius: 14px; object-fit: cover;
+      border: 3px solid var(--border-dark); box-shadow: 3px 3px 0px var(--border-dark);
+    }
+
+    .tv-ticker-wrapper {
+      width: 190px; height: 44px; border-radius: 12px; overflow: hidden;
+      box-shadow: 3px 3px 0px var(--border-dark); background: #0f172a;
       border: 3px solid var(--border-dark);
-      box-shadow: 3px 3px 0px var(--border-dark);
     }
 
-    .tradingview-ticker-container {
-      width: 190px;
-      height: 44px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 3px 3px 0px var(--border-dark);
-      background: #0f172a;
-      border: 2px solid var(--border-dark);
-    }
-
-    .nav-tabs {
-      display: flex;
-      gap: 8px;
-      max-width: 1200px;
-      margin: 10px auto 20px auto;
-      padding: 0 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .tab-btn {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      padding: 10px 20px;
-      border: 3px solid var(--border-dark);
-      border-radius: 12px;
-      background: #fff;
-      color: var(--text-dark);
-      cursor: pointer;
-      box-shadow: 3px 3px 0px var(--border-dark);
-      transition: all 0.15s ease;
-    }
-
-    .tab-btn.active, .tab-btn:hover {
-      background: var(--amazon-orange);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .nav-links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
     .btn {
-      font-family: 'Outfit', sans-serif;
-      padding: 10px 18px;
-      border-radius: 10px;
-      border: 2px solid var(--border-dark);
-      box-shadow: 3px 3px 0px var(--border-dark);
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.1s ease;
-      color: #fff;
+      font-family: 'Outfit', sans-serif; padding: 12px 20px; border-radius: 12px;
+      border: 3px solid var(--border-dark); box-shadow: 3px 3px 0px var(--border-dark);
+      font-weight: 800; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.1s ease; color: #fff;
     }
 
-    .btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px var(--border-dark);
-    }
-
+    .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--border-dark); }
     .btn-orange { background: var(--amazon-orange); }
     .btn-orange:hover { background: var(--amazon-orange-hover); }
     .btn-blue { background: var(--primary-blue); }
+    .btn-rh { background: var(--rh-green); color: #000; }
 
-    /* Page Section Infrastructure */
-    .page-section {
-      display: none;
-      max-width: 1200px;
-      margin: 20px auto 40px auto;
-      padding: 0 20px;
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex; gap: 10px; max-width: 1200px; margin: 10px auto 30px auto;
+      padding: 0 20px; flex-wrap: wrap; justify-content: center;
     }
 
-    .page-section.active {
-      display: block;
+    .tab-btn {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem;
+      padding: 12px 24px; border: 3px solid var(--border-dark); border-radius: 14px;
+      background: #fff; color: var(--text-dark); cursor: pointer;
+      box-shadow: 4px 4px 0px var(--border-dark); transition: all 0.15s ease;
     }
 
-    /* Hero Layout */
+    .tab-btn.active, .tab-btn:hover { background: var(--amazon-orange); color: #fff; transform: translateY(-3px); }
+
+    /* --- Page Infrastructure --- */
+    .page-section { display: none; margin-bottom: 80px; }
+    .page-section.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* --- HOME HUB --- */
     .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      perspective: 1200px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; margin-bottom: 60px;
     }
 
     .hero-text h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 3.6rem;
-      line-height: 1.05;
-      margin-bottom: 20px;
-      text-transform: uppercase;
+      font-family: 'Outfit', sans-serif; font-size: 4.2rem; line-height: 1.0;
+      margin-bottom: 25px; text-transform: uppercase;
     }
 
-    .hero-text h1 span {
-      color: var(--primary-blue);
-      text-shadow: 2px 2px 0px var(--border-dark);
-    }
+    .hero-text h1 span { color: var(--primary-blue); text-shadow: 2px 2px 0px var(--border-dark); }
 
-    .hero-text p {
-      font-size: 1.15rem;
-      color: #334155;
-      margin-bottom: 30px;
-      line-height: 1.6;
-      font-weight: 600;
-    }
+    .hero-text p { font-size: 1.25rem; color: #334155; margin-bottom: 35px; font-weight: 600; }
 
     .badge {
-      display: inline-block;
-      background: #dbeafe;
-      color: var(--primary-blue);
-      border: 2px solid var(--border-dark);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-      text-decoration: none;
+      display: inline-block; background: #dcfce7; color: #15803d;
+      border: 3px solid var(--border-dark); padding: 8px 18px; border-radius: 20px;
+      font-weight: 800; font-size: 1rem; margin-bottom: 20px; text-decoration: none;
     }
 
-    /* BORDERLESS FLOATING HERO IMAGE IN SPACE */
-    .hero-floating-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+    /* The polished Marble Man mascot image linking to Pons */
+    .hero-image-wrapper { perspective: 1500px; display: flex; justify-content: center; }
+    
+    .hero-prime-link { display: block; width: 100%; text-decoration: none; }
 
-    .floating-hero-link {
-      display: block;
-      width: 100%;
-      text-decoration: none;
-    }
-
-    .floating-hero-img {
-      width: 100%;
-      max-width: 520px;
-      height: auto;
-      border: none;
-      background: none;
-      border-radius: 24px;
-      cursor: pointer;
-      animation: float3D 4.5s ease-in-out infinite;
-      filter: drop-shadow(0px 25px 35px rgba(15, 23, 42, 0.45));
+    .hero-prime-img {
+      width: 100%; max-width: 600px; height: auto;
+      border: none; background: none; border-radius: 24px;
+      cursor: pointer; animation: floatMascot3D 5s ease-in-out infinite;
+      filter: drop-shadow(0px 30px 45px rgba(15, 23, 42, 0.45));
       transition: transform 0.4s ease, filter 0.4s ease;
     }
 
-    .floating-hero-img:hover {
-      transform: translateY(-15px) rotateY(-10deg) scale(1.06);
-      filter: drop-shadow(0px 35px 50px rgba(255, 153, 0, 0.6));
+    .hero-prime-img:hover {
+      transform: translateY(-20px) rotateY(-12deg) scale(1.04);
+      filter: drop-shadow(0px 40px 60px rgba(255, 153, 0, 0.6));
     }
 
-    @keyframes float3D {
-      0% { transform: translateY(0px) rotate(0deg) rotateX(0deg); }
-      50% { transform: translateY(-22px) rotate(1.5deg) rotateX(4deg); }
-      100% { transform: translateY(0px) rotate(0deg) rotateX(0deg); }
+    @keyframes floatMascot3D {
+      0%, 100% { transform: translateY(0px) rotate(0deg) rotateX(0deg); }
+      50% { transform: translateY(-25px) rotate(1deg) rotateX(3deg); }
     }
 
-    /* DYNAMIC DEXSCREENER STATS BAR */
+    /* Live Stats Bar */
     .live-stats-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin-top: 30px;
-    }
-
-    .stat-card-link {
-      text-decoration: none;
-      color: inherit;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 15px; margin-bottom: 60px;
     }
 
     .stat-card {
-      padding: 18px;
-      background: rgba(15, 23, 42, 0.92);
-      color: #fff;
-      border: 3px solid var(--border-dark);
-      border-radius: 14px;
-      box-shadow: 5px 5px 0px var(--border-dark);
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      animation: floatCard3D 6s ease-in-out infinite;
+      padding: 20px; background: rgba(15, 23, 42, 0.95); color: #fff;
+      border: 3px solid var(--border-dark); border-radius: 16px;
+      box-shadow: 6px 6px 0px var(--border-dark); text-align: center;
+      transition: all 0.2s ease; animation: floatCard3D 6s ease-in-out infinite;
     }
+    .stat-card:hover { transform: translateY(-8px); border-color: var(--amazon-orange); box-shadow: 6px 6px 0px var(--amazon-orange); }
 
-    .stat-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      border-color: var(--amazon-orange);
-      box-shadow: 6px 6px 0px var(--amazon-orange);
-    }
+    .stat-value { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 2.2rem; color: var(--amazon-orange); }
+    .stat-label { font-size: 0.95rem; color: #cbd5e1; text-transform: uppercase; font-weight: bold; margin-top: 5px; }
+    .stat-tag { display: inline-block; font-size: 0.8rem; padding: 3px 10px; border-radius: 10px; background: #1e293b; color: var(--accent-cyan); margin-top: 8px; font-weight: bold; }
 
-    .stat-value {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 900;
-      font-size: 1.7rem;
-      color: var(--amazon-orange);
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-      font-weight: bold;
-      margin-top: 4px;
-    }
-
-    .stat-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 10px;
-      background: #1e293b;
-      color: var(--accent-cyan);
-      margin-top: 6px;
-      font-weight: bold;
-    }
-
-    /* FLOATING SPACE STYLING FOR CARDS */
-    .features, .gallery-grid, .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 25px;
-    }
-
-    .floating-card {
-      padding: 20px;
-      background: var(--card-bg);
-      border: 3px solid var(--border-dark);
-      border-radius: 16px;
-      box-shadow: 6px 6px 0px var(--border-dark);
-      backdrop-filter: blur(8px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      animation: floatCard3D 5s ease-in-out infinite;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .floating-card:nth-child(even) {
-      animation-delay: 1.5s;
-    }
-
-    .floating-card:hover {
-      transform: translateY(-10px) rotate(0.5deg);
-      box-shadow: 8px 12px 0px var(--border-dark);
-    }
-
-    .floating-card img {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      background: #f8fafc;
-      border: 2px solid var(--border-dark);
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .floating-card h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
-
-    @keyframes floatCard3D {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
-    }
-
-    /* TradingView Chart Container */
-    .tv-chart-box {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 3px solid var(--border-dark);
-      border-radius: 16px;
-      box-shadow: 6px 6px 0px var(--border-dark);
-    }
-
-    .tv-chart-wrapper {
-      height: 380px;
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 2px solid var(--border-dark);
-    }
-
+    /* Contract Bar */
     .contract-bar {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.95);
+      padding: 25px 40px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px;
+    }
+    .address { font-family: monospace; font-weight: bold; color: #475569; font-size: 1.2rem; word-break: break-all; }
+
+    /* TradingView Overview */
+    .tv-chart-box { padding: 25px; background: rgba(15, 23, 42, 0.98); margin-bottom: 60px; }
+    .tv-chart-wrapper { height: 420px; width: 100%; border-radius: 12px; overflow: hidden; border: 3px solid var(--border-dark); }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px;
     }
 
-    .address {
-      font-family: monospace;
-      font-weight: bold;
-      color: #475569;
-      font-size: 1.1rem;
-      word-break: break-all;
+    .feature-card {
+      padding: 25px; display: flex; flex-direction: column; gap: 15px;
+    }
+    .feature-card img {
+      width: 100%; height: 200px; object-fit: cover; border-radius: 12px;
+      border: 2px solid var(--border-dark); background: #f8fafc;
+    }
+    .feature-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.7rem; margin-top: 10px; }
+
+    /* --- Secondary Tab Content Styles --- */
+    .split-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+
+    /* Tokenomics Card List */
+    .token-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .token-data-card {
+      padding: 20px; background: rgba(15, 23, 42, 0.03); border: 2px solid var(--border-dark);
+      border-radius: 12px;
+    }
+    .token-data-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.4rem; }
+    .token-data-value { font-family: 'Outfit', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--primary-blue); margin: 5px 0; }
+
+    /* Roadmap visual timeline */
+    .roadmap-list { list-style: none; display: grid; gap: 30px; }
+    .roadmap-step { display: grid; grid-template-columns: auto 1fr; gap: 25px; align-items: start; }
+    .roadmap-icon-box {
+      width: 60px; height: 60px; border-radius: 16px; border: 3px solid var(--border-dark);
+      background: #fff; box-shadow: 4px 4px 0px var(--border-dark);
+      display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+    }
+    .roadmap-text h3 { font-family: 'Outfit', sans-serif; font-size: 1.6rem; margin-bottom: 5px; }
+
+    /* --- FULL-BLEED NIGHT WAREHOUSE FOOTER --- */
+    .global-night-footer {
+      width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
+      margin-top: 80px; background-color: #0b1120; border-top: 6px solid var(--border-dark);
+      overflow: hidden;
     }
 
-    /* FULL-BLEED SCREEN SPANNING FOOTER */
-    .warehouse-footer-fullbleed {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      margin-top: 80px;
-      background: #0f172a;
-      border-top: 4px solid var(--border-dark);
-    }
-
-    .warehouse-footer-fullbleed img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
+    /* Wide night fulfillment artwork */
+    .global-night-footer-img {
+      width: 100%; height: auto; display: block; object-fit: cover;
+      max-height: 400px; /* Optional cap */
     }
 
     footer {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      text-align: center;
-      padding: 40px 20px;
-      background: #0b1120;
-      color: #fff;
+      width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;
+      text-align: center; padding: 60px 20px; background: #0b1120; color: #fff;
       border-top: 3px solid var(--border-dark);
     }
+    footer p { max-width: 800px; margin: 0 auto 15px auto; color: #cbd5e1; }
+    footer a { color: var(--accent-cyan); text-decoration: none; font-weight: 700; }
 
-    footer a {
-      color: var(--accent-cyan);
-      text-decoration: none;
-    }
-
+    /* Animation effects */
     .floating-box {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      font-size: 1.2rem;
-      font-family: 'Outfit', sans-serif;
-      font-weight: bold;
-      padding: 12px 20px;
-      background: #fff;
-      color: var(--text-dark);
-      border: 3px solid var(--border-dark);
-      border-radius: 12px;
-      box-shadow: 4px 4px 0px var(--border-dark);
-      animation: flyAcross 2.5s forwards linear;
+      position: fixed; pointer-events: none; z-index: 9999;
+      font-size: 1.25rem; font-family: 'Outfit', sans-serif; font-weight: bold;
+      padding: 14px 24px; background: #fff; color: var(--text-dark);
+      border: 3px solid var(--border-dark); border-radius: 14px;
+      box-shadow: 5px 5px 0px var(--border-dark);
+      animation: flyAcross 2.8s forwards linear;
     }
 
     @keyframes flyAcross {
@@ -477,341 +282,267 @@
       100% { transform: translate(110vw, -100px) rotate(360deg) scale(0.8); opacity: 0; }
     }
 
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero, .split-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .token-details-grid { grid-template-columns: 1fr; }
+      .nav-links { justify-content: center; }
+    }
     @media (max-width: 768px) {
-      header { justify-content: center; flex-direction: column; text-align: center; }
-      .hero { grid-template-columns: 1fr; text-align: center; gap: 25px; }
-      .hero-text h1 { font-size: 2.5rem; }
-      .contract-bar { flex-direction: column; gap: 15px; text-align: center; }
-      .tv-chart-wrapper { height: 300px; }
+      header { justify-content: center; text-align: center; }
+      .hero-text h1 { font-size: 2.8rem; }
+      .section-title { font-size: 2.2rem; }
+      .contract-bar { flex-direction: column; gap: 20px; text-align: center; }
+      .tv-chart-wrapper { height: 320px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Soft Amazon Smile Cursor Trail Canvas -->
+  <!-- Cursor Trail Canvas -->
   <canvas id="cursorCanvas"></canvas>
 
-  <!-- Header Navigation -->
-  <header>
-    <a href="https://ponsfamily.com" target="_blank" class="logo">
-      <img src="token-logo.jpg" alt="Prime Token Logo" class="logo-img">
-      Prime
-    </a>
-
-    <!-- TradingView $AMZN Single Ticker Widget -->
-    <div class="tradingview-ticker-container">
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-        {
-          "symbol": "NASDAQ:AMZN",
-          "width": "100%",
-          "colorTheme": "dark",
-          "isTransparent": true,
-          "locale": "en"
-        }
-        </script>
-      </div>
-    </div>
-
-    <div class="nav-links">
-      <a href="https://ponsfamily.com" target="_blank" class="btn btn-orange">Pons Launchpad</a>
-      <a href="https://x.com/PrimeOnPons" target="_blank" class="btn btn-blue">X / Twitter</a>
-      <a href="https://t.me/PrimeOnPons" target="_blank" class="btn btn-blue">Telegram</a>
-      <a href="https://ponsfamily.com" target="_blank" class="btn btn-orange">Buy $PRIME</a>
-    </div>
-  </header>
-
-  <!-- Navigation Tabs -->
-  <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('home', event)">🏠 Home Hub</button>
-    <button class="tab-btn" onclick="switchTab('about', event)">📦 About $PRIME</button>
-    <button class="tab-btn" onclick="switchTab('tokenomics', event)">📊 Tokenomics</button>
-    <button class="tab-btn" onclick="switchTab('roadmap', event)">🗺️ Logistics Roadmap</button>
-    <button class="tab-btn" onclick="switchTab('howtobuy', event)">🛒 How To Buy</button>
-  </nav>
-
-  <!-- PAGE 1: HOME HUB -->
-  <div id="home" class="page-section active">
-    <section class="hero">
-      <div class="hero-text">
-        <a href="https://ponsfamily.com" target="_blank" class="badge">🚀 Launching on PonsFamily.com</a>
-        <h1>PRIME DELIVERS <span>ALL MEMES</span></h1>
-        <p>The ultimate delivery token paired directly with Tokenized <b><a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" style="color: var(--primary-blue);">$AMZN (Amazon) Stock</a></b>. Guaranteed fast delivery directly to your portfolio with locked liquidity.</p>
-        
-        <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-          <button class="btn btn-orange" id="deliverBtn" onclick="triggerMemeDelivery()">📦 Deliver Meme Now!</button>
-          <a href="https://ponsfamily.com" target="_blank" class="btn bold-box" style="color: var(--text-dark);">Visit Launchpad</a>
-        </div>
-      </div>
-
-      <!-- Borderless Floating Space Hero Image linking directly to Ponsfamily.com -->
-      <div class="hero-floating-wrapper">
-        <a href="https://ponsfamily.com" target="_blank" class="floating-hero-link" title="Click to launch on PonsFamily.com">
-          <img src="Intro-image-future.jpg" alt="Delivering Memes With Prime" class="floating-hero-img">
-        </a>
-        <p style="margin-top: 15px; font-weight: bold; font-family: 'Outfit'; text-align: center;">Click Floating Package To Trade On Pons 🚀</p>
-      </div>
-    </section>
-
-    <!-- DYNAMIC DEXSCREENER & LOGISTICS STATS BAR (DEFAULTS TO "- -") -->
-    <div class="live-stats-bar">
-      <a id="dexMarketCapLink" href="https://dexscreener.com" target="_blank" class="stat-card-link">
-        <div class="stat-card">
-          <div class="stat-value" id="countMarketCap">- -</div>
-          <div class="stat-label">Market Cap</div>
-          <span class="stat-tag" id="tagMarketCap">DexScreener</span>
-        </div>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="https://pons.family" id="ponsHeaderLink" target="_blank" class="logo">
+        <img src="token-logo.jpg" alt="Prime Token Logo" class="logo-img">
+        Prime
       </a>
 
-      <a id="dexHoldersLink" href="https://dexscreener.com" target="_blank" class="stat-card-link">
-        <div class="stat-card">
-          <div class="stat-value" id="countHolders">- -</div>
-          <div class="stat-label">Holders / Price</div>
-          <span class="stat-tag" id="tagHolders">DexScreener</span>
-        </div>
-      </a>
-
-      <a id="dexLiquidityLink" href="https://dexscreener.com" target="_blank" class="stat-card-link">
-        <div class="stat-card">
-          <div class="stat-value" id="countLiquidity">- -</div>
-          <div class="stat-label">Vault Liquidity</div>
-          <span class="stat-tag">Pons Vault</span>
-        </div>
-      </a>
-
-      <div class="stat-card" onclick="triggerMemeDelivery()">
-        <div class="stat-value" id="countPackages">12,480+</div>
-        <div class="stat-label">Packages Dispatched</div>
-        <span class="stat-tag">Click To Dispatch 📦</span>
-      </div>
-    </div>
-
-    <!-- Contract Address Bar -->
-    <div class="contract-bar bold-box">
-      <div>
-        <small style="text-transform: uppercase; font-weight: bold; color: #94a3b8;">Token Pair Specification</small>
-        <div class="address">$PRIME / Tokenized $AMZN Stock</div>
-      </div>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-        <button class="btn btn-orange" onclick="copyCA()" id="copyBtn">Copy Pair Details</button>
-        <a href="https://ponsfamily.com" target="_blank" class="btn btn-blue">Trade on Pons</a>
-      </div>
-    </div>
-
-    <!-- TRADINGVIEW OVERVIEW CHART -->
-    <div class="tv-chart-box">
-      <h3 style="font-family: 'Outfit'; color: #fff; margin-bottom: 12px; font-size: 1.4rem; display: flex; align-items: center; gap: 8px;">
-        📈 Live $AMZN Stock Chart Pairing
-      </h3>
-      <div class="tv-chart-wrapper">
-        <div class="tradingview-widget-container" style="height:100%;width:100%;">
-          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
-          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" rel="noopener nofollow" target="_blank"><span class="blue-text">AMZN stock price</span></a><span class="trademark">&nbsp;by TradingView</span></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-          {
-            "lineWidth": 2,
-            "lineType": 0,
-            "chartType": "line",
-            "fontColor": "rgb(106, 109, 120)",
-            "gridLineColor": "rgba(242, 242, 242, 0.06)",
-            "volumeUpColor": "rgba(34, 171, 148, 0.5)",
-            "volumeDownColor": "rgba(247, 82, 95, 0.5)",
-            "backgroundColor": "#0F0F0F",
-            "widgetFontColor": "#DBDBDB",
-            "upColor": "#22ab94",
-            "downColor": "#f7525f",
-            "borderUpColor": "#22ab94",
-            "borderDownColor": "#f7525f",
-            "wickUpColor": "#22ab94",
-            "wickDownColor": "#f7525f",
-            "colorTheme": "dark",
-            "isTransparent": false,
-            "locale": "en",
-            "chartOnly": true,
-            "scalePosition": "right",
-            "scaleMode": "Normal",
-            "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-            "valuesTracking": "1",
-            "changeMode": "price-only",
-            "symbols": [
-              [
-                "NASDAQ:AMZN|1M"
-              ]
-            ],
-            "dateRanges": [
-              "1m|30",
-              "12m|1D",
-              "all|1M"
-            ],
-            "fontSize": "10",
-            "headerFontSize": "small",
-            "autosize": false,
-            "dateFormat": "MM/dd/yy",
-            "timeHoursFormat": "12-hours",
-            "width": "100%",
-            "height": "100%",
-            "noTimeScale": false,
-            "hideDateRanges": true
-          }
+      <!-- TradingView AMZN Ticker -->
+      <div class="tv-ticker-wrapper">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+          { "symbol": "NASDAQ:AMZN", "width": "100%", "colorTheme": "dark", "isTransparent": true, "locale": "en" }
           </script>
         </div>
       </div>
-    </div>
 
-    <!-- Floating Space Features -->
-    <section class="features">
-      <div class="floating-card">
-        <img src="AMZN-chart.jpg" alt="AMZN Chart Pairing">
-        <h3>Paired with $AMZN</h3>
-        <p>Backed by tokenized Amazon stock liquidity, offering a high-tech combination of TradFi power and pure meme magic.</p>
+      <div class="nav-links">
+        <a href="https://pons.family" id="ponsNavBtn" target="_blank" class="btn btn-rh">Pons Launchpad 🌿</a>
+        <a href="https://x.com/PrimeOnPons" target="_blank" class="btn btn-blue">X / Twitter</a>
+        <a href="https://t.me/PrimeOnPons" target="_blank" class="btn btn-blue">Telegram</a>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('home', event)">🏠 Home Hub</button>
+      <button class="tab-btn" onclick="switchTab('about', event)">📦 About $PRIME</button>
+      <button class="tab-btn" onclick="switchTab('tokenomics', event)">📊 Tokenomics</button>
+      <button class="tab-btn" onclick="switchTab('roadmap', event)">🗺️ Logistics Roadmap</button>
+      <button class="tab-btn" onclick="switchTab('howtobuy', event)">🛒 How To Buy</button>
+    </nav>
+
+    <!-- --- PAGE 1: HOME HUB --- -->
+    <div id="home" class="page-section active">
+      <section class="hero">
+        <div class="hero-text">
+          <a href="https://pons.family" id="ponsBadgeLink" target="_blank" class="badge">🌿 Active on Robinhood Chain</a>
+          <h1>PRIME DELIVERS <span>ALL MEMES</span></h1>
+          <p>The premier delivery token paired with the powerhouse spirit of <b><a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" style="color: var(--primary-blue);">$AMZN (Amazon) Stock</a></b> on Robinhood Chain. Frictionless, locked, and automated for Robinhood users.</p>
+          
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: start;">
+            <button class="btn btn-orange" onclick="triggerMemeDelivery()">📦 Dispatch Meme Now!</button>
+            <a href="https://pons.family" id="ponsHeroBtn" target="_blank" class="btn btn-rh">Buy on Pons 🌿</a>
+          </div>
+        </div>
+
+        <!-- The new professional Marble Man visual linking directly to Pons -->
+        <div class="hero-image-wrapper">
+          <a href="https://pons.family" id="ponsImgLink" target="_blank" class="hero-prime-link" title="Click to trade $PRIME on Pons">
+            <img src="image_12.png" alt="Delivering All Memes with Prime" class="hero-prime-img">
+          </a>
+        </div>
+      </section>
+
+      <!-- Dynamic DexScreener Stats (defaults to "- -") -->
+      <div class="live-stats-bar container">
+        <a id="dexMarketCapLink" href="https://dexscreener.com" target="_blank" class="stat-card">
+          <div class="stat-value" id="countMarketCap">- -</div>
+          <div class="stat-label">Market Cap</div>
+          <span class="stat-tag">Robinhood Chain MCAP</span>
+        </a>
+        <a id="dexHoldersLink" href="https://dexscreener.com" target="_blank" class="stat-card">
+          <div class="stat-value" id="countHolders">- -</div>
+          <div class="stat-label">Token Price</div>
+          <span class="stat-tag">DexScreener Live Price</span>
+        </a>
+        <a id="dexLiquidityLink" href="https://dexscreener.com" target="_blank" class="stat-card">
+          <div class="stat-value" id="countLiquidity">- -</div>
+          <div class="stat-label">Vault Liquidity</div>
+          <span class="stat-tag">Raydium Pool Lock</span>
+        </a>
+        <div class="stat-card" onclick="triggerMemeDelivery()" style="cursor: pointer;">
+          <div class="stat-value" id="countPackages">12,480+</div>
+          <div class="stat-label">Packages Dispatched</div>
+          <span class="stat-tag">Click To Dispatch 📦</span>
+        </div>
       </div>
 
-      <div class="floating-card">
-        <img src="Prime-vault.jpg" alt="Prime Vault Security">
-        <h3>Locked Liquidity</h3>
-        <p>100% of liquidity is secured in the vault at launch for maximum trust and long-term delivery power.</p>
-      </div>
-
-      <div class="floating-card">
-        <img src="delivery-truck.jpg" alt="Next Day Delivery Truck">
-        <h3>Next Day Delivery</h3>
-        <p>Launching exclusively on <a href="https://ponsfamily.com" target="_blank" style="color: var(--primary-blue); font-weight: bold;">ponsfamily.com</a>. Join our Telegram & X community to stay updated!</p>
-      </div>
-    </section>
-
-    <!-- Floating Fulfillment Operations Gallery -->
-    <section class="gallery-section">
-      <h2 style="font-family: 'Outfit'; text-align: center; font-size: 2.2rem; margin-top: 30px;">Fulfillment Hub Operations</h2>
-      <div class="gallery-grid">
-        <div class="floating-card" onclick="triggerMemeDelivery()">
-          <img src="warehouse-footer.jpg" alt="Warehouse Operations">
-          <p style="text-align: center; font-weight: bold; margin-top: 8px;">New Meme Processing</p>
+      <!-- Contract Address Bar -->
+      <div class="contract-bar bold-box">
+        <div>
+          <small style="text-transform: uppercase; font-weight: bold; color: #94a3b8;">$PRIME Robinhood Chain Contract</small>
+          <div class="address" id="mintAddressDisplay">Launching Soon via Pons</div>
         </div>
-        <div class="floating-card" onclick="triggerMemeDelivery()">
-          <img src="Warehouse-robots.jpg" alt="Warehouse Robots">
-          <p style="text-align: center; font-weight: bold; margin-top: 8px;">Automated Sorting</p>
-        </div>
-        <div class="floating-card" onclick="triggerMemeDelivery()">
-          <img src="Prime-porch.jpg" alt="Prime On Porch">
-          <p style="text-align: center; font-weight: bold; margin-top: 8px;">Porch Delivery</p>
-        </div>
-        <div class="floating-card" onclick="triggerMemeDelivery()">
-          <img src="Promo-image.jpg" alt="Special Delivery">
-          <p style="text-align: center; font-weight: bold; margin-top: 8px;">Special Delivery</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-orange" onclick="copyCA()" id="copyBtn">Copy Contract</button>
+          <a href="https://pons.family" id="ponsCaBtn" target="_blank" class="btn btn-rh">Trade on Pons</a>
         </div>
       </div>
-    </section>
-  </div>
 
-  <!-- PAGE 2: ABOUT $PRIME -->
-  <div id="about" class="page-section">
-    <div class="floating-card" style="padding: 40px;">
-      <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--primary-blue);">About Prime ($PRIME)</h2>
-      <p style="font-size: 1.2rem; line-height: 1.8; color: #334155; margin-bottom: 20px;">
-        Prime ($PRIME) is the world's first meme token built around the unstoppable power of automated global fulfillment. Engineered to pair directly with Tokenized <b>$AMZN (Amazon) Stock</b>, $PRIME delivers institutional-grade TradFi backing combined with high-octane viral meme culture.
-      </p>
-      <div class="info-grid">
-        <div class="floating-card">
-          <h3>📦 Express Meme Delivery</h3>
-          <p>Every block processed on the network triggers real-time meme distribution across our global community fulfillment hubs.</p>
-        </div>
-        <div class="floating-card">
-          <h3>🏢 Automated Sorting</h3>
-          <p>Utilizing high-tech warehouse robotics and automated blockchain mechanics, $PRIME ensures 100% fair launch integrity.</p>
+      <!-- TradingView Reference Chart -->
+      <div class="tv-chart-box bold-box">
+        <h3 style="font-family: Outfit; color: #fff; margin-bottom: 15px; font-size: 1.6rem;">📈 $AMZN Stock Chart Reference Pairing</h3>
+        <div class="tv-chart-wrapper">
+          <div class="tradingview-widget-container" style="height:100%;width:100%;">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+            {
+              "symbols": [ [ "NASDAQ:AMZN|1M" ] ],
+              "chartOnly": true, "lineWidth": 2, "lineType": 0, "fontColor": "rgb(106, 109, 120)", "gridLineColor": "rgba(242, 242, 242, 0.06)",
+              "backgroundColor": "#0F0F0F", "widgetFontColor": "#DBDBDB", "colorTheme": "dark", "isTransparent": false, "autosize": true,
+              "width": "100%", "height": "100%"
+            }
+            </script>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- PAGE 3: TOKENOMICS -->
-  <div id="tokenomics" class="page-section">
-    <div class="floating-card" style="padding: 40px;">
-      <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--amazon-orange);">Tokenomics & Pairing Mechanics</h2>
-      <div class="info-grid">
-        <div class="floating-card">
-          <h3 style="color: var(--primary-blue);">Total Supply</h3>
-          <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">1,000,000,000</p>
-          <p style="margin-top: 10px;">Fixed cap supply. No mint functions, no extra tokens ever created.</p>
+      <!-- Features Grid (using remaining wide visuals) -->
+      <div class="features-grid container">
+        <div class="feature-card bold-box floating-box-anim">
+          <img src="image_11.png" alt="Prime Sorting Facility">
+          <h3>Automated Meme Sorting</h3>
+          <p>Utilizing full logistics automation, $PRIME ensures the viral memes are delivered across the Robinhood ecosystem instantly.</p>
         </div>
-
-        <div class="floating-card">
-          <h3 style="color: var(--amazon-orange);">Trading Tax</h3>
-          <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">2% / 2%</p>
-          <p style="margin-top: 10px;">2% buy tax and 2% sell tax allocated directly toward automated $PRIME buybacks.</p>
+        <div class="feature-card bold-box floating-box-anim" style="animation-delay: 1.5s;">
+          <img src="image_16.png" alt="Locked Prime Sorting">
+          <h3>Secured in the Vault</h3>
+          <p>Liquidity is automatically secured in the Raydium Pool lock at bonding completion on Robinhood Chain.</p>
         </div>
-
-        <div class="floating-card">
-          <h3 style="color: #10b981;">Automated Buybacks</h3>
-          <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">2% Buyback Pool</p>
-          <p style="margin-top: 10px;">Every trade feeds the 2% buyback mechanism, constantly repurchasing $PRIME from the market to raise price floors.</p>
-        </div>
-
-        <div class="floating-card">
-          <h3 style="color: var(--primary-blue);">Liquidity Lock</h3>
-          <p style="font-size: 2rem; font-weight: 900; font-family: 'Outfit';">100% Locked</p>
-          <p style="margin-top: 10px;">All initial liquidity locked securely in the vault at launch on PonsFamily.com.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE 4: LOGISTICS ROADMAP -->
-  <div id="roadmap" class="page-section">
-    <div class="floating-card" style="padding: 40px;">
-      <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--primary-blue);">Logistics Roadmap</h2>
-      <div class="info-grid">
-        <div class="floating-card">
-          <h3>Phase 1: Warehouse Setup</h3>
-          <p>• Smart Contract Deployment<br>• Pons Launchpad Fair Launch<br>• Community Dispatch Hub Activation<br>• 1,000+ Holders Milestone</p>
-        </div>
-        <div class="floating-card">
-          <h3>Phase 2: Express Delivery</h3>
-          <p>• Tokenized $AMZN Liquidity Pairing<br>• Meme Fulfillment Marketing Blitz<br>• Coingecko & CoinMarketCap Listings<br>• 5,000+ Holders</p>
-        </div>
-        <div class="floating-card">
-          <h3>Phase 3: Global Logistics</h3>
-          <p>• Tier 1 CEX Exchange Listings<br>• Automated Warehouse Robot DApp<br>• Global Meme Delivery Network<br>• 25,000+ Holders</p>
+        <div class="feature-card bold-box floating-box-anim" style="animation-delay: 3s;">
+          <img src="image_18.png" alt="Open Prime Delivery Van">
+          <h3>Express Delivery</h3>
+          <p>Frictionless trading experience designed specifically for Robinhood Chain users, delivered at lightspeed. 📦💨</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- PAGE 5: HOW TO BUY -->
-  <div id="howtobuy" class="page-section">
-    <div class="floating-card" style="padding: 40px;">
-      <h2 style="font-family: 'Outfit'; font-size: 2.8rem; margin-bottom: 20px; color: var(--amazon-orange);">How To Buy $PRIME</h2>
-      <div class="info-grid">
-        <div class="floating-card">
-          <h3>1. Create Web3 Wallet</h3>
-          <p>Download MetaMask or your preferred EVM compatible wallet from official stores.</p>
+    <!-- --- PAGE 2: ABOUT $PRIME --- -->
+    <div id="about" class="page-section container">
+      <div class="bold-box" style="padding: 50px; display: grid; gap: 40px; grid-template-columns: 1fr auto; align-items: center;">
+        <div>
+          <h2 class="section-title" style="text-align: left;">📦 About Prime ($PRIME)</h2>
+          <p style="font-size: 1.2rem; margin-bottom: 20px;">Prime ($PRIME) is the premier logistics meme token on Robinhood Chain, built on the automated bonding curve system of Pons Launchpad. We marry the unstoppable viral power of memes with the high-tech, trusted global distribution architecture inspired by Amazon.</p>
+          <p>By pairing the spirit of <b>$AMZN</b> with meme volatility on Robinhood Chain, $PRIME offers users an intuitive, automated path to trading without complex presales or transaction taxes.</p>
         </div>
-        <div class="floating-card">
-          <h3>2. Connect to Pons</h3>
-          <p>Visit <a href="https://ponsfamily.com" target="_blank" style="color: var(--primary-blue); font-weight: bold;">PonsFamily.com</a> and connect your wallet to the official launchpad platform.</p>
+        <!-- High-tech logistical map image -->
+        <img src="image_17.png" alt="Prime Global Logistics Map" class="logistics-graphic" style="max-width: 400px; border-radius: 20px;">
+      </div>
+    </div>
+
+    <!-- --- PAGE 3: TOKENOMICS --- -->
+    <div id="tokenomics" class="page-section container">
+      <div class="bold-box" style="padding: 50px;">
+        <h2 class="section-title">📊 Tokenomics Specification</h2>
+        <div class="token-details-grid">
+          <div class="token-data-card bold-box">
+            <h3>Total Supply</h3>
+            <div class="token-data-value">1,000,000,000</div>
+            <p>Fixed cap on Robinhood Chain. No future mints, maximum distribution to users.</p>
+          </div>
+          <div class="token-data-card bold-box">
+            <h3>Buy / Sell Tax</h3>
+            <div class="token-data-value">0% / 0%</div>
+            <p>Frictionless trading. All volume goes directly into automated buybacks on Raydium after bonding.</p>
+          </div>
+          <div class="token-data-card bold-box">
+            <h3>Automated Buybacks</h3>
+            <div class="token-data-value">2% Pool</div>
+            <p>A portion of volume feeds the 2% buyback and burn mechanism, reducing supply and raising the floor.</p>
+          </div>
+          <div class="token-data-card bold-box">
+            <h3>Pons Bonding Curve</h3>
+            <div class="token-data-value">100% Fair</div>
+            <p>Launched exclusively via the fair bonding curve of Pons Launchpad. Complete community allocation.</p>
+          </div>
         </div>
-        <div class="floating-card">
-          <h3>3. Swap for $PRIME</h3>
-          <p>Select $PRIME / Tokenized $AMZN pair and confirm your swap transaction in your wallet.</p>
+      </div>
+    </div>
+
+    <!-- --- PAGE 4: LOGISTICS ROADMAP --- -->
+    <div id="roadmap" class="page-section container">
+      <div class="bold-box" style="padding: 50px; display: grid; gap: 40px; grid-template-columns: auto 1fr; align-items: start;">
+        <img src="image_15.png" alt="Warehouse Overview" class="logistics-graphic" style="max-width: 350px;">
+        <div>
+          <h2 class="section-title" style="text-align: left;">🗺️ Logistics Roadmap</h2>
+          <ul class="roadmap-list">
+            <li class="roadmap-step">
+              <div class="roadmap-icon-box">📦</div>
+              <div class="roadmap-text">
+                <h3>Phase 1: Fulfillment Facility Setup</h3>
+                <p>Smart Contract Deployment on Robinhood Chain<br>Pons Launchpad Fair Launch Activation<br>Community Dispatch Hub setup (Telegram)<br>1,000+ Holders Goal</p>
+              </div>
+            </li>
+            <li class="roadmap-step">
+              <div class="roadmap-icon-box">🚚</div>
+              <div class="roadmap-text">
+                <h3>Phase 2: Regional Express Distribution</h3>
+                <p>Bonding Curve Completion & Raydium Pool Lock<br>Automated supply reduction activation<br>Coingecko & CMC Application submissions<br>10,000+ Holders</p>
+              </div>
+            </li>
+            <li class="roadmap-step">
+              <div class="roadmap-icon-box">🛸</div>
+              <div class="roadmap-text">
+                <h3>Phase 3: Global Delivery Network</h3>
+                <p>Partnerships with Robinhood Ecosystem influencers<br>Fulfillment Center automated bot (DApp)<br>Tier-1 CEX Listings application<br>Global Meme Delivery Network expansion</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- --- PAGE 5: HOW TO BUY --- -->
+    <div id="howtobuy" class="page-section container">
+      <div class="bold-box" style="padding: 50px;">
+        <!-- Header artwork depicting the swap interface -->
+        <img src="image_14.png" alt="How to Buy $PRIME" class="logistics-graphic" style="width: 100%; height: 250px; object-fit: cover; margin-bottom: 30px;">
+        <h2 class="section-title">🛒 How To Buy $PRIME</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
+          <div class="token-data-card bold-box">
+            <h3>1. Get Robinhood Wallet</h3>
+            <p>Ensure you have the Robinhood Wallet or Phantom/Solflare and have SOL deposited to Robinhood Chain.</p>
+          </div>
+          <div class="token-data-card bold-box">
+            <h3>2. Connect to Pons</h3>
+            <p>Visit <a href="https://pons.family" target="_blank">Pons.family</a> and connect your wallet to the Robinhood Chain platform.</p>
+          </div>
+          <div class="token-data-card bold-box">
+            <h3>3. Swap for $PRIME</h3>
+            <p>Find the $PRIME pairing on the launchpad. Input the SOL you wish to dispatch and confirm the swap in your wallet.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FULL-BLEED SCREEN SPANNING WAREHOUSE FOOTER -->
-  <div class="warehouse-footer-fullbleed">
-    <img src="warehouse-footer.jpg" alt="Prime Warehouse Fulfillment Hub Artwork">
+  <!-- --- FULL-BLEED NIGHT WAREHOUSE FOOTER --- -->
+  <div class="global-night-footer">
+    <img src="image_19.png" alt="Prime Warehouse Fulfillment Hub Artwork at Night" class="global-night-footer-img">
   </div>
 
-  <!-- Footer Info Bar -->
+  <!-- Footer Info -->
   <footer>
-    <p style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; margin-bottom: 10px; color: #fff;">
-      PRIME ON PONS • <a href="https://ponsfamily.com" target="_blank">PonsFamily.com</a>
+    <p style="font-family: Outfit; font-size: 1.8rem; margin-bottom: 15px; color: #fff;">
+      PRIME ON ROBINHOOD CHAIN • <a href="https://pons.family" target="_blank">pons.family</a>
     </p>
-    <p style="color: #cbd5e1; font-size: 1rem; margin-bottom: 20px;">
-      Delivering all memes across the global blockchain network. Real-time $AMZN Stock Data powered by <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank">TradingView</a>.
-    </p>
-    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
+    <p>Delivering all memes across the global blockchain network. Real-time $AMZN Stock Data powered by <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank">TradingView</a>. This token is an independent meme project on Pons Launchpad and has no official affiliation with NASDAQ:AMZN stock.</p>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
       <a href="https://x.com/PrimeOnPons" target="_blank" class="btn btn-blue">Follow on X</a>
       <a href="https://t.me/PrimeOnPons" target="_blank" class="btn btn-orange">Join Telegram</a>
     </div>
@@ -823,7 +554,6 @@
     function switchTab(tabId, evt) {
       document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      
       document.getElementById(tabId).classList.add('active');
       if (evt) evt.currentTarget.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -842,17 +572,13 @@
     window.addEventListener('resize', resizeCCanvas);
 
     window.addEventListener('mousemove', (e) => {
-      points.push({
-        x: e.clientX,
-        y: e.clientY,
-        time: Date.now()
-      });
+      points.push({ x: e.clientX, y: e.clientY, time: Date.now() });
     });
 
     function renderCursorTrail() {
       cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
       const now = Date.now();
-      points = points.filter(p => now - p.time < 400);
+      points = points.filter(p => now - p.time < 350);
 
       if (points.length > 1) {
         cCtx.beginPath();
@@ -860,7 +586,7 @@
 
         for (let i = 1; i < points.length - 1; i++) {
           const xc = (points[i].x + points[i + 1].x) / 2;
-          const yc = (points[i].y + points[i + 1].y) / 2 + 1.5;
+          const yc = (points[i].y + points[i + 1].y) / 2 + 1.5; // Slight drop for the curve effect
           cCtx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
         }
 
@@ -869,15 +595,15 @@
           points[points.length - 1].x, points[points.length - 1].y
         );
         gradient.addColorStop(0, 'rgba(255, 153, 0, 0)');
-        gradient.addColorStop(0.5, 'rgba(255, 153, 0, 0.6)');
-        gradient.addColorStop(1, 'rgba(0, 242, 254, 0.9)');
+        gradient.addColorStop(0.5, 'rgba(255, 153, 0, 0.5)');
+        gradient.addColorStop(1, 'rgba(0, 242, 254, 0.8)');
 
         cCtx.strokeStyle = gradient;
         cCtx.lineWidth = 4;
         cCtx.lineCap = 'round';
         cCtx.lineJoin = 'round';
         cCtx.shadowColor = '#ff9900';
-        cCtx.shadowBlur = 8;
+        cCtx.shadowBlur = 6;
         cCtx.stroke();
       }
 
@@ -886,7 +612,7 @@
         cCtx.beginPath();
         cCtx.arc(last.x, last.y, 3, 0, Math.PI * 2);
         cCtx.fillStyle = '#ff9900';
-        cCtx.shadowBlur = 10;
+        cCtx.shadowBlur = 8;
         cCtx.shadowColor = '#ff9900';
         cCtx.fill();
       }
@@ -895,16 +621,9 @@
     }
     renderCursorTrail();
 
-    function copyCA() {
-      navigator.clipboard.writeText("$PRIME / Tokenized $AMZN Stock - Launching on https://ponsfamily.com");
-      const btn = document.getElementById('copyBtn');
-      btn.innerText = "Copied! 📦";
-      setTimeout(() => { btn.innerText = "Copy Pair Details"; }, 2000);
-    }
-
     // 3. Interactive Floating Box Dispatcher
     let packageCount = 12480;
-    const memeList = ["📦 Meme Delivered!", "🚀 $PRIME To The Moon!", "📈 $AMZN Stock Boosted!", "🔥 Prime Next Day Delivery!", "💎 Liquidity Locked!", "⚡ 2% Buyback Triggered!"];
+    const memeList = ["📦 Meme Delivered!", "🚀 $PRIME Dispatched!", "📈 $AMZN Spirits!", "🌿 Solana Surges!", "🔥 Locked!"];
     
     function triggerMemeDelivery() {
       packageCount++;
@@ -915,28 +634,54 @@
       box.innerHTML = memeList[Math.floor(Math.random() * memeList.length)];
       box.style.left = Math.random() * 80 + 'vw';
       document.body.appendChild(box);
-      setTimeout(() => { box.remove(); }, 2500);
+      setTimeout(() => { box.remove(); }, 2800);
     }
 
-    // 4. DEXSCREENER LIVE DYNAMIC STATS CONFIGURATION ENGINE
-    // When you launch, set isLaunched to true and paste your DexScreener URL below!
-    const DEXSCREENER_CONFIG = {
-      isLaunched: false, 
-      dexScreenerUrl: "https://dexscreener.com/ethereum/YOUR_PAIR_ADDRESS" 
+    // 4. LAUNCH CONFIGURATION & DEXSCREENER ENGINE (ROBINHOOD CHAIN)
+    // When you deploy on Pons / Robinhood Chain, flip isLaunched to true and add your addresses!
+    const LAUNCH_CONFIG = {
+      isLaunched: false, // FLIP TO TRUE WHEN LIVE
+      ponsLaunchUrl: "https://pons.family", // Specific token pool URL when live
+      contractAddress: "YOUR_ROBINHOOD_CHAIN_CONTRACT_ADDRESS",
+      dexScreenerUrl: "https://dexscreener.com/robinhood/YOUR_PAIR_ADDRESS" 
     };
 
+    function initializeLaunchLinks() {
+      if (!LAUNCH_CONFIG.isLaunched) return;
+
+      const pUrl = LAUNCH_CONFIG.ponsLaunchUrl;
+      document.getElementById('ponsHeaderLink').href = pUrl;
+      document.getElementById('ponsNavBtn').href = pUrl;
+      document.getElementById('ponsBadgeLink').href = pUrl;
+      document.getElementById('ponsHeroBtn').href = pUrl;
+      document.getElementById('ponsImgLink').href = pUrl;
+      document.getElementById('ponsCaBtn').href = pUrl;
+
+      if (LAUNCH_CONFIG.contractAddress !== "YOUR_ROBINHOOD_CHAIN_CONTRACT_ADDRESS") {
+        document.getElementById('mintAddressDisplay').innerText = LAUNCH_CONFIG.contractAddress;
+      }
+    }
+
+    function copyCA() {
+      const addressText = LAUNCH_CONFIG.isLaunched ? LAUNCH_CONFIG.contractAddress : "Launching soon on Robinhood Chain via Pons!";
+      navigator.clipboard.writeText(addressText);
+      const btn = document.getElementById('copyBtn');
+      btn.innerText = "Copied! 📦";
+      setTimeout(() => { btn.innerText = "Copy Contract"; }, 2000);
+    }
+
+    // DexScreener Fetcher (defaults to - - until launched)
     async function fetchDexScreenerData() {
-      if (!DEXSCREENER_CONFIG.isLaunched || !DEXSCREENER_CONFIG.dexScreenerUrl || DEXSCREENER_CONFIG.dexScreenerUrl.includes("YOUR_PAIR_ADDRESS")) {
-        return; // Retain "- -" until you provide your active DexScreener URL
+      if (!LAUNCH_CONFIG.isLaunched || !LAUNCH_CONFIG.dexScreenerUrl || LAUNCH_CONFIG.dexScreenerUrl.includes("YOUR_PAIR_ADDRESS")) {
+        return; 
       }
 
-      document.getElementById('dexMarketCapLink').href = DEXSCREENER_CONFIG.dexScreenerUrl;
-      document.getElementById('dexHoldersLink').href = DEXSCREENER_CONFIG.dexScreenerUrl;
-      document.getElementById('dexLiquidityLink').href = DEXSCREENER_CONFIG.dexScreenerUrl;
+      document.getElementById('dexMarketCapLink').href = LAUNCH_CONFIG.dexScreenerUrl;
+      document.getElementById('dexHoldersLink').href = LAUNCH_CONFIG.dexScreenerUrl;
+      document.getElementById('dexLiquidityLink').href = LAUNCH_CONFIG.dexScreenerUrl;
 
       try {
-        // Parse chainId and pairAddress from the URL
-        const parts = DEXSCREENER_CONFIG.dexScreenerUrl.trim().split('/');
+        const parts = LAUNCH_CONFIG.dexScreenerUrl.trim().split('/');
         const pairAddress = parts.pop() || parts.pop();
         const chainId = parts.pop();
 
@@ -946,21 +691,17 @@
         if (data && data.pair) {
           const pair = data.pair;
           
-          // Market Cap
           if (pair.marketCap || pair.fdv) {
             const mcap = pair.marketCap || pair.fdv;
             document.getElementById('countMarketCap').innerText = '$' + Number(mcap).toLocaleString();
           }
 
-          // Liquidity
           if (pair.liquidity && pair.liquidity.usd) {
             document.getElementById('countLiquidity').innerText = '$' + Number(pair.liquidity.usd).toLocaleString();
           }
 
-          // Price / Holder display
           if (pair.priceUsd) {
             document.getElementById('countHolders').innerText = '$' + parseFloat(pair.priceUsd).toFixed(6);
-            document.getElementById('tagHolders').innerText = "Live Token Price";
           }
         }
       } catch (err) {
@@ -968,8 +709,12 @@
       }
     }
 
+    // Initial setup
+    initializeLaunchLinks();
     fetchDexScreenerData();
+    // Run fetch every 15 seconds if launched
     setInterval(fetchDexScreenerData, 15000);
+
   </script>
 </body>
 </html>
