@@ -3,161 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$AMZN Token - Decentralized Liquidity</title>
+    <title>$AMZN - Premium Blue-Chip Meme Engine</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-        body { background-color: #eaeded; color: #0f1111; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #0b0e14; color: #f0f6fc; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* Amazon-styled Header */
-        .nav-top { background-color: #131921; color: #fff; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 22px; font-weight: bold; color: #ff9900; }
-        .logo span { color: #fff; }
-        .search-bar { display: flex; flex: 1; max-width: 600px; margin: 0 20px; }
-        .search-bar input { width: 100%; padding: 8px 10px; border: none; border-radius: 4px 0 0 4px; outline: none; }
-        .search-bar button { background-color: #febd69; border: none; padding: 8px 15px; border-radius: 0 4px 4px 0; cursor: pointer; font-weight: bold; }
-        .nav-sub { background-color: #232f3e; color: #fff; padding: 8px 20px; display: flex; gap: 15px; font-size: 14px; }
-        .nav-sub a { color: #fff; text-decoration: none; }
+        /* Amazon Dark Glassmorphism Header */
+        .nav-top { 
+            background: rgba(19, 25, 33, 0.85); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(255, 153, 0, 0.2); 
+            padding: 12px 24px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        .logo { font-size: 24px; font-weight: 800; color: #ff9900; letter-spacing: -0.5px; }
+        .logo span { color: #ffffff; font-weight: 300; }
+        
+        .search-bar { 
+            display: flex; 
+            flex: 1; 
+            max-width: 500px; 
+            margin: 0 20px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+        .search-bar input { 
+            width: 100%; 
+            padding: 10px 14px; 
+            background: transparent; 
+            border: none; 
+            color: #ff9900; 
+            font-family: monospace; 
+            font-size: 13px; 
+            outline: none; 
+        }
+        .search-bar button { 
+            background: #ff9900; 
+            border: none; 
+            padding: 10px 18px; 
+            color: #131921; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.2s; 
+        }
+        .search-bar button:hover { background: #ffad33; }
 
-        /* Hero Banner */
-        .hero { background: linear-gradient(180deg, #232f3e 0%, #eaeded 100%); padding: 30px 20px 10px; text-align: center; color: #fff; }
-        .hero h1 { font-size: 28px; margin-bottom: 8px; }
-        .hero p { color: #febd69; font-size: 16px; font-weight: bold; }
+        /* Layout Grid */
+        .container { 
+            max-width: 1200px; 
+            margin: 30px auto; 
+            padding: 0 20px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 24px; 
+            flex: 1; 
+        }
 
-        /* Product Grid (Main Layout) */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: #fff; padding: 20px; border-radius: 4px; border: 1px solid #ddd; display: flex; flex-direction: column; justify-content: space-between; }
-        .card h2 { font-size: 18px; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .glass-card { 
+            background: rgba(23, 29, 37, 0.6); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 16px; 
+            padding: 24px; 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        
+        .glass-card h2 { 
+            font-size: 18px; 
+            font-weight: 600; 
+            color: #ffffff; 
+            margin-bottom: 16px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+        .glass-card h2 span { color: #ff9900; font-size: 12px; border: 1px solid #ff9900; padding: 2px 8px; border-radius: 12px; }
 
-        /* Interactive Canvas Feature */
-        .canvas-container { text-align: center; background: #fafafa; border: 1px dashed #ccc; padding: 10px; margin: 10px 0; }
-        canvas { max-width: 100%; height: auto; border-radius: 4px; }
+        /* Canvas Box */
+        .canvas-box { 
+            background: radial-gradient(circle, rgba(255,153,0,0.05) 0%, rgba(0,0,0,0.2) 100%); 
+            border: 1px dashed rgba(255, 255, 255, 0.15); 
+            border-radius: 12px; 
+            padding: 16px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin-bottom: 16px; 
+        }
+        canvas { max-width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); cursor: pointer; }
 
-        /* Amazon-styled Buttons */
-        .btn-prime { background-color: #ffd814; border: 1px solid #fcd200; color: #0f1111; padding: 10px; border-radius: 20px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 8px; text-align: center; text-decoration: none; display: block; }
-        .btn-prime:hover { background-color: #f7ca00; }
-        .btn-secondary { background-color: #ffa41c; border: 1px solid #ff8f00; }
-        .btn-secondary:hover { background-color: #f3a847; }
+        /* Controls */
+        .control-group { margin-bottom: 12px; }
+        .control-group label { display: block; font-size: 12px; color: #8b949e; margin-bottom: 4px; }
+        .control-group input[type="text"] { 
+            width: 100%; 
+            padding: 8px 12px; 
+            background: rgba(0, 0, 0, 0.3); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 6px; 
+            color: #fff; 
+            outline: none; 
+        }
+        
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .btn-option { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            color: #ccc; 
+            padding: 8px; 
+            border-radius: 6px; 
+            font-size: 12px; 
+            cursor: pointer; 
+            transition: 0.2s; 
+        }
+        .btn-option:hover, .btn-option.active { background: rgba(255, 153, 0, 0.2); border-color: #ff9900; color: #ff9900; }
 
-        /* Tokenomics Table */
-        .tokenomics-list { list-style: none; font-size: 14px; margin: 10px 0; }
-        .tokenomics-list li { padding: 6px 0; border-bottom: 1px solid #f3f3f3; display: flex; justify-content: space-between; }
+        .btn-amazon { 
+            background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%); 
+            color: #0b0e14; 
+            border: none; 
+            padding: 12px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            text-align: center; 
+            text-decoration: none; 
+            transition: all 0.2s ease; 
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.25); 
+            display: block;
+            width: 100%;
+        }
+        .btn-amazon:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(255, 153, 0, 0.4); }
 
-        /* Footer */
-        footer { background-color: #131921; color: #ddd; text-align: center; padding: 20px; margin-top: 40px; font-size: 12px; }
+        /* Spec List */
+        .spec-list { list-style: none; font-size: 14px; }
+        .spec-list li { 
+            padding: 10px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            display: flex; 
+            justify-content: space-between; 
+            color: #8b949e; 
+        }
+        .spec-list li strong { color: #f0f6fc; }
+
+        footer { text-align: center; padding: 24px; color: #484f58; font-size: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <div class="nav-top">
-        <div class="logo">$AMZN<span>.coin</span></div>
+        <div class="logo">$AMZN<span>.Pons</span></div>
         <div class="search-bar">
-            <input type="text" value="0xAMZN...PonsChainContract" readonly>
+            <input type="text" value="0xAMZN...PonsChainContract" id="caInput" readonly>
             <button onclick="navigator.clipboard.writeText('0xAMZN...PonsChainContract')">Copy CA</button>
         </div>
-        <div><strong>Prime Liquidity</strong></div>
-    </div>
-    <div class="nav-sub">
-        <a href="#buy">Buy Token</a>
-        <a href="#tokenomics">Tokenomics</a>
-        <a href="#generator">Meme Generator</a>
-        <a href="#community">Community Telegram</a>
+        <div style="font-size: 13px; color: #8b949e;">Prime Protocol</div>
     </div>
 
-    <!-- Hero Banner -->
-    <div class="hero">
-        <h1>Same Day Delivery to the Moon 📦</h1>
-        <p>1-Click Decentralized Buy • Zero Fees with Prime</p>
-    </div>
-
-    <!-- Content Cards -->
     <div class="container">
         
-        <!-- Live Visual Card (Canvas Generator) -->
-        <div class="card" id="generator">
-            <h2>Generated Asset Preview</h2>
-            <div class="canvas-container">
-                <canvas id="assetCanvas" width="250" height="250"></canvas>
+        <!-- Interactive Generator -->
+        <div class="glass-card">
+            <h2>Asset Studio <span>Interactive</span></h2>
+            <div class="canvas-box">
+                <canvas id="assetCanvas" width="260" height="260"></canvas>
             </div>
-            <button class="btn-prime" onclick="downloadAsset()">Download Visual Asset (.png)</button>
+            
+            <div class="control-group">
+                <label>Custom Overlay Text</label>
+                <input type="text" id="canvasText" value="$AMZN" oninput="updateRender()">
+            </div>
+
+            <div class="control-group">
+                <label>Asset Preset Style</label>
+                <div class="btn-grid">
+                    <button class="btn-option active" id="btnOrb" onclick="setStyle('orb')">Blue-Chip Orb</button>
+                    <button class="btn-option" id="btnPackage" onclick="setStyle('package')">Prime Parcel</button>
+                </div>
+            </div>
+
+            <button class="btn-amazon" onclick="downloadAsset()">Download Custom Graphic (.PNG)</button>
         </div>
 
-        <!-- Token Information Card -->
-        <div class="card" id="buy">
-            <h2>Product Details</h2>
-            <p style="font-size: 13px; color: #565959; margin-bottom: 10px;">In Stock • Ships immediately on Pons Blockchain</p>
-            <ul class="tokenomics-list">
-                <li><span>Ticker:</span> <strong>$AMZN</strong></li>
-                <li><span>Network:</span> <strong>Pons Chain</strong></li>
-                <li><span>Total Supply:</span> <strong>1,000,000,000</strong></li>
-                <li><span>Slippage:</span> <strong>0%</strong></li>
+        <!-- Token Specs -->
+        <div class="glass-card">
+            <h2>Product Details <span>In Stock</span></h2>
+            <ul class="spec-list">
+                <li><span>Ticker</span> <strong>$AMZN</strong></li>
+                <li><span>Blockchain</span> <strong>Pons Chain</strong></li>
+                <li><span>Delivery</span> <strong>Instant Prime Settlement</strong></li>
+                <li><span>Vault Reserve</span> <strong>100% Glassmorphic</strong></li>
+                <li><span>Slippage</span> <strong>0%</strong></li>
             </ul>
-            <a href="https://t.me" target="_blank" class="btn-prime btn-secondary">Join Telegram Raid Group</a>
-        </div>
-
-        <!-- Social Raids Card -->
-        <div class="card" id="community">
-            <h2>Prime Customer Reviews</h2>
-            <p style="font-size: 14px; line-height: 1.4; color: #333;">
-                ⭐⭐⭐⭐⭐<br>
-                <em>"The delivery was instant. The vault filled up silently and inevitably. 10/10 meme coin experience."</em>
-            </p>
-            <a href="https://x.com" target="_blank" class="btn-prime" style="margin-top: 15px;">Launch X / Twitter Raid</a>
+            <a href="https://t.me" target="_blank" class="btn-amazon" style="margin-top: 16px;">Launch Telegram Raid</a>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 $AMZN Meme Coin. Built on Pons Blockchain. Not affiliated with Amazon.com, Inc.</p>
+        &copy; 2026 $AMZN Protocol. Built on Pons Blockchain.
     </footer>
 
-    <!-- Interactive Canvas Script -->
     <script>
-        function drawVisual() {
+        let currentStyle = 'orb';
+
+        function setStyle(style) {
+            currentStyle = style;
+            document.getElementById('btnOrb').classList.toggle('active', style === 'orb');
+            document.getElementById('btnPackage').classList.toggle('active', style === 'package');
+            updateRender();
+        }
+
+        function updateRender() {
             const canvas = document.getElementById('assetCanvas');
             const ctx = canvas.getContext('2d');
+            const userText = document.getElementById('canvasText').value || '$AMZN';
 
-            // Background
-            ctx.fillStyle = '#131921';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Bubbly Glassmorphic Sphere
-            let gradient = ctx.createRadialGradient(110, 110, 10, 125, 125, 90);
-            gradient.addColorStop(0, '#ffffff');
-            gradient.addColorStop(0.2, '#febd69');
-            gradient.addColorStop(0.8, '#ff9900');
-            gradient.addColorStop(1, '#131921');
+            if (currentStyle === 'orb') {
+                // Outer Glow
+                let outerGlow = ctx.createRadialGradient(130, 130, 50, 130, 130, 120);
+                outerGlow.addColorStop(0, 'rgba(255, 153, 0, 0.2)');
+                outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.fillStyle = outerGlow;
+                ctx.fillRect(0, 0, 260, 260);
 
-            ctx.beginPath();
-            ctx.arc(125, 125, 85, 0, Math.PI * 2);
-            ctx.fillStyle = gradient;
-            ctx.shadowColor = '#febd69';
-            ctx.shadowBlur = 15;
-            ctx.fill();
+                // Blue-Chip Glass Orb
+                let glassGrad = ctx.createRadialGradient(95, 85, 5, 130, 130, 95);
+                glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
+                glassGrad.addColorStop(0.3, 'rgba(255, 153, 0, 0.3)');
+                glassGrad.addColorStop(0.7, 'rgba(19, 25, 33, 0.85)');
+                glassGrad.addColorStop(1, 'rgba(11, 14, 20, 0.98)');
 
-            // Amazon-style Smile Arrow Text overlay
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 24px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('$AMZN', 125, 120);
+                ctx.beginPath();
+                ctx.arc(130, 130, 90, 0, Math.PI * 2);
+                ctx.fillStyle = glassGrad;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+                ctx.lineWidth = 1.5;
+                ctx.fill();
+                ctx.stroke();
 
-            ctx.beginPath();
-            ctx.arc(125, 125, 40, 0.2 * Math.PI, 0.8 * Math.PI, false);
-            ctx.strokeStyle = '#232f3e';
-            ctx.lineWidth = 4;
-            ctx.stroke();
+                // Inner Reflection
+                ctx.beginPath();
+                ctx.arc(130, 130, 82, 1.2 * Math.PI, 1.8 * Math.PI);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Amazon Arrow
+                ctx.beginPath();
+                ctx.arc(130, 125, 50, 0.25 * Math.PI, 0.75 * Math.PI, false);
+                ctx.strokeStyle = '#ff9900';
+                ctx.lineWidth = 5;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Arrowhead
+                ctx.beginPath();
+                ctx.fillStyle = '#ff9900';
+                ctx.moveTo(165, 156);
+                ctx.lineTo(175, 152);
+                ctx.lineTo(170, 164);
+                ctx.fill();
+
+                // Dynamic Text
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '700 22px -apple-system, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(userText, 130, 118);
+
+            } else if (currentStyle === 'package') {
+                // Glass Box Background Glow
+                ctx.fillStyle = 'rgba(255, 153, 0, 0.05)';
+                ctx.fillRect(0, 0, 260, 260);
+
+                // Prime Package Base
+                ctx.fillStyle = '#131921';
+                ctx.strokeStyle = '#ff9900';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.roundRect(40, 50, 180, 160, 16);
+                ctx.fill();
+                ctx.stroke();
+
+                // Prime Ribbon Tape
+                ctx.fillStyle = 'rgba(255, 153, 0, 0.2)';
+                ctx.fillRect(115, 50, 30, 160);
+
+                // Dynamic Text Overlay
+                ctx.fillStyle = '#ff9900';
+                ctx.font = '700 24px -apple-system, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(userText, 130, 125);
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '600 12px -apple-system, sans-serif';
+                ctx.fillText('PRIORITY DELIVERY', 130, 150);
+            }
         }
 
         function downloadAsset() {
             const canvas = document.getElementById('assetCanvas');
             const link = document.createElement('a');
-            link.download = 'AMZN_Prime_Asset.png';
+            link.download = `AMZN_${currentStyle}_asset.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
         }
 
-        window.onload = drawVisual;
+        window.onload = updateRender;
     </script>
 </body>
 </html>
