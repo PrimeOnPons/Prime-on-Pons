@@ -12,21 +12,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- Web3Modal / Reown AppKit Bundle -->
-  <script type="module">
-    import { createAppKit } from 'https://esm.sh/@reown/appkit@1.1.0';
-    import { mainnet } from 'https://esm.sh/@reown/appkit/networks';
-    import { EthersAdapter } from 'https://esm.sh/@reown/appkit-adapter-ethers';
-
-    window.appKit = createAppKit({
-      adapters: [new EthersAdapter()],
-      networks: [mainnet],
-      projectId: 'c4f79cc821944d9680842e34466bfb00',
-      features: { analytics: false },
-      themeMode: 'light'
-    });
-  </script>
 
   <style>
     :root {
@@ -188,9 +173,8 @@
     .btn-orange { background: var(--amazon-orange); }
     .btn-orange:hover { background: var(--amazon-orange-hover); }
     .btn-blue { background: var(--primary-blue); }
-    .btn-wallet { background: #10b981; }
 
-    /* Page View Containers */
+    /* Page Section Infrastructure */
     .page-section {
       display: none;
       max-width: 1200px;
@@ -255,15 +239,15 @@
 
     .hero-main-img {
       width: 100%;
-      height: 320px;
-      object-fit: contain;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
       background: #f8fafc;
-      border: 2px solid var(--border-dark);
+      border: 3px solid var(--border-dark);
       border-radius: 12px;
       cursor: pointer;
     }
 
-    /* Grid Sections */
+    /* Grid Sections & Formatted Card Boxes */
     .features, .gallery-grid, .info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -272,14 +256,17 @@
     }
 
     .card {
-      padding: 25px;
+      padding: 20px;
       background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card img {
       width: 100%;
-      height: 180px;
-      object-fit: contain;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
       background: #f8fafc;
       border: 2px solid var(--border-dark);
       border-radius: 10px;
@@ -310,91 +297,38 @@
       word-break: break-all;
     }
 
-    /* Wallet Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.75);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      backdrop-filter: blur(6px);
-    }
-
-    .modal-box {
-      width: 90%;
-      max-width: 400px;
-      padding: 30px;
-      background: #fff;
-      text-align: center;
+    /* 100% FULL-BLEED SCREEN SPANNING FOOTER (Artificial Inu Style) */
+    .warehouse-footer-fullbleed {
+      width: 100vw;
       position: relative;
-    }
-
-    .wallet-option {
-      width: 100%;
-      padding: 16px;
-      margin: 14px 0;
-      border: 2px solid var(--border-dark);
-      border-radius: 12px;
-      background: #f8fafc;
-      color: var(--text-dark);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .wallet-option:hover { background: #e2e8f0; }
-
-    .close-modal {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      background: none;
-    }
-
-    /* FULL WAREHOUSE FOOTER STYLING (Inspired by Artificial Inu) */
-    .warehouse-footer-container {
-      width: 100%;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
       margin-top: 80px;
-      position: relative;
       background: #0f172a;
       border-top: 4px solid var(--border-dark);
     }
 
-    .warehouse-banner-wrapper {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 20px 20px 0 20px;
-    }
-
-    .warehouse-footer-img {
+    .warehouse-footer-fullbleed img {
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 20px 20px 0 0;
-      border: 4px solid var(--border-dark);
-      border-bottom: none;
-      box-shadow: 0px -6px 20px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
     }
 
     footer {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
       text-align: center;
       padding: 40px 20px;
       background: #0b1120;
       color: #fff;
-      border-top: 4px solid var(--border-dark);
+      border-top: 3px solid var(--border-dark);
     }
 
     footer a {
@@ -464,11 +398,11 @@
       <a href="https://ponsfamily.com" target="_blank" class="btn btn-orange">Pons Launchpad</a>
       <a href="https://x.com/PrimeOnPons" target="_blank" class="btn btn-blue">X / Twitter</a>
       <a href="https://t.me/PrimeOnPons" target="_blank" class="btn btn-blue">Telegram</a>
-      <button class="btn btn-wallet" id="walletBtn" onclick="openWalletModal()">Connect Wallet</button>
+      <a href="https://ponsfamily.com" target="_blank" class="btn btn-orange">Buy $PRIME</a>
     </div>
   </header>
 
-  <!-- Navigation Tabs (Multiple Pages Infrastructure) -->
+  <!-- Navigation Tabs (Multiple Page System) -->
   <nav class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('home')">🏠 Home Hub</button>
     <button class="tab-btn" onclick="switchTab('about')">📦 About $PRIME</button>
@@ -535,7 +469,7 @@
       <h2 style="font-family: 'Outfit'; text-align: center; font-size: 2.2rem; margin-top: 30px;">Fulfillment Hub Operations</h2>
       <div class="gallery-grid">
         <div class="card bold-box" onclick="triggerMemeDelivery()">
-          <img src="warehouse-new-memes.jpg" alt="Warehouse New Memes">
+          <img src="warehouse-footer.jpg" alt="Warehouse Operations">
           <p style="text-align: center; font-weight: bold; margin-top: 8px;">New Meme Processing</p>
         </div>
         <div class="card bold-box" onclick="triggerMemeDelivery()">
@@ -626,7 +560,7 @@
       <div class="info-grid">
         <div class="card bold-box">
           <h3>1. Create Web3 Wallet</h3>
-          <p>Download MetaMask or your preferred EVM/WalletConnect compatible wallet from official stores.</p>
+          <p>Download MetaMask or your preferred EVM compatible wallet from official stores.</p>
         </div>
         <div class="card bold-box">
           <h3>2. Connect to Pons</h3>
@@ -640,11 +574,9 @@
     </div>
   </div>
 
-  <!-- WAREHOUSE FOOTER (ARTIFICIAL INU STYLE) -->
-  <div class="warehouse-footer-container">
-    <div class="warehouse-banner-wrapper">
-      <img src="warehouse-footer.jpg" alt="Prime Warehouse Fulfillment Hub Graphic" class="warehouse-footer-img">
-    </div>
+  <!-- FULL-BLEED SCREEN SPANNING WAREHOUSE FOOTER -->
+  <div class="warehouse-footer-fullbleed">
+    <img src="warehouse-footer.jpg" alt="Prime Warehouse Fulfillment Hub Artwork">
   </div>
 
   <!-- Footer Info Bar -->
@@ -660,25 +592,6 @@
       <a href="https://t.me/PrimeOnPons" target="_blank" class="btn btn-orange">Join Telegram</a>
     </div>
   </footer>
-
-  <!-- Wallet Modal -->
-  <div class="modal-overlay" id="walletModal">
-    <div class="modal-box bold-box">
-      <button class="close-modal" onclick="closeWalletModal()">&times;</button>
-      <h2 style="font-family: 'Outfit'; margin-bottom: 15px;">Connect Wallet</h2>
-      <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 20px;">Connect your Web3 account to launch on <a href="https://ponsfamily.com" target="_blank" style="color: var(--primary-blue);">ponsfamily.com</a></p>
-      
-      <button class="wallet-option" onclick="connectMetaMask()">
-        <span>🦊 MetaMask EVM</span>
-        <span>&rarr;</span>
-      </button>
-
-      <button class="wallet-option" onclick="connectWalletConnect()">
-        <span>⚡ WalletConnect</span>
-        <span>&rarr;</span>
-      </button>
-    </div>
-  </div>
 
   <!-- Scripts Engine -->
   <script>
@@ -750,49 +663,6 @@
     }
     renderParticles();
 
-    // 3. Modal Controls
-    function openWalletModal() { document.getElementById('walletModal').style.display = 'flex'; }
-    function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
-
-    // 4. Native MetaMask EVM Connect
-    async function connectMetaMask() {
-      let provider = window.ethereum;
-      if (window.ethereum && window.ethereum.providers) {
-        provider = window.ethereum.providers.find(p => p.isMetaMask) || window.ethereum;
-      }
-
-      if (provider && provider.isMetaMask) {
-        try {
-          const accounts = await provider.request({ method: 'eth_requestAccounts' });
-          if (accounts && accounts.length > 0) {
-            const account = accounts[0];
-            document.getElementById('walletBtn').innerText = `${account.slice(0, 6)}...${account.slice(-4)}`;
-            closeWalletModal();
-          }
-        } catch (err) {
-          alert("MetaMask connection requested.");
-        }
-      } else {
-        alert("MetaMask not detected! Opening download site...");
-        window.open('https://metamask.io/download/', '_blank');
-      }
-    }
-
-    // 5. WalletConnect Trigger
-    async function connectWalletConnect() {
-      try {
-        if (window.appKit) {
-          closeWalletModal();
-          await window.appKit.open();
-        } else {
-          throw new Error("AppKit loading");
-        }
-      } catch (err) {
-        window.open('https://ponsfamily.com', '_blank');
-        closeWalletModal();
-      }
-    }
-
     function copyCA() {
       navigator.clipboard.writeText("$PRIME / Tokenized $AMZN Stock - Launching on https://ponsfamily.com");
       const btn = document.getElementById('copyBtn');
@@ -800,7 +670,7 @@
       setTimeout(() => { btn.innerText = "Copy Pair Details"; }, 2000);
     }
 
-    // 6. Meme Express Delivery Animation
+    // 3. Meme Express Delivery Animation
     const memeList = ["📦 Meme Delivered!", "🚀 $PRIME To The Moon!", "📈 $AMZN Stock Boosted!", "🔥 Prime Next Day Delivery!", "💎 Liquidity Locked!"];
     function triggerMemeDelivery() {
       const box = document.createElement('div');
