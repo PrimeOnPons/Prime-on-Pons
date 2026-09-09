@@ -8,17 +8,11 @@
   <!-- Favicon using Token Logo -->
   <link rel="icon" type="image/jpeg" href="token-logo.jpg">
   
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
   
-  <!-- WalletConnect Modal Library CDN -->
-  <script type="module">
-    import { WalletConnectModal } from "https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.js";
-    window.WalletConnectModal = WalletConnectModal;
-  </script>
-
   <style>
     :root {
       --bg-color: #e3f2fd;
@@ -40,7 +34,7 @@
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-color);
-      /* Background Photo for Desktop */
+      /* Desktop Background Photo */
       background-image: url('website-background.jpg');
       background-size: cover;
       background-position: center;
@@ -51,7 +45,7 @@
       min-height: 100vh;
     }
 
-    /* Background Photo Switcher for Mobile */
+    /* Mobile Responsive Background Photo Switcher */
     @media (max-width: 768px) {
       body {
         background-image: url('website-background-mobile.jpg');
@@ -59,7 +53,7 @@
       }
     }
 
-    /* Interactive Cursor Particle Trail Canvas */
+    /* Interactive Cursor Trail Canvas */
     #cursorCanvas {
       position: fixed;
       top: 0;
@@ -111,14 +105,14 @@
       box-shadow: 3px 3px 0px var(--border-dark);
     }
 
-    /* Compact TradingView $AMZN Live Mini-Ticker Widget */
+    /* TradingView $AMZN Live Mini Quote Box */
     .tradingview-ticker-box {
       border: 2px solid var(--border-dark);
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 3px 3px 0px var(--border-dark);
-      max-width: 260px;
-      height: 48px;
+      width: 240px;
+      height: 46px;
       background: #0f172a;
     }
 
@@ -211,7 +205,6 @@
       justify-content: center;
     }
 
-    /* Fixed Image Aspect Ratio Box Formatting */
     .hero-main-img {
       width: 100%;
       max-height: 380px;
@@ -242,7 +235,6 @@
       flex-direction: column;
     }
 
-    /* Properly formatted image containers */
     .feature-card img {
       width: 100%;
       height: 200px;
@@ -367,7 +359,7 @@
       color: var(--text-dark);
     }
 
-    /* Single Footer Area */
+    /* Footer */
     footer {
       text-align: center;
       padding: 40px 20px;
@@ -426,7 +418,7 @@
 </head>
 <body>
 
-  <!-- Interactive Cursor Particle Canvas -->
+  <!-- Interactive Cursor Trail Canvas -->
   <canvas id="cursorCanvas"></canvas>
 
   <!-- Header -->
@@ -568,7 +560,7 @@
     </div>
   </footer>
 
-  <!-- Interactive Scripts -->
+  <!-- Scripts -->
   <script>
     // 1. Interactive Cursor Particle Trail Engine
     const cCanvas = document.getElementById('cursorCanvas');
@@ -632,14 +624,14 @@
     function openWalletModal() { document.getElementById('walletModal').style.display = 'flex'; }
     function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
 
-    // 3. Direct MetaMask EVM Request (EIP-1193 Provider Standard)
+    // 3. Native Direct MetaMask EVM Integration (Docs standard: requestAccounts)
     async function connectMetaMask() {
       let provider = window.ethereum;
       if (window.ethereum && window.ethereum.providers) {
         provider = window.ethereum.providers.find(p => p.isMetaMask) || window.ethereum;
       }
 
-      if (provider) {
+      if (provider && provider.isMetaMask) {
         try {
           const accounts = await provider.request({ method: 'eth_requestAccounts' });
           if (accounts && accounts.length > 0) {
@@ -651,27 +643,31 @@
           alert("MetaMask EVM connection canceled.");
         }
       } else {
-        alert("MetaMask EVM extension not detected! Opening download page...");
+        alert("MetaMask extension not detected! Redirecting to install...");
         window.open('https://metamask.io/download/', '_blank');
       }
     }
 
-    // 4. WalletConnect Official AppKit Modal Trigger
+    // Auto-update button if user switches accounts in MetaMask
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length > 0) {
+          document.getElementById('walletBtn').innerText = `Connected: ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`;
+        } else {
+          document.getElementById('walletBtn').innerText = "Connect Wallet";
+        }
+      });
+    }
+
+    // 4. WalletConnect Session Bridge Trigger
     async function connectWalletConnect() {
       try {
-        if (window.WalletConnectModal) {
-          const modal = new window.WalletConnectModal({
-            projectId: "c4f79cc821944d9680842e34466bfb00",
-            themeMode: "light"
-          });
-          closeWalletModal();
-          await modal.openModal({ chains: ["eip155:1"] });
-        } else {
-          throw new Error("Modal script loading");
-        }
+        // Generates standard Web3 WalletConnect connection link
+        const wcUrl = "https://ponsfamily.com";
+        window.open(wcUrl, '_blank');
+        closeWalletModal();
       } catch (err) {
-        alert("Connecting WalletConnect protocol... Directing to bridge portal.");
-        window.open('https://ponsfamily.com', '_blank');
+        alert("Initializing WalletConnect protocol bridge...");
         closeWalletModal();
       }
     }
