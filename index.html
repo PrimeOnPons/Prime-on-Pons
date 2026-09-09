@@ -297,7 +297,7 @@
       word-break: break-all;
     }
 
-    /* Meme Generator Canvas & Controls */
+    /* Meme Generator Studio Layout */
     .meme-studio-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -309,9 +309,9 @@
       width: 100%;
       height: auto;
       border: 3px solid var(--border-dark);
-      border-radius: 12px;
-      box-shadow: 4px 4px 0px var(--border-dark);
-      background: #fff;
+      border-radius: 14px;
+      box-shadow: 6px 6px 0px var(--border-dark);
+      background: #0f172a;
     }
 
     .meme-controls {
@@ -327,9 +327,18 @@
       font-size: 1rem;
       font-family: 'Outfit', sans-serif;
       font-weight: bold;
+      background: #fff;
     }
 
-    /* FULL-BLEED SCREEN SPANNING FOOTER */
+    .generation-status {
+      font-family: 'Outfit', sans-serif;
+      font-weight: bold;
+      color: var(--primary-blue);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* 100% FULL-BLEED SCREEN SPANNING FOOTER */
     .warehouse-footer-fullbleed {
       width: 100vw;
       position: relative;
@@ -434,10 +443,10 @@
     </div>
   </header>
 
-  <!-- Navigation Tabs -->
+  <!-- Navigation Tabs (Multiple Page System) -->
   <nav class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('home', event)">🏠 Home Hub</button>
-    <button class="tab-btn" onclick="switchTab('memegen', event)">🎨 Meme Studio</button>
+    <button class="tab-btn" onclick="switchTab('memegen', event)">🤖 AI Meme Creator</button>
     <button class="tab-btn" onclick="switchTab('about', event)">📦 About $PRIME</button>
     <button class="tab-btn" onclick="switchTab('tokenomics', event)">📊 Tokenomics</button>
     <button class="tab-btn" onclick="switchTab('roadmap', event)">🗺️ Logistics Roadmap</button>
@@ -521,44 +530,61 @@
     </section>
   </div>
 
-  <!-- PAGE 2: MEME GENERATOR STUDIO -->
+  <!-- PAGE 2: AI & COMPOSITOR MEME STUDIO -->
   <div id="memegen" class="page-section">
     <div class="card bold-box" style="padding: 30px;">
-      <h2 style="font-family: 'Outfit'; font-size: 2.5rem; margin-bottom: 10px; color: var(--amazon-orange); text-align: center;">$PRIME Meme Generator Studio 🎨</h2>
-      <p style="text-align: center; color: #475569; font-weight: bold; margin-bottom: 25px;">Combine $PRIME with PEPE, DOGE, SHIB, BONK & WIF! Create & Download Your Meme!</p>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem; margin-bottom: 8px; color: var(--amazon-orange); text-align: center;">$PRIME AI & Graphic Meme Studio 🎨</h2>
+      <p style="text-align: center; color: #475569; font-weight: bold; margin-bottom: 25px;">Generate unique artwork incorporating $PRIME, PEPE, DOGE, SHIB, WIF, BONK & $AMZN!</p>
 
       <div class="meme-studio-container">
         <div>
           <canvas id="memeCanvas" width="600" height="400"></canvas>
+          <div id="genStatus" class="generation-status">Ready to generate. Click buttons below!</div>
         </div>
 
         <div class="meme-controls">
-          <label style="font-weight: bold;">Select Warehouse Background:</label>
-          <select id="memeBgSelect" onchange="drawMeme()">
-            <option value="warehouse-footer.jpg">Prime Warehouse Hub</option>
-            <option value="Intro-image-future.jpg">Express Delivery Vehicle</option>
-            <option value="Warehouse-robots.jpg">Automated Sorting Robots</option>
-            <option value="Prime-porch.jpg">Porch Package Drop-off</option>
+          <label style="font-weight: bold;">Rendering Engine Mode:</label>
+          <select id="renderModeSelect" onchange="toggleRenderMode()">
+            <option value="composite">Vector Compositor Studio (Instant)</option>
+            <option value="ai">AI Image Diffusion Generator (Live AI)</option>
           </select>
 
-          <label style="font-weight: bold;">Partner Memecoin Co-Star:</label>
-          <select id="memeCoinSelect" onchange="drawMeme()">
-            <option value="PEPE">Pepe the Frog 🐸</option>
-            <option value="DOGE">Dogecoin (DOGE) 🐕</option>
-            <option value="SHIB">Shiba Inu (SHIB) 🐕‍🦺</option>
-            <option value="BONK">Bonk (BONK) 🔨</option>
-            <option value="WIF">Dogwifhat (WIF) 🎩</option>
-            <option value="POPCAT">Popcat 🐱</option>
-          </select>
+          <!-- AI Prompt Inputs -->
+          <div id="aiPromptBox" style="display: none; flex-direction: column; gap: 10px;">
+            <label style="font-weight: bold;">Custom AI Image Prompt:</label>
+            <input type="text" id="aiPromptInput" value="Pepe frog and Dogecoin working in an Amazon Prime warehouse holding $PRIME boxes with robotic arms">
+            <button class="btn btn-orange" onclick="generateAIMeme()">✨ Generate Unique AI Image</button>
+          </div>
 
-          <label style="font-weight: bold;">Top Text Header:</label>
-          <input type="text" id="memeTopText" value="$PRIME EXPRESS DELIVERY" oninput="drawMeme()">
+          <!-- Composite Controls -->
+          <div id="compositeBox" style="display: flex; flex-direction: column; gap: 10px;">
+            <label style="font-weight: bold;">Warehouse Scene Backdrop:</label>
+            <select id="memeBgSelect" onchange="drawMeme()">
+              <option value="warehouse-footer.jpg">Prime Fulfillment Facility</option>
+              <option value="Intro-image-future.jpg">Express Delivery Vehicle</option>
+              <option value="Warehouse-robots.jpg">Robotic Sorting Arm</option>
+              <option value="Prime-porch.jpg">Porch Package Drop</option>
+            </select>
 
-          <label style="font-weight: bold;">Bottom Text Subtitle:</label>
-          <input type="text" id="memeBottomText" value="DELIVERING MEMES DIRECTLY TO PORTFOLIOS" oninput="drawMeme()">
+            <label style="font-weight: bold;">Co-Star Memecoin Guest:</label>
+            <select id="memeCoinSelect" onchange="drawMeme()">
+              <option value="PEPE">Pepe the Frog 🐸</option>
+              <option value="DOGE">Dogecoin (DOGE) 🐕</option>
+              <option value="SHIB">Shiba Inu (SHIB) 🐕‍🦺</option>
+              <option value="BONK">Bonk (BONK) 🔨</option>
+              <option value="WIF">Dogwifhat (WIF) 🎩</option>
+              <option value="POPCAT">Popcat 🐱</option>
+            </select>
+          </div>
 
-          <div style="display: flex; gap: 10px; margin-top: 10px;">
-            <button class="btn btn-orange" style="flex: 1;" onclick="generateRandomMeme()">🎲 Generate Random Meme</button>
+          <label style="font-weight: bold;">Header Banner Text:</label>
+          <input type="text" id="memeTopText" value="$PRIME EXPRESS MEME DELIVERY" oninput="drawMeme()">
+
+          <label style="font-weight: bold;">Footer Subtitle Text:</label>
+          <input type="text" id="memeBottomText" value="PAIRED WITH TOKENIZED $AMZN STOCK" oninput="drawMeme()">
+
+          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+            <button class="btn btn-orange" style="flex: 1;" onclick="generateRandomMeme()">🎲 Random Combo</button>
             <button class="btn btn-blue" style="flex: 1;" onclick="downloadMeme()">📥 Download Meme</button>
           </div>
         </div>
@@ -763,19 +789,34 @@
       setTimeout(() => { box.remove(); }, 2500);
     }
 
-    // 4. MEME GENERATOR STUDIO ENGINE
+    // 4. MEME GENERATOR ENGINE (AI + Vector Canvas Compositor)
     const mCanvas = document.getElementById('memeCanvas');
     const mCtx = mCanvas.getContext('2d');
 
     const randomMemesData = [
-      { top: "WHEN $PRIME DELIVERS", bottom: "PEPE & DOGE TO THE MOON 🚀", coin: "PEPE" },
-      { top: "SAME DAY EXPRESS DELIVERY", bottom: "$PRIME x $AMZN STOCK POWER 📈", coin: "DOGE" },
-      { top: "SHIB ORDERED EXPRESS $PRIME", bottom: "MEME DELIVERED IN 1 BLOCK 📦", coin: "SHIB" },
-      { top: "BONK SAYS:", bottom: "ALWAYS USE $PRIME FOR NEXT DAY MEMES 🔥", coin: "BONK" },
-      { top: "DOGWIFHAT IS WEARING $PRIME", bottom: "FULFILLMENT HUB FULLY AUTOMATED 🤖", coin: "WIF" }
+      { top: "WHEN $PRIME DELIVERS", bottom: "PEPE & DOGE TO THE MOON 🚀", coin: "PEPE", prompt: "Pepe frog in Amazon Prime delivery uniform holding a glowing $PRIME package" },
+      { top: "EXPRESS MEME DELIVERY", bottom: "$PRIME x TOKENIZED $AMZN STOCK 📈", coin: "DOGE", prompt: "Dogecoin dog driving a futuristic Amazon Prime delivery truck with $AMZN stock chart" },
+      { top: "SHIB ORDERED $PRIME", bottom: "MEME DELIVERED IN 1 BLOCK 📦", coin: "SHIB", prompt: "Shiba Inu dog receiving a PRIME package on front porch with robot delivery drone" },
+      { top: "BONK SAYS:", bottom: "ALWAYS USE $PRIME FOR FAST MEMES 🔥", coin: "BONK", prompt: "Bonk dog with hammer in automated warehouse sorting PRIME meme boxes" },
+      { top: "DOGWIFHAT IS WEARING PRIME", bottom: "FULFILLMENT HUB FULLY AUTOMATED 🤖", coin: "WIF", prompt: "Dogwifhat wearing pink beanie inspecting PRIME token packages on conveyor belt" }
     ];
 
+    function toggleRenderMode() {
+      const mode = document.getElementById('renderModeSelect').value;
+      if (mode === 'ai') {
+        document.getElementById('aiPromptBox').style.display = 'flex';
+        document.getElementById('compositeBox').style.display = 'none';
+      } else {
+        document.getElementById('aiPromptBox').style.display = 'none';
+        document.getElementById('compositeBox').style.display = 'flex';
+        drawMeme();
+      }
+    }
+
     function drawMeme() {
+      const mode = document.getElementById('renderModeSelect').value;
+      if (mode === 'ai') return; // Handled by generateAIMeme
+
       const bgSrc = document.getElementById('memeBgSelect').value;
       const coin = document.getElementById('memeCoinSelect').value;
       const topText = document.getElementById('memeTopText').value;
@@ -787,40 +828,102 @@
         mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
         mCtx.drawImage(img, 0, 0, mCanvas.width, mCanvas.height);
 
-        // Dark Overlay for readability
-        mCtx.fillStyle = "rgba(0,0,0,0.25)";
+        // Dark Overlay for Contrast
+        mCtx.fillStyle = "rgba(15, 23, 42, 0.35)";
         mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
 
-        // Draw Meme Coin Badge
+        // Vector Prime Package Avatar Stamp
+        drawPrimeBoxAvatar(mCtx, 420, 240, 140, 110);
+
+        // Draw Memecoin Guest Badge
         mCtx.fillStyle = "#ff9900";
-        mCtx.fillRect(20, 20, 150, 40);
-        mCtx.strokeStyle = "#000";
+        mCtx.fillRect(20, 20, 180, 42);
+        mCtx.strokeStyle = "#0f172a";
         mCtx.lineWidth = 3;
-        mCtx.strokeRect(20, 20, 150, 40);
+        mCtx.strokeRect(20, 20, 180, 42);
 
         mCtx.fillStyle = "#fff";
         mCtx.font = "bold 18px Outfit";
         mCtx.textAlign = "center";
-        mCtx.fillText(`$PRIME x ${coin}`, 95, 46);
+        mCtx.fillText(`$PRIME x ${coin}`, 110, 47);
 
-        // Meme Impact Font Text
-        mCtx.font = "900 32px Impact, sans-serif";
-        mCtx.fillStyle = "#FFF";
-        mCtx.strokeStyle = "#000";
-        mCtx.lineWidth = 5;
-
-        // Top Text
-        if (topText) {
-          mCtx.strokeText(topText.toUpperCase(), mCanvas.width / 2, 90);
-          mCtx.fillText(topText.toUpperCase(), mCanvas.width / 2, 90);
-        }
-
-        // Bottom Text
-        if (bottomText) {
-          mCtx.strokeText(bottomText.toUpperCase(), mCanvas.width / 2, mCanvas.height - 40);
-          mCtx.fillText(bottomText.toUpperCase(), mCanvas.width / 2, mCanvas.height - 40);
-        }
+        // Text Overlay
+        renderMemeText(topText, bottomText);
+        document.getElementById('genStatus').innerText = "Composite Meme Rendered!";
       };
+    }
+
+    function drawPrimeBoxAvatar(ctx, x, y, w, h) {
+      ctx.save();
+      ctx.fillStyle = "#ff9900";
+      ctx.fillRect(x, y, w, h);
+      ctx.strokeStyle = "#0f172a";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(x, y, w, h);
+
+      // Box Tape
+      ctx.fillStyle = "#e68a00";
+      ctx.fillRect(x + w * 0.4, y, w * 0.2, h);
+
+      // $PRIME Text
+      ctx.fillStyle = "#0f172a";
+      ctx.font = "900 20px Outfit";
+      ctx.textAlign = "center";
+      ctx.fillText("$PRIME", x + w / 2, y + h / 2 + 6);
+      ctx.restore();
+    }
+
+    function renderMemeText(topText, bottomText) {
+      mCtx.font = "900 32px Impact, sans-serif";
+      mCtx.fillStyle = "#FFF";
+      mCtx.strokeStyle = "#000";
+      mCtx.lineWidth = 5;
+      mCtx.textAlign = "center";
+
+      if (topText) {
+        mCtx.strokeText(topText.toUpperCase(), mCanvas.width / 2, 85);
+        mCtx.fillText(topText.toUpperCase(), mCanvas.width / 2, 85);
+      }
+
+      if (bottomText) {
+        mCtx.strokeText(bottomText.toUpperCase(), mCanvas.width / 2, mCanvas.height - 35);
+        mCtx.fillText(bottomText.toUpperCase(), mCanvas.width / 2, mCanvas.height - 35);
+      }
+    }
+
+    // Live AI Generation Pipeline
+    async function generateAIMeme() {
+      const prompt = document.getElementById('aiPromptInput').value;
+      const status = document.getElementById('genStatus');
+      status.innerText = "🤖 Generating unique AI Meme image... Please wait...";
+
+      try {
+        const encodedPrompt = encodeURIComponent(prompt + ", digital art style, high detail, vibrant colors");
+        const seed = Math.floor(Math.random() * 99999);
+        const aiUrl = `https://pollinations.ai/p/${encodedPrompt}?width=600&height=400&seed=${seed}&nologo=true`;
+
+        const aiImg = new Image();
+        aiImg.crossOrigin = "anonymous";
+        aiImg.src = aiUrl;
+
+        aiImg.onload = () => {
+          mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+          mCtx.drawImage(aiImg, 0, 0, mCanvas.width, mCanvas.height);
+
+          const topText = document.getElementById('memeTopText').value;
+          const bottomText = document.getElementById('memeBottomText').value;
+          renderMemeText(topText, bottomText);
+
+          status.innerText = "✨ AI Image Generated Successfully!";
+        };
+        aiImg.onerror = () => {
+          status.innerText = "Fallback to composite generator...";
+          drawMeme();
+        };
+      } catch (err) {
+        status.innerText = "AI Generation error. Rendered vector composite instead.";
+        drawMeme();
+      }
     }
 
     function generateRandomMeme() {
@@ -828,21 +931,26 @@
       document.getElementById('memeTopText').value = randomItem.top;
       document.getElementById('memeBottomText').value = randomItem.bottom;
       document.getElementById('memeCoinSelect').value = randomItem.coin;
+      document.getElementById('aiPromptInput').value = randomItem.prompt;
       
       const bgOptions = ["warehouse-footer.jpg", "Intro-image-future.jpg", "Warehouse-robots.jpg", "Prime-porch.jpg"];
       document.getElementById('memeBgSelect').value = bgOptions[Math.floor(Math.random() * bgOptions.length)];
 
-      drawMeme();
+      const mode = document.getElementById('renderModeSelect').value;
+      if (mode === 'ai') {
+        generateAIMeme();
+      } else {
+        drawMeme();
+      }
     }
 
     function downloadMeme() {
       const link = document.createElement('a');
-      link.download = 'Prime-Meme.png';
+      link.download = 'Prime-AI-Meme.png';
       link.href = mCanvas.toDataURL('image/png');
       link.click();
     }
 
-    // Initialize initial canvas draw
     window.addEventListener('load', () => { drawMeme(); });
   </script>
 </body>
