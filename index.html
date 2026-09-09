@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime | $PRIME - Delivering All Memes</title>
   
-  <!-- Favicon using Token Logo -->
+  <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="token-logo.jpg">
   
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
   
+  <!-- Official WalletConnect v2 Modal Script -->
+  <script type="module">
+    import { WalletConnectModal } from "https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.js";
+    window.WalletConnectModal = WalletConnectModal;
+  </script>
+
   <style>
     :root {
       --bg-color: #e3f2fd;
@@ -45,7 +51,7 @@
       min-height: 100vh;
     }
 
-    /* Mobile Responsive Background Photo Switcher */
+    /* Mobile Background Switcher */
     @media (max-width: 768px) {
       body {
         background-image: url('website-background-mobile.jpg');
@@ -53,7 +59,7 @@
       }
     }
 
-    /* Interactive Cursor Trail Canvas */
+    /* Interactive Cursor Particle Trail Canvas */
     #cursorCanvas {
       position: fixed;
       top: 0;
@@ -99,21 +105,20 @@
     .logo-img {
       width: 55px;
       height: 55px;
-      border: 3px solid var(--border-dark);
       border-radius: 14px;
       object-fit: cover;
       box-shadow: 3px 3px 0px var(--border-dark);
     }
 
-    /* TradingView $AMZN Live Mini Quote Box */
-    .tradingview-ticker-box {
-      border: 2px solid var(--border-dark);
+    /* Official TradingView Single Price Ticker Box */
+    .tradingview-ticker-container {
+      width: 190px;
+      height: 44px;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 3px 3px 0px var(--border-dark);
-      width: 240px;
-      height: 46px;
       background: #0f172a;
+      border: 2px solid var(--border-dark);
     }
 
     .nav-links {
@@ -205,14 +210,17 @@
       justify-content: center;
     }
 
+    /* Borderless Faded Image Formatting */
     .hero-main-img {
       width: 100%;
       max-height: 380px;
       object-fit: contain;
-      border-radius: 12px;
-      border: 2px solid var(--border-dark);
+      border: none;
+      border-radius: 16px;
       cursor: pointer;
-      background: #fff;
+      /* Soft Radial Fade Mask on Edges */
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
       transition: transform 0.2s ease;
     }
 
@@ -239,10 +247,11 @@
       width: 100%;
       height: 200px;
       object-fit: contain;
-      background: #f8fafc;
-      border-radius: 10px;
-      border: 2px solid var(--border-dark);
+      border: none;
+      border-radius: 12px;
       margin-bottom: 15px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
     }
 
     .feature-card h3 {
@@ -277,9 +286,10 @@
       width: 100%;
       height: 160px;
       object-fit: contain;
-      background: #fff;
-      border-radius: 8px;
-      border: 2px solid var(--border-dark);
+      border: none;
+      border-radius: 12px;
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
     }
 
     .contract-bar {
@@ -418,18 +428,18 @@
 </head>
 <body>
 
-  <!-- Interactive Cursor Trail Canvas -->
+  <!-- Interactive Cursor Particle Canvas -->
   <canvas id="cursorCanvas"></canvas>
 
-  <!-- Header -->
+  <!-- Header Navigation -->
   <header>
     <a href="https://ponsfamily.com" target="_blank" class="logo">
       <img src="token-logo.jpg" alt="Prime Token Logo" class="logo-img">
       Prime
     </a>
 
-    <!-- Working TradingView Mini AMZN Quote Ticker -->
-    <div class="tradingview-ticker-box">
+    <!-- Official TradingView $AMZN Single Ticker Price Widget -->
+    <div class="tradingview-ticker-container">
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
@@ -562,7 +572,7 @@
 
   <!-- Scripts -->
   <script>
-    // 1. Interactive Cursor Particle Trail Engine
+    // 1. Particle Trail Cursor Engine
     const cCanvas = document.getElementById('cursorCanvas');
     const cCtx = cCanvas.getContext('2d');
     let particles = [];
@@ -624,9 +634,11 @@
     function openWalletModal() { document.getElementById('walletModal').style.display = 'flex'; }
     function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
 
-    // 3. Native Direct MetaMask EVM Integration (Docs standard: requestAccounts)
+    // 3. Official Native MetaMask EVM Request (Calls window.ethereum.request)
     async function connectMetaMask() {
       let provider = window.ethereum;
+
+      // Filter injected multi-wallet providers directly to MetaMask
       if (window.ethereum && window.ethereum.providers) {
         provider = window.ethereum.providers.find(p => p.isMetaMask) || window.ethereum;
       }
@@ -643,7 +655,7 @@
           alert("MetaMask EVM connection canceled.");
         }
       } else {
-        alert("MetaMask extension not detected! Redirecting to install...");
+        alert("MetaMask EVM extension not detected! Redirecting to install...");
         window.open('https://metamask.io/download/', '_blank');
       }
     }
@@ -659,15 +671,22 @@
       });
     }
 
-    // 4. WalletConnect Session Bridge Trigger
+    // 4. WalletConnect v2 Modal Session Trigger
     async function connectWalletConnect() {
       try {
-        // Generates standard Web3 WalletConnect connection link
-        const wcUrl = "https://ponsfamily.com";
-        window.open(wcUrl, '_blank');
-        closeWalletModal();
+        if (window.WalletConnectModal) {
+          const modal = new window.WalletConnectModal({
+            projectId: "c4f79cc821944d9680842e34466bfb00",
+            themeMode: "light"
+          });
+          closeWalletModal();
+          await modal.openModal({ chains: ["eip155:1"] });
+        } else {
+          throw new Error("Modal script loading");
+        }
       } catch (err) {
-        alert("Initializing WalletConnect protocol bridge...");
+        alert("Connecting via WalletConnect protocol bridge...");
+        window.open('https://ponsfamily.com', '_blank');
         closeWalletModal();
       }
     }
