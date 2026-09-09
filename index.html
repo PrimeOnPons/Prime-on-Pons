@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$AMZN - Premium Blue-Chip Meme Engine</title>
+    <title>$AMZN - Premium Decentralized Asset</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #0b0e14; color: #f0f6fc; min-height: 100vh; display: flex; flex-direction: column; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #07090e; color: #f0f6fc; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-        /* Amazon Dark Glassmorphism Header */
+        /* Glassmorphic Dark Navigation */
         .nav-top { 
-            background: rgba(19, 25, 33, 0.85); 
-            backdrop-filter: blur(12px); 
-            border-bottom: 1px solid rgba(255, 153, 0, 0.2); 
-            padding: 12px 24px; 
+            background: rgba(11, 15, 23, 0.85); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 153, 0, 0.15); 
+            padding: 12px 16px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
@@ -21,197 +22,225 @@
             top: 0; 
             z-index: 100; 
         }
-        .logo { font-size: 24px; font-weight: 800; color: #ff9900; letter-spacing: -0.5px; }
+        .logo { font-size: 20px; font-weight: 800; color: #ff9900; letter-spacing: -0.5px; }
         .logo span { color: #ffffff; font-weight: 300; }
         
-        .search-bar { 
+        .ca-pill { 
             display: flex; 
-            flex: 1; 
-            max-width: 500px; 
-            margin: 0 20px; 
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 8px; 
-            overflow: hidden; 
+            align-items: center; 
+            background: rgba(255, 255, 255, 0.04); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 20px; 
+            padding: 4px 6px 4px 12px; 
+            max-width: 200px;
         }
-        .search-bar input { 
+        .ca-pill input { 
             width: 100%; 
-            padding: 10px 14px; 
             background: transparent; 
             border: none; 
-            color: #ff9900; 
+            color: #8b949e; 
             font-family: monospace; 
-            font-size: 13px; 
+            font-size: 11px; 
             outline: none; 
+            text-overflow: ellipsis;
         }
-        .search-bar button { 
+        .ca-pill button { 
             background: #ff9900; 
             border: none; 
-            padding: 10px 18px; 
-            color: #131921; 
-            font-weight: bold; 
+            padding: 6px 12px; 
+            color: #07090e; 
+            font-weight: 700; 
+            font-size: 11px;
+            border-radius: 14px; 
             cursor: pointer; 
-            transition: 0.2s; 
+            transition: opacity 0.2s;
+            flex-shrink: 0;
         }
-        .search-bar button:hover { background: #ffad33; }
 
-        /* Layout Grid */
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 32px 20px 10px;
+            background: radial-gradient(circle at top, rgba(255, 153, 0, 0.08) 0%, transparent 70%);
+        }
+        .hero h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(180deg, #fff 0%, #a3b3c2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: #ff9900; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+
+        /* Main Container */
         .container { 
-            max-width: 1200px; 
-            margin: 30px auto; 
-            padding: 0 20px; 
+            max-width: 1100px; 
+            margin: 10px auto 30px; 
+            padding: 0 16px; 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 24px; 
-            flex: 1; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 16px; 
+            width: 100%;
         }
 
+        /* Premium Glass Card */
         .glass-card { 
-            background: rgba(23, 29, 37, 0.6); 
-            backdrop-filter: blur(16px); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 16px; 
-            padding: 24px; 
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
+            background: rgba(18, 24, 36, 0.5); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.07); 
+            border-radius: 20px; 
+            padding: 20px; 
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); 
             display: flex; 
             flex-direction: column; 
             justify-content: space-between; 
         }
         
         .glass-card h2 { 
-            font-size: 18px; 
-            font-weight: 600; 
+            font-size: 16px; 
+            font-weight: 700; 
             color: #ffffff; 
-            margin-bottom: 16px; 
+            margin-bottom: 14px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
         }
-        .glass-card h2 span { color: #ff9900; font-size: 12px; border: 1px solid #ff9900; padding: 2px 8px; border-radius: 12px; }
+        .glass-card h2 span { color: #ff9900; font-size: 10px; border: 1px solid rgba(255, 153, 0, 0.4); padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
 
-        /* Canvas Box */
+        /* Interactive Canvas Stage */
         .canvas-box { 
-            background: radial-gradient(circle, rgba(255,153,0,0.05) 0%, rgba(0,0,0,0.2) 100%); 
-            border: 1px dashed rgba(255, 255, 255, 0.15); 
-            border-radius: 12px; 
-            padding: 16px; 
+            background: radial-gradient(circle, rgba(255, 153, 0, 0.03) 0%, rgba(0,0,0,0.3) 100%); 
+            border: 1px dashed rgba(255, 255, 255, 0.1); 
+            border-radius: 14px; 
+            padding: 12px; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            margin-bottom: 16px; 
+            margin-bottom: 14px; 
+            touch-action: manipulation;
         }
-        canvas { max-width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); cursor: pointer; }
+        canvas { max-width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
 
-        /* Controls */
-        .control-group { margin-bottom: 12px; }
-        .control-group label { display: block; font-size: 12px; color: #8b949e; margin-bottom: 4px; }
+        /* Mobile-Optimized Inputs & Controls */
+        .control-group { margin-bottom: 10px; }
+        .control-group label { display: block; font-size: 11px; color: #8b949e; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
         .control-group input[type="text"] { 
             width: 100%; 
-            padding: 8px 12px; 
-            background: rgba(0, 0, 0, 0.3); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 6px; 
+            padding: 10px 12px; 
+            background: rgba(0, 0, 0, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border-radius: 8px; 
             color: #fff; 
+            font-size: 14px;
             outline: none; 
         }
         
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
         .btn-option { 
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            color: #ccc; 
-            padding: 8px; 
-            border-radius: 6px; 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            color: #8b949e; 
+            padding: 10px; 
+            border-radius: 8px; 
             font-size: 12px; 
+            font-weight: 600;
             cursor: pointer; 
             transition: 0.2s; 
         }
-        .btn-option:hover, .btn-option.active { background: rgba(255, 153, 0, 0.2); border-color: #ff9900; color: #ff9900; }
+        .btn-option.active { background: rgba(255, 153, 0, 0.15); border-color: #ff9900; color: #ff9900; }
 
-        .btn-amazon { 
+        .btn-action { 
             background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%); 
-            color: #0b0e14; 
+            color: #07090e; 
             border: none; 
-            padding: 12px; 
-            border-radius: 8px; 
+            padding: 14px; 
+            border-radius: 10px; 
+            font-size: 14px;
             font-weight: 700; 
             cursor: pointer; 
             text-align: center; 
             text-decoration: none; 
-            transition: all 0.2s ease; 
-            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.25); 
+            box-shadow: 0 4px 16px rgba(255, 153, 0, 0.2); 
             display: block;
             width: 100%;
+            transition: transform 0.1s ease;
         }
-        .btn-amazon:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(255, 153, 0, 0.4); }
+        .btn-action:active { transform: scale(0.98); }
 
-        /* Spec List */
-        .spec-list { list-style: none; font-size: 14px; }
+        /* Spec Table */
+        .spec-list { list-style: none; font-size: 13px; }
         .spec-list li { 
-            padding: 10px 0; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            padding: 12px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04); 
             display: flex; 
             justify-content: space-between; 
             color: #8b949e; 
         }
-        .spec-list li strong { color: #f0f6fc; }
+        .spec-list li strong { color: #f0f6fc; font-weight: 600; }
 
-        footer { text-align: center; padding: 24px; color: #484f58; font-size: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        footer { text-align: center; padding: 20px; color: #484f58; font-size: 11px; border-top: 1px solid rgba(255, 255, 255, 0.04); }
+
+        /* Desktop Polish */
+        @media (min-width: 768px) {
+            .hero { padding: 48px 20px 20px; }
+            .hero h1 { font-size: 36px; }
+            .ca-pill { max-width: 260px; }
+            .container { gap: 24px; margin: 20px auto 50px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="nav-top">
         <div class="logo">$AMZN<span>.Pons</span></div>
-        <div class="search-bar">
+        <div class="ca-pill">
             <input type="text" value="0xAMZN...PonsChainContract" id="caInput" readonly>
-            <button onclick="navigator.clipboard.writeText('0xAMZN...PonsChainContract')">Copy CA</button>
+            <button onclick="copyCA()">Copy</button>
         </div>
-        <div style="font-size: 13px; color: #8b949e;">Prime Protocol</div>
+    </div>
+
+    <div class="hero">
+        <h1>Prime Liquidity Protocol</h1>
+        <p>1-CLICK DECENTRALIZED SETTLEMENT</p>
     </div>
 
     <div class="container">
         
-        <!-- Interactive Generator -->
+        <!-- Interactive Studio -->
         <div class="glass-card">
-            <h2>Asset Studio <span>Interactive</span></h2>
+            <h2>Asset Engine <span>Interactive</span></h2>
             <div class="canvas-box">
                 <canvas id="assetCanvas" width="260" height="260"></canvas>
             </div>
             
             <div class="control-group">
-                <label>Custom Overlay Text</label>
+                <label>Custom Overlay</label>
                 <input type="text" id="canvasText" value="$AMZN" oninput="updateRender()">
             </div>
 
             <div class="control-group">
-                <label>Asset Preset Style</label>
+                <label>Preset Style</label>
                 <div class="btn-grid">
-                    <button class="btn-option active" id="btnOrb" onclick="setStyle('orb')">Blue-Chip Orb</button>
+                    <button class="btn-option active" id="btnOrb" onclick="setStyle('orb')">Glass Orb</button>
                     <button class="btn-option" id="btnPackage" onclick="setStyle('package')">Prime Parcel</button>
                 </div>
             </div>
 
-            <button class="btn-amazon" onclick="downloadAsset()">Download Custom Graphic (.PNG)</button>
+            <button class="btn-action" onclick="downloadAsset()">Export Asset (.PNG)</button>
         </div>
 
-        <!-- Token Specs -->
+        <!-- Spec Sheet -->
         <div class="glass-card">
-            <h2>Product Details <span>In Stock</span></h2>
+            <h2>Specifications <span>Verified</span></h2>
             <ul class="spec-list">
                 <li><span>Ticker</span> <strong>$AMZN</strong></li>
-                <li><span>Blockchain</span> <strong>Pons Chain</strong></li>
-                <li><span>Delivery</span> <strong>Instant Prime Settlement</strong></li>
-                <li><span>Vault Reserve</span> <strong>100% Glassmorphic</strong></li>
-                <li><span>Slippage</span> <strong>0%</strong></li>
+                <li><span>Network</span> <strong>Pons Blockchain</strong></li>
+                <li><span>Settlement</span> <strong>Instant Prime</strong></li>
+                <li><span>Vault Reserve</span> <strong>Glassmorphic</strong></li>
+                <li><span>Tax / Slippage</span> <strong>0%</strong></li>
             </ul>
-            <a href="https://t.me" target="_blank" class="btn-amazon" style="margin-top: 16px;">Launch Telegram Raid</a>
+            <a href="https://t.me" target="_blank" class="btn-action" style="margin-top: 16px; background: rgba(255, 255, 255, 0.05); color: #ff9900; border: 1px solid rgba(255, 153, 0, 0.3);">Join Telegram Channel</a>
         </div>
 
     </div>
 
     <footer>
-        &copy; 2026 $AMZN Protocol. Built on Pons Blockchain.
+        &copy; 2026 $AMZN Protocol. Built on Pons Network.
     </footer>
 
     <script>
@@ -232,85 +261,90 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             if (currentStyle === 'orb') {
-                // Outer Glow
-                let outerGlow = ctx.createRadialGradient(130, 130, 50, 130, 130, 120);
-                outerGlow.addColorStop(0, 'rgba(255, 153, 0, 0.2)');
+                // Outer Ambient Glow
+                let outerGlow = ctx.createRadialGradient(130, 130, 40, 130, 130, 120);
+                outerGlow.addColorStop(0, 'rgba(255, 153, 0, 0.15)');
                 outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
                 ctx.fillStyle = outerGlow;
                 ctx.fillRect(0, 0, 260, 260);
 
-                // Blue-Chip Glass Orb
-                let glassGrad = ctx.createRadialGradient(95, 85, 5, 130, 130, 95);
-                glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
-                glassGrad.addColorStop(0.3, 'rgba(255, 153, 0, 0.3)');
-                glassGrad.addColorStop(0.7, 'rgba(19, 25, 33, 0.85)');
-                glassGrad.addColorStop(1, 'rgba(11, 14, 20, 0.98)');
+                // Premium Blue-Chip Glass Sphere
+                let glassGrad = ctx.createRadialGradient(90, 80, 5, 130, 130, 95);
+                glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.6)');
+                glassGrad.addColorStop(0.25, 'rgba(255, 153, 0, 0.25)');
+                glassGrad.addColorStop(0.7, 'rgba(18, 24, 36, 0.85)');
+                glassGrad.addColorStop(1, 'rgba(7, 9, 14, 0.98)');
 
                 ctx.beginPath();
-                ctx.arc(130, 130, 90, 0, Math.PI * 2);
+                ctx.arc(130, 130, 88, 0, Math.PI * 2);
                 ctx.fillStyle = glassGrad;
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
                 ctx.lineWidth = 1.5;
                 ctx.fill();
                 ctx.stroke();
 
-                // Inner Reflection
+                // Inner Glass Highlight Reflection
                 ctx.beginPath();
-                ctx.arc(130, 130, 82, 1.2 * Math.PI, 1.8 * Math.PI);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-                ctx.lineWidth = 3;
+                ctx.arc(130, 130, 80, 1.25 * Math.PI, 1.75 * Math.PI);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.lineWidth = 2.5;
                 ctx.stroke();
 
-                // Amazon Arrow
+                // Subtle Amazon-inspired Smile Curve
                 ctx.beginPath();
-                ctx.arc(130, 125, 50, 0.25 * Math.PI, 0.75 * Math.PI, false);
+                ctx.arc(130, 125, 48, 0.28 * Math.PI, 0.72 * Math.PI, false);
                 ctx.strokeStyle = '#ff9900';
-                ctx.lineWidth = 5;
+                ctx.lineWidth = 4;
                 ctx.lineCap = 'round';
                 ctx.stroke();
 
                 // Arrowhead
                 ctx.beginPath();
                 ctx.fillStyle = '#ff9900';
-                ctx.moveTo(165, 156);
-                ctx.lineTo(175, 152);
-                ctx.lineTo(170, 164);
+                ctx.moveTo(163, 154);
+                ctx.lineTo(172, 150);
+                ctx.lineTo(168, 161);
                 ctx.fill();
 
-                // Dynamic Text
+                // Text Overlay
                 ctx.fillStyle = '#ffffff';
-                ctx.font = '700 22px -apple-system, sans-serif';
+                ctx.font = '700 21px -apple-system, sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText(userText, 130, 118);
+                ctx.fillText(userText, 130, 116);
 
             } else if (currentStyle === 'package') {
-                // Glass Box Background Glow
-                ctx.fillStyle = 'rgba(255, 153, 0, 0.05)';
+                // Glass Box Studio Glow
+                ctx.fillStyle = 'rgba(255, 153, 0, 0.03)';
                 ctx.fillRect(0, 0, 260, 260);
 
-                // Prime Package Base
-                ctx.fillStyle = '#131921';
+                // Prime Parcel Frame
+                ctx.fillStyle = '#121824';
                 ctx.strokeStyle = '#ff9900';
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 1.5;
                 ctx.beginPath();
-                ctx.roundRect(40, 50, 180, 160, 16);
+                ctx.roundRect(45, 55, 170, 150, 14);
                 ctx.fill();
                 ctx.stroke();
 
-                // Prime Ribbon Tape
-                ctx.fillStyle = 'rgba(255, 153, 0, 0.2)';
-                ctx.fillRect(115, 50, 30, 160);
+                // Ribbon Tape Detail
+                ctx.fillStyle = 'rgba(255, 153, 0, 0.15)';
+                ctx.fillRect(115, 55, 30, 150);
 
-                // Dynamic Text Overlay
+                // Text Overlay
                 ctx.fillStyle = '#ff9900';
-                ctx.font = '700 24px -apple-system, sans-serif';
+                ctx.font = '700 22px -apple-system, sans-serif';
                 ctx.textAlign = 'center';
                 ctx.fillText(userText, 130, 125);
 
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '600 12px -apple-system, sans-serif';
-                ctx.fillText('PRIORITY DELIVERY', 130, 150);
+                ctx.fillStyle = '#8b949e';
+                ctx.font = '600 11px -apple-system, sans-serif';
+                ctx.fillText('PRIORITY VAULT', 130, 148);
             }
+        }
+
+        function copyCA() {
+            navigator.clipboard.writeText('0xAMZN...PonsChainContract');
+            alert('Contract address copied!');
         }
 
         function downloadAsset() {
