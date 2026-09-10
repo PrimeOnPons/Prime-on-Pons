@@ -37,7 +37,7 @@
   </script>
 
   <style>
-    /* Interactive Mouse Particle Canvas */
+    /* Interactive Particle Canvas */
     #particleCanvas {
       position: fixed;
       top: 0;
@@ -48,7 +48,7 @@
       z-index: 9999;
     }
 
-    /* Floating Interactive Dispatch Particle */
+    /* Floating Interactive Dispatch Alert */
     .dispatch-particle {
       position: fixed;
       pointer-events: none;
@@ -69,15 +69,42 @@
       50% { transform: translateY(-30vh) scale(1.05); }
       100% { transform: translateY(-80vh) scale(0.95); opacity: 0; }
     }
+
+    /* Submerged Background Hero Warehouse Scene */
+    .warehouse-hero-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 620px;
+      background-image: url('warehouse-footer.jpg');
+      background-size: cover;
+      background-position: center top;
+      opacity: 0.18;
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+    }
+
+    .warehouse-glow-overlay {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 153, 0, 0.15) 0%, rgba(234, 237, 237, 0) 70%);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body class="bg-amazon-bg text-slate-900 font-sans antialiased selection:bg-amber-300 selection:text-black min-h-screen flex flex-col relative">
 
-  <!-- Dynamic Particle Layer -->
+  <!-- Dynamic Trail Canvas -->
   <canvas id="particleCanvas"></canvas>
 
-  <!-- Amazon Sub-Header Utility Bar -->
-  <div class="bg-amazon-navy text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-700 relative z-20">
+  <!-- Amazon Utility Header Bar -->
+  <div class="bg-amazon-navy text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-700 relative z-30">
     <div class="flex items-center gap-4">
       <span class="flex items-center gap-2 font-medium text-slate-300">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -87,7 +114,7 @@
       <span class="hidden md:inline text-slate-300">Official DEX: ponsfamily.com</span>
     </div>
 
-    <!-- Live TradingView Stock Quote Header Widget -->
+    <!-- Live TradingView Stock Quote Widget -->
     <div class="flex items-center gap-4">
       <div class="hidden sm:flex items-center h-6 overflow-hidden rounded bg-slate-800/90 border border-slate-700 px-2">
         <div class="tradingview-widget-container">
@@ -111,7 +138,7 @@
   </div>
 
   <!-- Primary Header Bar -->
-  <header class="bg-amazon-dark text-white sticky top-0 z-50 shadow-md">
+  <header class="bg-amazon-dark text-white sticky top-0 z-40 shadow-md">
     <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
       
       <!-- Brand Logo: Text left, Token Image directly to the right -->
@@ -141,184 +168,190 @@
     </div>
   </header>
 
-  <!-- Amazon Storefront Body Container -->
-  <main class="max-w-6xl mx-auto px-4 py-6 space-y-6 flex-1 w-full relative z-10">
-    
-    <!-- Hero Section Banner -->
-    <section class="bg-white rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 grid lg:grid-cols-12 gap-8 items-center transition-all hover:shadow-md">
-      <div class="lg:col-span-7 space-y-5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Tokenized $AMZN Stock Pair
+  <!-- SUBTLE WAREHOUSE BACKGROUND HERO SECTION (Informed by therobincat.com) -->
+  <div class="relative w-full">
+    <div class="warehouse-hero-backdrop"></div>
+    <div class="warehouse-glow-overlay"></div>
+
+    <!-- Storefront Body Container -->
+    <main class="max-w-6xl mx-auto px-4 py-6 space-y-6 flex-1 w-full relative z-10">
+      
+      <!-- Hero Tile -->
+      <section class="bg-white/95 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 grid lg:grid-cols-12 gap-8 items-center transition-all hover:shadow-md">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Tokenized $AMZN Stock Pair
+          </div>
+          
+          <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-slate-900 leading-none">
+            PRIME DELIVERS <br />
+            <span class="text-amazon-orange">ALL MEMES.</span>
+          </h1>
+
+          <p class="text-slate-600 text-base md:text-lg font-normal leading-relaxed">
+            The premier delivery token paired directly with Tokenized <strong>$AMZN Stock</strong> on Robinhood Chain. Guaranteed liquidity execution on <strong>ponsfamily.com</strong>.
+          </p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="https://ponsfamily.com" target="_blank" class="px-6 py-3 text-sm font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-sm transform hover:-translate-y-0.5">
+              Buy $PRIME Now
+            </a>
+            <button onclick="triggerDispatch(event)" class="px-6 py-3 text-sm font-semibold rounded bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition">
+              Dispatch Test Package
+            </button>
+          </div>
         </div>
-        
-        <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-slate-900 leading-none">
-          PRIME DELIVERS <br />
-          <span class="text-amazon-orange">ALL MEMES.</span>
-        </h1>
 
-        <p class="text-slate-600 text-base md:text-lg font-normal leading-relaxed">
-          The premier delivery token paired directly with Tokenized <strong>$AMZN Stock</strong> on Robinhood Chain. Guaranteed liquidity execution on <strong>ponsfamily.com</strong>.
-        </p>
-
-        <div class="flex flex-wrap gap-3 pt-2">
-          <a href="https://ponsfamily.com" target="_blank" class="px-6 py-3 text-sm font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-sm transform hover:-translate-y-0.5">
-            Buy $PRIME Now
+        <!-- Featured Artwork Showcase Tile -->
+        <div class="lg:col-span-5">
+          <a href="https://ponsfamily.com" target="_blank" class="block group">
+            <img 
+              src="CEO.jpg" 
+              alt="Prime Executive Dispatch" 
+              class="w-full rounded border border-slate-200 shadow-sm object-cover group-hover:opacity-95 group-hover:scale-[1.01] transition duration-300" 
+            />
           </a>
-          <button onclick="triggerDispatch(event)" class="px-6 py-3 text-sm font-semibold rounded bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition">
-            Dispatch Test Package
-          </button>
         </div>
-      </div>
+      </section>
 
-      <!-- Feature Image Showcase Tile -->
-      <div class="lg:col-span-5">
-        <a href="https://ponsfamily.com" target="_blank" class="block group">
-          <img 
-            src="warehouse-footer.jpg" 
-            alt="Prime Operations Center" 
-            class="w-full rounded border border-slate-200 shadow-sm object-cover group-hover:opacity-95 group-hover:scale-[1.01] transition duration-300" 
-          />
-        </a>
-      </div>
-    </section>
-
-    <!-- Interactive Data Metric Cards -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
-        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Supply</div>
-        <div class="font-display font-black text-2xl text-slate-900">1,000,000,000</div>
-      </div>
-      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
-        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Trading Tax</div>
-        <div class="font-display font-black text-2xl text-slate-900">2% / 2%</div>
-      </div>
-      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
-        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Liquidity Vault</div>
-        <div class="font-display font-black text-2xl text-slate-900">100% Locked</div>
-      </div>
-      <div onclick="triggerDispatch(event)" class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 cursor-pointer hover:border-amazon-orange transition group">
-        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider group-hover:text-amazon-orange">Dispatched Memes</div>
-        <div id="dispatchCounter" class="font-display font-black text-2xl text-amazon-orange">12,480+</div>
-      </div>
-    </section>
-
-    <!-- LIVE $AMZN CHART TILE -->
-    <section class="bg-white rounded-lg p-6 shadow-sm border border-slate-200/80 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <h2 class="font-display font-black text-xl text-slate-900">Live $AMZN Stock Chart Pairing</h2>
+      <!-- Data Metric Cards -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Supply</div>
+          <div class="font-display font-black text-2xl text-slate-900">1,000,000,000</div>
         </div>
-        <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" class="text-xs font-semibold text-amazon-blue hover:underline">
-          View Symbol Details
-        </a>
-      </div>
-
-      <!-- TradingView Symbol Overview Chart -->
-      <div class="w-full h-80 rounded overflow-hidden border border-slate-200 bg-slate-950">
-        <div class="tradingview-widget-container" style="height:100%;width:100%;">
-          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-          {
-            "lineWidth": 2,
-            "lineType": 0,
-            "chartType": "line",
-            "fontColor": "rgb(156, 163, 175)",
-            "gridLineColor": "rgba(242, 242, 242, 0.06)",
-            "backgroundColor": "#0f172a",
-            "widgetFontColor": "#f3f4f6",
-            "colorTheme": "dark",
-            "isTransparent": false,
-            "locale": "en",
-            "chartOnly": false,
-            "scalePosition": "right",
-            "symbols": [
-              [
-                "NASDAQ:AMZN|1M"
-              ]
-            ],
-            "dateRanges": [
-              "1m|30",
-              "12m|1D",
-              "all|1M"
-            ],
-            "width": "100%",
-            "height": "100%"
-          }
-          </script>
+        <div class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Trading Tax</div>
+          <div class="font-display font-black text-2xl text-slate-900">2% / 2%</div>
         </div>
-      </div>
-    </section>
+        <div class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Liquidity Vault</div>
+          <div class="font-display font-black text-2xl text-slate-900">100% Locked</div>
+        </div>
+        <div onclick="triggerDispatch(event)" class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 cursor-pointer hover:border-amazon-orange transition group">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider group-hover:text-amazon-orange">Dispatched Memes</div>
+          <div id="dispatchCounter" class="font-display font-black text-2xl text-amazon-orange">12,480+</div>
+        </div>
+      </section>
 
-    <!-- Contract Address Bar -->
-    <section class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>
-        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Robinhood Chain Contract</div>
-        <div class="font-mono font-bold text-slate-900 text-sm md:text-base mt-0.5">Launching soon on ponsfamily.com</div>
-      </div>
-      <button onclick="copyAddress()" id="copyAddressBtn" class="w-full md:w-auto px-5 py-2.5 rounded bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white transition active:scale-95">
-        Copy Contract Address
-      </button>
-    </section>
-
-    <!-- Specifications / Feature Cards -->
-    <section class="bg-white rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 space-y-6">
-      <div class="border-b border-slate-200 pb-4">
-        <h2 class="font-display font-black text-2xl text-slate-900">Logistics Specifications</h2>
-        <p class="text-slate-500 text-sm mt-1">Automated fulfillment mechanics native to Robinhood Chain.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
-          <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">01. Stock Pairing</div>
-          <h3 class="font-bold text-slate-900 text-base">Tokenized $AMZN Liquidity</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Direct market pairing with Amazon stock liquidity for stable, long-term scaling.</p>
+      <!-- LIVE $AMZN CHART TILE -->
+      <section class="bg-white/95 backdrop-blur-md rounded-lg p-6 shadow-sm border border-slate-200/80 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <h2 class="font-display font-black text-xl text-slate-900">Live $AMZN Stock Chart Pairing</h2>
+          </div>
+          <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" class="text-xs font-semibold text-amazon-blue hover:underline">
+            View Symbol Details
+          </a>
         </div>
 
-        <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
-          <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">02. Automated Vault</div>
-          <h3 class="font-bold text-slate-900 text-base">2% Buyback Pool</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">2% of every buy and sell automatically executes market buybacks on the bonding curve.</p>
+        <!-- TradingView Symbol Overview Chart -->
+        <div class="w-full h-80 rounded overflow-hidden border border-slate-200 bg-slate-950">
+          <div class="tradingview-widget-container" style="height:100%;width:100%;">
+            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+            {
+              "lineWidth": 2,
+              "lineType": 0,
+              "chartType": "line",
+              "fontColor": "rgb(156, 163, 175)",
+              "gridLineColor": "rgba(242, 242, 242, 0.06)",
+              "backgroundColor": "#0f172a",
+              "widgetFontColor": "#f3f4f6",
+              "colorTheme": "dark",
+              "isTransparent": false,
+              "locale": "en",
+              "chartOnly": false,
+              "scalePosition": "right",
+              "symbols": [
+                [
+                  "NASDAQ:AMZN|1M"
+                ]
+              ],
+              "dateRanges": [
+                "1m|30",
+                "12m|1D",
+                "all|1M"
+              ],
+              "width": "100%",
+              "height": "100%"
+            }
+            </script>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contract Address Bar -->
+      <section class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Robinhood Chain Contract</div>
+          <div class="font-mono font-bold text-slate-900 text-sm md:text-base mt-0.5">Launching soon on ponsfamily.com</div>
+        </div>
+        <button onclick="copyAddress()" id="copyAddressBtn" class="w-full md:w-auto px-5 py-2.5 rounded bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white transition active:scale-95">
+          Copy Contract Address
+        </button>
+      </section>
+
+      <!-- Specifications / Feature Cards -->
+      <section class="bg-white/95 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 space-y-6">
+        <div class="border-b border-slate-200 pb-4">
+          <h2 class="font-display font-black text-2xl text-slate-900">Logistics Specifications</h2>
+          <p class="text-slate-500 text-sm mt-1">Automated fulfillment mechanics native to Robinhood Chain.</p>
         </div>
 
-        <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
-          <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">03. Express Execution</div>
-          <h3 class="font-bold text-slate-900 text-base">Instant Block Finality</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Fast transaction settlement powered by EVM compatibility on Robinhood Chain.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
+            <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">01. Stock Pairing</div>
+            <h3 class="font-bold text-slate-900 text-base">Tokenized $AMZN Liquidity</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Direct market pairing with Amazon stock liquidity for stable, long-term scaling.</p>
+          </div>
+
+          <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
+            <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">02. Automated Vault</div>
+            <h3 class="font-bold text-slate-900 text-base">2% Buyback Pool</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">2% of every buy and sell automatically executes market buybacks on the bonding curve.</p>
+          </div>
+
+          <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
+            <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">03. Express Execution</div>
+            <h3 class="font-bold text-slate-900 text-base">Instant Block Finality</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Fast transaction settlement powered by EVM compatibility on Robinhood Chain.</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- How To Buy Storefront Guide -->
-    <section class="bg-white rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 space-y-6">
-      <div class="border-b border-slate-200 pb-4">
-        <h2 class="font-display font-black text-2xl text-slate-900">1-Click Checkout Guide</h2>
-        <p class="text-slate-500 text-sm mt-1">Follow these steps to acquire $PRIME on Robinhood Chain.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="space-y-2">
-          <span class="font-display font-black text-3xl text-amazon-orange">Step 1</span>
-          <h3 class="font-bold text-slate-900 text-base">Set Up EVM Wallet</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Install MetaMask, Rabby, or Robinhood Wallet and select the Robinhood Chain RPC network.</p>
+      <!-- How To Buy Storefront Guide -->
+      <section class="bg-white/95 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 space-y-6">
+        <div class="border-b border-slate-200 pb-4">
+          <h2 class="font-display font-black text-2xl text-slate-900">1-Click Checkout Guide</h2>
+          <p class="text-slate-500 text-sm mt-1">Follow these steps to acquire $PRIME on Robinhood Chain.</p>
         </div>
 
-        <div class="space-y-2">
-          <span class="font-display font-black text-3xl text-amazon-orange">Step 2</span>
-          <h3 class="font-bold text-slate-900 text-base">Visit Pons Platform</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Navigate to <a href="https://ponsfamily.com" target="_blank" class="text-amazon-blue font-bold hover:underline">ponsfamily.com</a> and pair your Web3 wallet.</p>
-        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="space-y-2">
+            <span class="font-display font-black text-3xl text-amazon-orange">Step 1</span>
+            <h3 class="font-bold text-slate-900 text-base">Set Up EVM Wallet</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Install MetaMask, Rabby, or Robinhood Wallet and select the Robinhood Chain RPC network.</p>
+          </div>
 
-        <div class="space-y-2">
-          <span class="font-display font-black text-3xl text-amazon-orange">Step 3</span>
-          <h3 class="font-bold text-slate-900 text-base">Swap $PRIME</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">Locate the $PRIME / Tokenized $AMZN pair on the bonding curve and confirm your trade.</p>
-        </div>
-      </div>
-    </section>
+          <div class="space-y-2">
+            <span class="font-display font-black text-3xl text-amazon-orange">Step 2</span>
+            <h3 class="font-bold text-slate-900 text-base">Visit Pons Platform</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Navigate to <a href="https://ponsfamily.com" target="_blank" class="text-amazon-blue font-bold hover:underline">ponsfamily.com</a> and pair your Web3 wallet.</p>
+          </div>
 
-  </main>
+          <div class="space-y-2">
+            <span class="font-display font-black text-3xl text-amazon-orange">Step 3</span>
+            <h3 class="font-bold text-slate-900 text-base">Swap $PRIME</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Locate the $PRIME / Tokenized $AMZN pair on the bonding curve and confirm your trade.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
 
   <!-- Amazon Footer Bar -->
   <footer class="bg-amazon-dark text-slate-300 text-xs mt-12 relative z-10">
