@@ -31,7 +31,7 @@
               orange: '#ff9900',
               orangeHover: '#e68a00',
               blue: '#007185',
-              bg: '#eaeded',
+              bg: '#f3f4f6',
             }
           }
         },
@@ -40,7 +40,7 @@
   </script>
 
   <style>
-    /* Dynamic Cursor Trail Canvas */
+    /* Particle Trail Layer */
     #particleCanvas {
       position: fixed;
       top: 0;
@@ -51,7 +51,7 @@
       z-index: 9999;
     }
 
-    /* Floating Interactive Dispatch Particle */
+    /* Floating Interactive Dispatch Alert */
     .dispatch-particle {
       position: fixed;
       pointer-events: none;
@@ -62,8 +62,8 @@
       background: #ffffff;
       color: #131921;
       border: 1px solid #ff9900;
-      border-radius: 4px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      border-radius: 9999px;
+      box-shadow: 0 10px 25px rgba(255,153,0,0.2);
       animation: flyUpAndFade 1.8s forwards cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -73,53 +73,50 @@
       100% { transform: translateY(-80vh) scale(0.95); opacity: 0; }
     }
 
-    /* Submerged Background Hero Warehouse Scene */
+    /* Full-Page Fluid Warehouse Backdrop */
     .warehouse-hero-backdrop {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 620px;
+      height: 100%;
       background-image: url('warehouse-footer.jpg');
       background-size: cover;
       background-position: center top;
-      opacity: 0.18;
+      opacity: 0.12;
       pointer-events: none;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 100%);
     }
 
-    .warehouse-glow-overlay {
+    .ambient-glow {
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255, 153, 0, 0.15) 0%, rgba(234, 237, 237, 0) 70%);
+      border-radius: 9999px;
+      filter: blur(80px);
       pointer-events: none;
+      z-index: 0;
     }
   </style>
 </head>
-<body class="bg-amazon-bg text-slate-900 font-sans antialiased selection:bg-amber-300 selection:text-black min-h-screen flex flex-col relative">
+<body class="bg-slate-100 text-slate-900 font-sans antialiased selection:bg-amber-300 selection:text-black min-h-screen flex flex-col relative overflow-x-hidden">
 
-  <!-- Interactive Trail Layer -->
+  <!-- Interactive Canvas Trail -->
   <canvas id="particleCanvas"></canvas>
 
-  <!-- Amazon Sub-Header Utility Bar -->
-  <div class="bg-amazon-navy text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-700 relative z-30">
+  <!-- Floating Utility Header -->
+  <div class="bg-amazon-navy/90 backdrop-blur-md text-white text-xs py-2 px-6 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-50 border-b border-slate-800">
     <div class="flex items-center gap-4">
       <span class="flex items-center gap-2 font-medium text-slate-300">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Network: <strong class="text-white">Robinhood Chain Mainnet</strong>
+        Mainnet: <strong class="text-white">Robinhood Chain</strong>
       </span>
-      <span class="hidden md:inline text-slate-600">|</span>
-      <span class="hidden md:inline text-slate-300">Official DEX: ponsfamily.com</span>
+      <span class="hidden md:inline text-slate-700">|</span>
+      <span class="hidden md:inline text-slate-400">Official DEX: ponsfamily.com</span>
     </div>
 
-    <!-- Live TradingView Stock Quote Widget -->
+    <!-- Live TradingView Stock Single Quote Header -->
     <div class="flex items-center gap-4">
-      <div class="hidden sm:flex items-center h-6 overflow-hidden rounded bg-slate-800/90 border border-slate-700 px-2">
+      <div class="hidden sm:flex items-center h-6 overflow-hidden rounded-full bg-slate-800/80 border border-slate-700 px-3">
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
           <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
@@ -135,142 +132,133 @@
       </div>
 
       <a href="https://ponsfamily.com" target="_blank" class="hover:text-amazon-orange transition font-medium">ponsfamily.com</a>
-      <span class="text-slate-600">|</span>
+      <span class="text-slate-700">|</span>
       <a href="https://x.com/PrimeOnPons" target="_blank" class="hover:text-amazon-orange transition font-medium">X / Twitter</a>
     </div>
   </div>
 
-  <!-- Primary Header Bar -->
-  <header class="bg-amazon-dark text-white sticky top-0 z-40 shadow-md">
-    <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
+  <!-- Main Navigation Header -->
+  <header class="py-5 px-6 relative z-40">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
       
-      <!-- Brand Logo: Text left, Token Image directly to the right -->
+      <!-- Brand Logo -->
       <a href="https://ponsfamily.com" class="flex items-center gap-3 group">
-        <span class="font-display font-black text-2xl tracking-wider text-white group-hover:text-amazon-orange transition">
+        <span class="font-display font-black text-3xl tracking-wider text-slate-900 group-hover:text-amazon-orange transition">
           PRIME
         </span>
         <img 
           src="token-logo.jpg" 
           alt="PRIME Token Logo" 
-          class="w-9 h-9 rounded-full border border-amazon-orange shadow group-hover:scale-105 transition-transform" 
+          class="w-10 h-10 rounded-full border-2 border-amazon-orange shadow-md group-hover:scale-110 transition-transform" 
         />
       </a>
 
-      <!-- Navigation Bar Actions -->
-      <div class="flex items-center gap-3">
-        <button onclick="triggerDispatch(event)" class="hidden sm:inline-block px-3.5 py-2 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-amber-400 transition border border-slate-600">
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <button onclick="triggerDispatch(event)" class="hidden sm:inline-block px-4 py-2 text-xs font-semibold rounded-full bg-white hover:bg-slate-50 text-slate-800 transition shadow-sm border border-slate-200">
           Dispatch Test
         </button>
-        <button onclick="openWalletModal()" class="hidden md:inline-block px-4 py-2 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-white transition">
+        <button onclick="openWalletModal()" class="hidden md:inline-block px-4 py-2 text-xs font-semibold rounded-full bg-slate-900 hover:bg-slate-800 text-white transition shadow-sm">
           Connect Wallet
         </button>
-        <a href="https://ponsfamily.com" target="_blank" class="px-5 py-2 text-xs font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow">
+        <a href="https://ponsfamily.com" target="_blank" class="px-6 py-2.5 text-xs font-bold rounded-full bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-md hover:shadow-lg">
           Trade on Pons
         </a>
       </div>
     </div>
   </header>
 
-  <!-- SUBTLE WAREHOUSE BACKGROUND HERO SECTION -->
-  <div class="relative w-full">
+  <!-- UNBOXED FLUID HERO SECTION -->
+  <div class="relative w-full flex-1">
     <div class="warehouse-hero-backdrop"></div>
-    <div class="warehouse-glow-overlay"></div>
+    <div class="ambient-glow bg-amber-400/20 w-[500px] h-[500px] top-0 left-1/4"></div>
+    <div class="ambient-glow bg-blue-500/10 w-[600px] h-[600px] top-1/3 right-10"></div>
 
-    <!-- Storefront Body Container -->
-    <main class="max-w-6xl mx-auto px-4 py-6 space-y-6 flex-1 w-full relative z-10">
+    <main class="max-w-6xl mx-auto px-6 py-10 space-y-20 relative z-10">
       
-      <!-- Hero Tile -->
-      <section data-aos="fade-up" data-aos-duration="800" class="bg-white/95 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 grid lg:grid-cols-12 gap-8 items-center transition-all hover:shadow-md">
-        <div class="lg:col-span-7 space-y-5">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider">
+      <!-- Organic Hero Section -->
+      <section data-aos="fade-up" data-aos-duration="1000" class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-900 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Tokenized $AMZN Stock Pair
           </div>
           
-          <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-slate-900 leading-none">
+          <h1 class="font-display font-black text-5xl sm:text-6xl lg:text-7xl text-slate-900 leading-[0.95] tracking-tight">
             PRIME DELIVERS <br />
-            <span class="text-amazon-orange">ALL MEMES.</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amazon-orange via-amber-500 to-orange-600">ALL MEMES.</span>
           </h1>
 
-          <p class="text-slate-600 text-base md:text-lg font-normal leading-relaxed">
-            The premier delivery token paired directly with Tokenized <strong>$AMZN Stock</strong> on Robinhood Chain. Guaranteed liquidity execution on <strong>ponsfamily.com</strong>.
+          <p class="text-slate-600 text-lg sm:text-xl font-normal leading-relaxed max-w-xl">
+            The premier delivery token paired directly with Tokenized <strong>$AMZN Stock</strong> on Robinhood Chain. Guaranteed liquidity execution native to <strong>ponsfamily.com</strong>.
           </p>
 
-          <div class="flex flex-wrap gap-3 pt-2">
-            <a href="https://ponsfamily.com" target="_blank" class="px-6 py-3 text-sm font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-sm transform hover:-translate-y-0.5">
+          <div class="flex flex-wrap gap-4 pt-4">
+            <a href="https://ponsfamily.com" target="_blank" class="px-8 py-4 text-sm font-bold rounded-full bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-lg hover:shadow-orange-500/20 transform hover:-translate-y-1">
               Buy $PRIME Now
             </a>
-            <button onclick="triggerDispatch(event)" class="px-6 py-3 text-sm font-semibold rounded bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition">
+            <button onclick="triggerDispatch(event)" class="px-8 py-4 text-sm font-semibold rounded-full bg-white/80 backdrop-blur-md border border-slate-200 text-slate-800 hover:bg-white transition shadow-sm">
               Dispatch Test Package
             </button>
           </div>
         </div>
 
-        <!-- Featured Artwork Showcase Tile -->
-        <div class="lg:col-span-5">
-          <a href="https://ponsfamily.com" target="_blank" class="block group">
+        <!-- Hero Featured Image (Free Floating with Soft Shadows) -->
+        <div class="lg:col-span-5 relative">
+          <div class="absolute -inset-2 bg-gradient-to-r from-amazon-orange to-amber-300 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition"></div>
+          <a href="https://ponsfamily.com" target="_blank" class="block relative group">
             <img 
               src="roaring-kitty.jpg" 
               alt="Roaring Kitty PRIME" 
-              class="w-full rounded border border-slate-200 shadow-sm object-cover group-hover:opacity-95 group-hover:scale-[1.01] transition duration-300" 
+              class="w-full rounded-2xl shadow-2xl object-cover transform group-hover:scale-[1.02] transition duration-500" 
             />
           </a>
         </div>
       </section>
 
-      <!-- Interactive Progress & Tokenomics Dashboard -->
-      <section data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" class="bg-white/95 backdrop-blur-md rounded-lg p-6 shadow-sm border border-slate-200/80 space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-          <h2 class="font-display font-black text-xl text-slate-900">Bonding Curve & Liquidity Metrics</h2>
-          <span class="text-xs font-bold text-amazon-orange uppercase tracking-wider">100% Fair Launch</span>
-        </div>
-        
-        <div class="space-y-3">
-          <div>
-            <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
-              <span>Bonding Curve Progress (Ponsfamily DEX)</span>
-              <span class="text-amazon-orange">84.2% Completed</span>
-            </div>
-            <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200">
-              <div class="bg-gradient-to-r from-amber-400 to-amazon-orange h-full rounded-full w-[84.2%] animate-pulse"></div>
-            </div>
+      <!-- Free-Floating Metrics Bar -->
+      <section data-aos="fade-up" data-aos-duration="1000" class="pt-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="space-y-1 p-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Supply</div>
+            <div class="font-display font-black text-3xl text-slate-900">1,000,000,000</div>
+            <div class="text-xs text-slate-500">100% Minted on RH Chain</div>
           </div>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
-          <div class="bg-slate-50 p-4 rounded border border-slate-100 text-center">
-            <div class="text-xs font-bold text-slate-400 uppercase">Total Supply</div>
-            <div class="font-display font-black text-xl text-slate-900 mt-0.5">1,000,000,000</div>
+          <div class="space-y-1 p-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Trading Tax</div>
+            <div class="font-display font-black text-3xl text-slate-900">2% / 2%</div>
+            <div class="text-xs text-slate-500">Automated Buyback Engine</div>
           </div>
-          <div class="bg-slate-50 p-4 rounded border border-slate-100 text-center">
-            <div class="text-xs font-bold text-slate-400 uppercase">Trading Tax</div>
-            <div class="font-display font-black text-xl text-slate-900 mt-0.5">2% / 2%</div>
+          <div class="space-y-1 p-2">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Liquidity Vault</div>
+            <div class="font-display font-black text-3xl text-slate-900">100% Locked</div>
+            <div class="text-xs text-slate-500">Bonding Curve Verified</div>
           </div>
-          <div class="bg-slate-50 p-4 rounded border border-slate-100 text-center">
-            <div class="text-xs font-bold text-slate-400 uppercase">Liquidity Vault</div>
-            <div class="font-display font-black text-xl text-slate-900 mt-0.5">100% Locked</div>
-          </div>
-          <div onclick="triggerDispatch(event)" class="bg-slate-50 p-4 rounded border border-slate-100 text-center cursor-pointer hover:border-amazon-orange transition group">
-            <div class="text-xs font-bold text-slate-400 uppercase group-hover:text-amazon-orange">Dispatched Memes</div>
-            <div id="dispatchCounter" class="font-display font-black text-xl text-amazon-orange mt-0.5">12,480+</div>
+          <div onclick="triggerDispatch(event)" class="space-y-1 p-2 cursor-pointer group">
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest group-hover:text-amazon-orange transition">Dispatched Memes</div>
+            <div id="dispatchCounter" class="font-display font-black text-3xl text-amazon-orange">12,480+</div>
+            <div class="text-xs text-amazon-orange/80 font-medium">Click to dispatch &rarr;</div>
           </div>
         </div>
       </section>
 
-      <!-- LIVE $AMZN CHART TILE -->
-      <section data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" class="bg-white/95 backdrop-blur-md rounded-lg p-6 shadow-sm border border-slate-200/80 space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <h2 class="font-display font-black text-xl text-slate-900">Live $AMZN Stock Chart Pairing</h2>
+      <!-- Unboxed Live $AMZN Chart Showcase -->
+      <section data-aos="fade-up" data-aos-duration="1000" class="space-y-6 pt-6">
+        <div class="flex items-center justify-between">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <h2 class="font-display font-black text-3xl text-slate-900">Tokenized Stock Pairing</h2>
+            </div>
+            <p class="text-slate-500 text-sm">Real-time $AMZN market curve paired directly on Robinhood Chain DEX liquidity.</p>
           </div>
-          <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" class="text-xs font-semibold text-amazon-blue hover:underline">
-            View Symbol Details
+          <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" class="hidden sm:inline-block text-xs font-bold text-amazon-blue hover:underline">
+            TradingView Chart &rarr;
           </a>
         </div>
 
-        <!-- TradingView Symbol Overview Chart -->
-        <div class="w-full h-80 rounded overflow-hidden border border-slate-200 bg-slate-950">
+        <!-- Embedded Full Width Chart Container -->
+        <div class="w-full h-96 rounded-2xl overflow-hidden border border-slate-200 shadow-xl bg-slate-950">
           <div class="tradingview-widget-container" style="height:100%;width:100%;">
             <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
@@ -305,68 +293,68 @@
         </div>
       </section>
 
-      <!-- Contract Address Bar -->
-      <section data-aos="fade-up" data-aos-duration="800" class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
-        <div>
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Robinhood Chain Contract</div>
-          <div class="font-mono font-bold text-slate-900 text-sm md:text-base mt-0.5">Launching soon on ponsfamily.com</div>
+      <!-- Minimal Contract Bar -->
+      <section data-aos="fade-up" data-aos-duration="1000" class="py-8 border-y border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-1 text-center md:text-left">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Robinhood Chain Contract</div>
+          <div class="font-mono font-bold text-slate-900 text-lg">Launching soon on ponsfamily.com</div>
         </div>
-        <button onclick="copyAddress()" id="copyAddressBtn" class="w-full md:w-auto px-5 py-2.5 rounded bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white transition active:scale-95">
+        <button onclick="copyAddress()" id="copyAddressBtn" class="px-8 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white transition shadow-md active:scale-95">
           Copy Contract Address
         </button>
       </section>
 
-      <!-- Specifications / Feature Cards -->
-      <section data-aos="fade-up" data-aos-duration="800" class="bg-white/95 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 space-y-6">
-        <div class="border-b border-slate-200 pb-4">
-          <h2 class="font-display font-black text-2xl text-slate-900">Logistics Specifications</h2>
-          <p class="text-slate-500 text-sm mt-1">Automated fulfillment mechanics native to Robinhood Chain.</p>
+      <!-- Asymmetrical Logistics Specifications -->
+      <section data-aos="fade-up" data-aos-duration="1000" class="space-y-10 py-6">
+        <div class="max-w-xl space-y-2">
+          <h2 class="font-display font-black text-3xl text-slate-900">Logistics Specifications</h2>
+          <p class="text-slate-500 text-base">Automated fulfillment mechanics native to Robinhood Chain bonding curves.</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
-            <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">01. Stock Pairing</div>
-            <h3 class="font-bold text-slate-900 text-base">Tokenized $AMZN Liquidity</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Direct market pairing with Amazon stock liquidity for stable, long-term scaling.</p>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="space-y-3 p-2">
+            <div class="font-display font-black text-4xl text-amazon-orange/40">01</div>
+            <h3 class="font-bold text-slate-900 text-xl">Tokenized Stock Pairing</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Direct market pairing with Amazon stock liquidity on Robinhood Chain for long-term backing.</p>
           </div>
 
-          <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
-            <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">02. Automated Vault</div>
-            <h3 class="font-bold text-slate-900 text-base">2% Buyback Pool</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">2% of every buy and sell automatically executes market buybacks on the bonding curve.</p>
+          <div class="space-y-3 p-2">
+            <div class="font-display font-black text-4xl text-amazon-orange/40">02</div>
+            <h3 class="font-bold text-slate-900 text-xl">Automated Vault Engine</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">2% of every transaction continuously triggers market buybacks on the bonding curve.</p>
           </div>
 
-          <div class="space-y-2 p-5 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 hover:bg-white hover:shadow-sm transition">
-            <div class="font-bold text-amazon-orange text-xs uppercase tracking-wider">03. Express Execution</div>
-            <h3 class="font-bold text-slate-900 text-base">Instant Block Finality</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Fast transaction settlement powered by EVM compatibility on Robinhood Chain.</p>
+          <div class="space-y-3 p-2">
+            <div class="font-display font-black text-4xl text-amazon-orange/40">03</div>
+            <h3 class="font-bold text-slate-900 text-xl">Express Block Finality</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Instant settlement execution powered by Robinhood Chain EVM infrastructure.</p>
           </div>
         </div>
       </section>
 
-      <!-- How To Buy Storefront Guide -->
-      <section data-aos="fade-up" data-aos-duration="800" class="bg-white/95 backdrop-blur-md rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 space-y-6">
-        <div class="border-b border-slate-200 pb-4">
-          <h2 class="font-display font-black text-2xl text-slate-900">1-Click Checkout Guide</h2>
-          <p class="text-slate-500 text-sm mt-1">Follow these steps to acquire $PRIME on Robinhood Chain.</p>
+      <!-- How to Buy Process (Flowing Timeline) -->
+      <section data-aos="fade-up" data-aos-duration="1000" class="space-y-10 py-6 border-t border-slate-200/80">
+        <div class="max-w-xl space-y-2">
+          <h2 class="font-display font-black text-3xl text-slate-900">1-Click Checkout Guide</h2>
+          <p class="text-slate-500 text-base">Acquire $PRIME in three simple steps.</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-3 gap-8">
           <div class="space-y-2">
-            <span class="font-display font-black text-3xl text-amazon-orange">Step 1</span>
-            <h3 class="font-bold text-slate-900 text-base">Set Up EVM Wallet</h3>
+            <span class="font-display font-black text-sm text-amazon-orange uppercase tracking-wider">Step 01</span>
+            <h3 class="font-bold text-slate-900 text-lg">Set Up EVM Wallet</h3>
             <p class="text-slate-600 text-sm leading-relaxed">Install MetaMask, Rabby, or Robinhood Wallet and select the Robinhood Chain RPC network.</p>
           </div>
 
           <div class="space-y-2">
-            <span class="font-display font-black text-3xl text-amazon-orange">Step 2</span>
-            <h3 class="font-bold text-slate-900 text-base">Visit Pons Platform</h3>
+            <span class="font-display font-black text-sm text-amazon-orange uppercase tracking-wider">Step 02</span>
+            <h3 class="font-bold text-slate-900 text-lg">Visit Pons Platform</h3>
             <p class="text-slate-600 text-sm leading-relaxed">Navigate to <a href="https://ponsfamily.com" target="_blank" class="text-amazon-blue font-bold hover:underline">ponsfamily.com</a> and pair your Web3 wallet.</p>
           </div>
 
           <div class="space-y-2">
-            <span class="font-display font-black text-3xl text-amazon-orange">Step 3</span>
-            <h3 class="font-bold text-slate-900 text-base">Swap $PRIME</h3>
+            <span class="font-display font-black text-sm text-amazon-orange uppercase tracking-wider">Step 03</span>
+            <h3 class="font-bold text-slate-900 text-lg">Swap $PRIME</h3>
             <p class="text-slate-600 text-sm leading-relaxed">Locate the $PRIME / Tokenized $AMZN pair on the bonding curve and confirm your trade.</p>
           </div>
         </div>
@@ -375,29 +363,29 @@
     </main>
   </div>
 
-  <!-- Floating Fixed Utility Bottom Dock -->
-  <div class="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-amazon-dark/90 backdrop-blur-md text-white px-4 py-2.5 rounded-full shadow-lg border border-slate-700 text-xs font-semibold">
+  <!-- Floating Action Dock -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-slate-900/90 backdrop-blur-md text-white px-5 py-3 rounded-full shadow-2xl border border-slate-700 text-xs font-semibold">
     <a href="https://t.me/PrimeOnPons" target="_blank" class="hover:text-amazon-orange transition">Telegram</a>
-    <span class="text-slate-600">|</span>
+    <span class="text-slate-700">|</span>
     <a href="https://x.com/PrimeOnPons" target="_blank" class="hover:text-amazon-orange transition">X</a>
-    <span class="text-slate-600">|</span>
+    <span class="text-slate-700">|</span>
     <a href="https://ponsfamily.com" target="_blank" class="text-amazon-orange font-bold hover:underline">Buy $PRIME</a>
   </div>
 
-  <!-- Web3 Wallet Connection Modal Overlay -->
+  <!-- Web3 Connect Modal -->
   <div id="walletModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg max-w-sm w-full p-6 space-y-4 shadow-xl border border-slate-200">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-2xl border border-slate-200">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <h3 class="font-display font-bold text-lg text-slate-900">Select EVM Wallet</h3>
         <button onclick="closeWalletModal()" class="text-slate-400 hover:text-slate-800 text-lg font-bold">&times;</button>
       </div>
-      <p class="text-xs text-slate-500">Connect your Web3 provider to interact with Robinhood Chain liquidity.</p>
+      <p class="text-xs text-slate-500">Connect your Web3 wallet provider to trade on Robinhood Chain.</p>
       <div class="space-y-2">
-        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3 rounded border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
+        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
           <span class="font-bold text-xs text-slate-900">MetaMask / Rabby</span>
           <span class="text-xs font-bold text-amazon-orange">Connect &rarr;</span>
         </a>
-        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3 rounded border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
+        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
           <span class="font-bold text-xs text-slate-900">Robinhood Wallet</span>
           <span class="text-xs font-bold text-amazon-orange">Connect &rarr;</span>
         </a>
@@ -405,34 +393,32 @@
     </div>
   </div>
 
-  <!-- Amazon Footer Bar -->
-  <footer class="bg-amazon-dark text-slate-300 text-xs mt-12 relative z-10">
-    <div class="bg-slate-700/50 py-3 text-center text-slate-200 font-semibold cursor-pointer hover:bg-slate-700 transition" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-      Back to top
-    </div>
-    <div class="max-w-6xl mx-auto px-4 py-8 text-center space-y-3">
-      <div class="flex items-center justify-center gap-2">
-        <span class="font-display font-black text-xl text-white tracking-wider">PRIME</span>
+  <!-- Footer -->
+  <footer class="bg-amazon-dark text-slate-400 text-xs mt-20 relative z-10">
+    <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="font-display font-black text-2xl text-white tracking-wider">PRIME</span>
         <img src="token-logo.jpg" alt="Logo" class="w-6 h-6 rounded-full border border-amazon-orange" />
       </div>
-      <p class="text-slate-400">Robinhood Chain Mainnet • Official Launchpad: <a href="https://ponsfamily.com" target="_blank" class="text-amazon-orange hover:underline font-bold">ponsfamily.com</a></p>
+      <p>Robinhood Chain Mainnet • Launchpad: <a href="https://ponsfamily.com" target="_blank" class="text-amazon-orange font-bold hover:underline">ponsfamily.com</a></p>
+      <div class="cursor-pointer hover:text-white transition" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        Back to top &uarr;
+      </div>
     </div>
   </footer>
 
-  <!-- AOS Animation Library JS -->
+  <!-- AOS Animation Library -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-  <!-- GSAP Animation Engine -->
+  <!-- GSAP Motion Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <script>
-    // 1. Initialize AOS Scroll Animations
     AOS.init({
       once: true,
-      offset: 50
+      offset: 40
     });
 
-    // 2. Wallet Modal Trigger Logic
     function openWalletModal() {
       document.getElementById('walletModal').classList.remove('hidden');
     }
@@ -440,7 +426,6 @@
       document.getElementById('walletModal').classList.add('hidden');
     }
 
-    // 3. Mouse Movement Soft Particle Trail Canvas
     const pCanvas = document.getElementById('particleCanvas');
     const pCtx = pCanvas.getContext('2d');
     let trailPoints = [];
@@ -475,7 +460,7 @@
           pCtx.quadraticCurveTo(trailPoints[i].x, trailPoints[i].y, xc, yc);
         }
 
-        pCtx.strokeStyle = 'rgba(255, 153, 0, 0.45)';
+        pCtx.strokeStyle = 'rgba(255, 153, 0, 0.4)';
         pCtx.lineWidth = 3;
         pCtx.lineCap = 'round';
         pCtx.stroke();
@@ -485,7 +470,6 @@
     }
     renderParticleTrail();
 
-    // 4. Interactive Dispatch Handler
     let count = 12480;
     const dispatchAlerts = [
       "Meme Package Dispatched", 
@@ -499,7 +483,6 @@
       count++;
       document.getElementById('dispatchCounter').innerText = count.toLocaleString() + '+';
 
-      // GSAP Counter Pop
       gsap.fromTo("#dispatchCounter", { scale: 1.25 }, { scale: 1, duration: 0.35, ease: "back.out(2)" });
 
       const particle = document.createElement('div');
@@ -514,7 +497,6 @@
       setTimeout(() => { particle.remove(); }, 1800);
     }
 
-    // 5. Copy Address Function
     function copyAddress() {
       navigator.clipboard.writeText("Launching soon on ponsfamily.com!");
       const btn = document.getElementById('copyAddressBtn');
