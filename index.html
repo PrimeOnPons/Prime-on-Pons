@@ -161,9 +161,9 @@
         <button onclick="triggerDispatch(event)" class="hidden sm:inline-block px-3.5 py-2 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-amber-400 transition border border-slate-600">
           Dispatch Test
         </button>
-        <a href="https://t.me/PrimeOnPons" target="_blank" class="hidden md:inline-block px-4 py-2 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-white transition">
-          Telegram
-        </a>
+        <button onclick="openWalletModal()" class="hidden md:inline-block px-4 py-2 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-white transition">
+          Connect Wallet
+        </button>
         <a href="https://ponsfamily.com" target="_blank" class="px-5 py-2 text-xs font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow">
           Trade on Pons
         </a>
@@ -207,34 +207,53 @@
         </div>
 
         <!-- Featured Artwork Showcase Tile -->
-       <div class="lg:col-span-5">
-  <a href="https://ponsfamily.com" target="_blank" class="block group">
-    <img 
-      src="roaring-kitty.jpg" 
-      alt="Roaring Kitty PRIME" 
-      class="w-full rounded border border-slate-200 shadow-sm object-cover group-hover:opacity-95 group-hover:scale-[1.01] transition duration-300" 
-    />
-  </a>
-</div>
+        <div class="lg:col-span-5">
+          <a href="https://ponsfamily.com" target="_blank" class="block group">
+            <img 
+              src="roaring-kitty.jpg" 
+              alt="Roaring Kitty PRIME" 
+              class="w-full rounded border border-slate-200 shadow-sm object-cover group-hover:opacity-95 group-hover:scale-[1.01] transition duration-300" 
+            />
+          </a>
+        </div>
       </section>
 
-      <!-- Data Metric Cards -->
-      <section data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Supply</div>
-          <div class="font-display font-black text-2xl text-slate-900">1,000,000,000</div>
+      <!-- Interactive Progress & Tokenomics Dashboard -->
+      <section data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" class="bg-white/95 backdrop-blur-md rounded-lg p-6 shadow-sm border border-slate-200/80 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <h2 class="font-display font-black text-xl text-slate-900">Bonding Curve & Liquidity Metrics</h2>
+          <span class="text-xs font-bold text-amazon-orange uppercase tracking-wider">100% Fair Launch</span>
         </div>
-        <div class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Trading Tax</div>
-          <div class="font-display font-black text-2xl text-slate-900">2% / 2%</div>
+        
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+              <span>Bonding Curve Progress (Ponsfamily DEX)</span>
+              <span class="text-amazon-orange">84.2% Completed</span>
+            </div>
+            <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200">
+              <div class="bg-gradient-to-r from-amber-400 to-amazon-orange h-full rounded-full w-[84.2%] animate-pulse"></div>
+            </div>
+          </div>
         </div>
-        <div class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Liquidity Vault</div>
-          <div class="font-display font-black text-2xl text-slate-900">100% Locked</div>
-        </div>
-        <div onclick="triggerDispatch(event)" class="bg-white/95 backdrop-blur-md p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 cursor-pointer hover:border-amazon-orange transition group">
-          <div class="text-xs font-bold text-slate-400 uppercase tracking-wider group-hover:text-amazon-orange">Dispatched Memes</div>
-          <div id="dispatchCounter" class="font-display font-black text-2xl text-amazon-orange">12,480+</div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+          <div class="bg-slate-50 p-4 rounded border border-slate-100 text-center">
+            <div class="text-xs font-bold text-slate-400 uppercase">Total Supply</div>
+            <div class="font-display font-black text-xl text-slate-900 mt-0.5">1,000,000,000</div>
+          </div>
+          <div class="bg-slate-50 p-4 rounded border border-slate-100 text-center">
+            <div class="text-xs font-bold text-slate-400 uppercase">Trading Tax</div>
+            <div class="font-display font-black text-xl text-slate-900 mt-0.5">2% / 2%</div>
+          </div>
+          <div class="bg-slate-50 p-4 rounded border border-slate-100 text-center">
+            <div class="text-xs font-bold text-slate-400 uppercase">Liquidity Vault</div>
+            <div class="font-display font-black text-xl text-slate-900 mt-0.5">100% Locked</div>
+          </div>
+          <div onclick="triggerDispatch(event)" class="bg-slate-50 p-4 rounded border border-slate-100 text-center cursor-pointer hover:border-amazon-orange transition group">
+            <div class="text-xs font-bold text-slate-400 uppercase group-hover:text-amazon-orange">Dispatched Memes</div>
+            <div id="dispatchCounter" class="font-display font-black text-xl text-amazon-orange mt-0.5">12,480+</div>
+          </div>
         </div>
       </section>
 
@@ -356,6 +375,36 @@
     </main>
   </div>
 
+  <!-- Floating Fixed Utility Bottom Dock -->
+  <div class="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-amazon-dark/90 backdrop-blur-md text-white px-4 py-2.5 rounded-full shadow-lg border border-slate-700 text-xs font-semibold">
+    <a href="https://t.me/PrimeOnPons" target="_blank" class="hover:text-amazon-orange transition">Telegram</a>
+    <span class="text-slate-600">|</span>
+    <a href="https://x.com/PrimeOnPons" target="_blank" class="hover:text-amazon-orange transition">X</a>
+    <span class="text-slate-600">|</span>
+    <a href="https://ponsfamily.com" target="_blank" class="text-amazon-orange font-bold hover:underline">Buy $PRIME</a>
+  </div>
+
+  <!-- Web3 Wallet Connection Modal Overlay -->
+  <div id="walletModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-sm w-full p-6 space-y-4 shadow-xl border border-slate-200">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h3 class="font-display font-bold text-lg text-slate-900">Select EVM Wallet</h3>
+        <button onclick="closeWalletModal()" class="text-slate-400 hover:text-slate-800 text-lg font-bold">&times;</button>
+      </div>
+      <p class="text-xs text-slate-500">Connect your Web3 provider to interact with Robinhood Chain liquidity.</p>
+      <div class="space-y-2">
+        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3 rounded border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
+          <span class="font-bold text-xs text-slate-900">MetaMask / Rabby</span>
+          <span class="text-xs font-bold text-amazon-orange">Connect &rarr;</span>
+        </a>
+        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3 rounded border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
+          <span class="font-bold text-xs text-slate-900">Robinhood Wallet</span>
+          <span class="text-xs font-bold text-amazon-orange">Connect &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Amazon Footer Bar -->
   <footer class="bg-amazon-dark text-slate-300 text-xs mt-12 relative z-10">
     <div class="bg-slate-700/50 py-3 text-center text-slate-200 font-semibold cursor-pointer hover:bg-slate-700 transition" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -383,7 +432,15 @@
       offset: 50
     });
 
-    // 2. Mouse Movement Soft Particle Trail Canvas
+    // 2. Wallet Modal Trigger Logic
+    function openWalletModal() {
+      document.getElementById('walletModal').classList.remove('hidden');
+    }
+    function closeWalletModal() {
+      document.getElementById('walletModal').classList.add('hidden');
+    }
+
+    // 3. Mouse Movement Soft Particle Trail Canvas
     const pCanvas = document.getElementById('particleCanvas');
     const pCtx = pCanvas.getContext('2d');
     let trailPoints = [];
@@ -428,7 +485,7 @@
     }
     renderParticleTrail();
 
-    // 3. Interactive Dispatch Handler
+    // 4. Interactive Dispatch Handler
     let count = 12480;
     const dispatchAlerts = [
       "Meme Package Dispatched", 
@@ -457,7 +514,7 @@
       setTimeout(() => { particle.remove(); }, 1800);
     }
 
-    // 4. Copy Address Function
+    // 5. Copy Address Function
     function copyAddress() {
       navigator.clipboard.writeText("Launching soon on ponsfamily.com!");
       const btn = document.getElementById('copyAddressBtn');
