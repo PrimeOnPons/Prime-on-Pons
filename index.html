@@ -103,7 +103,7 @@
   <!-- Interactive Canvas Trail -->
   <canvas id="particleCanvas"></canvas>
 
-  <!-- Floating Utility Header -->
+  <!-- Utility Header Bar with Minimal $AMZN Price Number -->
   <div class="bg-amazon-navy/90 backdrop-blur-md text-white text-xs py-2 px-6 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-50 border-b border-slate-800">
     <div class="flex items-center gap-4">
       <span class="flex items-center gap-2 font-medium text-slate-300">
@@ -114,21 +114,11 @@
       <span class="hidden md:inline text-slate-400">Official DEX: ponsfamily.com</span>
     </div>
 
-    <!-- Live TradingView Stock Single Quote Header -->
+    <!-- Minimal Clean $AMZN Stock Ticker -->
     <div class="flex items-center gap-4">
-      <div class="hidden sm:flex items-center h-6 overflow-hidden rounded-full bg-slate-800/80 border border-slate-700 px-3">
-        <div class="tradingview-widget-container">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-          {
-            "symbol": "NASDAQ:AMZN",
-            "width": "100%",
-            "colorTheme": "dark",
-            "isTransparent": true,
-            "locale": "en"
-          }
-          </script>
-        </div>
+      <div class="flex items-center gap-2 bg-slate-800/80 border border-slate-700/80 px-3 py-0.5 rounded-full">
+        <span class="font-bold text-slate-400">$AMZN</span>
+        <span class="font-mono font-bold text-emerald-400">$251.57</span>
       </div>
 
       <a href="https://ponsfamily.com" target="_blank" class="hover:text-amazon-orange transition font-medium">ponsfamily.com</a>
@@ -158,7 +148,7 @@
         <button onclick="triggerDispatch(event)" class="hidden sm:inline-block px-4 py-2 text-xs font-semibold rounded-full bg-white hover:bg-slate-50 text-slate-800 transition shadow-sm border border-slate-200">
           Dispatch Test
         </button>
-        <button onclick="openWalletModal()" class="hidden md:inline-block px-4 py-2 text-xs font-semibold rounded-full bg-slate-900 hover:bg-slate-800 text-white transition shadow-sm">
+        <button id="connectWalletBtn" onclick="connectEVMWallet()" class="hidden md:inline-block px-4 py-2 text-xs font-semibold rounded-full bg-slate-900 hover:bg-slate-800 text-white transition shadow-sm">
           Connect Wallet
         </button>
         <a href="https://ponsfamily.com" target="_blank" class="px-6 py-2.5 text-xs font-bold rounded-full bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-md hover:shadow-lg">
@@ -176,7 +166,7 @@
 
     <main class="max-w-6xl mx-auto px-6 py-10 space-y-20 relative z-10">
       
-      <!-- Organic Hero Section -->
+      <!-- Hero Section -->
       <section data-aos="fade-up" data-aos-duration="1000" class="grid lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-900 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
@@ -203,7 +193,7 @@
           </div>
         </div>
 
-        <!-- Hero Featured Image (Free Floating with Soft Shadows) -->
+        <!-- Hero Featured Image -->
         <div class="lg:col-span-5 relative">
           <div class="absolute -inset-2 bg-gradient-to-r from-amazon-orange to-amber-300 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition"></div>
           <a href="https://ponsfamily.com" target="_blank" class="block relative group">
@@ -213,6 +203,37 @@
               class="w-full rounded-2xl shadow-2xl object-cover transform group-hover:scale-[1.02] transition duration-500" 
             />
           </a>
+        </div>
+      </section>
+
+      <!-- Logistics Fleet Gallery Showcase -->
+      <section data-aos="fade-up" data-aos-duration="1000" class="space-y-6">
+        <div class="space-y-1">
+          <h2 class="font-display font-black text-3xl text-slate-900">Delivery Operations Center</h2>
+          <p class="text-slate-500 text-sm">Automated meme fulfillment native to Robinhood Chain bonding curves.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div class="relative group rounded-2xl overflow-hidden shadow-md">
+            <img src="Delivery-truck.jpg" alt="Express Delivery Truck" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-4">
+              <span class="text-white text-xs font-bold">Express Ground Fleet</span>
+            </div>
+          </div>
+
+          <div class="relative group rounded-2xl overflow-hidden shadow-md">
+            <img src="Drone-dispatch.jpg" alt="Drone Fulfillment" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-4">
+              <span class="text-white text-xs font-bold">Drone Air Dispatch</span>
+            </div>
+          </div>
+
+          <div class="relative group rounded-2xl overflow-hidden shadow-md">
+            <img src="Warehouse-robots.jpg" alt="Warehouse Automation" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-4">
+              <span class="text-white text-xs font-bold">Automated Sorting Vaults</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -257,7 +278,6 @@
           </a>
         </div>
 
-        <!-- Embedded Full Width Chart Container -->
         <div class="w-full h-96 rounded-2xl overflow-hidden border border-slate-200 shadow-xl bg-slate-950">
           <div class="tradingview-widget-container" style="height:100%;width:100%;">
             <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
@@ -304,7 +324,7 @@
         </button>
       </section>
 
-      <!-- Asymmetrical Logistics Specifications -->
+      <!-- Logistics Specifications Showcase with Uploaded Assets -->
       <section data-aos="fade-up" data-aos-duration="1000" class="space-y-10 py-6">
         <div class="max-w-xl space-y-2">
           <h2 class="font-display font-black text-3xl text-slate-900">Logistics Specifications</h2>
@@ -313,26 +333,26 @@
 
         <div class="grid md:grid-cols-3 gap-8">
           <div class="space-y-3 p-2">
-            <div class="font-display font-black text-4xl text-amazon-orange/40">01</div>
-            <h3 class="font-bold text-slate-900 text-xl">Tokenized Stock Pairing</h3>
+            <img src="Prime-Vault.jpg" alt="Automated Vault" class="w-full h-36 object-cover rounded-xl shadow-sm border border-slate-200" />
+            <div class="font-display font-black text-xl text-slate-900">01. Tokenized Stock Pairing</div>
             <p class="text-slate-600 text-sm leading-relaxed">Direct market pairing with Amazon stock liquidity on Robinhood Chain for long-term backing.</p>
           </div>
 
           <div class="space-y-3 p-2">
-            <div class="font-display font-black text-4xl text-amazon-orange/40">02</div>
-            <h3 class="font-bold text-slate-900 text-xl">Automated Vault Engine</h3>
+            <img src="buyback.jpg" alt="Buyback Engine" class="w-full h-36 object-cover rounded-xl shadow-sm border border-slate-200" />
+            <div class="font-display font-black text-xl text-slate-900">02. Automated Vault Engine</div>
             <p class="text-slate-600 text-sm leading-relaxed">2% of every transaction continuously triggers market buybacks on the bonding curve.</p>
           </div>
 
           <div class="space-y-3 p-2">
-            <div class="font-display font-black text-4xl text-amazon-orange/40">03</div>
-            <h3 class="font-bold text-slate-900 text-xl">Express Block Finality</h3>
+            <img src="Prime-porch.jpg" alt="Doorstep Delivery" class="w-full h-36 object-cover rounded-xl shadow-sm border border-slate-200" />
+            <div class="font-display font-black text-xl text-slate-900">03. Express Block Finality</div>
             <p class="text-slate-600 text-sm leading-relaxed">Instant settlement execution powered by Robinhood Chain EVM infrastructure.</p>
           </div>
         </div>
       </section>
 
-      <!-- How to Buy Process (Flowing Timeline) -->
+      <!-- How to Buy Process -->
       <section data-aos="fade-up" data-aos-duration="1000" class="space-y-10 py-6 border-t border-slate-200/80">
         <div class="max-w-xl space-y-2">
           <h2 class="font-display font-black text-3xl text-slate-900">1-Click Checkout Guide</h2>
@@ -372,27 +392,6 @@
     <a href="https://ponsfamily.com" target="_blank" class="text-amazon-orange font-bold hover:underline">Buy $PRIME</a>
   </div>
 
-  <!-- Web3 Connect Modal -->
-  <div id="walletModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-2xl border border-slate-200">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-        <h3 class="font-display font-bold text-lg text-slate-900">Select EVM Wallet</h3>
-        <button onclick="closeWalletModal()" class="text-slate-400 hover:text-slate-800 text-lg font-bold">&times;</button>
-      </div>
-      <p class="text-xs text-slate-500">Connect your Web3 wallet provider to trade on Robinhood Chain.</p>
-      <div class="space-y-2">
-        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
-          <span class="font-bold text-xs text-slate-900">MetaMask / Rabby</span>
-          <span class="text-xs font-bold text-amazon-orange">Connect &rarr;</span>
-        </a>
-        <a href="https://ponsfamily.com" target="_blank" class="w-full flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:border-amazon-orange hover:bg-amber-50/50 transition">
-          <span class="font-bold text-xs text-slate-900">Robinhood Wallet</span>
-          <span class="text-xs font-bold text-amazon-orange">Connect &rarr;</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <!-- Footer -->
   <footer class="bg-amazon-dark text-slate-400 text-xs mt-20 relative z-10">
     <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -419,11 +418,26 @@
       offset: 40
     });
 
-    function openWalletModal() {
-      document.getElementById('walletModal').classList.remove('hidden');
-    }
-    function closeWalletModal() {
-      document.getElementById('walletModal').classList.add('hidden');
+    // Native Web3 EVM Wallet Connection Script
+    async function connectEVMWallet() {
+      const btn = document.getElementById('connectWalletBtn');
+      
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          if (accounts.length > 0) {
+            const address = accounts[0];
+            const shortAddress = address.substring(0, 6) + '...' + address.substring(address.length - 4);
+            btn.innerText = shortAddress;
+            btn.classList.remove('bg-slate-900', 'hover:bg-slate-800');
+            btn.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+          }
+        } catch (error) {
+          console.error("Wallet connection denied:", error);
+        }
+      } else {
+        alert("No Web3 wallet detected. Please install MetaMask, Rabby, or open via Robinhood Wallet browser.");
+      }
     }
 
     const pCanvas = document.getElementById('particleCanvas');
