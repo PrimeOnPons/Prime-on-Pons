@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PRIME ($PRIME) — Delivering All Memes</title>
+  <link rel="icon" type="image/jpeg" href="token-logo.jpg" />
 
   <!-- Google Fonts: Inter & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,11 +35,34 @@
       },
     };
   </script>
+
+  <style>
+    .floating-package {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 10px 18px;
+      background: #ffffff;
+      color: #131921;
+      border: 2px solid #ff9900;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      animation: flyUp 2s forwards ease-out;
+    }
+
+    @keyframes flyUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      50% { transform: translateY(-50vh) scale(1.1); }
+      100% { transform: translateY(-100vh) scale(0.9); opacity: 0; }
+    }
+  </style>
 </head>
 <body class="bg-amazon-bg text-slate-900 font-sans antialiased selection:bg-amber-300 selection:text-black min-h-screen flex flex-col">
 
-  <!-- Amazon Utility Header Bar -->
-  <div class="bg-amazon-navy text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-2 border-b border-slate-700">
+  <!-- Amazon Utility Header Bar with Live $AMZN Ticker Widget -->
+  <div class="bg-amazon-navy text-white text-xs py-2 px-4 flex flex-wrap items-center justify-between gap-3 border-b border-slate-700">
     <div class="flex items-center gap-4">
       <span class="flex items-center gap-1.5 font-medium text-slate-300">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -47,10 +71,27 @@
       <span class="hidden md:inline text-slate-500">|</span>
       <span class="hidden md:inline text-slate-300">Pons Launchpad Mainnet</span>
     </div>
-    <div class="flex items-center gap-4 font-medium text-slate-300">
-      <a href="https://ponsfamily.com" target="_blank" class="hover:text-amazon-orange transition">ponsfamily.com</a>
-      <span>|</span>
-      <a href="https://x.com/PrimeOnPons" target="_blank" class="hover:text-amazon-orange transition">X / Twitter</a>
+
+    <!-- TradingView $AMZN Live Quote Header Widget -->
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center h-6 overflow-hidden rounded bg-slate-800 border border-slate-700 px-2">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+          {
+            "symbol": "NASDAQ:AMZN",
+            "width": "100%",
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "locale": "en"
+          }
+          </script>
+        </div>
+      </div>
+
+      <a href="https://ponsfamily.com" target="_blank" class="hover:text-amazon-orange transition font-medium">ponsfamily.com</a>
+      <span class="text-slate-500">|</span>
+      <a href="https://x.com/PrimeOnPons" target="_blank" class="hover:text-amazon-orange transition font-medium">X / Twitter</a>
     </div>
   </div>
 
@@ -58,14 +99,24 @@
   <header class="bg-amazon-dark text-white sticky top-0 z-50 shadow-md">
     <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
       
-      <!-- Clean Brand Logo Text -->
-      <a href="https://ponsfamily.com" class="font-display font-black text-2xl tracking-wider text-white hover:text-amazon-orange transition">
-        PRIME
+      <!-- Brand Logo: Text with Token Image to the Right -->
+      <a href="https://ponsfamily.com" class="flex items-center gap-3 group">
+        <span class="font-display font-black text-2xl tracking-wider text-white group-hover:text-amazon-orange transition">
+          PRIME
+        </span>
+        <img 
+          src="token-logo.jpg" 
+          alt="PRIME Token Logo" 
+          class="w-9 h-9 rounded-full border-2 border-amazon-orange/80 shadow group-hover:scale-105 transition-transform" 
+        />
       </a>
 
       <!-- Navigation Actions -->
       <div class="flex items-center gap-3">
-        <a href="https://t.me/PrimeOnPons" target="_blank" class="hidden sm:inline-block px-4 py-2 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-white transition">
+        <button onclick="dispatchPackage(event)" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-amber-400 transition border border-slate-600">
+          <span>📦</span> Dispatch Delivery
+        </button>
+        <a href="https://t.me/PrimeOnPons" target="_blank" class="hidden md:inline-block px-4 py-2 text-xs font-semibold rounded bg-slate-700/60 hover:bg-slate-700 text-white transition">
           Telegram
         </a>
         <a href="https://ponsfamily.com" target="_blank" class="px-5 py-2 text-xs font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow">
@@ -81,7 +132,8 @@
     <!-- Hero Tile / Storefront Header -->
     <section class="bg-white rounded-lg p-6 md:p-8 shadow-sm border border-slate-200/80 grid lg:grid-cols-12 gap-8 items-center">
       <div class="lg:col-span-7 space-y-5">
-        <div class="inline-block px-3 py-1 rounded bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           Tokenized $AMZN Stock Pair
         </div>
         
@@ -95,18 +147,18 @@
         </p>
 
         <div class="flex flex-wrap gap-3 pt-2">
-          <a href="https://ponsfamily.com" target="_blank" class="px-6 py-3 text-sm font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-sm">
+          <a href="https://ponsfamily.com" target="_blank" class="px-6 py-3 text-sm font-bold rounded bg-amazon-orange text-slate-950 hover:bg-amazon-orangeHover transition shadow-sm transform hover:-translate-y-0.5">
             Buy $PRIME Now
           </a>
-          <a href="https://x.com/PrimeOnPons" target="_blank" class="px-6 py-3 text-sm font-semibold rounded bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition">
-            Community X
-          </a>
+          <button onclick="dispatchPackage(event)" class="px-6 py-3 text-sm font-semibold rounded bg-slate-100 border border-slate-200 text-slate-800 hover:bg-slate-200 transition">
+            📦 Dispatch Test Delivery
+          </button>
         </div>
       </div>
 
       <!-- Feature Image Tile -->
-      <div class="lg:col-span-5">
-        <a href="https://ponsfamily.com" target="_blank" class="block group">
+      <div class="lg:col-span-5 relative group">
+        <a href="https://ponsfamily.com" target="_blank" class="block">
           <img 
             src="warehouse-footer.jpg" 
             alt="Prime Fulfillment Operations" 
@@ -116,23 +168,71 @@
       </div>
     </section>
 
-    <!-- 4-Column Product Tile Metric Grid -->
+    <!-- Interactive Metrics & Dispatches Bar -->
     <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1">
+      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
         <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Supply</div>
         <div class="font-display font-black text-2xl text-slate-900">1,000,000,000</div>
       </div>
-      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1">
+      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
         <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Trading Tax</div>
         <div class="font-display font-black text-2xl text-slate-900">2% / 2%</div>
       </div>
-      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1">
+      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 hover:border-amber-400 transition">
         <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Liquidity Vault</div>
         <div class="font-display font-black text-2xl text-slate-900">100% Locked</div>
       </div>
-      <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1">
-        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Dispatched Memes</div>
-        <div class="font-display font-black text-2xl text-amazon-orange">12,480+</div>
+      <div onclick="dispatchPackage(event)" class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm text-center space-y-1 cursor-pointer hover:border-amazon-orange hover:shadow transition group">
+        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider group-hover:text-amazon-orange">Dispatched Memes 📦</div>
+        <div id="packageCounter" class="font-display font-black text-2xl text-amazon-orange">12,480+</div>
+      </div>
+    </section>
+
+    <!-- LIVE $AMZN CHART TILE -->
+    <section class="bg-white rounded-lg p-6 shadow-sm border border-slate-200/80 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <h2 class="font-display font-black text-xl text-slate-900">Live $AMZN Stock Chart Pairing</h2>
+        </div>
+        <a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" class="text-xs font-semibold text-amazon-blue hover:underline">
+          View on TradingView &rarr;
+        </a>
+      </div>
+
+      <!-- TradingView Interactive Chart Container -->
+      <div class="w-full h-80 rounded overflow-hidden border border-slate-200 bg-slate-950">
+        <div class="tradingview-widget-container" style="height:100%;width:100%;">
+          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+            "lineWidth": 2,
+            "lineType": 0,
+            "chartType": "line",
+            "fontColor": "rgb(156, 163, 175)",
+            "gridLineColor": "rgba(242, 242, 242, 0.06)",
+            "backgroundColor": "#0f172a",
+            "widgetFontColor": "#f3f4f6",
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "locale": "en",
+            "chartOnly": false,
+            "scalePosition": "right",
+            "symbols": [
+              [
+                "NASDAQ:AMZN|1M"
+              ]
+            ],
+            "dateRanges": [
+              "1m|30",
+              "12m|1D",
+              "all|1M"
+            ],
+            "width": "100%",
+            "height": "100%"
+          }
+          </script>
+        </div>
       </div>
     </section>
 
@@ -155,19 +255,19 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="space-y-2 p-4 rounded bg-slate-50 border border-slate-100">
+        <div class="space-y-2 p-4 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 transition">
           <div class="font-bold text-amazon-orange text-sm uppercase">01. Stock Pairing</div>
           <h3 class="font-bold text-slate-900 text-base">Tokenized $AMZN Liquidity</h3>
           <p class="text-slate-600 text-sm leading-relaxed">Direct market pairing with Amazon stock liquidity for stable, long-term scaling.</p>
         </div>
 
-        <div class="space-y-2 p-4 rounded bg-slate-50 border border-slate-100">
+        <div class="space-y-2 p-4 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 transition">
           <div class="font-bold text-amazon-orange text-sm uppercase">02. Automated Vault</div>
           <h3 class="font-bold text-slate-900 text-base">2% Buyback Pool</h3>
           <p class="text-slate-600 text-sm leading-relaxed">2% of every buy and sell automatically executes market buybacks on the bonding curve.</p>
         </div>
 
-        <div class="space-y-2 p-4 rounded bg-slate-50 border border-slate-100">
+        <div class="space-y-2 p-4 rounded bg-slate-50 border border-slate-100 hover:border-amber-300 transition">
           <div class="font-bold text-amazon-orange text-sm uppercase">03. Express Execution</div>
           <h3 class="font-bold text-slate-900 text-base">Instant Block Finality</h3>
           <p class="text-slate-600 text-sm leading-relaxed">Fast transaction settlement powered by EVM compatibility on Robinhood Chain.</p>
@@ -211,12 +311,41 @@
       Back to top
     </div>
     <div class="max-w-6xl mx-auto px-4 py-8 text-center space-y-3">
-      <div class="font-display font-black text-xl text-white tracking-wider">PRIME</div>
+      <div class="flex items-center justify-center gap-2">
+        <span class="font-display font-black text-xl text-white tracking-wider">PRIME</span>
+        <img src="token-logo.jpg" alt="Logo" class="w-6 h-6 rounded-full border border-amazon-orange" />
+      </div>
       <p class="text-slate-400">Robinhood Chain Mainnet • Official Launchpad: <a href="https://ponsfamily.com" target="_blank" class="text-amazon-orange hover:underline font-bold">ponsfamily.com</a></p>
     </div>
   </footer>
 
+  <!-- Interactive Scripts -->
   <script>
+    let packageCount = 12480;
+    const memeMessages = [
+      "📦 Meme Package Delivered!", 
+      "🚀 $PRIME Dispatched!", 
+      "📈 $AMZN Stock Boosted!", 
+      "⚡ Express Execution!", 
+      "💎 Liquidity Locked!"
+    ];
+
+    function dispatchPackage(e) {
+      packageCount++;
+      document.getElementById('packageCounter').innerText = packageCount.toLocaleString() + '+';
+
+      const pkg = document.createElement('div');
+      pkg.className = 'floating-package';
+      pkg.innerText = memeMessages[Math.floor(Math.random() * memeMessages.length)];
+      
+      const x = e ? e.clientX : Math.random() * (window.innerWidth - 150);
+      pkg.style.left = Math.min(Math.max(x, 20), window.innerWidth - 220) + 'px';
+      pkg.style.top = (e ? e.clientY : window.innerHeight - 100) + 'px';
+
+      document.body.appendChild(pkg);
+      setTimeout(() => { pkg.remove(); }, 2000);
+    }
+
     function copyCA() {
       navigator.clipboard.writeText("Launching soon on ponsfamily.com!");
       const btn = document.getElementById('copyBtn');
