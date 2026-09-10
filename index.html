@@ -6,10 +6,10 @@
   <title>PRIME ($PRIME) — Delivering All Memes</title>
   <link rel="icon" type="image/jpeg" href="token-logo.jpg" />
 
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,13 +18,13 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Outfit', 'sans-serif'],
           },
           colors: {
-            brand: {
+            prime: {
               orange: '#ff9900',
-              bg: '#080a0f',
-              card: '#0f131d',
+              blue: '#0088cc',
+              bg: '#fcfdfe',
             }
           }
         },
@@ -32,147 +32,145 @@
     };
   </script>
 </head>
-<body class="bg-brand-bg text-slate-100 font-sans selection:bg-brand-orange selection:text-black antialiased relative overflow-x-hidden min-h-screen">
+<body class="bg-prime-bg text-slate-900 font-sans selection:bg-amber-300 selection:text-black antialiased relative overflow-x-hidden min-h-screen">
 
-  <!-- Ambient background glow behind hero -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-brand-orange/10 blur-[150px] pointer-events-none rounded-full"></div>
+  <!-- Soft subtle background gradient glow -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-gradient-to-b from-amber-100/50 via-sky-50/30 to-transparent blur-3xl pointer-events-none"></div>
 
   <!-- Header -->
-  <header class="max-w-6xl mx-auto px-6 py-8 flex items-center justify-between relative z-10">
+  <header class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between relative z-10">
     <a href="https://ponsfamily.com" class="flex items-center gap-3 group">
-      <img src="token-logo.jpg" alt="PRIME" class="w-10 h-10 rounded-full border border-brand-orange/50 group-hover:scale-105 transition-transform" />
-      <span class="font-extrabold text-2xl tracking-tight text-white">PRIME</span>
+      <img src="token-logo.jpg" alt="PRIME Token Logo" class="w-10 h-10 rounded-full border border-slate-200 group-hover:scale-105 transition-transform" />
+      <span class="font-extrabold text-2xl tracking-tight text-slate-900">PRIME</span>
     </a>
 
-    <div class="flex items-center gap-4">
-      <a href="https://x.com/PrimeOnPons" target="_blank" class="px-5 py-2.5 text-sm font-semibold rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/10 transition">
+    <div class="flex items-center gap-3">
+      <a href="https://x.com/PrimeOnPons" target="_blank" class="px-5 py-2 text-sm font-semibold rounded-full text-slate-600 hover:text-slate-900 transition">
         X / Twitter
       </a>
-      <a href="https://ponsfamily.com" target="_blank" class="px-6 py-2.5 text-sm font-bold rounded-full bg-brand-orange text-black hover:bg-amber-400 transition transform hover:-translate-y-0.5">
+      <a href="https://ponsfamily.com" target="_blank" class="px-6 py-2.5 text-sm font-bold rounded-full bg-slate-900 text-white hover:bg-slate-800 transition transform hover:-translate-y-0.5">
         Trade on Pons 🌿
       </a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <main class="max-w-6xl mx-auto px-6 pt-12 pb-24 relative z-10 space-y-24">
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-6 pt-12 pb-24 relative z-10 space-y-24">
     
+    <!-- Hero Section -->
     <section class="grid lg:grid-cols-2 gap-12 items-center">
       <div class="space-y-6">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold tracking-wide">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-emerald-700 text-xs font-bold tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           Robinhood Chain Mainnet
         </div>
         
-        <h1 class="text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+        <h1 class="text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-900">
           PRIME DELIVERS <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-300">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-600 to-orange-500">
             ALL MEMES.
           </span>
         </h1>
 
-        <p class="text-slate-400 text-lg font-normal leading-relaxed max-w-xl">
-          The premier delivery memecoin paired directly with Tokenized <span class="text-white font-semibold">$AMZN Stock</span> on Robinhood Chain. Guaranteed fast execution via <span class="text-white font-semibold">ponsfamily.com</span>.
+        <p class="text-slate-600 text-lg font-normal leading-relaxed max-w-lg">
+          The premier delivery memecoin paired directly with Tokenized <span class="text-slate-900 font-semibold">$AMZN Stock</span> on Robinhood Chain. Guaranteed fast execution via <span class="text-slate-900 font-semibold">ponsfamily.com</span>.
         </p>
 
         <div class="flex flex-wrap gap-4 pt-2">
-          <a href="https://ponsfamily.com" target="_blank" class="px-8 py-4 text-base font-bold rounded-full bg-brand-orange text-black hover:bg-amber-400 transition">
+          <a href="https://ponsfamily.com" target="_blank" class="px-8 py-3.5 text-base font-bold rounded-full bg-amber-500 text-slate-950 hover:bg-amber-400 transition shadow-sm">
             Buy $PRIME
           </a>
-          <a href="https://t.me/PrimeOnPons" target="_blank" class="px-8 py-4 text-base font-semibold rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition">
+          <a href="https://t.me/PrimeOnPons" target="_blank" class="px-8 py-3.5 text-base font-semibold rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition">
             Telegram
           </a>
         </div>
       </div>
 
-      <!-- Single Hero Focus Image -->
-      <div class="relative group">
-        <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-orange to-amber-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-        <a href="https://ponsfamily.com" target="_blank" class="relative block">
-          <img src="warehouse-footer.jpg" alt="PRIME Operations" class="w-full rounded-2xl border border-white/10 shadow-2xl object-cover" />
+      <!-- Single Focus Hero Image -->
+      <div class="relative">
+        <a href="https://ponsfamily.com" target="_blank" class="block group">
+          <img 
+            src="warehouse-footer.jpg" 
+            alt="PRIME Operations Center" 
+            class="w-full rounded-2xl border border-slate-200/80 shadow-lg object-cover group-hover:opacity-95 transition" 
+          />
         </a>
       </div>
     </section>
 
-    <!-- Token Metrics Strip -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="bg-brand-card/60 border border-white/5 p-6 rounded-2xl text-center space-y-1">
-        <div class="text-2xl font-bold text-brand-orange">1,000,000,000</div>
-        <div class="text-xs uppercase tracking-wider text-slate-500 font-medium">Total Supply</div>
+    <!-- Clean Token Metrics (No heavy boxes) -->
+    <section class="py-6 border-y border-slate-200/80 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="space-y-1">
+        <div class="text-2xl font-black text-slate-900">1,000,000,000</div>
+        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Supply</div>
       </div>
-      <div class="bg-brand-card/60 border border-white/5 p-6 rounded-2xl text-center space-y-1">
-        <div class="text-2xl font-bold text-brand-orange">2% / 2%</div>
-        <div class="text-xs uppercase tracking-wider text-slate-500 font-medium">Tax / Buybacks</div>
+      <div class="space-y-1">
+        <div class="text-2xl font-black text-slate-900">2% / 2%</div>
+        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tax / Buybacks</div>
       </div>
-      <div class="bg-brand-card/60 border border-white/5 p-6 rounded-2xl text-center space-y-1">
-        <div class="text-2xl font-bold text-brand-orange">100% Locked</div>
-        <div class="text-xs uppercase tracking-wider text-slate-500 font-medium">Liquidity Vault</div>
+      <div class="space-y-1">
+        <div class="text-2xl font-black text-slate-900">100% Locked</div>
+        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Vault Liquidity</div>
       </div>
-      <div class="bg-brand-card/60 border border-white/5 p-6 rounded-2xl text-center space-y-1">
-        <div class="text-2xl font-bold text-brand-orange">0x00...Pons</div>
-        <div class="text-xs uppercase tracking-wider text-slate-500 font-medium">Robinhood Chain</div>
+      <div class="space-y-1">
+        <div class="text-2xl font-black text-slate-900">12,480+</div>
+        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Dispatched Memes</div>
       </div>
     </section>
 
-    <!-- Contract Bar -->
-    <section class="p-6 rounded-2xl bg-brand-card/80 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- Contract Address -->
+    <section class="flex flex-col md:flex-row items-center justify-between gap-4 py-4 px-2">
       <div>
-        <div class="text-xs uppercase font-bold text-slate-500 tracking-wider">Contract Address</div>
-        <div class="text-brand-orange font-mono font-medium text-sm md:text-base mt-1">Launching soon on ponsfamily.com</div>
+        <div class="text-xs uppercase font-extrabold text-slate-400 tracking-wider">Contract Address</div>
+        <div class="text-slate-900 font-mono font-bold text-base mt-0.5">Launching soon on ponsfamily.com</div>
       </div>
-      <button onclick="copyCA()" id="copyBtn" class="w-full md:w-auto px-6 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white transition active:scale-95">
+      <button onclick="copyCA()" id="copyBtn" class="w-full md:w-auto px-6 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 transition active:scale-95">
         Copy Address
       </button>
     </section>
 
-    <!-- Clean About Text Section (No Image Grid Clutter) -->
-    <section class="space-y-6 max-w-3xl mx-auto text-center py-8">
-      <h2 class="text-3xl font-extrabold text-white">About PRIME</h2>
-      <p class="text-slate-400 text-lg leading-relaxed">
-        PRIME is designed to bridge viral memecoin momentum with tokenized real-world assets on Robinhood Chain. Engineered around automated buyback mechanics and continuous fulfillment liquidity, $PRIME ensures transparent, fast execution directly from your wallet.
+    <!-- About Section -->
+    <section class="max-w-2xl mx-auto text-center space-y-4 py-6">
+      <h2 class="text-3xl font-black text-slate-900">About PRIME</h2>
+      <p class="text-slate-600 text-base leading-relaxed">
+        PRIME bridges viral memecoin momentum with tokenized real-world assets on Robinhood Chain. Engineered with automated buyback mechanics and continuous fulfillment liquidity, $PRIME delivers fast, transparent execution directly to your Web3 wallet.
       </p>
     </section>
 
-    <!-- Simple 3-Step How To Buy -->
-    <section class="space-y-10">
-      <div class="text-center space-y-2">
-        <h2 class="text-3xl font-extrabold text-white">How To Buy</h2>
-        <p class="text-slate-400 text-sm">Follow these simple steps to join the $PRIME community.</p>
+    <!-- Streamlined How To Buy (Minimal text blocks) -->
+    <section class="space-y-10 pt-4">
+      <div class="text-center space-y-1">
+        <h2 class="text-3xl font-black text-slate-900">How To Buy</h2>
+        <p class="text-slate-500 text-sm">Three quick steps to join $PRIME on Robinhood Chain.</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-brand-card/60 border border-white/5 rounded-2xl p-8 space-y-4">
-          <div class="text-3xl font-extrabold text-brand-orange">01</div>
-          <h3 class="text-lg font-bold text-white">Create Wallet</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Download MetaMask or your preferred Web3 wallet and add the Robinhood Chain RPC network.</p>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="space-y-2">
+          <div class="text-3xl font-black text-amber-500">01</div>
+          <h3 class="text-lg font-bold text-slate-900">Create Wallet</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Download MetaMask, Rabby, or Robinhood Wallet and set your network RPC to Robinhood Chain.</p>
         </div>
 
-        <div class="bg-brand-card/60 border border-white/5 rounded-2xl p-8 space-y-4">
-          <div class="text-3xl font-extrabold text-brand-orange">02</div>
-          <h3 class="text-lg font-bold text-white">Connect to Pons</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Visit <a href="https://ponsfamily.com" target="_blank" class="text-brand-orange font-medium hover:underline">ponsfamily.com</a> and link your wallet to the platform.</p>
+        <div class="space-y-2">
+          <div class="text-3xl font-black text-amber-500">02</div>
+          <h3 class="text-lg font-bold text-slate-900">Connect to Pons</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Visit <a href="https://ponsfamily.com" target="_blank" class="text-amber-600 font-bold hover:underline">ponsfamily.com</a> and pair your wallet to the official launchpad platform.</p>
         </div>
 
-        <div class="bg-brand-card/60 border border-white/5 rounded-2xl p-8 space-y-4">
-          <div class="text-3xl font-extrabold text-brand-orange">03</div>
-          <h3 class="text-lg font-bold text-white">Swap $PRIME</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Select the $PRIME pair on the bonding curve and confirm your trade transaction.</p>
+        <div class="space-y-2">
+          <div class="text-3xl font-black text-amber-500">03</div>
+          <h3 class="text-lg font-bold text-slate-900">Swap $PRIME</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Select the $PRIME / Tokenized $AMZN stock pair on the bonding curve and confirm your trade.</p>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Clean Footer Banner -->
-  <div class="w-full h-48 md:h-64 relative border-t border-white/10 overflow-hidden">
-    <img src="night-shift.jpg" alt="Night Shift" class="w-full h-full object-cover opacity-40" />
-    <div class="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent"></div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-[#05060a] py-12 text-center text-slate-500 text-sm space-y-3 border-t border-white/5">
-    <div class="font-extrabold text-lg text-white tracking-wider">PRIME ($PRIME)</div>
-    <p>Official DEX Launchpad: <a href="https://ponsfamily.com" target="_blank" class="text-brand-orange font-semibold hover:underline">ponsfamily.com</a></p>
+  <!-- Clean Footer -->
+  <footer class="border-t border-slate-200/80 py-12 text-center text-slate-500 text-sm space-y-2 bg-white">
+    <div class="font-extrabold text-slate-900 tracking-wide text-base">PRIME ($PRIME) • ROBINHOOD CHAIN</div>
+    <p>Official DEX Launchpad: <a href="https://ponsfamily.com" target="_blank" class="text-amber-600 font-bold hover:underline">ponsfamily.com</a></p>
   </footer>
 
   <script>
