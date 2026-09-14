@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PRIME ($PRIME) — Billion-Dollar Stock Exposure + 1000x Upside</title>
-  <link rel="icon" type="image/jpeg" href="token-transparent.png" />
+  <link rel="icon" type="image/jpeg" href="token-logo.jpg" />
   
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet" />
@@ -48,11 +47,11 @@
 
     .hero-header {
       position: relative;
-      background-image: linear-gradient(to bottom, rgba(19, 25, 33, 0.8), rgba(246, 241, 235, 0.95)), url('forklift-loader.jpg');
+      background-image: linear-gradient(to bottom, rgba(19, 25, 33, 0.4), rgba(246, 241, 235, 0.85)), url('forklift-loader.jpg');
       background-size: cover;
       background-position: center;
       color: #ffffff;
-      padding-bottom: 60px;
+      padding-bottom: 80px;
     }
 
     .navbar {
@@ -106,10 +105,14 @@
       max-width: 1200px;
       margin: 40px auto 0;
       padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
+      display: flex;
+      justify-content: center;
       align-items: center;
+    }
+
+    .hero-text {
+      text-align: center;
+      max-width: 700px;
     }
 
     .hero-text h1 {
@@ -118,6 +121,7 @@
       line-height: 1.1;
       margin: 16px 0;
       font-family: 'Outfit', sans-serif;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
     .hero-text h1 span {
@@ -142,15 +146,8 @@
       border-radius: 16px;
       border: 2px solid #131921;
       box-shadow: 4px 4px 0px #ff9900;
-      margin-bottom: 24px;
+      margin: 24px 0;
       font-weight: 600;
-    }
-
-    .hero-image img {
-      width: 100%;
-      border-radius: 20px;
-      border: 3px solid #131921;
-      box-shadow: 8px 8px 0px #131921;
     }
 
     .container {
@@ -421,6 +418,7 @@
       padding-top: 12px;
     }
 
+    /* Modal Fixes */
     .world-modal {
       display: none;
       position: fixed;
@@ -464,6 +462,7 @@
       font-size: 1.2rem;
       cursor: pointer;
       box-shadow: 2px 2px 0px #1f1b18;
+      z-index: 10;
     }
 
     .dialog-close:hover {
@@ -560,7 +559,7 @@
     }
 
     @media (max-width: 900px) {
-      .hero-content, .dispatch-wrapper, .modal-content {
+      .dispatch-wrapper, .modal-content {
         grid-template-columns: 1fr;
       }
       .steps-grid {
@@ -590,7 +589,7 @@
   <header class="hero-header">
     <div class="navbar">
       <a href="#about" onclick="openModal(event)" class="brand">
-        <img src="token-transparent.png" alt="Logo" />
+        <img src="token-logo.jpg" alt="Logo" />
         <span>PRIME</span>
       </a>
       <div style="display: flex; gap: 12px;">
@@ -608,15 +607,9 @@
           Degens finally get exposure to a multi-billion dollar long-term stock hold while keeping the absolute chance to 1000x on-chain via <strong>Long.xyz</strong>.
         </div>
 
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div>
           <a href="https://long.xyz" target="_blank" class="btn-primary" style="font-size: 1rem; padding: 14px 28px;">Buy $PRIME Now 🚀</a>
         </div>
-      </div>
-
-      <div class="hero-image">
-        <a href="https://long.xyz" target="_blank">
-          <img src="roaring-kitty.jpg" alt="Roaring Kitty Prime" />
-        </a>
       </div>
     </div>
   </header>
@@ -746,10 +739,10 @@
 
   </main>
 
-  <!-- Interactive Modal Popup -->
-  <dialog id="about" class="world-modal">
-    <button class="dialog-close" type="button" onclick="closeModal()">×</button>
+  <!-- Interactive Modal Popup (Exitable) -->
+  <div id="about" class="world-modal" onclick="handleModalClick(event)">
     <div class="modal-content">
+      <button class="dialog-close" type="button" onclick="closeModal()">×</button>
       <div class="employee-card">
         <div class="employee-top">
           <span>EMPLOYEE OF THE MONTH</span><span>EVERY MONTH.</span>
@@ -774,12 +767,12 @@
           <span>Special skills</span><strong>Delivering 1000x upside &amp; stock equity.</strong>
         </div>
 
-        <a href="token-logo.jpg" download="token-transparent.png" style="font-size: 0.85rem; font-weight: 800; color: #131921; text-decoration: underline;">
+        <a href="token-logo.jpg" download="prime-token.jpg" style="font-size: 0.85rem; font-weight: 800; color: #131921; text-decoration: underline;">
           Take PRIME with you ↗
         </a>
       </div>
     </div>
-  </dialog>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -790,11 +783,20 @@
   <script>
     function openModal(e) {
       e.preventDefault();
+      document.getElementById('about').style.display = 'flex';
       document.getElementById('about').setAttribute('open', 'true');
     }
 
     function closeModal() {
-      document.getElementById('about').removeAttribute('open');
+      const modal = document.getElementById('about');
+      modal.style.display = 'none';
+      modal.removeAttribute('open');
+    }
+
+    function handleModalClick(e) {
+      if (e.target.id === 'about') {
+        closeModal();
+      }
     }
 
     function copyCA() {
