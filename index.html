@@ -1,315 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PRIME ($PRIME) — Billion-Dollar Stock Exposure + 1000x Upside</title>
-  <link rel="icon" type="image/jpeg" href="token-logo.jpg" />
-
-  <!-- Google Fonts: Inter & Outfit -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet" />
-
-  <!-- AOS (Animate On Scroll) CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-          },
-          colors: {
-            amazon: {
-              navy: '#131921',
-              dark: '#232f3e',
-              orange: '#ff9900',
-              orangeHover: '#e68a00',
-              blue: '#007185',
-              bg: '#fdfdfd',
-            }
-          }
-        },
-      },
-    };
-  </script>
-
-  <style>
-    body {
-      background-color: #fdfdfd;
-      background-image: radial-gradient(#ff9900 0.55px, transparent 0.55px), radial-gradient(#ff9900 0.55px, #fdfdfd 0.55px);
-      background-size: 24px 24px;
-      background-position: 0 0, 12px 12px;
-      background-attachment: fixed;
-    }
-
-    /* Top Half Background using forklift-loader.jpg mimicking boxycat layout */
-    .top-hero-section {
-      position: relative;
-      background-image: linear-gradient(to bottom, rgba(19, 25, 33, 0.75), rgba(253, 253, 253, 0.98)), url('forklift-loader.jpg');
-      background-size: cover;
-      background-position: center top;
-      min-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .dispatch-particle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      font-size: 0.85rem;
-      font-weight: 800;
-      padding: 10px 18px;
-      background: #131921;
-      color: #ff9900;
-      border: 2px solid #ff9900;
-      border-radius: 9999px;
-      box-shadow: 0 10px 25px rgba(255,153,0,0.3);
-      animation: flyUpAndFade 1.8s forwards cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes flyUpAndFade {
-      0% { transform: translateY(0) scale(0.9); opacity: 1; }
-      50% { transform: translateY(-30vh) scale(1.05); }
-      100% { transform: translateY(-80vh) scale(0.95); opacity: 0; }
-    }
-
-    .prime-glow {
-      text-shadow: 3px 3px 0px #131921;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#d9cdbe" />
+  <meta name="description" content="PRIME the delivery token. Delivering all memes. Welcome to the warehouse." />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>PRIME · Delivering All Memes</title>
+  <link rel="icon" href="token-logo.jpg" type="image/jpeg" />
+  <link rel="preload" href="forklift-loader.jpg" as="image" fetchpriority="high" />
+  <link rel="stylesheet" href="off-duty.css" />
+  <link rel="stylesheet" href="dispatch.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="script.js"></script>
 </head>
-<body class="text-slate-900 font-sans antialiased min-h-screen flex flex-col relative overflow-x-hidden">
-
-  <!-- Dynamic Ticker Bar -->
-  <div class="bg-amazon-navy text-white text-xs font-bold py-2.5 px-6 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-50 shadow-md">
-    <div class="flex items-center gap-3">
-      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-      <span>MAINNET: <strong class="text-amazon-orange">ROBINHOOD CHAIN</strong></span>
-    </div>
-    <div class="flex items-center gap-4">
-      <div class="bg-slate-800 border border-slate-700 px-3 py-1 rounded-lg text-emerald-400 font-mono">
-        $AMZN: <span class="text-white font-bold">$251.57</span>
-      </div>
-      <a href="https://long.xyz" target="_blank" class="hover:text-amazon-orange transition underline">Launchpad: Long.xyz</a>
-    </div>
-  </div>
-
-  <!-- TOP HALF CONTAINER: Extremely clean/spacious mimicking boxycat style with forklift background -->
-  <div class="top-hero-section w-full border-b-2 border-amazon-navy">
-    <!-- Main Header -->
-    <header class="py-6 px-6 max-w-6xl mx-auto w-full flex items-center justify-between relative z-40">
-      <a href="https://primeonhood.com" class="flex items-center gap-3 group">
-        <img src="token-logo.jpg" alt="Logo" class="w-12 h-12 rounded-full border-2 border-white shadow-lg group-hover:rotate-12 transition-transform" />
-        <span class="font-display font-black text-3xl tracking-wider text-white drop-shadow">PRIME</span>
-      </a>
-      
-      <div class="flex items-center gap-3">
-        <a href="https://t.me/PrimeOnPons" target="_blank" class="hidden sm:inline-block px-4 py-2 font-bold text-xs rounded-xl bg-white border-2 border-amazon-navy shadow-[2px_2px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">Telegram</a>
-        <a href="https://x.com/PrimeOnPons" target="_blank" class="hidden sm:inline-block px-4 py-2 font-bold text-xs rounded-xl bg-white border-2 border-amazon-navy shadow-[2px_2px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">Twitter/X</a>
-        <a href="https://long.xyz" target="_blank" class="px-5 py-2.5 font-display font-black text-xs rounded-xl bg-amazon-orange text-slate-950 border-2 border-amazon-navy shadow-[3px_3px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
-          Trade on Long.xyz
-        </a>
-      </div>
-    </header>
-
-    <!-- Hero Section: Almost empty top space mimicking boxycat layout focus -->
-    <main class="max-w-6xl mx-auto px-6 pt-16 pb-20 relative z-10 w-full">
-      <section data-aos="fade-up" class="grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-block bg-amazon-orange border-2 border-amazon-navy text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-lg shadow-[2px_2px_0px_#131921] uppercase tracking-wider rotate-[-1deg]">
-            📦 Billion-Dollar Backing + 1000x Upside
+<body>
+  <a class="skip-link" href="#off-duty">Skip to content</a>
+  <main id="main">
+    <section class="hero" id="warehouse" aria-labelledby="hero-title">
+      <div class="warehouse-shell" id="viewport">
+        <div class="warehouse" id="scene" role="group" aria-label="PRIME delivery operations in the hand-drawn warehouse.">
+          <img class="warehouse-art" src="forklift-loader.jpg" width="2834" height="1986" alt="Forklift loader operating inside the warehouse." fetchpriority="high" draggable="false" />
+          <img class="truck-layer" src="next-day-delivery.jpg" width="2834" height="1986" alt="Delivery truck waiting at the loading dock." draggable="false" />
+          <div class="belt-layer" aria-hidden="true">
+            <img src="warehouse-footer.jpg" width="2834" height="196" alt="" draggable="false" />
+            <div class="belt-track-window"><div class="belt-track" id="belt-track"></div></div>
           </div>
-          
-          <h1 class="font-display font-black text-5xl sm:text-7xl text-white leading-[1.05] tracking-tight drop-shadow-md">
-            PRIME <br/>
-            <span class="text-amazon-orange prime-glow">DELIVERS ALL MEMES.</span>
-          </h1>
-
-          <p class="text-slate-900 text-lg sm:text-xl font-medium leading-relaxed max-w-xl bg-white/95 p-5 rounded-2xl border-2 border-amazon-navy shadow-[4px_4px_0px_#131921]">
-            Degens finally get exposure to a multi-billion dollar long-term stock hold while keeping the absolute chance to 1000x on-chain via <strong class="text-amazon-navy underline">Long.xyz</strong>.
-          </p>
-
-          <div class="flex flex-wrap gap-4 pt-2">
-            <a href="https://long.xyz" target="_blank" class="px-8 py-4 font-display font-black text-sm rounded-xl bg-amazon-orange text-slate-950 border-2 border-amazon-navy shadow-[4px_4px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
-              Buy $PRIME Now 🚀
-            </a>
-            <button onclick="triggerDispatch(event)" class="px-6 py-4 font-display font-bold text-sm rounded-xl bg-white border-2 border-amazon-navy shadow-[4px_4px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
-              Dispatch Test Package 📦
+          <div class="cat-position" id="cat-position">
+            <button class="cat" id="cat" type="button" aria-label="Trigger package dispatch">
+              <img class="cat-usual" src="roaring-kitty.jpg" width="752" height="870" alt="Roaring Kitty ready for dispatch." draggable="false" fetchpriority="high" />
+              <img class="cat-happy" src="roaring-kitty.jpg" width="636" height="858" alt="" draggable="false" />
             </button>
           </div>
+          <img class="cat-friend" id="cat-friend" src="roaring-kitty.jpg" width="636" height="858" alt="Another package rolling along." draggable="false" />
         </div>
-
-        <!-- Hero Character Image -->
-        <div class="lg:col-span-5 relative">
-          <div class="absolute -inset-2 bg-amazon-orange rounded-3xl border-2 border-amazon-navy translate-x-3 translate-y-3"></div>
-          <a href="https://long.xyz" target="_blank" class="block relative group">
-            <img src="roaring-kitty.jpg" alt="Roaring Kitty Prime" class="w-full rounded-2xl border-2 border-amazon-navy shadow-lg relative z-10 group-hover:scale-[1.01] transition" />
-          </a>
+      </div>
+      <div class="hero-heading">
+        <a class="wall-brand" href="#about" aria-haspopup="dialog" aria-label="Meet PRIME">
+          <img class="wall-head" src="token-logo.jpg" width="1584" height="1260" alt="" />
+          <h1 id="hero-title"><img class="wall-wordmark" src="token-logo.jpg" width="3270" height="1020" alt="PRIME" /></h1>
+        </a>
+        <p class="hero-tagline">Billion-Dollar Stock Exposure.<br /> 1000x Crypto Upside.</p>
+        <p class="hero-intro">Robinhood Chain just got a high-speed delivery</p>
+        <div class="hero-links">
+          <a class="hero-trade" href="https://long.xyz" target="_blank" rel="noopener noreferrer">Trade on Long.xyz <span aria-hidden="true">↗</span></a>
+          <a class="hero-secondary" href="#dispatch">Token details <span aria-hidden="true">↗</span></a>
         </div>
-      </section>
-    </main>
-    <div></div> <!-- Spacer to balance boxycat layout structure -->
-  </div>
-
-  <!-- LOWER HALF CONTAINER: Graphics-Focused Grid & Widgets -->
-  <div class="max-w-6xl mx-auto px-6 py-20 flex-1 space-y-32 relative z-10 w-full">
-    
-    <!-- Graphics-Forward Visual Grid Showcase -->
-    <section data-aos="fade-up" class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6">
-      <div class="bg-white rounded-2xl border-2 border-amazon-navy p-4 shadow-[6px_6px_0px_#131921] space-y-4 hover:-translate-y-1 transition duration-300">
-        <img src="next-day-delivery.jpg" alt="Express Delivery" class="w-full h-52 object-cover rounded-xl border-2 border-amazon-navy" />
-        <h3 class="font-display font-black text-2xl text-amazon-navy">Express Ground Fleet</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">Lightning fast delivery straight to your crypto wallet porch with ultimate reliability.</p>
+        <div class="hero-socials" role="group" aria-label="PRIME social profiles">
+          <a href="https://x.com/PrimeOnPons" target="_blank" rel="noopener noreferrer" aria-label="PRIME on X" title="PRIME on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.3l8.2-9.4L.8 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L6.4 3.9H4.6L17.8 20Z" fill="currentColor"/></svg></a>
+          <a href="https://t.me/PrimeOnPons" target="_blank" rel="noopener noreferrer" aria-label="PRIME on Telegram" title="PRIME on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 5L2 12.5l7 2.5M21 5l-2.5 15L9.5 15M21 5L9.5 15"/></svg></a>
+        </div>
       </div>
-
-      <div class="bg-white rounded-2xl border-2 border-amazon-navy p-4 shadow-[6px_6px_0px_#131921] space-y-4 hover:-translate-y-1 transition duration-300">
-        <img src="Drone-dispatch.jpg" alt="Drone Dispatch" class="w-full h-52 object-cover rounded-xl border-2 border-amazon-navy" />
-        <h3 class="font-display font-black text-2xl text-amazon-navy">Drone Air Dispatch</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">Air-dropping massive gains directly over neighborhood charts at supersonic speeds.</p>
-      </div>
-
-      <div class="bg-white rounded-2xl border-2 border-amazon-navy p-4 shadow-[6px_6px_0px_#131921] space-y-4 hover:-translate-y-1 transition duration-300">
-        <img src="Warehouse-robots.jpg" alt="Warehouse Robots" class="w-full h-52 object-cover rounded-xl border-2 border-amazon-navy" />
-        <h3 class="font-display font-black text-2xl text-amazon-navy">Automated Vaults</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">Configured token tax funds continuous automated vault buybacks around the clock.</p>
-      </div>
+      <p class="sr-only" id="scene-announcement" role="status" aria-live="polite"></p>
     </section>
-
-    <!-- Fun Stats Ribbon (Updated with 3% Tax) -->
-    <section data-aos="fade-up" class="bg-amazon-navy text-white rounded-2xl border-2 border-amazon-navy p-8 shadow-[8px_8px_0px_#ff9900]" id="dispatch">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div class="text-xs font-bold text-slate-400 uppercase">Total Supply</div>
-          <div class="font-display font-black text-2xl sm:text-3xl text-amazon-orange">1,000,000,000</div>
-          <div class="text-xs text-slate-400">100% Fair Mint</div>
-        </div>
-        <div>
-          <div class="text-xs font-bold text-slate-400 uppercase">Trading Tax</div>
-          <div class="font-display font-black text-2xl sm:text-3xl text-white">3%</div>
-          <div class="text-xs text-slate-400">Tokenized AMZN Buys</div>
-        </div>
-        <div>
-          <div class="text-xs font-bold text-slate-400 uppercase">Liquidity</div>
-          <div class="font-display font-black text-2xl sm:text-3xl text-emerald-400">100% Locked</div>
-          <div class="text-xs text-slate-400">Curve Verified</div>
-        </div>
-        <div onclick="triggerDispatch(event)" class="cursor-pointer group">
-          <div class="text-xs font-bold text-slate-400 uppercase group-hover:text-amazon-orange">Packages Sent</div>
-          <div id="dispatchCounter" class="font-display font-black text-2xl sm:text-3xl text-amazon-orange">12,480+</div>
-          <div class="text-xs text-amazon-orange underline">Click to send 📦</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Live Chart Showcase -->
-    <section data-aos="fade-up" class="space-y-6">
-      <div class="space-y-1">
-        <h2 class="font-display font-black text-3xl text-amazon-navy">Stock-Backed Market Curve</h2>
-        <p class="text-slate-600 font-medium">Real-time $AMZN tracking paired natively via Long.xyz liquidity.</p>
-      </div>
-
-      <div class="w-full h-96 rounded-2xl border-2 border-amazon-navy shadow-[6px_6px_0px_#131921] overflow-hidden bg-slate-950">
-        <div class="tradingview-widget-container" style="height:100%;width:100%;">
-          <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%;"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-          {
-            "lineWidth": 2,
-            "lineType": 0,
-            "chartType": "line",
-            "fontColor": "rgb(156, 163, 175)",
-            "gridLineColor": "rgba(242, 242, 242, 0.06)",
-            "backgroundColor": "#0f172a",
-            "widgetFontColor": "#f3f4f6",
-            "colorTheme": "dark",
-            "isTransparent": false,
-            "locale": "en",
-            "chartOnly": false,
-            "scalePosition": "right",
-            "symbols": [["NASDAQ:AMZN|1M"]],
-            "width": "100%",
-            "height": "100%"
-          }
-          </script>
+      
+    <section class="off-duty" id="off-duty" aria-labelledby="off-duty-title">
+      <div class="off-duty-inner">
+        <header class="off-duty-heading">
+          <span class="section-label">HOW TO GET PRIME</span>
+          <h2 id="off-duty-title">Secure your bags.</h2>
+          <p>Three steps to billion-dollar equity backing and 1000x meme velocity.</p>
+        </header>
+        <div class="boxy-moments">
+          <article class="moment">
+            <div class="moment-heading">
+              <span class="moment-number">01</span>
+              <h3>Get a wallet</h3>
+            </div>
+            <p>
+              Install MetaMask, Rabby, or Robinhood Wallet and select the Robinhood Chain network.
+            </p>
+            <div class="moment-art">
+              <img
+                src="Prime-vault.jpg"
+                width="826"
+                height="764"
+                loading="lazy"
+                alt="Automated vault setup."
+              />
+            </div>
+            <a href="#wallet-help" aria-haspopup="dialog">Set one up <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="moment">
+            <div class="moment-heading">
+              <span class="moment-number">02</span>
+              <h3>Visit Long.xyz</h3>
+            </div>
+            <p>
+              Navigate to Long.xyz and pair your Web3 wallet for instant DEX execution.
+            </p>
+            <div class="moment-art">
+              <img
+                src="buyback.jpg"
+                width="820"
+                height="674"
+                loading="lazy"
+                alt="Automated buyback engine."
+              />
+            </div>
+            <a href="https://long.xyz" target="_blank" rel="noopener noreferrer">Open Long.xyz <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="moment">
+            <div class="moment-heading">
+              <span class="moment-number">03</span>
+              <h3>Swap $PRIME</h3>
+            </div>
+            <p>
+              Locate the $PRIME / Tokenized $AMZN pair on the bonding curve and confirm your trade.
+            </p>
+            <div class="moment-art">
+              <img
+                src="Prime-porch.jpg"
+                width="1104"
+                height="990"
+                loading="lazy"
+                alt="Doorstep delivery finality."
+              />
+            </div>
+            <a href="https://long.xyz" target="_blank" rel="noopener noreferrer">Swap $PRIME <span aria-hidden="true">→</span></a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Contract Copy Banner -->
-    <section data-aos="fade-up" class="bg-amber-100 rounded-2xl border-2 border-amazon-navy p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-[6px_6px_0px_#131921]">
-      <div>
-        <div class="text-xs font-bold uppercase text-slate-700">Robinhood Chain Smart Contract</div>
-        <div class="font-mono font-bold text-amazon-navy text-lg">Launching live on Long.xyz</div>
+    <section class="dispatch-section" id="dispatch" aria-labelledby="dispatch-title">
+      <div class="dispatch-page-inner">
+        <div class="dispatch-layout">
+          <svg class="parcel-ear parcel-ear-left" viewBox="0 0 130 110" aria-hidden="true"><path d="M6 104 46 13Q49 6 55 13L124 104Z" fill="#ff9900" stroke="#131921" stroke-width="5" stroke-linejoin="round"/><path d="M27 97 51 26 60 97Z" fill="#232f3e" stroke="#131921" stroke-width="2.5" stroke-linejoin="round"/><path d="M64 43 100 94M70 64 87 91" stroke="#ff9900" stroke-width="1.5" opacity=".5"/></svg>
+          <svg class="parcel-ear parcel-ear-right" viewBox="0 0 130 110" aria-hidden="true"><path d="M6 104 46 13Q49 6 55 13L124 104Z" fill="#ff9900" stroke="#131921" stroke-width="5" stroke-linejoin="round"/><path d="M27 97 51 26 60 97Z" fill="#232f3e" stroke="#131921" stroke-width="2.5" stroke-linejoin="round"/><path d="M64 43 100 94M70 64 87 91" stroke="#ff9900" stroke-width="1.5" opacity=".5"/></svg>
+          <div class="dispatch-story">
+            <h2 id="dispatch-title">Check the label.</h2>
+            <p>$PRIME, AMZN stock pairing, and the logistics specs that matter.</p>
+            <a class="dispatch-long" href="https://long.xyz" target="_blank" rel="noopener noreferrer">Explore Long.xyz <span aria-hidden="true">↗</span></a>
+            <div class="dispatch-signature"><img src="token-logo.jpg" alt="" width="1584" height="1260" loading="lazy" /><span>Inspected by PRIME Logistics.<br />3% tax for stock buybacks.</span></div>
+          </div>
+          <article class="parcel-slip" aria-label="PRIME token shipping label">
+            <div class="slip-topline"><span>PRIME WAREHOUSE / DISPATCH NOTE</span><span>01 OF 01</span></div>
+            <div class="slip-title"><strong>PRIME <span>/</span> AMZN</strong><span class="slip-stamp">HANDLE WITH<br />LEVERAGE</span></div>
+            <dl class="slip-specs">
+              <div><dt>CONTENTS</dt><dd>PRIME delivery token <span class="slip-ticker">$PRIME</span></dd></div>
+              <div><dt>NETWORK</dt><dd>Robinhood Chain</dd></div>
+              <div><dt>PLATFORM</dt><dd><a href="https://long.xyz" target="_blank" rel="noopener noreferrer">Long.xyz ↗</a></dd></div>
+              <div><dt>PAIR</dt><dd>Tokenized AMZN Stock</dd></div>
+            </dl>
+            <div class="slip-contract" id="contract-details">
+              <div class="slip-field-label"><span>PRIME CONTRACT ADDRESS (CA)</span><span>VERIFIED</span></div>
+              <div class="contract-value"><code id="boxy-ca">Launching soon on Long.xyz</code><button id="copy-ca" type="button" aria-describedby="copy-ca-status">Copy CA</button></div>
+              <p id="copy-ca-status" role="status" aria-live="polite">Address supplied by the project via Long.xyz.</p>
+            </div>
+            <div class="slip-destinations">
+              <div><span>TRADING TAX</span><strong>3% (Tokenized AMZN Buys)</strong></div>
+              <div><span>PRIME ON LONG</span><strong><a href="https://long.xyz" target="_blank" rel="noopener noreferrer">Trade PRIME/AMZN ↗</a></strong></div>
+              <div><span>CHART</span><strong><a href="https://www.tradingview.com/symbols/NASDAQ-AMZN/" target="_blank" rel="noopener noreferrer">TradingView ↗</a><small>Real-time $AMZN market curve</small></strong></div>
+            </div>
+            <div class="slip-bottom"><span class="barcode" aria-hidden="true"></span><span>BILLION DOLLAR HOLD.<br />1000X UPSIDE.</span></div>
+          </article>
+        </div>
+        <footer class="dispatch-footer">
+          <div class="footer-socials" role="group" aria-label="PRIME social profiles">
+            <a href="https://x.com/PrimeOnPons" target="_blank" rel="noopener noreferrer" aria-label="PRIME on X" title="PRIME on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.3l8.2-9.4L.8 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L6.4 3.9H4.6L17.8 20Z" fill="currentColor"/></svg></a>
+            <a href="https://t.me/PrimeOnPons" target="_blank" rel="noopener noreferrer" aria-label="PRIME on Telegram" title="PRIME on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 5L2 12.5l7 2.5M21 5l-2.5 15L9.5 15M21 5L9.5 15"/></svg></a>
+          </div>
+          <a class="brand footer-brand" href="#warehouse" aria-label="PRIME home"><img src="token-logo.jpg" alt="" width="1584" height="1260" loading="lazy" /><img class="footer-wordmark" src="token-logo.jpg" alt="PRIME" width="3270" height="1020" loading="lazy" /></a>
+          <a class="footer-details" href="#details" aria-haspopup="dialog">Project notes &amp; disclosures ↗</a>
+        </footer>
       </div>
-      <button onclick="copyContract()" id="copyAddressBtn" class="px-6 py-3 rounded-xl bg-amazon-navy text-white font-display font-bold text-xs border-2 border-amazon-navy shadow-[3px_3px_0px_#ff9900] hover:translate-x-0.5 hover:translate-y-0.5 transition">
-        Copy Contract Address
-      </button>
     </section>
+  </main>
 
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-amazon-navy text-slate-400 text-xs py-8 mt-20 border-t-2 border-slate-800">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="font-display font-black text-xl text-white">PRIME</span>
-        <span class="text-slate-500">| Delivering All Memes</span>
+  <dialog id="about" class="world-dialog" aria-labelledby="about-title">
+    <button class="dialog-close" type="button" aria-label="Close Meet PRIME">×</button>
+    <section class="about" aria-labelledby="about-title">
+      <div class="employee-card">
+        <div class="employee-top">
+          <span>DELIVERY OPERATIONS</span><span>24/7.</span>
+        </div>
+        <div class="employee-portrait">
+          <span class="portrait-orbit" aria-hidden="true"></span>
+          <img src="roaring-kitty.jpg" alt="PRIME mascot portrait." width="752" height="870" loading="lazy" />
+        </div>
+        <div class="employee-bottom">
+          <span class="signature">PRIME</span>
+          <span>Delivering<br />all memes</span>
+        </div>
+        <span class="card-tape" aria-hidden="true"></span>
       </div>
-      <p>Launchpad Partner: <a href="https://long.xyz" target="_blank" class="text-amazon-orange font-bold underline">Long.xyz</a></p>
-      <div class="cursor-pointer text-white font-bold hover:text-amazon-orange transition" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        Back to top &uarr;
+      <div class="about-copy">
+        <span class="section-label">MEET THE LOGISTICS</span>
+        <h2 id="about-title">Billion-dollar stock hold.<br />1000x crypto upside.</h2>
+        <p>
+          Degens finally get the chance to gain exposure to a multi-billion dollar long-term stock hold while keeping the absolute opportunity to 1000x on-chain.
+        </p>
+        <p>
+          Powered by Robinhood Chain and launched natively through Long.xyz with automated 3% buyback mechanics.
+        </p>
+        <div class="personality">
+          <span>Mainnet</span><strong>Robinhood Chain</strong>
+          <span>Launchpad</span><strong>Long.xyz</strong>
+        </div>
+        <a class="text-link" href="token-logo.jpg" download="prime-token.jpg">Take PRIME with you <span aria-hidden="true">↗</span></a>
       </div>
-    </div>
-  </footer>
+    </section>
+  </dialog>
 
-  <!-- AOS Script -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <!-- GSAP Engine -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <dialog id="wallet-help" class="world-dialog setup-dialog" aria-labelledby="wallet-help-title">
+    <button class="dialog-close" type="button" aria-label="Close wallet guide">×</button>
+    <span class="section-label">01 / GET A WALLET</span>
+    <h2 id="wallet-help-title">Start with the right wallet.</h2>
+    <p>Install MetaMask, Rabby, or Robinhood Wallet and configure your network for Robinhood Chain.</p>
+    <p>Keep your recovery phrase secure and private at all times.</p>
+    <a class="platform-link" href="https://long.xyz" target="_blank" rel="noopener noreferrer">Open Long.xyz ↗</a>
+    <small>Platform homepage; this site does not create or connect wallets directly.</small>
+  </dialog>
 
-  <script>
-    AOS.init({ once: true, offset: 30 });
+  <dialog id="funding-help" class="world-dialog setup-dialog" aria-labelledby="funding-help-title">
+    <button class="dialog-close" type="button" aria-label="Close funding guide">×</button>
+    <span class="section-label">02 / ADD FUNDS</span>
+    <h2 id="funding-help-title">Ready for the swap.</h2>
+    <p>Top up your wallet with enough funds for your allocation plus network gas fees.</p>
+    <p>Head over to Long.xyz to complete your transaction safely.</p>
+    <a class="platform-link" href="https://long.xyz" target="_blank" rel="noopener noreferrer">Open Long.xyz ↗</a>
+    <small>Platform homepage; no transfer takes place on this site.</small>
+  </dialog>
 
-    let count = 12480;
-    const dispatchAlerts = [
-      "Meme Package Dispatched 📦", 
-      "PRIME Liquidity Locked 🔒", 
-      "AMZN Pair Settled 📈", 
-      "1000x Flight Airborne 🚀", 
-      "3% Tax Buyback Triggered ⚡"
-    ];
+  <dialog id="details" class="world-dialog" aria-labelledby="details-title">
+    <button class="dialog-close" type="button" aria-label="Close project notes">×</button>
+    <h2 id="details-title">Project notes</h2>
+    <footer class="site-footer">
+      <p>
+        PRIME is a speculative meme token providing exposure to tokenized equity pairing. You can lose all value. No affiliation with or endorsement by Amazon, Robinhood Markets, or Long.xyz is claimed. Token details and official destinations are managed via Long.xyz.
+      </p>
+      <div class="footer-bottom">
+        <span>© 2026 PRIME</span>
+        <span>Delivering all memes.</span>
+      </div>
+    </footer>
+  </dialog>
 
-    function triggerDispatch(e) {
-      count++;
-      document.getElementById('dispatchCounter').innerText = count.toLocaleString() + '+';
-
-      gsap.fromTo("#dispatchCounter", { scale: 1.3 }, { scale: 1, duration: 0.3, ease: "back.out(2)" });
-
-      const particle = document.createElement('div');
-      particle.className = 'dispatch-particle';
-      particle.innerText = dispatchAlerts[Math.floor(Math.random() * dispatchAlerts.length)];
-
-      const posX = e ? e.clientX : Math.random() * (window.innerWidth - 180);
-      particle.style.left = Math.min(Math.max(posX, 20), window.innerWidth - 220) + 'px';
-      particle.style.top = (e ? e.clientY : window.innerHeight - 80) + 'px';
-
-      document.body.appendChild(particle);
-      setTimeout(() => { particle.remove(); }, 1800);
-    }
-
-    function copyContract() {
-      navigator.clipboard.writeText("Launching soon on Long.xyz!");
-      const btn = document.getElementById('copyAddressBtn');
-      btn.innerText = "Address Copied! ✅";
-      setTimeout(() => { btn.innerText = "Copy Contract Address"; }, 2000);
-    }
-  </script>
+  <noscript><style>.world-dialog:not([open]){display:block;position:relative;margin:30px auto}.dialog-close{display:none}</style><p class="noscript">PRIME warehouse is operating. Details and artwork are available above.</p></noscript>
 </body>
 </html>
