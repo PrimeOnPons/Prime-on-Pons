@@ -25,6 +25,7 @@
       overflow-x: hidden;
     }
 
+    /* Ticker Bar with robinhood.png icon */
     .ticker-bar {
       background-color: #131921;
       color: #ffffff;
@@ -40,12 +41,24 @@
       border-bottom: 1px solid #334155;
     }
 
+    .ticker-chain {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ticker-chain img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
     .ticker-bar a {
       color: #ff9900;
       text-decoration: none;
     }
 
-    /* Hero Header Layout Matching the Reference Style */
+    /* Hero Header Layout */
     .hero-header {
       position: relative;
       background-image: linear-gradient(to bottom, rgba(19, 25, 33, 0.7) 0%, rgba(19, 25, 33, 0.4) 50%, #f2ece4 100%), url('forklift-loader.jpg');
@@ -60,26 +73,8 @@
       margin: 0 auto;
       padding: 24px;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: #ffffff;
-      font-weight: 900;
-      font-size: 1.5rem;
-      font-family: 'Outfit', sans-serif;
-      cursor: pointer;
-    }
-
-    .brand img {
-      width: 45px;
-      height: 45px;
-      object-fit: contain;
     }
 
     .nav-right {
@@ -145,7 +140,7 @@
       transform: translate(-1px, -1px);
     }
 
-    /* Left-aligned Hero Layout with Big Font Title and Simple Hook */
+    /* Left-aligned Hero Layout cleanly incorporated into the site without text boxes */
     .hero-content {
       max-width: 1200px;
       margin: 30px auto 0;
@@ -157,44 +152,40 @@
 
     .hero-text {
       text-align: left;
-      max-width: 550px;
-      background: rgba(246, 241, 235, 0.92);
-      border: 3px solid #1f1b18;
-      border-radius: 24px;
-      padding: 40px;
-      box-shadow: 8px 8px 0px #1f1b18;
+      max-width: 500px;
       color: #1f1b18;
     }
 
     .hero-logo-large {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       object-fit: contain;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      cursor: pointer;
     }
 
     .hero-text h1 {
-      font-size: 4.5rem;
+      font-size: 5rem;
       font-weight: 900;
-      line-height: 1;
-      margin-bottom: 12px;
+      line-height: 0.95;
+      margin-bottom: 16px;
       font-family: 'Outfit', sans-serif;
       color: #1f1b18;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
 
     .hero-tagline {
       font-size: 1.25rem;
       font-weight: 800;
-      color: #474038;
+      color: #3f3933;
       line-height: 1.4;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .hero-subtext {
       font-size: 0.95rem;
-      color: #78716c;
-      font-weight: 600;
+      color: #57534e;
+      font-weight: 700;
       margin-bottom: 24px;
     }
 
@@ -650,11 +641,15 @@
 </head>
 <body>
 
-  <!-- Dynamic Ticker Bar -->
+  <!-- Dynamic Ticker Bar with robinhood.png -->
   <div class="ticker-bar">
-    <div>🚀 MAINNET: <strong style="color: #ff9900;">ROBINHOOD CHAIN</strong></div>
+    <div class="ticker-chain">
+      <span>MAINNET:</span>
+      <img src="robinhood.png" alt="Robinhood" />
+      <strong style="color: #ff9900;">ROBINHOOD CHAIN</strong>
+    </div>
     <div>
-      $AMZN: <span style="color: #34d399; font-family: monospace;">$251.57</span> | 
+      AMZN: <span style="color: #34d399; font-family: monospace;">$251.57</span> | 
       <a href="https://long.xyz" target="_blank">Launchpad: Long.xyz ↗</a>
     </div>
   </div>
@@ -662,10 +657,6 @@
   <!-- Hero Header -->
   <header class="hero-header">
     <div class="navbar">
-      <a href="#about" onclick="openModal(event)" class="brand">
-        <img src="token-transparent.png" alt="Logo" />
-        <span>PRIME</span>
-      </a>
       <div class="nav-right">
         <!-- X (Twitter) Logo Button -->
         <a href="https://x.com/Primeonhood" target="_blank" class="social-btn" title="X (Twitter)">
@@ -683,10 +674,10 @@
       </div>
     </div>
 
-    <!-- Left-aligned Hero Section Matching Reference Layout -->
+    <!-- Left-aligned Hero Section without outer text box, matching the reference layout cleanly -->
     <div class="hero-content">
       <div class="hero-text">
-        <img src="token-transparent.png" alt="Logo" class="hero-logo-large" />
+        <img src="token-transparent.png" alt="Logo" class="hero-logo-large" onclick="openModal(event)" />
         <h1>Prime</h1>
         <p class="hero-tagline">A chance for degens to invest in the company that keeps the world going, with 100x gains</p>
         <p class="hero-subtext">Robinhood just got a special delivery</p>
