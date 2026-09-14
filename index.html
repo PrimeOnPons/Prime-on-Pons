@@ -82,6 +82,37 @@
       object-fit: contain;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .social-btn {
+      background-color: #ffffff;
+      color: #131921;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #131921;
+      box-shadow: 3px 3px 0px #131921;
+      transition: transform 0.1s ease;
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      transform: translate(-1px, -1px);
+    }
+
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
     .btn-primary {
       background-color: #ff9900;
       color: #0f172a;
@@ -192,7 +223,6 @@
       gap: 20px;
     }
 
-    /* Unboxed Step Cards */
     .step-card {
       background: #ffffff;
       border: 2px solid #1f1b18;
@@ -268,9 +298,9 @@
       color: #ff9900;
     }
 
-    /* Cardboard Box Dispatch Styling Matching Logo Theme */
+    /* Bottom Box Recreated with exact Logo Colorway (Light box background with logo's tan/gold color body and blue center tape stripe) */
     .dispatch-wrapper {
-      background-color: #d1b490;
+      background-color: #f6f1eb;
       border: 4px solid #1f1b18;
       border-radius: 28px;
       padding: 60px 40px;
@@ -284,13 +314,19 @@
       background-image: linear-gradient(90deg, transparent calc(50% - 24px), #0099ff calc(50% - 24px), #0099ff calc(50% + 24px), transparent calc(50% + 24px));
     }
 
+    /* Left panel background styled with the exact gold/tan logo color tone */
     .dispatch-left {
       position: relative;
       z-index: 2;
+      background-color: #d1b490;
+      border: 3px solid #1f1b18;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 6px 6px 0px #1f1b18;
     }
 
     .dispatch-left h2 {
-      font-size: 3.5rem;
+      font-size: 3rem;
       font-weight: 900;
       font-family: 'Outfit', sans-serif;
       color: #1f1b18;
@@ -299,7 +335,7 @@
     }
 
     .dispatch-left p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #3f3933;
       margin-bottom: 24px;
     }
@@ -307,9 +343,9 @@
     .shipping-slip {
       background: #ffffff;
       border: 2px solid #1f1b18;
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 30px;
-      box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+      box-shadow: 8px 8px 0px #1f1b18;
       position: relative;
       z-index: 2;
     }
@@ -607,8 +643,19 @@
         <img src="token-transparent.png" alt="Logo" />
         <span>PRIME</span>
       </a>
-      <div style="display: flex; gap: 12px;">
-        <a href="https://t.me/PrimeOnPons" target="_blank" class="btn-primary" style="background: #ffffff; color: #131921;">Telegram</a>
+      <div class="nav-right">
+        <!-- X (Twitter) Logo Button -->
+        <a href="https://x.com/Primeonhood" target="_blank" class="social-btn" title="X (Twitter)">
+          <svg viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <!-- Telegram Logo Button -->
+        <a href="https://t.me/PrimeOnHood" target="_blank" class="social-btn" title="Telegram">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27 0-.12.07-1.99 1.25-5.62 3.69-.53.36-1.01.54-1.44.53-.47-.02-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.07-.78 4.18-1.82 6.98-3.02 8.41-3.61 4-.1.66 4.67 1.8 4.65 1.8z"/>
+          </svg>
+        </a>
         <a href="https://long.xyz" target="_blank" class="btn-primary">Trade on Long.xyz</a>
       </div>
     </div>
@@ -632,7 +679,7 @@
   <!-- Main Content Container -->
   <main class="container">
     
-    <!-- 4-Step Cards Section -->
+    <!-- 4-Step Cards Section utilizing the correct asset names -->
     <section class="steps-section">
       <div class="section-header">
         <span class="section-label">HOW TO GET PRIME</span>
@@ -649,7 +696,7 @@
             </div>
             <p>Use a wallet that supports Robinhood Chain. Check network compatibility before you start.</p>
             <div class="step-art-container">
-              <img src="bezos-wallet.jpg" alt="Wallet setup" class="step-art" />
+              <img src="bezos-wallet.png" alt="Wallet setup" class="step-art" />
             </div>
           </div>
           <a href="https://long.xyz" target="_blank" class="step-link">Set one up <span>→</span></a>
@@ -663,7 +710,7 @@
             </div>
             <p>Top it up with enough for your swap, plus a little extra for network gas fees.</p>
             <div class="step-art-container">
-              <img src="Warehouse-robots.jpg" alt="Funding engine" class="step-art" />
+              <img src="bezos-addfunds.png" alt="Add funds" class="step-art" />
             </div>
           </div>
           <a href="https://long.xyz" target="_blank" class="step-link">Fund it <span>→</span></a>
@@ -677,7 +724,7 @@
             </div>
             <p>Check the verified contract, pick your amount, and confirm the trade on Long.xyz.</p>
             <div class="step-art-container">
-              <img src="buyback.jpg" alt="Swap execution" class="step-art" />
+              <img src="bezos-swap.png" alt="Swap execution" class="step-art" />
             </div>
           </div>
           <a href="https://long.xyz" target="_blank" class="step-link">Swap for PRIME <span>→</span></a>
@@ -691,7 +738,7 @@
             </div>
             <p>Gain multi-billion dollar AMZN equity exposure while riding 1000x on-chain volume.</p>
             <div class="step-art-container">
-              <img src="next-day-delivery.jpg" alt="Delivery finality" class="step-art" />
+              <img src="bezos-hold.png" alt="Hold equity" class="step-art" />
             </div>
           </div>
           <a href="https://long.xyz" target="_blank" class="step-link">Join us <span>→</span></a>
@@ -699,7 +746,7 @@
       </div>
     </section>
 
-    <!-- Cardboard Box Dispatch Section Styled to Match Logo Theme -->
+    <!-- Bottom Box Styled with exact Logo Colorway (Tan/Gold Cardboard + Blue Center Tape) -->
     <section class="dispatch-wrapper">
       <div class="dispatch-left">
         <h2>Check the label.</h2>
@@ -762,7 +809,7 @@
 
   </main>
 
-  <!-- Interactive Modal Popup (Exitable) -->
+  <!-- Interactive Modal Popup -->
   <div id="about" class="world-modal" onclick="handleModalClick(event)">
     <div class="modal-content">
       <button class="dialog-close" type="button" onclick="closeModal()">×</button>
@@ -817,7 +864,6 @@
     }
 
     function handleModalClick(e) {
-      e.preventDefault();
       if (e.target.id === 'about') {
         closeModal();
       }
@@ -825,7 +871,7 @@
 
     function copyCA() {
       navigator.clipboard.writeText("Launching soon on Long.xyz!");
-      alert("Contract notice opened/copied!");
+      alert("Contract notice copied!");
     }
   </script>
 
