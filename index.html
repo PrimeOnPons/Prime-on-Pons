@@ -48,6 +48,14 @@
       background-attachment: fixed;
     }
 
+    /* Top Half Background Wrapper using forklift-loader.jpg */
+    .top-hero-section {
+      position: relative;
+      background-image: linear-gradient(to bottom, rgba(19, 25, 33, 0.85), rgba(253, 253, 253, 0.95)), url('forklift-loader.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
     .dispatch-particle {
       position: fixed;
       pointer-events: none;
@@ -90,59 +98,65 @@
     </div>
   </div>
 
-  <!-- Main Header -->
-  <header class="py-6 px-6 max-w-6xl mx-auto w-full flex items-center justify-between relative z-40">
-    <a href="https://primeonhood.com" class="flex items-center gap-3 group">
-      <img src="token-logo.jpg" alt="Logo" class="w-12 h-12 rounded-full border-2 border-amazon-navy shadow-lg group-hover:rotate-12 transition-transform" />
-      <span class="font-display font-black text-3xl tracking-wider text-amazon-navy">PRIME</span>
-    </a>
-    
-    <div class="flex items-center gap-3">
-      <a href="https://t.me/PrimeOnPons" target="_blank" class="hidden sm:inline-block px-4 py-2 font-bold text-xs rounded-xl bg-white border-2 border-amazon-navy shadow-[2px_2px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">Telegram</a>
-      <a href="https://x.com/PrimeOnPons" target="_blank" class="hidden sm:inline-block px-4 py-2 font-bold text-xs rounded-xl bg-white border-2 border-amazon-navy shadow-[2px_2px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">Twitter/X</a>
-      <a href="https://long.xyz" target="_blank" class="px-5 py-2.5 font-display font-black text-xs rounded-xl bg-amazon-orange text-slate-950 border-2 border-amazon-navy shadow-[3px_3px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
-        Trade on Long.xyz
+  <!-- TOP HALF CONTAINER WITH FORKLIFT LOADER BACKGROUND -->
+  <div class="top-hero-section w-full border-b-2 border-amazon-navy">
+    <!-- Main Header -->
+    <header class="py-6 px-6 max-w-6xl mx-auto w-full flex items-center justify-between relative z-40">
+      <a href="https://primeonhood.com" class="flex items-center gap-3 group">
+        <img src="token-logo.jpg" alt="Logo" class="w-12 h-12 rounded-full border-2 border-white shadow-lg group-hover:rotate-12 transition-transform" />
+        <span class="font-display font-black text-3xl tracking-wider text-white drop-shadow">PRIME</span>
       </a>
-    </div>
-  </header>
-
-  <!-- Hero Section with Minimalist Top Space & Heavy Graphics Focus -->
-  <main class="max-w-6xl mx-auto px-6 pt-12 pb-24 flex-1 space-y-32 relative z-10">
-    
-    <section data-aos="fade-up" class="grid lg:grid-cols-12 gap-12 items-center min-h-[55vh]">
-      <div class="lg:col-span-7 space-y-6">
-        <div class="inline-block bg-amazon-orange border-2 border-amazon-navy text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-lg shadow-[2px_2px_0px_#131921] uppercase tracking-wider rotate-[-1deg]">
-          📦 Billion-Dollar Backing + 1000x Upside
-        </div>
-        
-        <h1 class="font-display font-black text-5xl sm:text-7xl text-amazon-navy leading-[1.05] tracking-tight">
-          PRIME <br/>
-          <span class="text-amazon-orange prime-glow">DELIVERS ALL MEMES.</span>
-        </h1>
-
-        <p class="text-slate-700 text-lg sm:text-xl font-medium leading-relaxed max-w-xl bg-white/90 p-5 rounded-2xl border-2 border-amazon-navy shadow-[4px_4px_0px_#131921]">
-          Degens finally get exposure to a multi-billion dollar long-term stock hold while keeping the absolute chance to 1000x on-chain via <strong class="text-amazon-navy underline">Long.xyz</strong>.
-        </p>
-
-        <div class="flex flex-wrap gap-4 pt-2">
-          <a href="https://long.xyz" target="_blank" class="px-8 py-4 font-display font-black text-sm rounded-xl bg-amazon-orange text-slate-950 border-2 border-amazon-navy shadow-[4px_4px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
-            Buy $PRIME Now 🚀
-          </a>
-          <button onclick="triggerDispatch(event)" class="px-6 py-4 font-display font-bold text-sm rounded-xl bg-white border-2 border-amazon-navy shadow-[4px_4px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
-            Dispatch Test Package 📦
-          </button>
-        </div>
-      </div>
-
-      <!-- Hero Character Image -->
-      <div class="lg:col-span-5 relative">
-        <div class="absolute -inset-2 bg-amazon-orange rounded-3xl border-2 border-amazon-navy translate-x-3 translate-y-3"></div>
-        <a href="https://long.xyz" target="_blank" class="block relative group">
-          <img src="roaring-kitty.jpg" alt="Roaring Kitty Prime" class="w-full rounded-2xl border-2 border-amazon-navy shadow-lg relative z-10 group-hover:scale-[1.01] transition" />
+      
+      <div class="flex items-center gap-3">
+        <a href="https://t.me/PrimeOnPons" target="_blank" class="hidden sm:inline-block px-4 py-2 font-bold text-xs rounded-xl bg-white border-2 border-amazon-navy shadow-[2px_2px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">Telegram</a>
+        <a href="https://x.com/PrimeOnPons" target="_blank" class="hidden sm:inline-block px-4 py-2 font-bold text-xs rounded-xl bg-white border-2 border-amazon-navy shadow-[2px_2px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">Twitter/X</a>
+        <a href="https://long.xyz" target="_blank" class="px-5 py-2.5 font-display font-black text-xs rounded-xl bg-amazon-orange text-slate-950 border-2 border-amazon-navy shadow-[3px_3px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
+          Trade on Long.xyz
         </a>
       </div>
-    </section>
+    </header>
 
+    <!-- Hero Section with Minimalist Top Space & Heavy Graphics Focus -->
+    <main class="max-w-6xl mx-auto px-6 pt-12 pb-24 relative z-10">
+      <section data-aos="fade-up" class="grid lg:grid-cols-12 gap-12 items-center min-h-[55vh]">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-block bg-amazon-orange border-2 border-amazon-navy text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-lg shadow-[2px_2px_0px_#131921] uppercase tracking-wider rotate-[-1deg]">
+            📦 Billion-Dollar Backing + 1000x Upside
+          </div>
+          
+          <h1 class="font-display font-black text-5xl sm:text-7xl text-white leading-[1.05] tracking-tight drop-shadow-md">
+            PRIME <br/>
+            <span class="text-amazon-orange prime-glow">DELIVERS ALL MEMES.</span>
+          </h1>
+
+          <p class="text-slate-900 text-lg sm:text-xl font-medium leading-relaxed max-w-xl bg-white/95 p-5 rounded-2xl border-2 border-amazon-navy shadow-[4px_4px_0px_#131921]">
+            Degens finally get exposure to a multi-billion dollar long-term stock hold while keeping the absolute chance to 1000x on-chain via <strong class="text-amazon-navy underline">Long.xyz</strong>.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="https://long.xyz" target="_blank" class="px-8 py-4 font-display font-black text-sm rounded-xl bg-amazon-orange text-slate-950 border-2 border-amazon-navy shadow-[4px_4px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
+              Buy $PRIME Now 🚀
+            </a>
+            <button onclick="triggerDispatch(event)" class="px-6 py-4 font-display font-bold text-sm rounded-xl bg-white border-2 border-amazon-navy shadow-[4px_4px_0px_#131921] hover:translate-x-0.5 hover:translate-y-0.5 transition">
+              Dispatch Test Package 📦
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Character Image -->
+        <div class="lg:col-span-5 relative">
+          <div class="absolute -inset-2 bg-amazon-orange rounded-3xl border-2 border-amazon-navy translate-x-3 translate-y-3"></div>
+          <a href="https://long.xyz" target="_blank" class="block relative group">
+            <img src="roaring-kitty.jpg" alt="Roaring Kitty Prime" class="w-full rounded-2xl border-2 border-amazon-navy shadow-lg relative z-10 group-hover:scale-[1.01] transition" />
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- LOWER HALF CONTAINER -->
+  <div class="max-w-6xl mx-auto px-6 py-20 flex-1 space-y-32 relative z-10 w-full">
+    
     <!-- Graphics-Forward Visual Grid Showcase -->
     <section data-aos="fade-up" class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10">
       <div class="bg-white rounded-2xl border-2 border-amazon-navy p-4 shadow-[6px_6px_0px_#131921] space-y-4 hover:-translate-y-1 transition duration-300">
@@ -234,7 +248,7 @@
       </button>
     </section>
 
-  </main>
+  </div>
 
   <!-- Footer -->
   <footer class="bg-amazon-navy text-slate-400 text-xs py-8 mt-20 border-t-2 border-slate-800">
