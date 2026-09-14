@@ -579,7 +579,7 @@
       align-items: center;
     }
 
-    /* Wallet-specific custom popup card styling */
+    /* Custom popup card styling for steps */
     .wallet-modal-content {
       background: #fbf9f5;
       border: 3px solid #1f1b18;
@@ -811,12 +811,12 @@
               <span class="step-number">02</span>
               <h3>Add funds</h3>
             </div>
-            <p>Top it up with enough for your swap, plus a little extra for network gas fees.</p>
+            <p>Top it up with enough for your swap, plus a little extra for gas.</p>
             <div class="step-art-container">
               <img src="bezos-addfunds.png" alt="Add funds" class="step-art" />
             </div>
           </div>
-          <a href="https://long.xyz" target="_blank" class="step-link">Fund it <span>→</span></a>
+          <a onclick="openFundsModal(event)" class="step-link">Fund it <span>→</span></a>
         </article>
 
         <article class="step-card">
@@ -825,7 +825,7 @@
               <span class="step-number">03</span>
               <h3>Swap for PRIME</h3>
             </div>
-            <p>Check the verified contract, pick your amount, and confirm the trade on Long.xyz.</p>
+            <p>Check the verified contract, pick your amount, and review the swap before executing.</p>
             <div class="step-art-container">
               <img src="bezos-swap.png" alt="Swap execution" class="step-art" />
             </div>
@@ -1005,6 +1005,29 @@
     </div>
   </div>
 
+  <!-- Interactive Add Funds Modal Popup -->
+  <div id="fundsModal" class="world-modal" onclick="handleFundsModalClick(event)">
+    <div class="wallet-modal-content">
+      <button class="dialog-close" type="button" onclick="closeFundsModal()">×</button>
+      <div class="about-copy" style="margin: 0;">
+        <span class="section-label">02 / ADD FUNDS</span>
+        <h2 style="font-size: 2.2rem; font-family: 'Outfit', sans-serif; font-weight: 900; margin: 10px 0 16px; color: #1f1b18;">Ready for the swap.</h2>
+        <p style="color: #57534e; font-size: 0.95rem; margin-bottom: 12px;">Check LONG's current funding options, supported assets, and network before transferring funds. Leave enough for any fees shown in the app.</p>
+        <p style="color: #57534e; font-size: 0.95rem; margin-bottom: 20px;">Open PRIME on LONG ↗ and confirm the network and contract address before making a swap.</p>
+        
+        <div style="margin-bottom: 20px;">
+          <a href="https://long.xyz" target="_blank" style="font-size: 0.9rem; font-weight: 800; color: #ff9900; background: #131921; padding: 10px 16px; border-radius: 8px; display: inline-block; text-decoration: none; border: 2px solid #1f1b18; box-shadow: 2px 2px 0px #1f1b18;">
+            Open LONG.xyz ↗
+          </a>
+        </div>
+
+        <p style="font-size: 0.75rem; color: #78716c; border-top: 1px dashed #cbd5e1; padding-top: 12px;">
+          Platform homepage; no transfer takes place on this site.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>© 2026 PRIME ($PRIME). All rights reserved.</p>
@@ -1045,6 +1068,24 @@
     function handleWalletModalClick(e) {
       if (e.target.id === 'walletModal') {
         closeWalletModal();
+      }
+    }
+
+    function openFundsModal(e) {
+      e.preventDefault();
+      document.getElementById('fundsModal').style.display = 'flex';
+      document.getElementById('fundsModal').setAttribute('open', 'true');
+    }
+
+    function closeFundsModal() {
+      const modal = document.getElementById('fundsModal');
+      modal.style.display = 'none';
+      modal.removeAttribute('open');
+    }
+
+    function handleFundsModalClick(e) {
+      if (e.target.id === 'fundsModal') {
+        closeFundsModal();
       }
     }
 
