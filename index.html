@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PRIME</title>
+  <title>PRIME ($PRIME) — Billion-Dollar Stock Exposure + 100x Upside</title>
   <link rel="icon" type="image/png" href="token-transparent.png" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,18 +58,16 @@
       text-decoration: none;
     }
 
-    /* Hero Header Layout using forklift-loader-website.jpg with full image display & clean bottom border */
+    /* Hero Header Layout using forklift-loader-website.jpg with unproportional container set to match natural image aspect ratio + clean bottom black line */
     .hero-header {
       position: relative;
       background-image: url('forklift-loader-website.jpg');
-      background-size: 100% 100%;
-      background-position: center;
+      background-size: cover;
+      background-position: center top;
       background-repeat: no-repeat;
       color: #ffffff;
       width: 100%;
-      aspect-ratio: 16 / 9;
-      max-height: 85vh;
-      min-height: 600px;
+      height: 720px;
       border-bottom: 4px solid #1f1b18;
     }
 
@@ -116,13 +114,13 @@
     .btn-primary {
       background-color: #ff9900;
       color: #0f172a;
-      padding: 10px 20px;
-      border-radius: 12px;
+      padding: 9px 16px;
+      border-radius: 10px;
       font-weight: 800;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-decoration: none;
-      border: 2px solid #131921;
-      box-shadow: 3px 3px 0px #131921;
+      border: 2px solid #1f1b18;
+      box-shadow: 2px 2px 0px #1f1b18;
       display: inline-block;
       transition: transform 0.1s ease;
     }
@@ -130,13 +128,13 @@
     .btn-secondary {
       background-color: #ffffff;
       color: #0f172a;
-      padding: 10px 20px;
-      border-radius: 12px;
+      padding: 9px 16px;
+      border-radius: 10px;
       font-weight: 800;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-decoration: none;
-      border: 2px solid #131921;
-      box-shadow: 3px 3px 0px #131921;
+      border: 2px solid #1f1b18;
+      box-shadow: 2px 2px 0px #1f1b18;
       display: inline-block;
       transition: transform 0.1s ease;
     }
@@ -145,11 +143,11 @@
       transform: translate(-1px, -1px);
     }
 
-    /* Perfectly aligned into the left beige panel space */
+    /* Perfectly matched to fit entirely inside the left portrait column */
     .hero-content {
       width: 100%;
       margin: 0;
-      padding: 20px 0 0 5%;
+      padding: 15px 0 0 35px;
       display: flex;
       justify-content: flex-start;
       align-items: flex-start;
@@ -157,22 +155,22 @@
 
     .hero-text {
       text-align: left;
-      width: 33%;
+      width: 255px;
       color: #1f1b18;
     }
 
     .hero-logo-large {
-      width: 70px;
-      height: 70px;
+      width: 55px;
+      height: 55px;
       object-fit: contain;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       cursor: pointer;
     }
 
     .hero-text h1 {
-      font-size: 3.8rem;
+      font-size: 3.2rem;
       font-weight: 900;
-      line-height: 0.95;
+      line-height: 0.9;
       margin-bottom: 10px;
       font-family: 'Outfit', sans-serif;
       color: #1f1b18;
@@ -180,7 +178,7 @@
     }
 
     .hero-tagline {
-      font-size: 1.05rem;
+      font-size: 0.92rem;
       font-weight: 800;
       color: #3f3933;
       line-height: 1.3;
@@ -188,16 +186,16 @@
     }
 
     .hero-subtext {
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: #57534e;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .container {
@@ -635,17 +633,20 @@
       .steps-grid {
         grid-template-columns: 1fr 1fr;
       }
+      .hero-content {
+        padding: 20px;
+      }
       .hero-text {
-        width: 80%;
+        width: 100%;
+      }
+      .hero-header {
+        height: auto;
       }
     }
 
     @media (max-width: 600px) {
       .steps-grid {
         grid-template-columns: 1fr;
-      }
-      .hero-text {
-        width: 95%;
       }
     }
   </style>
@@ -685,7 +686,7 @@
       </div>
     </div>
 
-    <!-- Perfectly aligned into the left beige panel space -->
+    <!-- Perfectly formatted to fit strictly within the left portrait column space -->
     <div class="hero-content">
       <div class="hero-text">
         <img src="token-transparent.png" alt="Logo" class="hero-logo-large" onclick="openModal(event)" />
