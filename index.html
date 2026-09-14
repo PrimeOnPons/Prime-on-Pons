@@ -6,11 +6,574 @@
   <title>PRIME ($PRIME) — Billion-Dollar Stock Exposure + 1000x Upside</title>
   <link rel="icon" type="image/jpeg" href="token-logo.jpg" />
   
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif, system-ui;
+      background-color: #f6f1eb;
+      color: #1f1b18;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .ticker-bar {
+      background-color: #131921;
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #334155;
+    }
+
+    .ticker-bar a {
+      color: #ff9900;
+      text-decoration: none;
+    }
+
+    .hero-header {
+      position: relative;
+      background-image: linear-gradient(to bottom, rgba(19, 25, 33, 0.8), rgba(246, 241, 235, 0.95)), url('forklift-loader.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+      padding-bottom: 60px;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.5rem;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+    }
+
+    .brand img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #ff9900;
+      object-fit: cover;
+    }
+
+    .btn-primary {
+      background-color: #ff9900;
+      color: #0f172a;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border: 2px solid #131921;
+      box-shadow: 3px 3px 0px #131921;
+      display: inline-block;
+      transition: transform 0.1s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translate(-1px, -1px);
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin: 16px 0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .hero-text h1 span {
+      color: #ff9900;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: #ff9900;
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 2px solid #131921;
+    }
+
+    .hero-box {
+      background: rgba(255, 255, 255, 0.95);
+      color: #1e293b;
+      padding: 20px;
+      border-radius: 16px;
+      border: 2px solid #131921;
+      box-shadow: 4px 4px 0px #ff9900;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 20px;
+      border: 3px solid #131921;
+      box-shadow: 8px 8px 0px #131921;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .steps-section {
+      margin-bottom: 80px;
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #8c6d46;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Outfit', sans-serif;
+      color: #1f1b18;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: #6c635b;
+      font-size: 1.1rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .step-card {
+      background: #ffffff;
+      border: 2px solid #1f1b18;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 6px 6px 0px #1f1b18;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .step-number {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 0.85rem;
+      color: #b48348;
+    }
+
+    .step-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      color: #1f1b18;
+    }
+
+    .step-card p {
+      font-size: 0.85rem;
+      color: #6c635b;
+      margin-bottom: 20px;
+    }
+
+    .step-art {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #1f1b18;
+      margin-bottom: 20px;
+    }
+
+    .step-link {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #1f1b18;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e2ded8;
+      padding-top: 14px;
+    }
+
+    .step-link:hover {
+      color: #ff9900;
+    }
+
+    .dispatch-wrapper {
+      background-color: #d1b490;
+      border: 3px solid #1f1b18;
+      border-radius: 24px;
+      padding: 60px 40px;
+      box-shadow: 10px 10px 0px #1f1b18;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      margin-bottom: 60px;
+    }
+
+    .dispatch-left h2 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      font-family: 'Outfit', sans-serif;
+      color: #1f1b18;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .dispatch-left p {
+      font-size: 1.1rem;
+      color: #3f3933;
+      margin-bottom: 24px;
+    }
+
+    .shipping-slip {
+      background: #ffffff;
+      border: 2px solid #1f1b18;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .slip-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #78716c;
+      border-bottom: 1px dashed #cbd5e1;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+
+    .slip-title-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .slip-title-area h3 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      font-family: 'Outfit', sans-serif;
+      color: #1f1b18;
+    }
+
+    .slip-stamp {
+      border: 2px solid #b91c1c;
+      color: #b91c1c;
+      font-size: 0.6rem;
+      font-weight: 900;
+      padding: 4px 8px;
+      text-align: center;
+      transform: rotate(4deg);
+      border-radius: 4px;
+    }
+
+    .slip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 0.8rem;
+      border-bottom: 1px dashed #cbd5e1;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    .slip-grid dt {
+      color: #78716c;
+      font-weight: 700;
+    }
+
+    .slip-grid dd {
+      font-weight: 800;
+      color: #1f1b18;
+    }
+
+    .ca-box {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .ca-box-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .ca-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .copy-btn {
+      background: #ff9900;
+      border: 1px solid #1f1b18;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .slip-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .slip-links a {
+      color: #0284c7;
+      text-decoration: none;
+    }
+
+    .slip-links a:hover {
+      text-decoration: underline;
+    }
+
+    .slip-footer {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #78716c;
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 12px;
+    }
+
+    .world-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .world-modal[open] {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      border: 3px solid #1f1b18;
+      border-radius: 24px;
+      max-width: 900px;
+      width: 100%;
+      padding: 40px;
+      position: relative;
+      box-shadow: 10px 10px 0px #1f1b18;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .dialog-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #1f1b18;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #1f1b18;
+    }
+
+    .dialog-close:hover {
+      background: #ff9900;
+    }
+
+    .employee-card {
+      background: #fbf9f5;
+      border: 2px solid #1f1b18;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 5px 5px 0px #1f1b18;
+      transform: rotate(-2deg);
+    }
+
+    .employee-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #78716c;
+      margin-bottom: 12px;
+    }
+
+    .employee-portrait img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #1f1b18;
+    }
+
+    .employee-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 12px;
+      font-weight: 800;
+    }
+
+    .employee-bottom .signature {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+    }
+
+    .about-copy h2 {
+      font-size: 2.5rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      line-height: 1.1;
+      margin: 10px 0 16px;
+    }
+
+    .about-copy p {
+      color: #57534e;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .personality-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 8px 16px;
+      font-size: 0.85rem;
+      border-top: 1px solid #e7e5e4;
+      border-bottom: 1px solid #e7e5e4;
+      padding: 16px 0;
+      margin: 20px 0;
+    }
+
+    .personality-grid span {
+      color: #78716c;
+      font-weight: 700;
+    }
+
+    .personality-grid strong {
+      color: #1f1b18;
+      font-weight: 800;
+    }
+
+    footer {
+      background-color: #131921;
+      color: #94a3b8;
+      text-align: center;
+      padding: 30px;
+      font-size: 0.85rem;
+      border-top: 2px solid #334155;
+    }
+
+    footer a {
+      color: #ff9900;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .hero-content, .dispatch-wrapper, .modal-content {
+        grid-template-columns: 1fr;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -26,7 +589,6 @@
   <!-- Hero Header -->
   <header class="hero-header">
     <div class="navbar">
-      <!-- Clicking Brand Opens Modal -->
       <a href="#about" onclick="openModal(event)" class="brand">
         <img src="token-logo.jpg" alt="Logo" />
         <span>PRIME</span>
@@ -184,7 +746,7 @@
 
   </main>
 
-  <!-- Interactive "Meet the Management" Modal Popup -->
+  <!-- Interactive Modal Popup -->
   <dialog id="about" class="world-modal">
     <button class="dialog-close" type="button" onclick="closeModal()">×</button>
     <div class="modal-content">
