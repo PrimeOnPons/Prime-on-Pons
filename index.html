@@ -310,6 +310,7 @@
       align-items: center;
       border-top: 1px solid #e2ded8;
       padding-top: 14px;
+      cursor: pointer;
     }
 
     .step-link:hover {
@@ -578,6 +579,21 @@
       align-items: center;
     }
 
+    /* Wallet-specific custom popup card styling */
+    .wallet-modal-content {
+      background: #fbf9f5;
+      border: 3px solid #1f1b18;
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+      position: relative;
+      box-shadow: 10px 10px 0px #1f1b18;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
     .dialog-close {
       position: absolute;
       top: 20px;
@@ -786,7 +802,7 @@
               <img src="bezos-wallet.png" alt="Wallet setup" class="step-art" />
             </div>
           </div>
-          <a href="https://long.xyz" target="_blank" class="step-link">Set one up <span>→</span></a>
+          <a onclick="openWalletModal(event)" class="step-link">Set one up <span>→</span></a>
         </article>
 
         <article class="step-card">
@@ -931,7 +947,7 @@
 
   </main>
 
-  <!-- Interactive Modal Popup -->
+  <!-- Interactive Token Details Modal Popup -->
   <div id="about" class="world-modal" onclick="handleModalClick(event)">
     <div class="modal-content">
       <button class="dialog-close" type="button" onclick="closeModal()">×</button>
@@ -966,6 +982,29 @@
     </div>
   </div>
 
+  <!-- Interactive Wallet Setup Modal Popup -->
+  <div id="walletModal" class="world-modal" onclick="handleWalletModalClick(event)">
+    <div class="wallet-modal-content">
+      <button class="dialog-close" type="button" onclick="closeWalletModal()">×</button>
+      <div class="about-copy" style="margin: 0;">
+        <span class="section-label">01 / GET A WALLET</span>
+        <h2 style="font-size: 2.2rem; font-family: 'Outfit', sans-serif; font-weight: 900; margin: 10px 0 16px; color: #1f1b18;">Ready your vault.</h2>
+        <p style="color: #57534e; font-size: 0.95rem; margin-bottom: 12px;">To interact with Robinhood Chain and secure your $PRIME allocation, you need a self-custodial wallet configured for the network.</p>
+        <p style="color: #57534e; font-size: 0.95rem; margin-bottom: 20px;">Download a trusted provider from official sources, back up your recovery phrase offline, and ensure you are connected to the correct mainnet.</p>
+        
+        <div style="margin-bottom: 20px;">
+          <a href="https://long.xyz" target="_blank" style="font-size: 0.9rem; font-weight: 800; color: #ff9900; background: #131921; padding: 10px 16px; border-radius: 8px; display: inline-block; text-decoration: none; border: 2px solid #1f1b18; box-shadow: 2px 2px 0px #1f1b18;">
+            Visit Long.xyz for Supported Wallets ↗
+          </a>
+        </div>
+
+        <p style="font-size: 0.75rem; color: #78716c; border-top: 1px dashed #cbd5e1; padding-top: 12px;">
+          Self-custody protocol reminder: Never share your private keys or seed phrase with anyone.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>© 2026 PRIME ($PRIME). All rights reserved.</p>
@@ -988,6 +1027,24 @@
     function handleModalClick(e) {
       if (e.target.id === 'about') {
         closeModal();
+      }
+    }
+
+    function openWalletModal(e) {
+      e.preventDefault();
+      document.getElementById('walletModal').style.display = 'flex';
+      document.getElementById('walletModal').setAttribute('open', 'true');
+    }
+
+    function closeWalletModal() {
+      const modal = document.getElementById('walletModal');
+      modal.style.display = 'none';
+      modal.removeAttribute('open');
+    }
+
+    function handleWalletModalClick(e) {
+      if (e.target.id === 'walletModal') {
+        closeWalletModal();
       }
     }
 
